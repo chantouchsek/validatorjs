@@ -1,12 +1,12 @@
 {
-  "name": "@chantouch/validator-js",
+  "name": "@chantouchsek/validatorjs",
   "version": "0.0.1",
   "description": "The validator-js library makes data validation in JavaScript very easy in both the browser and Node.js.",
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist",
     "build": "npm run clean && BABEL_ENV=production rollup --config rollup.config.js",
-    "prepare": "npm run clean && npm run build",
+    "prepare": "npm run build",
     "test": "jest --coverage",
     "release": "yarn prepare && standard-version && git push --follow-tags && npm publish"
   },
@@ -14,8 +14,15 @@
     "type": "git",
     "url": "git+https://github.com/Chantouch/validator-js.git"
   },
-  "keywords": [],
-  "author": "",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "validator",
+    "validator-js",
+    "node"
+  ],
+  "author": "Chantouch Sek",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Chantouch/validator-js/issues"
@@ -55,5 +62,8 @@
     "rollup": "^2.22.2",
     "rollup-plugin-uglify": "^3.0.0",
     "standard-version": "^8.0.2"
+  },
+  "directories": {
+    "test": "tests"
   }
 }

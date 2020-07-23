@@ -1,15 +1,15 @@
-# validator-js
+# @chantouchsek/validatorjs
 
-The validator-js library makes data validation in JavaScript very easy in both the browser and Node.js.
+The @chantouchsek/validatorjs library makes data validation in JavaScript very easy in both the browser and Node.js.
 This library was inspired by the [Laravel framework's Validator](http://laravel.com/docs/validation) and 
 [ValidatorJs](https://github.com/skaterdav85/validatorjs)
 
-[![Latest Version on NPM](https://img.shields.io/npm/v/validatejs.svg?style=flat-square)](https://npmjs.com/package/validator-js)
+[![Latest Version on NPM](https://img.shields.io/npm/v/@chantouchsek/validatorjs.svg?style=flat-square)](https://npmjs.com/package/@chantouchsek/validatorjs)
   [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-  [![npm](https://img.shields.io/npm/dt/validator-js.svg?style=flat-square)](https://npmjs.com/package/validator-js)
-  [![npm](https://img.shields.io/npm/dm/validator-js.svg?style=flat-square)](https://npmjs.com/package/validator-js)
+  [![npm](https://img.shields.io/npm/dt/@chantouchsek/validatorjs.svg?style=flat-square)](https://npmjs.com/package/@chantouchsek/validatorjs)
+  [![npm](https://img.shields.io/npm/dm/@chantouchsek/validatorjs.svg?style=flat-square)](https://npmjs.com/package/@chantouchsek/validatorjs)
 
-## Why use validator-js?
+## Why use @chantouchsek/validatorjs?
 
 * Not dependent on any libraries.
 * Works in both the browser and Node.
@@ -21,31 +21,31 @@ This library was inspired by the [Laravel framework's Validator](http://laravel.
 ### Using npm
 
 ```npm
-npm install validator-js
+npm install @chantouchsek/validatorjs
 ```
 
 ### Using yarn
 
 ```yarn
-yarn add validator-js
+yarn add @chantouchsek/validatorjs
 ```
 
 ### Browser
 
 ```html
-<script src="validator-js.js"></script>
+<script src="@chantouchsek/validatorjs.js"></script>
 ```
 
 ### Node.js / Browserify
 
 ```js
 // ES5
-let Validator = require('validator-js');
+let Validator = require('@chantouchsek/validatorjs');
 ```
 
 ```js
 // ES6
-import Validator from 'validator-js';
+import Validator from '@chantouchsek/validatorjs';
 ```
 
 ### Basic Usage
@@ -78,7 +78,7 @@ __customAttributes__ {Object} - Optional custom error attributes to return
 #### Example 1 - Passing Validation
 
 ```js
-import Validator from 'validator-js'
+import Validator from '@chantouchsek/validatorjs'
 
 let input = {
   name: 'John',
@@ -649,7 +649,7 @@ Note: by default all _ characters will be replaced with spaces.
 Error messages are in English by default. To include another language in the browser, reference the language file in a script tag and call `Validator.useLang('lang_code')`.
 
 ```html
-<script src="dist/validator-js.js"></script>
+<script src="dist/@chantouchsek/validatorjs.js"></script>
 <script src="dist/lang/ru.js"></script>
 <script>
   Validator.useLang('es');
@@ -659,7 +659,7 @@ Error messages are in English by default. To include another language in the bro
 In Node, it will automatically pickup on the language source files.
 
 ```js
-let Validator = require('validator-js');
+let Validator = require('@chantouchsek/validatorjs');
 Validator.useLang('ru');
 ```
 
@@ -707,7 +707,7 @@ Released under the MIT license
 
 ### Credits
 
-validator-js re-write by Chantouch Sek
+@chantouchsek/validatorjs re-write by Chantouch Sek
 
 E-Mail: [chantouchsek.cs83@gmail.com](mailto:chantouchsek.cs93@gmail.com)
 
