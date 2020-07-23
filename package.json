@@ -1,22 +1,22 @@
 {
   "name": "@chantouchsek/validatorjs",
-  "version": "0.0.1-beta.2",
+  "version": "0.0.1-beta.3",
   "description": "The validator-js library makes data validation in JavaScript very easy in both the browser and Node.js.",
-  "main": "dist/index.js",
+  "main": "src/index.js",
   "scripts": {
     "clean": "rimraf dist",
     "build": "npm run clean && babel src -d dist",
     "prepare": "npm run build",
     "test": "jest --coverage",
-    "release": "yarn prepare && standard-version && git push --follow-tags && yarn publish",
-    "publish": "npm publish --access=public"
+    "release": "yarn prepare && standard-version && git push --follow-tags && yarn publish"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Chantouch/validator-js.git"
   },
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "keywords": [
     "validator",

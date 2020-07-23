@@ -24,7 +24,7 @@ export default class Validator {
       customAttributes: {},
       confirmedReverse: false
     }
-    this.options = merge({}, options, defaults)
+    this.options = merge({}, defaults, options)
     const {
       input = {},
       locale,
