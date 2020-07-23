@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "npm run clean && BABEL_ENV=production rollup --config rollup.config.js",
+    "build": "npm run clean && babel src -d dist",
     "prepare": "npm run build",
     "test": "jest --coverage",
     "release": "yarn prepare && standard-version && git push --follow-tags && npm publish"
@@ -32,8 +32,12 @@
     "date-fns": "^2.15.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.10.5",
     "@babel/core": "^7.10.5",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
     "@rollup/plugin-babel": "^5.1.0",
     "@rollup/plugin-commonjs": "^14.0.0",
     "@rollup/plugin-json": "^4.1.0",
@@ -41,9 +45,9 @@
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.1.0",
     "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-es2017-object-entries": "0.0.5",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
+    "babel-preset-minify": "^0.5.1",
     "escape-string-regexp": "^4.0.0",
     "eslint": "^7.5.0",
     "eslint-plugin-babel": "^5.3.1",
@@ -57,6 +61,7 @@
     "lodash.isobject": "^3.0.2",
     "lodash.isstring": "^4.0.1",
     "lodash.isundefined": "^3.0.1",
+    "lodash.merge": "^4.6.2",
     "prettier": "^2.0.5",
     "rimraf": "^3.0.2",
     "rollup": "^2.22.2",

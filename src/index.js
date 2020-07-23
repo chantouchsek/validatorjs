@@ -3,6 +3,7 @@ import isString from 'lodash.isstring'
 import isUndefined from 'lodash.isundefined'
 import isFunction from 'lodash.isfunction'
 import isNull from 'lodash.isnull'
+import merge from 'lodash.merge'
 import Errors from './errors'
 import Rules from './rules'
 import Lang from './lang'
@@ -15,7 +16,6 @@ const numericRules = ['integer', 'numeric']
 export default class Validator {
   constructor(options = {}) {
     const defaults = {
-      accessorName: '$vlidator',
       input: {},
       rules: {},
       fields: {},
@@ -24,10 +24,7 @@ export default class Validator {
       customAttributes: {},
       confirmedReverse: false
     }
-    this.options = {
-      ...defaults,
-      ...options
-    }
+    this.options = merge({}, options, defaults)
     const {
       input = {},
       locale,
