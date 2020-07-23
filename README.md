@@ -4,7 +4,8 @@ The validator-js library makes data validation in JavaScript very easy in both t
 This library was inspired by the [Laravel framework's Validator](http://laravel.com/docs/validation) and 
 [ValidatorJs](https://github.com/skaterdav85/validatorjs)
 
-[![Latest Version on NPM](https://img.shields.io/npm/v/validator-js.svg?style=flat-square)](https://npmjs.com/package/validator-js)
+[![Latest Version on NPM](https://img.shields.io/npm/v/validatejs.svg?style=flat-square)](https://npmjs.com/package
+/validator-js)
   [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
   [![npm](https://img.shields.io/npm/dt/validator-js.svg?style=flat-square)](https://npmjs.com/package/validator-js)
   [![npm](https://img.shields.io/npm/dm/validator-js.svg?style=flat-square)](https://npmjs.com/package/validator-js)
