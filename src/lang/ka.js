@@ -99,4 +99,4 @@ module.exports = {
   unique: 'ასეთი :attribute უკვე არსებობს.',
   uploaded: ':attribute-ის ატვირთვა ვერ მოხერხდა.',
   url: ':attribute უნდა იყოს URL მისამართი.'
-};
+}

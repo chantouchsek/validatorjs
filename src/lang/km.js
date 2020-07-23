@@ -51,4 +51,4 @@ module.exports = {
       name: 'ឈ្មោះ'
     }
   }
-};
+}

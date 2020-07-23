@@ -99,4 +99,4 @@ module.exports = {
   unique: ':attribute jadanik erregistratua izan da.',
   uploaded: ':attribute igotzerakoan huts egin du.',
   url: ':attribute-k ez dauka formatu egokirik.'
-};
+}

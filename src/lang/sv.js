@@ -98,4 +98,4 @@ module.exports = {
   unique: ':attribute används redan.',
   uploaded: ':attribute kunde inte laddas upp.',
   url: ':attribute har ett ogiltigt format.'
-};
+}

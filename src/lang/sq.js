@@ -99,4 +99,4 @@ module.exports = {
   unique: ':attribute është marrë tashmë.',
   uploaded: 'The :attribute failed to upload.',
   url: 'Formati i :attribute është i pasaktë.'
-};
+}

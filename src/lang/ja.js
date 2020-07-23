@@ -46,4 +46,4 @@ module.exports = {
   regex: ':attributeの値はパターンにマッチする必要があります。',
   password: ':attributeパスワードでなければなりません。',
   attributes: {}
-};
+}

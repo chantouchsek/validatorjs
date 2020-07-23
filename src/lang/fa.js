@@ -36,4 +36,4 @@ module.exports = {
   url: 'آدرس فیلد :attribute صحیح نمی باشد',
   regex: 'فرمت آدرس :attribute صحیح نمی باشد',
   attributes: {}
-};
+}

@@ -99,4 +99,4 @@ module.exports = {
   unique: ':attribute telah wujud.',
   uploaded: ':attribute gagal dimuat naik.',
   url: ':attribute format tidak sah.'
-};
+}

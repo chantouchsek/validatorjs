@@ -99,4 +99,4 @@ module.exports = {
   unique: 'A(z) :attribute már foglalt.',
   uploaded: 'A(z) :attribute feltöltése sikertelen.',
   url: 'A(z) :attribute érvénytelen link.'
-};
+}

@@ -98,4 +98,4 @@ module.exports = {
   unique: 'Такое значэнне поля :attribute ўжо існуе.',
   uploaded: 'The :attribute failed to upload.',
   url: 'Поле :attribute мае памылковы фармат.'
-};
+}

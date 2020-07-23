@@ -98,4 +98,4 @@ module.exports = {
   unique: 'O valor informado para o campo :attribute já está em uso.',
   uploaded: 'Falha no Upload do arquivo :attribute.',
   url: 'O formato da URL informada para o campo :attribute é inválido.'
-};
+}

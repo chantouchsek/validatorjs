@@ -100,4 +100,4 @@ module.exports = {
   unique: ':attribute musí být unikátní.',
   uploaded: 'Nahrávání :attribute se nezdařilo.',
   url: 'Formát :attribute je neplatný.'
-};
+}

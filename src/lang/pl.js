@@ -36,4 +36,4 @@ module.exports = {
   url: 'Pole :attribute musi być poprawnym adresem URL.',
   regex: 'Pole :attribute nie spełnia warunku.',
   attributes: {}
-};
+}

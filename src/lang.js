@@ -1,5 +1,5 @@
-import { isUndefined } from 'lodash';
-import Messages from './messages';
+import isUndefined from 'lodash.isundefined'
+import Messages from './messages'
 
 export const Lang = {
   messages: {},
@@ -11,7 +11,7 @@ export const Lang = {
    * @return {void}
    */
   _set(lang, rawMessages) {
-    this.messages[lang] = rawMessages;
+    this.messages[lang] = rawMessages
   },
 
   /**
@@ -23,12 +23,12 @@ export const Lang = {
    * @return {void}
    */
   _setRuleMessage(lang, attribute, message) {
-    this._load(lang);
+    this._load(lang)
     if (isUndefined(message)) {
-      message = this.messages[lang].def;
+      message = this.messages[lang].def
     }
 
-    this.messages[lang][attribute] = message;
+    this.messages[lang][attribute] = message
   },
 
   /**
@@ -40,13 +40,13 @@ export const Lang = {
   _load(lang) {
     if (!this.messages[lang]) {
       try {
-        const rawMessages = require(`./lang/${lang}`);
-        this._set(lang, rawMessages);
+        const rawMessages = require(`./lang/${lang}`)
+        this._set(lang, rawMessages)
       } catch (e) {
-        const rawMessages = require('./lang/en');
-        this._set(lang, rawMessages);
+        const rawMessages = require('./lang/en')
+        this._set(lang, rawMessages)
         // eslint-disable-next-line no-console
-        console.warn(e);
+        console.warn(e)
       }
     }
   },
@@ -58,8 +58,8 @@ export const Lang = {
    * @return {object}
    */
   _get(lang) {
-    this._load(lang);
-    return this.messages[lang];
+    this._load(lang)
+    return this.messages[lang]
   },
 
   /**
@@ -69,9 +69,9 @@ export const Lang = {
    * @return {Messages}
    */
   _make(lang) {
-    this._load(lang);
-    return new Messages(lang, this.messages[lang]);
+    this._load(lang)
+    return new Messages(lang, this.messages[lang])
   }
-};
+}
 
-export default Lang;
+export default Lang

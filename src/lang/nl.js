@@ -69,4 +69,4 @@ module.exports = {
   url: 'Het :attribute veld is geen geldige URL.',
   regex: 'Het :attribute veld heeft een ongeldig formaat.',
   attributes: {}
-};
+}

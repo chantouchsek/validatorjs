@@ -99,4 +99,4 @@ module.exports = {
   unique: 'Таке значення поля :attribute вже існує.',
   uploaded: 'Завантаження поля :attribute не вдалося.',
   url: 'Формат поля :attribute неправильний.'
-};
+}

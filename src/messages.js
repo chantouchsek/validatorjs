@@ -1,13 +1,14 @@
-import { isObject, isString } from 'lodash';
-import Attributes from './attributes';
-import flatten from './flatten';
+import isObject from 'lodash.isobject'
+import isString from 'lodash.isstring'
+import Attributes from './attributes'
+import flatten from './flatten'
 
 class Messages {
   constructor(lang, messages = []) {
-    this.lang = lang;
-    this.messages = messages;
-    this.customMessages = {};
-    this.attributeNames = {};
+    this.lang = lang
+    this.messages = messages
+    this.customMessages = {}
+    this.attributeNames = {}
   }
 
   /**
@@ -17,7 +18,7 @@ class Messages {
    * @return {void}
    */
   _setCustom(customMessages) {
-    this.customMessages = customMessages || {};
+    this.customMessages = customMessages || {}
   }
 
   /**
@@ -26,7 +27,7 @@ class Messages {
    * @param {object} attributes
    */
   _setAttributeNames(attributes) {
-    this.attributeNames = attributes;
+    this.attributeNames = attributes
   }
 
   /**
@@ -36,7 +37,7 @@ class Messages {
    * @return {void}
    */
   _setAttributeFormatter(func) {
-    this.attributeFormatter = func;
+    this.attributeFormatter = func
   }
 
   /**
@@ -46,18 +47,18 @@ class Messages {
    * @return {string}
    */
   _getAttributeName(attribute) {
-    let name = attribute;
-    const attributes = flatten(this.messages.attributes);
-    const attributeNames = flatten(this.attributeNames);
+    let name = attribute
+    const attributes = flatten(this.messages.attributes)
+    const attributeNames = flatten(this.attributeNames)
     if (attributeNames.hasOwnProperty(attribute)) {
-      return attributeNames[attribute];
+      return attributeNames[attribute]
     } else if (attributes.hasOwnProperty(attribute)) {
-      name = attributes[attribute];
+      name = attributes[attribute]
     }
     if (this.attributeFormatter) {
-      name = this.attributeFormatter(name);
+      name = this.attributeFormatter(name)
     }
-    return name;
+    return name
   }
 
   /**
@@ -66,7 +67,7 @@ class Messages {
    * @return {object}
    */
   all() {
-    return this.messages;
+    return this.messages
   }
 
   /**
@@ -77,16 +78,16 @@ class Messages {
    */
   render(rule) {
     if (rule.customMessage) {
-      return rule.customMessage;
+      return rule.customMessage
     }
-    const template = this._getTemplate(rule);
-    let message;
+    const template = this._getTemplate(rule)
+    let message
     if (Attributes.replacements[rule.name]) {
-      message = Attributes.replacements[rule.name].apply(this, [template, rule]);
+      message = Attributes.replacements[rule.name].apply(this, [template, rule])
     } else {
-      message = this._replacePlaceholders(rule, template, {});
+      message = this._replacePlaceholders(rule, template, {})
     }
-    return message;
+    return message
   }
 
   /**
@@ -96,26 +97,26 @@ class Messages {
    * @return {string}
    */
   _getTemplate(rule) {
-    const messages = this.messages;
-    let template = messages.def;
-    const customMessages = this.customMessages;
-    const formats = [rule.name + '.' + rule.attribute, rule.name];
-    let i = 0;
-    let format;
+    const messages = this.messages
+    let template = messages.def
+    const customMessages = this.customMessages
+    const formats = [rule.name + '.' + rule.attribute, rule.name]
+    let i = 0
+    let format
     for (; i < formats.length; i++) {
-      format = formats[i];
+      format = formats[i]
       if (customMessages.hasOwnProperty(format)) {
-        template = customMessages[format];
-        break;
+        template = customMessages[format]
+        break
       } else if (messages.hasOwnProperty(format)) {
-        template = messages[format];
-        break;
+        template = messages[format]
+        break
       }
     }
     if (isObject(template)) {
-      template = template[rule._getValueType()];
+      template = template[rule._getValueType()]
     }
-    return template;
+    return template
   }
 
   /**
@@ -127,21 +128,21 @@ class Messages {
    * @return {string}
    */
   _replacePlaceholders(rule, template, data) {
-    let message;
-    let attribute;
-    data.attribute = this._getAttributeName(rule.attribute);
-    data[rule.name] = data[rule.name] || rule.getParameters().join(',');
+    let message
+    let attribute
+    data.attribute = this._getAttributeName(rule.attribute)
+    data[rule.name] = data[rule.name] || rule.getParameters().join(',')
     if (isString(template) && isObject(data)) {
-      message = template;
+      message = template
       for (attribute in data) {
         message = message.replace(
           new RegExp(':' + attribute, 'g'),
           data[attribute]
-        );
+        )
       }
     }
-    return message;
+    return message
   }
 }
 
-export default Messages;
+export default Messages

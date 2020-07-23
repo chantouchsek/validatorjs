@@ -1,12 +1,12 @@
 class AsyncResolvers {
   constructor(onFailedOne, onResolvedAll) {
-    this.onResolvedAll = onResolvedAll;
-    this.onFailedOne = onFailedOne;
-    this.resolvers = {};
-    this.resolversCount = 0;
-    this.passed = [];
-    this.failed = [];
-    this.firing = false;
+    this.onResolvedAll = onResolvedAll
+    this.onFailedOne = onFailedOne
+    this.resolvers = {}
+    this.resolversCount = 0
+    this.passed = []
+    this.failed = []
+    this.firing = false
   }
 
   /**
@@ -16,10 +16,10 @@ class AsyncResolvers {
    * @return {integer}
    */
   add(rule = {}) {
-    const index = this.resolversCount;
-    this.resolvers[index] = rule;
-    this.resolversCount++;
-    return index;
+    const index = this.resolversCount
+    this.resolvers[index] = rule
+    this.resolversCount++
+    return index
   }
 
   /**
@@ -29,14 +29,14 @@ class AsyncResolvers {
    * @return {void}
    */
   resolve(index) {
-    const rule = this.resolvers[index];
+    const rule = this.resolvers[index]
     if (rule.passes === true) {
-      this.passed.push(rule);
+      this.passed.push(rule)
     } else if (rule.passes === false) {
-      this.failed.push(rule);
-      this.onFailedOne(rule);
+      this.failed.push(rule)
+      this.onFailedOne(rule)
     }
-    this.fire();
+    this.fire()
   }
 
   /**
@@ -45,7 +45,7 @@ class AsyncResolvers {
    * @return {boolean}
    */
   isAllResolved() {
-    return this.passed.length + this.failed.length === this.resolversCount;
+    return this.passed.length + this.failed.length === this.resolversCount
   }
 
   /**
@@ -55,10 +55,10 @@ class AsyncResolvers {
    */
   fire() {
     if (!this.firing) {
-      return;
+      return
     }
     if (this.isAllResolved()) {
-      this.onResolvedAll(this.failed.length === 0);
+      this.onResolvedAll(this.failed.length === 0)
     }
   }
 
@@ -68,8 +68,8 @@ class AsyncResolvers {
    * @return {void}
    */
   enableFiring() {
-    this.firing = true;
+    this.firing = true
   }
 }
 
-export default AsyncResolvers;
+export default AsyncResolvers

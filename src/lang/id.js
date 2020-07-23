@@ -45,4 +45,4 @@ module.exports = {
   url: ':attribute harus berupa format url.',
   regex: ':attribute format tidak benar.',
   attributes: {}
-};
+}

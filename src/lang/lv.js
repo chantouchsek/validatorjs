@@ -99,4 +99,4 @@ module.exports = {
   unique: ' :attribute jau ir aizņemts.',
   uploaded: ' :attribute netika augšuplādēts.',
   url: ' :attribute formāts ir nederīgs.'
-};
+}

@@ -35,4 +35,4 @@ module.exports = {
   url: 'Il formato del campo :attribute non è valido.',
   regex: 'Il formato del campo :attribute non è valido.',
   attributes: {}
-};
+}

@@ -1,15 +1,15 @@
-# vue-vlidator
+# validator-js
 
-The vue-vlidator library makes data validation in JavaScript very easy in both the browser and Node.js.
+The validator-js library makes data validation in JavaScript very easy in both the browser and Node.js.
 This library was inspired by the [Laravel framework's Validator](http://laravel.com/docs/validation) and 
 [ValidatorJs](https://github.com/skaterdav85/validatorjs)
 
-[![Latest Version on NPM](https://img.shields.io/npm/v/vue-vlidator.svg?style=flat-square)](https://npmjs.com/package/vue-vlidator)
+[![Latest Version on NPM](https://img.shields.io/npm/v/validator-js.svg?style=flat-square)](https://npmjs.com/package/validator-js)
   [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-  [![npm](https://img.shields.io/npm/dt/vue-vlidator.svg?style=flat-square)](https://npmjs.com/package/vue-vlidator)
-  [![npm](https://img.shields.io/npm/dm/vue-vlidator.svg?style=flat-square)](https://npmjs.com/package/vue-vlidator)
+  [![npm](https://img.shields.io/npm/dt/validator-js.svg?style=flat-square)](https://npmjs.com/package/validator-js)
+  [![npm](https://img.shields.io/npm/dm/validator-js.svg?style=flat-square)](https://npmjs.com/package/validator-js)
 
-## Why use vue-vlidator?
+## Why use validator-js?
 
 * Not dependent on any libraries.
 * Works in both the browser and Node.
@@ -21,31 +21,31 @@ This library was inspired by the [Laravel framework's Validator](http://laravel.
 ### Using npm
 
 ```npm
-npm install vue-vlidator
+npm install validator-js
 ```
 
 ### Using yarn
 
 ```yarn
-yarn add vue-vlidator
+yarn add validator-js
 ```
 
 ### Browser
 
 ```html
-<script src="vue-vlidator.js"></script>
+<script src="validator-js.js"></script>
 ```
 
 ### Node.js / Browserify
 
 ```js
 // ES5
-let Validator = require('vue-vlidator');
+let Validator = require('validator-js');
 ```
 
 ```js
 // ES6
-import Validator from 'vue-vlidator';
+import Validator from 'validator-js';
 ```
 
 ### Basic Usage
@@ -71,129 +71,6 @@ __customMessages__ {Object} - Optional custom error messages to return
 
 __customAttributes__ {Object} - Optional custom error attributes to return
 
-## Nuxt Support
-
-Put it on top of `nuxt-i18n`
-
-``nuxt.config.js``
-```js
-  export default {
-    modules: [
-        'vue-vlidator/nuxt',
-        'nuxt-i18n',
-      ],
-    vlidator: {}
-  }
-```
-
-### Vue plugins
-
-```js
-import Vue from 'vue';
-import Validator from 'vue-vlidator';
-
-const options = { locale: 'km', customAttributes: {}, customMessages: {}, langDir: 'lang/' }
-
-Vue.use(Validator, options);
-```
-
-#### Available options
-1. locale {string}
-2. customMessages {Object}
-
-#### Example in Vue component
-```vue
-<template>
-    <b-form @submit.prevent="onSubmit">
-        <b-form-group
-                id="fieldset-1"
-                description="Let us know your name."
-                label="Enter your name"
-                label-for="input-1"
-                :state="$vlidator.errors.has('form.name')"
-                :invalid-feedback="$vlidator.errors.first('form.name')"
-        >
-            <b-form-input
-                    id="input-1"
-                    v-model="form.name"
-                    :state="!$vlidator.errors.has('form.name')"
-                    trim
-            />
-        </b-form-group>
-        <b-form-group
-                id="fieldset-2"
-                description="Let us know your email."
-                label="Enter your email"
-                label-for="input-2"
-                :state="$vlidator.errors.has('form.email')"
-                :invalid-feedback="$vlidator.errors.first('form.email')"
-        >
-            <b-form-input
-                    id="input-2"
-                    v-model="form.email"
-                    :state="!$vlidator.errors.has('form.email')"
-                    type="email"
-                    trim
-            />
-        </b-form-group>
-        <b-form-group
-                id="fieldset-3"
-                description="Let us know your age."
-                label="Enter your age"
-                label-for="input-3"
-                :state="$vlidator.errors.has('form.age')"
-                :invalid-feedback="$vlidator.errors.first('form.age')"
-        >
-            <b-form-input
-                    id="input-3"
-                    v-model.number="form.age"
-                    :state="!$vlidator.errors.has('form.age')"
-                    type="number"
-                    trim
-            />
-        </b-form-group>
-        <b-button type="submit" variant="primary" :disabled="$vlidator.errors.any()">
-            Submit
-        </b-button>
-    </b-form>
-</template>
-
-<script>
-  export default {
-    name: "HomePage",
-    data () {
-      return {
-        form: {
-          name: 'John',
-          email: 'johndoe@gmail.com',
-          age: 18
-        }
-      }
-    },
-    vlidator: {
-      rules: {
-        form: {
-          name: 'required|min:4',
-          email: 'required|email',
-          age: 'required|numeric|min:18|max:50'
-        }
-      }
-    },
-    methods: {
-      async onSubmit () {
-          try {
-            const { data } = await this.validate()
-            console.log(data)
-            alert(JSON.stringify(this.form))
-          } catch (e) {
-            console.log(e)
-          }
-      }
-    },
-  }
-</script>
-```
-
 ---
 
 ## Example for NodeJs
@@ -201,7 +78,7 @@ Vue.use(Validator, options);
 #### Example 1 - Passing Validation
 
 ```js
-import Validator from 'vue-vlidator'
+import Validator from 'validator-js'
 
 let input = {
   name: 'John',
@@ -772,7 +649,7 @@ Note: by default all _ characters will be replaced with spaces.
 Error messages are in English by default. To include another language in the browser, reference the language file in a script tag and call `Validator.useLang('lang_code')`.
 
 ```html
-<script src="dist/vue-vlidator.js"></script>
+<script src="dist/validator-js.js"></script>
 <script src="dist/lang/ru.js"></script>
 <script>
   Validator.useLang('es');
@@ -782,7 +659,7 @@ Error messages are in English by default. To include another language in the bro
 In Node, it will automatically pickup on the language source files.
 
 ```js
-let Validator = require('vue-vlidator');
+let Validator = require('validator-js');
 Validator.useLang('ru');
 ```
 
@@ -830,7 +707,7 @@ Released under the MIT license
 
 ### Credits
 
-vue-vlidator re-write by Chantouch Sek
+validator-js re-write by Chantouch Sek
 
 E-Mail: [chantouchsek.cs83@gmail.com](mailto:chantouchsek.cs93@gmail.com)
 

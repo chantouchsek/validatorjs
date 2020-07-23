@@ -1,8 +1,8 @@
-import { is, isArray } from './utils';
+import { is, isArray } from './utils'
 
 class Errors {
   constructor(errors = {}) {
-    this.errors = errors;
+    this.errors = errors
   }
 
   /**
@@ -14,10 +14,10 @@ class Errors {
    */
   add(attribute, message) {
     if (!this.has(attribute)) {
-      this.errors[attribute] = [];
+      this.errors[attribute] = []
     }
     if (!this.errors[attribute].includes(message)) {
-      this.errors[attribute].push(message);
+      this.errors[attribute].push(message)
     }
   }
 
@@ -29,9 +29,9 @@ class Errors {
    */
   get(attribute) {
     if (this.has(attribute)) {
-      return this.errors[attribute];
+      return this.errors[attribute]
     }
-    return [];
+    return []
   }
 
   /**
@@ -44,12 +44,12 @@ class Errors {
     if (isArray(attribute)) {
       for (let i = 0; i < attribute.length; i++) {
         if (!this.errors.hasOwnProperty(attribute[i])) {
-          continue;
+          continue
         }
-        return this.first(attribute[i]);
+        return this.first(attribute[i])
       }
     }
-    return this.get(attribute)[0];
+    return this.get(attribute)[0]
   }
 
   /**
@@ -58,14 +58,14 @@ class Errors {
    * @return {Object} Failed attribute names for keys and an array of messages for values
    */
   all() {
-    return this.errors;
+    return this.errors
   }
 
   /**
    * Determine if we have any errors.
    */
   any() {
-    return Object.keys(this.errors).length > 0;
+    return Object.keys(this.errors).length > 0
   }
 
   /**
@@ -76,16 +76,16 @@ class Errors {
    */
   has(attribute) {
     if (isArray(attribute)) {
-      return is(Object.keys(this.errors), attribute);
+      return is(Object.keys(this.errors), attribute)
     }
-    let hasError = this.errors.hasOwnProperty(attribute);
+    let hasError = this.errors.hasOwnProperty(attribute)
     if (!hasError) {
       const errors = Object.keys(this.errors).filter(
         (e) => e.startsWith(`${attribute}.`) || e.startsWith(`${attribute}[`)
-      );
-      hasError = errors.length > 0;
+      )
+      hasError = errors.length > 0
     }
-    return hasError;
+    return hasError
   }
 
   /**
@@ -93,14 +93,14 @@ class Errors {
    * @param errors
    */
   fill(errors = {}) {
-    this.errors = errors;
+    this.errors = errors
   }
 
   /**
    * Flush error
    */
   flush() {
-    this.errors = {};
+    this.errors = {}
   }
 
   /**
@@ -109,8 +109,8 @@ class Errors {
    * @param {String|undefined|Array} attribute
    */
   clear(attribute) {
-    if (!attribute) return this.flush();
-    const errors = Object.assign({}, this.errors);
+    if (!attribute) return this.flush()
+    const errors = Object.assign({}, this.errors)
     if (isArray(attribute)) {
       attribute.map((field) => {
         Object.keys(errors)
@@ -120,8 +120,8 @@ class Errors {
               e.startsWith(`${field}.`) ||
               e.startsWith(`${field}[`)
           )
-          .forEach((e) => delete errors[e]);
-      });
+          .forEach((e) => delete errors[e])
+      })
     } else {
       Object.keys(errors)
         .filter(
@@ -130,9 +130,9 @@ class Errors {
             e.startsWith(`${attribute}.`) ||
             e.startsWith(`${attribute}[`)
         )
-        .forEach((e) => delete errors[e]);
+        .forEach((e) => delete errors[e])
     }
-    this.fill(errors);
+    this.fill(errors)
   }
 
   /**
@@ -142,14 +142,14 @@ class Errors {
    * @param {string} prefix
    */
   keydown(event, prefix = '') {
-    const { name } = event.target;
-    if (!name) return;
-    let name2 = '';
+    const { name } = event.target
+    if (!name) return
+    let name2 = ''
     if (prefix) {
-      name2 = `${prefix}.${name}`;
+      name2 = `${prefix}.${name}`
     }
-    this.clear([name, name2]);
+    this.clear([name, name2])
   }
 }
 
-export default Errors;
+export default Errors

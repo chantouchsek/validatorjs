@@ -36,4 +36,4 @@ module.exports = {
   url: ':attribute格式不正确.',
   regex: ':attribute格式不正确.',
   attributes: {}
-};
+}

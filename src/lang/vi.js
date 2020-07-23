@@ -36,4 +36,4 @@ module.exports = {
   url: ':attribute không phải là một Url hợp lệ.',
   regex: ':attribute không đúng định dạng',
   attributes: {}
-};
+}

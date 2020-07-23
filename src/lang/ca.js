@@ -34,4 +34,4 @@ module.exports = {
     string: 'El camp :attribute pot contenir :size caràcters.'
   },
   url: 'El format de :attribute es invàlid.'
-};
+}

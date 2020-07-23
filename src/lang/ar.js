@@ -60,4 +60,4 @@ module.exports = {
     phone: 'رقم الهاتف',
     mobile: 'رقم الجوال'
   }
-};
+}

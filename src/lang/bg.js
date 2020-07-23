@@ -98,4 +98,4 @@ module.exports = {
   unique: 'Полето :attribute вече съществува.',
   uploaded: 'Неуспешно качване на :attribute.',
   url: 'Полето :attribute е в невалиден формат.'
-};
+}

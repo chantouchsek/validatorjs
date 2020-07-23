@@ -1,34 +1,34 @@
-import { isNaN } from 'lodash';
+import isNaN from 'lodash.isnan'
 
 const flatten = (obj) => {
-  const flattened = {};
+  const flattened = {}
   function recurse(current, property) {
     if (!property && Object.getOwnPropertyNames(current).length === 0) {
-      return;
+      return
     }
     if (Object(current) !== current || Array.isArray(current)) {
-      flattened[property] = current;
+      flattened[property] = current
     } else {
-      let isEmpty = true;
+      let isEmpty = true
       for (const p in current) {
-        isEmpty = false;
-        recurse(current[p], property ? property + '.' + p : p);
+        isEmpty = false
+        recurse(current[p], property ? property + '.' + p : p)
       }
       if (isEmpty) {
-        flattened[property] = {};
+        flattened[property] = {}
       }
     }
   }
   if (obj) {
-    recurse(obj);
+    recurse(obj)
   }
-  return flattened;
-};
+  return flattened
+}
 
 export const unflatten = (data = {}) => {
-  const result = {};
+  const result = {}
   for (const i in data) {
-    const keys = i.split('.');
+    const keys = i.split('.')
     keys.reduce(function(r, e, j) {
       return (
         r[e] ||
@@ -37,10 +37,10 @@ export const unflatten = (data = {}) => {
             ? data[i]
             : {}
           : [])
-      );
-    }, result);
+      )
+    }, result)
   }
-  return result;
-};
+  return result
+}
 
-export default flatten;
+export default flatten

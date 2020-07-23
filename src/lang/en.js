@@ -70,4 +70,4 @@ module.exports = {
   regex: 'The :attribute format is invalid.',
   password: 'The :attribute must be password.',
   attributes: {}
-};
+}

@@ -34,4 +34,4 @@ module.exports = {
   url: 'Поле :attribute должно содержать валидный URL.',
   regex: 'Неверный формат поля :attribute.',
   attributes: {}
-};
+}

@@ -37,4 +37,4 @@ module.exports = {
   url: 'Το πεδίο :attribute δεν είναι έγκυρη διεύθυνση URL.',
   regex: 'Η μορφή του :attribute δεν είναι αποδεκτή.',
   attributes: {}
-};
+}

@@ -99,4 +99,4 @@ module.exports = {
   unique: 'Polje :attribute već postoji.',
   uploaded: 'Polje :attribute nije uspešno učitano.',
   url: 'Polje :attribute nije ispravnog formata.'
-};
+}

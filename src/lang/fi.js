@@ -45,4 +45,4 @@ module.exports = {
   url: ':attribute on väärässä muodossa.',
   regex: ':attribute on väärässä muodossa.',
   attributes: {}
-};
+}

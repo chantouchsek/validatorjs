@@ -1,34 +1,32 @@
-import { parseISO, isValid } from 'date-fns';
-import {
-  isNaN,
-  isString,
-  isNumber,
-  isFunction,
-  isUndefined,
-  isBoolean
-} from 'lodash';
+import { parseISO, isValid } from 'date-fns'
+import isString from 'lodash.isstring'
+import isUndefined from 'lodash.isundefined'
+import isFunction from 'lodash.isfunction'
+import isBoolean from 'lodash.isboolean'
+import isNaN from 'lodash.isnan'
+import isNumber from 'lodash.isnumber'
 
 const leapYear = (year) => {
-  return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
-};
+  return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
+}
 const isValidDate = (inDate) => {
   if (inDate instanceof Date) {
-    return !isNaN(inDate);
+    return !isNaN(inDate)
   }
   // reformat if supplied as mm.dd.yyyy (period delimiter)
   if (isString(inDate)) {
-    const pos = inDate.indexOf('.');
+    const pos = inDate.indexOf('.')
     if (pos > 0 && pos <= 6) {
-      inDate = inDate.replace(/\./g, '-');
+      inDate = inDate.replace(/\./g, '-')
     }
     if (inDate.length === 10) {
-      return isValid(parseISO(inDate));
+      return isValid(parseISO(inDate))
     }
   }
-  const testDate = new Date(inDate);
-  const yr = testDate.getFullYear();
-  const mo = testDate.getMonth();
-  const day = testDate.getDate();
+  const testDate = new Date(inDate)
+  const yr = testDate.getFullYear()
+  const mo = testDate.getMonth()
+  const day = testDate.getDate()
   const daysInMonth = [
     31,
     leapYear(yr) ? 29 : 28,
@@ -42,73 +40,73 @@ const isValidDate = (inDate) => {
     31,
     30,
     31
-  ];
+  ]
   if (yr < 1000) {
-    return false;
+    return false
   }
   if (isNaN(mo)) {
-    return false;
+    return false
   }
   if (mo + 1 > 12) {
-    return false;
+    return false
   }
   if (isNaN(day)) {
-    return false;
+    return false
   }
-  return day <= daysInMonth[mo];
-};
+  return day <= daysInMonth[mo]
+}
 
 const rules = {
   required(val) {
     if (val === undefined || val === null) {
-      return false;
+      return false
     }
-    const str = String(val).replace(/\s/g, '');
-    return str.length > 0;
+    const str = String(val).replace(/\s/g, '')
+    return str.length > 0
   },
-  required_if(val, req, attribute) {
-    req = this.getParameters();
+  required_if(val, req) {
+    req = this.getParameters()
     if (this.validator._objectPath(this.validator.input, req[0]) === req[1]) {
-      return this.validator.getRule('required').validate(val);
+      return this.validator.getRule('required').validate(val)
     }
-    return true;
+    return true
   },
-  required_unless(val, req, attribute) {
-    req = this.getParameters();
+  required_unless(val, req) {
+    req = this.getParameters()
     if (this.validator._objectPath(this.validator.input, req[0]) !== req[1]) {
-      return this.validator.getRule('required').validate(val);
+      return this.validator.getRule('required').validate(val)
     }
-    return true;
+    return true
   },
-  required_with(val, req, attribute) {
+  required_with(val, req) {
     if (this.validator._objectPath(this.validator.input, req)) {
-      return this.validator.getRule('required').validate(val);
+      return this.validator.getRule('required').validate(val)
     }
-    return true;
+    return true
   },
-  required_with_all(val, req, attribute) {
-    req = this.getParameters();
+  required_with_all(val, req) {
+    req = this.getParameters()
     for (let i = 0; i < req.length; i++) {
       if (!this.validator._objectPath(this.validator.input, req[i])) {
-        return true;
+        return true
       }
     }
-    return this.validator.getRule('required').validate(val);
+    return this.validator.getRule('required').validate(val)
   },
-  required_without(val, req, attribute) {
+  required_without(val, req) {
     if (this.validator._objectPath(this.validator.input, req)) {
-      return true;
+      return true
     }
-    return this.validator.getRule('required').validate(val);
+    return this.validator.getRule('required').validate(val)
   },
-  required_without_all(val, req, attribute) {
-    req = this.getParameters();
+  required_without_all(val, req) {
+    req = this.getParameters()
     for (let i = 0; i < req.length; i++) {
       if (this.validator._objectPath(this.validator.input, req[i])) {
-        return true;
+        return true
       }
     }
-    return this.validator.getRule('required').validate(val);
+    return this.validator.getRule('required').validate(val)
   },
   boolean(val) {
     return (
@@ -120,254 +118,254 @@ const rules = {
       val === '1' ||
       val === 'true' ||
       val === 'false'
-    );
+    )
   },
   // compares the size of strings
   // with numbers, compares the value
-  size(val, req, attribute) {
+  size(val, req) {
     if (val) {
-      req = parseFloat(req);
-      const size = this.getSize();
-      return size === req;
+      req = parseFloat(req)
+      const size = this.getSize()
+      return size === req
     }
-    return true;
+    return true
   },
-  string(val, req, attribute) {
-    return isString(val);
+  string(val) {
+    return isString(val)
   },
-  sometimes(val) {
-    return true;
-  },
-  /**
-   * Compares the size of strings or the value of numbers if there is a truthy value
-   */
-  min(val, req, attribute) {
-    const size = this.getSize();
-    return size >= req;
+  sometimes() {
+    return true
   },
   /**
    * Compares the size of strings or the value of numbers if there is a truthy value
    */
-  max(val, req, attribute) {
-    const size = this.getSize();
-    return size <= req;
+  min(val, req) {
+    const size = this.getSize()
+    return size >= req
   },
-  between(val, req, attribute) {
-    req = this.getParameters();
-    const size = this.getSize();
-    const min = parseFloat(req[0], 10);
-    const max = parseFloat(req[1], 10);
-    return size >= min && size <= max;
+  /**
+   * Compares the size of strings or the value of numbers if there is a truthy value
+   */
+  max(val, req) {
+    const size = this.getSize()
+    return size <= req
+  },
+  between(val, req) {
+    req = this.getParameters()
+    const size = this.getSize()
+    const min = parseFloat(req[0], 10)
+    const max = parseFloat(req[1], 10)
+    return size >= min && size <= max
   },
   email(val) {
-    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(val);
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    return re.test(val)
   },
   numeric(val) {
-    const num = Number(val); // tries to convert value to a number. useful if value is coming from form element
-    return isNumber(num) && !isNaN(num) && !isBoolean(isBoolean);
+    const num = Number(val) // tries to convert value to a number. useful if value is coming from form element
+    return isNumber(num) && !isNaN(num) && !isBoolean(isBoolean)
   },
   array(val) {
-    return Array.isArray(val);
+    return Array.isArray(val)
   },
   url(url) {
     return /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-z]{2,63}\b([-a-zA-Z0-9@:%_\+.~#?&/=]*)/i.test(
       url
-    );
+    )
   },
   alpha(val) {
-    return /^[a-zA-Z]+$/.test(val);
+    return /^[a-zA-Z]+$/.test(val)
   },
   alpha_dash(val) {
-    return /^[a-zA-Z0-9_\-]+$/.test(val);
+    return /^[a-zA-Z0-9_\-]+$/.test(val)
   },
   alpha_num(val) {
-    return /^[a-zA-Z0-9]+$/.test(val);
+    return /^[a-zA-Z0-9]+$/.test(val)
   },
   same(val, req) {
-    const val1 = this.validator._flattenObject(this.validator.input)[req];
-    return val1 === val;
+    const val1 = this.validator._flattenObject(this.validator.input)[req]
+    return val1 === val
   },
   different(val, req) {
-    const val1 = this.validator._flattenObject(this.validator.input)[req];
-    return val1 !== val;
+    const val1 = this.validator._flattenObject(this.validator.input)[req]
+    return val1 !== val
   },
-  in(val, req) {
-    let list, i;
+  in(val) {
+    let list, i
     if (val) {
-      list = this.getParameters();
+      list = this.getParameters()
     }
     if (val && !Array.isArray(val)) {
-      let localValue = val;
+      let localValue = val
       for (i = 0; i < list.length; i++) {
         if (isString(list[i])) {
-          localValue = String(val);
+          localValue = String(val)
         }
         if (localValue === list[i]) {
-          return true;
+          return true
         }
       }
-      return false;
+      return false
     }
     if (val && Array.isArray(val)) {
       for (i = 0; i < val.length; i++) {
         if (!list.includes(val[i])) {
-          return false;
+          return false
         }
       }
     }
-    return true;
+    return true
   },
-  not_in(val, req) {
-    const list = this.getParameters();
-    const len = list.length;
-    let returnVal = true;
+  not_in(val) {
+    const list = this.getParameters()
+    const len = list.length
+    let returnVal = true
     for (let i = 0; i < len; i++) {
-      let localValue = val;
+      let localValue = val
       if (isString(list[i])) {
-        localValue = String(val);
+        localValue = String(val)
       }
       if (localValue === list[i]) {
-        returnVal = false;
-        break;
+        returnVal = false
+        break
       }
     }
-    return returnVal;
+    return returnVal
   },
   accepted(val) {
     return (
       val === 'on' || val === 'yes' || val === 1 || val === '1' || val === true
-    );
+    )
   },
   confirmed(val, req, key) {
-    const confirmationKey = `${key}_confirmation`;
-    const confirmedKey = `${key}Confirmation`;
-    const val1 = this.validator._flattenObject(this.validator.input);
+    const confirmationKey = `${key}_confirmation`
+    const confirmedKey = `${key}Confirmation`
+    const val1 = this.validator._flattenObject(this.validator.input)
     if (val1.hasOwnProperty(confirmationKey)) {
-      return val1[confirmationKey] === val;
+      return val1[confirmationKey] === val
     }
-    return val1[confirmedKey] === val;
+    return val1[confirmedKey] === val
   },
   integer(val) {
-    return String(parseInt(val, 10)) === String(val);
+    return String(parseInt(val, 10)) === String(val)
   },
   digits(val, req) {
-    const numericRule = this.validator.getRule('numeric');
-    return numericRule.validate(val) && String(val).length === parseInt(req);
+    const numericRule = this.validator.getRule('numeric')
+    return numericRule.validate(val) && String(val).length === parseInt(req)
   },
   digits_between(val) {
-    const numericRule = this.validator.getRule('numeric');
-    const req = this.getParameters();
-    const valueDigitsCount = String(val).length;
-    const min = parseFloat(req[0], 10);
-    const max = parseFloat(req[1], 10);
+    const numericRule = this.validator.getRule('numeric')
+    const req = this.getParameters()
+    const valueDigitsCount = String(val).length
+    const min = parseFloat(req[0], 10)
+    const max = parseFloat(req[1], 10)
     return (
       numericRule.validate(val) &&
       valueDigitsCount >= min &&
       valueDigitsCount <= max
-    );
+    )
   },
   regex(val, req) {
-    const mod = /[g|i|m]{1,3}$/;
-    let flag = req.match(mod);
-    flag = flag ? flag[0] : '';
-    req = req.replace(mod, '').slice(1, -1);
-    req = new RegExp(req, flag);
-    return !!req.test(val);
+    const mod = /[g|i|m]{1,3}$/
+    let flag = req.match(mod)
+    flag = flag ? flag[0] : ''
+    req = req.replace(mod, '').slice(1, -1)
+    req = new RegExp(req, flag)
+    return !!req.test(val)
   },
-  date(val, format) {
-    return isValidDate(val);
+  date(val) {
+    return isValidDate(val)
   },
   present(val) {
-    return !isUndefined(val);
+    return !isUndefined(val)
   },
   gt(val, req)  {
-    const val1 = Number(this.validator._objectPath(this.validator.input, req));
-    const val2 = Number(val);
+    const val1 = Number(this.validator._objectPath(this.validator.input, req))
+    const val2 = Number(val)
 
-    return isNaN(val1) || isNaN(val2) || val2 > val1;
+    return isNaN(val1) || isNaN(val2) || val2 > val1
   },
   lt(val, req)  {
-    const val1 = Number(this.validator._objectPath(this.validator.input, req));
-    const val2 = Number(val);
+    const val1 = Number(this.validator._objectPath(this.validator.input, req))
+    const val2 = Number(val)
 
-    return isNaN(val1) || isNaN(val2) || val2 < val1;
+    return isNaN(val1) || isNaN(val2) || val2 < val1
   },
   gte(val, req)  {
-    const val1 = Number(this.validator._objectPath(this.validator.input, req));
-    const val2 = Number(val);
+    const val1 = Number(this.validator._objectPath(this.validator.input, req))
+    const val2 = Number(val)
 
-    return isNaN(val1) || isNaN(val2) || val2 >= val1;
+    return isNaN(val1) || isNaN(val2) || val2 >= val1
   },
   lte(val, req)  {
-    const val1 = Number(this.validator._objectPath(this.validator.input, req));
-    const val2 = Number(val);
+    const val1 = Number(this.validator._objectPath(this.validator.input, req))
+    const val2 = Number(val)
 
-    return isNaN(val1) || isNaN(val2) || val2 <= val1;
+    return isNaN(val1) || isNaN(val2) || val2 <= val1
   },
   after(val, req) {
-    const val1 = this.validator._objectPath(this.validator.input, req);
-    const val2 = val;
+    const val1 = this.validator._objectPath(this.validator.input, req)
+    const val2 = val
     if (!isValidDate(val1)) {
-      return false;
+      return false
     }
     if (!isValidDate(val2)) {
-      return false;
+      return false
     }
-    return new Date(val1).getTime() < new Date(val2).getTime();
+    return new Date(val1).getTime() < new Date(val2).getTime()
   },
   after_or_equal(val, req) {
-    const val1 = this.validator._objectPath(this.validator.input, req);
-    const val2 = val;
+    const val1 = this.validator._objectPath(this.validator.input, req)
+    const val2 = val
     if (!isValidDate(val1)) {
-      return false;
+      return false
     }
     if (!isValidDate(val2)) {
-      return false;
+      return false
     }
-    return new Date(val1).getTime() <= new Date(val2).getTime();
+    return new Date(val1).getTime() <= new Date(val2).getTime()
   },
   before(val, req) {
-    const val1 = this.validator._objectPath(this.validator.input, req);
-    const val2 = val;
+    const val1 = this.validator._objectPath(this.validator.input, req)
+    const val2 = val
     if (!isValidDate(val1)) {
-      return false;
+      return false
     }
     if (!isValidDate(val2)) {
-      return false;
+      return false
     }
-    return new Date(val1).getTime() > new Date(val2).getTime();
+    return new Date(val1).getTime() > new Date(val2).getTime()
   },
   before_or_equal(val, req) {
-    const val1 = this.validator._objectPath(this.validator.input, req);
-    const val2 = val;
+    const val1 = this.validator._objectPath(this.validator.input, req)
+    const val2 = val
     if (!isValidDate(val1)) {
-      return false;
+      return false
     }
     if (!isValidDate(val2)) {
-      return false;
+      return false
     }
-    return new Date(val1).getTime() >= new Date(val2).getTime();
+    return new Date(val1).getTime() >= new Date(val2).getTime()
   },
   hex(val) {
-    return /^[0-9a-f]+$/i.test(val);
+    return /^[0-9a-f]+$/i.test(val)
   },
   password(val) {
-    return /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(val);
+    return /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(val)
   }
-};
+}
 let missedRuleValidator = (name = null) => {
-  throw new Error('Validator `' + name + '` is not defined!');
-};
-let missedRuleMessage;
+  throw new Error('Validator `' + name + '` is not defined!')
+}
+let missedRuleMessage
 
 class Rules {
   constructor(name, fn, async) {
-    this.name = name;
-    this.fn = fn;
-    this.passes = null;
-    this._customMessage = undefined;
-    this.async = async;
+    this.name = name
+    this.fn = fn
+    this.passes = null
+    this._customMessage = undefined
+    this.async = async
   }
 
   /**
@@ -380,20 +378,20 @@ class Rules {
    * @return {void|boolean}
    */
   validate(inputValue, ruleValue = '', attribute = '', callback = null) {
-    const _this = this;
-    this._setValidatingData(attribute, inputValue, ruleValue);
+    const _this = this
+    this._setValidatingData(attribute, inputValue, ruleValue)
     if (isFunction(callback)) {
-      this.callback = callback;
+      this.callback = callback
       const handleResponse = (passes, message) => {
-        _this.response(passes, message);
-      };
+        _this.response(passes, message)
+      }
       if (this.async) {
-        return this._apply(inputValue, ruleValue, attribute, handleResponse);
+        return this._apply(inputValue, ruleValue, attribute, handleResponse)
       } else {
-        return handleResponse(this._apply(inputValue, ruleValue, attribute));
+        return handleResponse(this._apply(inputValue, ruleValue, attribute))
       }
     }
-    return this._apply(inputValue, ruleValue, attribute);
+    return this._apply(inputValue, ruleValue, attribute)
   }
 
   /**
@@ -406,8 +404,8 @@ class Rules {
    * @return {boolean|undefined}
    */
   _apply(inputValue, ruleValue, attribute, callback = null) {
-    const fn = this.isMissed() ? missedRuleValidator(this.name) : this.fn;
-    return fn.apply(this, [inputValue, ruleValue, attribute, callback]);
+    const fn = this.isMissed() ? missedRuleValidator(this.name) : this.fn
+    return fn.apply(this, [inputValue, ruleValue, attribute, callback])
   }
 
   /**
@@ -419,9 +417,9 @@ class Rules {
    * @return {void}
    */
   _setValidatingData(attribute, inputValue, ruleValue) {
-    this.attribute = attribute;
-    this.inputValue = inputValue;
-    this.ruleValue = ruleValue;
+    this.attribute = attribute
+    this.inputValue = inputValue
+    this.ruleValue = ruleValue
   }
 
   /**
@@ -430,17 +428,17 @@ class Rules {
    * @return {array}
    */
   getParameters() {
-    let value = [];
+    let value = []
     if (isString(this.ruleValue)) {
-      value = this.ruleValue.split(',');
+      value = this.ruleValue.split(',')
     }
     if (isNumber(this.ruleValue)) {
-      value.push(this.ruleValue);
+      value.push(this.ruleValue)
     }
     if (Array.isArray(this.ruleValue)) {
-      value = this.ruleValue;
+      value = this.ruleValue
     }
-    return value;
+    return value
   }
 
   /**
@@ -449,17 +447,17 @@ class Rules {
    * @return {any|integer|float|mixed|number}
    */
   getSize() {
-    const value = this.inputValue;
+    const value = this.inputValue
     if (Array.isArray(value)) {
-      return value.length;
+      return value.length
     }
     if (isNumber(value)) {
-      return value;
+      return value
     }
     if (this.validator._hasNumericRule(this.attribute)) {
-      return parseFloat(value, 10);
+      return parseFloat(value, 10)
     }
-    return value.length;
+    return value.length
   }
 
   /**
@@ -472,9 +470,9 @@ class Rules {
       isNumber(this.inputValue) ||
       this.validator._hasNumericRule(this.attribute)
     ) {
-      return 'numeric';
+      return 'numeric'
     }
-    return 'string';
+    return 'string'
   }
 
   /**
@@ -485,9 +483,9 @@ class Rules {
    * @return {void}
    */
   response(passes, message) {
-    this.passes = passes === undefined || passes === true;
-    this._customMessage = message;
-    this.callback(this.passes, message);
+    this.passes = passes === undefined || passes === true
+    this._customMessage = message
+    this.callback(this.passes, message)
   }
 
   /**
@@ -497,7 +495,7 @@ class Rules {
    * @return {void}
    */
   setValidator(validator) {
-    this.validator = validator;
+    this.validator = validator
   }
 
   /**
@@ -506,11 +504,11 @@ class Rules {
    * @return {boolean}
    */
   isMissed() {
-    return !isFunction(this.fn);
+    return !isFunction(this.fn)
   }
 
   get customMessage() {
-    return this.isMissed() ? missedRuleMessage : this._customMessage;
+    return this.isMissed() ? missedRuleMessage : this._customMessage
   }
 }
 
@@ -547,10 +545,10 @@ export const manager = {
    * @return {Rules}
    */
   make(name, validator) {
-    const async = this.isAsync(name);
-    const rule = new Rules(name, rules[name], async);
-    rule.setValidator(validator);
-    return rule;
+    const async = this.isAsync(name)
+    const rule = new Rules(name, rules[name], async)
+    rule.setValidator(validator)
+    return rule
   },
 
   /**
@@ -560,14 +558,14 @@ export const manager = {
    * @return {boolean}
    */
   isAsync(name) {
-    let i = 0;
-    const len = this.asyncRules.length;
+    let i = 0
+    const len = this.asyncRules.length
     for (; i < len; i++) {
       if (this.asyncRules[i] === name) {
-        return true;
+        return true
       }
     }
-    return false;
+    return false
   },
 
   /**
@@ -577,7 +575,7 @@ export const manager = {
    * @return {boolean}
    */
   isImplicit(name) {
-    return this.implicitRules.includes(name);
+    return this.implicitRules.includes(name)
   },
 
   /**
@@ -588,7 +586,7 @@ export const manager = {
    * @return {void}
    */
   register(name, fn) {
-    rules[name] = fn;
+    rules[name] = fn
   },
 
   /**
@@ -599,8 +597,8 @@ export const manager = {
    * @return {void}
    */
   registerImplicit(name, fn) {
-    this.register(name, fn);
-    this.implicitRules.push(name);
+    this.register(name, fn)
+    this.implicitRules.push(name)
   },
 
   /**
@@ -611,8 +609,8 @@ export const manager = {
    * @return {void}
    */
   registerAsync(name, fn) {
-    this.register(name, fn);
-    this.asyncRules.push(name);
+    this.register(name, fn)
+    this.asyncRules.push(name)
   },
 
   /**
@@ -623,14 +621,14 @@ export const manager = {
    * @return {void}
    */
   registerAsyncImplicit(name, fn) {
-    this.registerImplicit(name, fn);
-    this.asyncRules.push(name);
+    this.registerImplicit(name, fn)
+    this.asyncRules.push(name)
   },
 
   registerMissedRuleValidator(fn, message) {
-    missedRuleValidator = fn;
-    missedRuleMessage = message;
+    missedRuleValidator = fn
+    missedRuleMessage = message
   }
-};
+}
 
-export default manager;
+export default manager

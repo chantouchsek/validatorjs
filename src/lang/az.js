@@ -97,4 +97,4 @@ module.exports = {
   unique: ' :attribute artıq iştirak edib',
   uploaded: ' :attribute yüklənməsi mümkün olmadı',
   url: ' :attribute formatı yanlışdır'
-};
+}

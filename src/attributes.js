@@ -7,11 +7,11 @@ export const replacements = {
    * @return {string}
    */
   between(template, rule) {
-    const parameters = rule.getParameters();
+    const parameters = rule.getParameters()
     return this._replacePlaceholders(rule, template, {
       min: parameters[0],
       max: parameters[1]
-    });
+    })
   },
 
   /**
@@ -22,11 +22,11 @@ export const replacements = {
    * @return {string}
    */
   digits_between(template, rule) {
-    const parameters = rule.getParameters();
+    const parameters = rule.getParameters()
     return this._replacePlaceholders(rule, template, {
       min: parameters[0],
       max: parameters[1]
-    });
+    })
   },
 
   /**
@@ -36,11 +36,11 @@ export const replacements = {
    * @return {string}
    */
   gt(template, rule) {
-    const parameters = rule.getParameters();
+    const parameters = rule.getParameters()
 
     return this._replacePlaceholders(rule, template, {
       value: this._getAttributeName(parameters[0]),
-    });
+    })
   },
 
   /**
@@ -50,11 +50,11 @@ export const replacements = {
    * @return {string}
    */
   gte(template, rule) {
-    const parameters = rule.getParameters();
+    const parameters = rule.getParameters()
 
     return this._replacePlaceholders(rule, template, {
       value: this._getAttributeName(parameters[0]),
-    });
+    })
   },
 
   /**
@@ -64,11 +64,11 @@ export const replacements = {
    * @return {string}
    */
   lt(template, rule) {
-    const parameters = rule.getParameters();
+    const parameters = rule.getParameters()
 
     return this._replacePlaceholders(rule, template, {
       value: this._getAttributeName(parameters[0]),
-    });
+    })
   },
 
   /**
@@ -78,11 +78,11 @@ export const replacements = {
    * @return {string}
    */
   lte(template, rule) {
-    const parameters = rule.getParameters();
+    const parameters = rule.getParameters()
 
     return this._replacePlaceholders(rule, template, {
       value: this._getAttributeName(parameters[0]),
-    });
+    })
   },
 
   /**
@@ -93,11 +93,11 @@ export const replacements = {
    * @return {string}
    */
   required_if(template, rule) {
-    const parameters = rule.getParameters();
+    const parameters = rule.getParameters()
     return this._replacePlaceholders(rule, template, {
       other: this._getAttributeName(parameters[0]),
       value: parameters[1]
-    });
+    })
   },
 
   /**
@@ -108,11 +108,11 @@ export const replacements = {
    * @return {string}
    */
   required_unless(template, rule) {
-    const parameters = rule.getParameters();
+    const parameters = rule.getParameters()
     return this._replacePlaceholders(rule, template, {
       other: this._getAttributeName(parameters[0]),
       value: parameters[1]
-    });
+    })
   },
 
   /**
@@ -123,10 +123,10 @@ export const replacements = {
    * @return {string}
    */
   required_with(template, rule) {
-    const parameters = rule.getParameters();
+    const parameters = rule.getParameters()
     return this._replacePlaceholders(rule, template, {
       field: this._getAttributeName(parameters[0])
-    });
+    })
   },
 
   /**
@@ -137,11 +137,11 @@ export const replacements = {
    * @return {string}
    */
   required_with_all(template, rule) {
-    const parameters = rule.getParameters();
-    const getAttributeName = this._getAttributeName.bind(this);
+    const parameters = rule.getParameters()
+    const getAttributeName = this._getAttributeName.bind(this)
     return this._replacePlaceholders(rule, template, {
       fields: parameters.map(getAttributeName).join(', ')
-    });
+    })
   },
 
   /**
@@ -152,10 +152,10 @@ export const replacements = {
    * @return {string}
    */
   required_without(template, rule) {
-    const parameters = rule.getParameters();
+    const parameters = rule.getParameters()
     return this._replacePlaceholders(rule, template, {
       field: this._getAttributeName(parameters[0])
-    });
+    })
   },
 
   /**
@@ -166,11 +166,11 @@ export const replacements = {
    * @return {string}
    */
   required_without_all(template, rule) {
-    const parameters = rule.getParameters();
-    const getAttributeName = this._getAttributeName.bind(this);
+    const parameters = rule.getParameters()
+    const getAttributeName = this._getAttributeName.bind(this)
     return this._replacePlaceholders(rule, template, {
       fields: parameters.map(getAttributeName).join(', ')
-    });
+    })
   },
 
   /**
@@ -181,10 +181,10 @@ export const replacements = {
    * @return {string}
    */
   after(template, rule) {
-    const parameters = rule.getParameters();
+    const parameters = rule.getParameters()
     return this._replacePlaceholders(rule, template, {
       after: this._getAttributeName(parameters[0])
-    });
+    })
   },
 
   /**
@@ -195,10 +195,10 @@ export const replacements = {
    * @return {string}
    */
   before(template, rule) {
-    const parameters = rule.getParameters();
+    const parameters = rule.getParameters()
     return this._replacePlaceholders(rule, template, {
       before: this._getAttributeName(parameters[0])
-    });
+    })
   },
 
   /**
@@ -209,10 +209,10 @@ export const replacements = {
    * @return {string}
    */
   after_or_equal(template, rule) {
-    const parameters = rule.getParameters();
+    const parameters = rule.getParameters()
     return this._replacePlaceholders(rule, template, {
       after_or_equal: this._getAttributeName(parameters[0])
-    });
+    })
   },
 
   /**
@@ -223,10 +223,10 @@ export const replacements = {
    * @return {string}
    */
   before_or_equal(template, rule) {
-    const parameters = rule.getParameters();
+    const parameters = rule.getParameters()
     return this._replacePlaceholders(rule, template, {
       before_or_equal: this._getAttributeName(parameters[0])
-    });
+    })
   },
 
   /**
@@ -237,15 +237,15 @@ export const replacements = {
    * @return {string}
    */
   same(template, rule) {
-    const parameters = rule.getParameters();
+    const parameters = rule.getParameters()
     return this._replacePlaceholders(rule, template, {
       same: this._getAttributeName(parameters[0])
-    });
+    })
   }
-};
+}
 
 export const formatter = (attribute) => {
-  return attribute.replace(/[_\[]/g, ' ').replace(/]/g, '');
-};
+  return attribute.replace(/[_\[]/g, ' ').replace(/]/g, '')
+}
 
-export default { replacements, formatter };
+export default { replacements, formatter }
