@@ -2,8 +2,6 @@ import { parseISO, isValid } from 'date-fns'
 import isString from 'lodash.isstring'
 import isUndefined from 'lodash.isundefined'
 import isFunction from 'lodash.isfunction'
-import isBoolean from 'lodash.isboolean'
-import isNaN from 'lodash.isnan'
 import isNumber from 'lodash.isnumber'
 
 const leapYear = (year) => {
@@ -163,7 +161,7 @@ const rules = {
   },
   numeric(val) {
     const num = Number(val) // tries to convert value to a number. useful if value is coming from form element
-    return isNumber(num) && !isNaN(num) && !isBoolean(isBoolean)
+    return typeof num === 'number' && !isNaN(num) && typeof val !== 'boolean'
   },
   array(val) {
     return Array.isArray(val)
