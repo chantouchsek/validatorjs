@@ -1,8 +1,9 @@
 {
   "name": "@chantouchsek/validatorjs",
-  "version": "0.0.1-beta.4",
+  "version": "0.0.1-beta.5",
   "description": "The validator-js library makes data validation in JavaScript very easy in both the browser and Node.js.",
   "main": "src/index.js",
+  "types": "types/index.d.ts",
   "scripts": {
     "clean": "rimraf dist",
     "build": "npm run clean && babel src -d dist",

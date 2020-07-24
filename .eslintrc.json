@@ -1,8 +1,15 @@
 {
-  "parser": "babel-eslint",
   "extends": [
     "eslint:recommended"
   ],
+  "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": true,
+    "ecmaVersion": 2018,
+    "ecmaFeatures": {
+      "modules": true
+    }
+  },
   "plugins": [
     "prettier",
     "babel"
@@ -100,6 +107,7 @@
       "error",
       "never"
     ],
-    "no-prototype-builtins": "off"
+    "no-prototype-builtins": "off",
+    "no-unused-vars": "warn"
   }
 }

@@ -174,8 +174,9 @@ export default class Validator {
    * Add failure and error message for given rule
    *
    * @param {Rules} rule
+   * @param {string|null} message
    */
-  _addFailure(rule) {
+  _addFailure(rule, message = null) {
     const msg = this.messages.render(rule)
     this.errors.add(rule.attribute, msg)
     this.errorCount++
