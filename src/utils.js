@@ -40,7 +40,7 @@ export function is(errors, error) {
   if (typeof error === 'string' && error.match(/[\*\!]/)) {
     return errors.filter(w => isMatch(w, error)).length > 0
   }
-  return Array.isArray(error) ? error.some(w => is(errors, w)) : errors.includes(error)
+  return isArray(error) ? error.some(w => is(errors, w)) : errors.includes(error)
 }
 
 export function isArray(object) {

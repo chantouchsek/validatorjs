@@ -28,16 +28,13 @@ class Errors {
    * @return {array} An array of error messages
    */
   get(attribute) {
-    if (this.has(attribute)) {
-      return this.errors[attribute]
-    }
-    return []
+    return this.has(attribute) ? this.errors[attribute] : []
   }
 
   /**
    * Returns the first error message for an attribute, false otherwise
    *
-   * @param  {string} attribute A key in the data object being validated
+   * @param  {string|[]} attribute A key in the data object being validated
    * @return {string|boolean} First error message or false
    */
   first(attribute) {
@@ -71,21 +68,11 @@ class Errors {
   /**
    * Determine if there are any error messages for an attribute
    *
-   * @param  {string}  attribute A key in the data object being validated
+   * @param  {string|[]}  attribute A key in the data object being validated
    * @return {boolean}
    */
   has(attribute) {
-    if (isArray(attribute)) {
-      return is(Object.keys(this.errors), attribute)
-    }
-    let hasError = this.errors.hasOwnProperty(attribute)
-    if (!hasError) {
-      const errors = Object.keys(this.errors).filter(
-        (e) => e.startsWith(`${attribute}.`) || e.startsWith(`${attribute}[`)
-      )
-      hasError = errors.length > 0
-    }
-    return hasError
+    return is(Object.keys(this.errors), attribute)
   }
 
   /**

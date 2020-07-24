@@ -52,7 +52,8 @@ class Messages {
     const attributeNames = flatten(this.attributeNames)
     if (attributeNames.hasOwnProperty(attribute)) {
       return attributeNames[attribute]
-    } else if (attributes.hasOwnProperty(attribute)) {
+    }
+    if (attributes.hasOwnProperty(attribute)) {
       name = attributes[attribute]
     }
     if (this.attributeFormatter) {

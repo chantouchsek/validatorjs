@@ -54,4 +54,20 @@ describe('Validator constructor', () => {
     })
     validator.fails()
   })
+  it('should get default lang if undefined lang provided', function() {
+    const validator = new Validator({
+      input: undefined,
+      rules: { name: 'required' },
+      locale: 'abc'
+    })
+    expect(validator.getDefaultLang()).toEqual('en')
+  })
+  it('should get correct lang with exist', function() {
+    const validator = new Validator({
+      input: undefined,
+      rules: { name: 'required' },
+      locale: 'km'
+    })
+    expect(validator.getDefaultLang()).toEqual('km')
+  })
 })

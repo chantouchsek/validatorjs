@@ -42,7 +42,7 @@ export default class Validator {
     this.errorCount = 0
     this.hasAsync = false
     this.rules = this._parseRules(rules)
-    this.locale = locale
+    this.useLang(locale)
     this.fields = fields
   }
 
@@ -565,7 +565,12 @@ export default class Validator {
    * @return {void}
    */
   useLang(lang) {
-    this.locale = lang
+    try {
+      require(`./lang/${lang}`)
+      this.locale = lang
+    } catch (e) {
+      this.locale = 'en'
+    }
   }
   /**
    * Get default language

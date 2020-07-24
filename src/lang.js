@@ -44,9 +44,7 @@ export const Lang = {
         this._set(lang, rawMessages)
       } catch (e) {
         const rawMessages = require('./lang/en')
-        this._set(lang, rawMessages)
-        // eslint-disable-next-line no-console
-        console.warn(e)
+        this._set('en', rawMessages)
       }
     }
   },
