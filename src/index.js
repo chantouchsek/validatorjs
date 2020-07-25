@@ -80,7 +80,7 @@ export default class Validator {
    */
   check() {
     const self = this
-    const { confirmedReverse = false } = this.options
+    const { confirmedReverse } = this.options
     const confirmed = 'confirmed'
     for (let attribute in self.rules) {
       const attributeRules = self.rules[attribute]
