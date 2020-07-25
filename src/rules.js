@@ -461,10 +461,7 @@ class Rules {
    * @return {string}
    */
   _getValueType() {
-    if (
-      isNumber(this.inputValue) ||
-      this.validator._hasNumericRule(this.attribute)
-    ) {
+    if (isNumber(this.inputValue) || this.validator._hasNumericRule(this.attribute)) {
       return 'numeric'
     }
     return 'string'
@@ -474,10 +471,10 @@ class Rules {
    * Set the async callback response
    *
    * @param  {boolean|undefined} passes  Whether validation passed
-   * @param  {string|undefined} message Custom error message
+   * @param  {string|null} message Custom error message
    * @return {void}
    */
-  response(passes, message) {
+  response(passes, message = '') {
     this.passes = passes === undefined || passes === true
     this._customMessage = message
     this.callback(this.passes, message)

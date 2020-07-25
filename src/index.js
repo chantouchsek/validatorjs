@@ -26,12 +26,12 @@ export default class Validator {
     }
     this.options = merge({}, defaults, options)
     const {
-      input = {},
+      input,
+      rules,
+      fields,
       locale,
       customMessages,
-      customAttributes,
-      rules,
-      fields
+      customAttributes
     } = this.options
     this.input = input
     this.messages = Lang._make(locale)
@@ -148,10 +148,7 @@ export default class Validator {
     for (const attribute in this.rules) {
       const attributeRules = this.rules[attribute]
       const inputValue = this._objectPath(this.input, attribute)
-      if (
-        this._hasRule(attribute, ['sometimes']) &&
-        !this._suppliedWithData(attribute)
-      ) {
+      if (this._hasRule(attribute, ['sometimes']) && !this._suppliedWithData(attribute)) {
         continue
       }
       let i = 0
@@ -214,11 +211,7 @@ export default class Validator {
     let i = 0
     const l = keys.length
     for (; i < l; i++) {
-      if (
-        isObject(copy) &&
-        !isNull(copy) &&
-        Object.hasOwnProperty.call(copy, keys[i])
-      ) {
+      if (isObject(copy) && !isNull(copy) && Object.hasOwnProperty.call(copy, keys[i])) {
         copy = copy[keys[i]]
       } else {
         return
@@ -262,11 +255,7 @@ export default class Validator {
     const parentPath = attribute.substr(0, attribute.indexOf('*') - 1)
     const propertyValue = this._objectPath(this.input, parentPath)
     if (propertyValue) {
-      for (
-        let propertyNumber = 0;
-        propertyNumber < propertyValue.length;
-        propertyNumber++
-      ) {
+      for (let propertyNumber = 0; propertyNumber < propertyValue.length; propertyNumber++) {
         const workingValues = wildCardValues ? wildCardValues.slice() : []
         workingValues.push(propertyNumber)
         this._parseRulesCheck(
