@@ -121,22 +121,6 @@ class Errors {
     }
     this.fill(errors)
   }
-
-  /**
-   * Clear errors on keydown.
-   *
-   * @param {KeyboardEvent} event
-   * @param {string} prefix
-   */
-  keydown(event, prefix = '') {
-    const { name } = event.target
-    if (!name) return
-    let name2 = ''
-    if (prefix) {
-      name2 = `${prefix}.${name}`
-    }
-    this.clear([name, name2])
-  }
 }
 
 export default Errors

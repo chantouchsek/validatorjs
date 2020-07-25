@@ -18,7 +18,7 @@ describe('lang / messages', function() {
   })
 
   it('should be able to add custom', function() {
-    const oldLang = validator.getDefaultLang()
+    const oldLang = validator.getLang()
     const rawMessages = {
       required: 'Le nkundla iyadingeka',
       attributes: {},
@@ -38,6 +38,6 @@ describe('lang / messages', function() {
     expect(messages).toEqual(rawMessages)
     expect(validator.fails()).toBeTruthy()
     expect(validator.errors.first('zip')).toEqual('Le nkundla iyadingeka')
-    validator.useLang(oldLang)
+    validator.setLang(oldLang)
   })
 })

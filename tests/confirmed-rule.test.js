@@ -42,4 +42,20 @@ describe('confirmed validation rule', function() {
     expect(validator.passes()).toBeTruthy()
     expect(validator.fails()).not.toBeTruthy()
   })
+
+  it('should reverse message from confirm to _confirmation', function() {
+    const validator = new Validator({
+      input: {
+        password: 'abc-1',
+        password_confirmation: 'abc',
+      },
+      rules: {
+        password: 'confirmed',
+      },
+      confirmedReverse: true,
+    })
+    expect(validator.passes()).not.toBeTruthy()
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.errors.first('password_confirmation')).toEqual('The password confirmation confirmation does not match.')
+  })
 })

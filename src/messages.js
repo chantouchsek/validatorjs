@@ -1,7 +1,5 @@
 import isObject from 'lodash.isobject'
 import isString from 'lodash.isstring'
-import isUndefined from 'lodash.isundefined'
-import isNull from 'lodash.isnull'
 import { replacements } from './attributes'
 import flatten from './flatten'
 
@@ -99,7 +97,7 @@ class Messages {
    * @return {string}
    */
   _getTemplate(rule) {
-    const messages = this.messages
+    const messages = this.all()
     let template = messages.def
     const customMessages = this.customMessages
     const formats = [rule.name + '.' + rule.attribute, rule.name]

@@ -8,7 +8,7 @@ describe('gte validation rule', function() {
         bar: 2,
       },
       rules: {
-        age: 'gt:bar',
+        age: 'gte:bar',
       },
     })
     expect(validator.passes()).not.toBeTruthy()
