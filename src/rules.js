@@ -121,12 +121,9 @@ const rules = {
   // compares the size of strings
   // with numbers, compares the value
   size(val, req) {
-    if (val) {
-      req = parseFloat(req)
-      const size = this.getSize()
-      return size === req
-    }
-    return true
+    req = parseFloat(req)
+    const size = this.getSize()
+    return size === req
   },
   string(val) {
     return isString(val)
@@ -254,14 +251,9 @@ const rules = {
   digits_between(val) {
     const numericRule = this.validator.getRule('numeric')
     const req = this.getParameters()
-    const valueDigitsCount = String(val).length
     const min = parseFloat(req[0], 10)
     const max = parseFloat(req[1], 10)
-    return (
-      numericRule.validate(val) &&
-      valueDigitsCount >= min &&
-      valueDigitsCount <= max
-    )
+    return (numericRule.validate(val) && val >= min && val <= max)
   },
   regex(val, req) {
     const mod = /[g|i|m]{1,3}$/
@@ -352,8 +344,8 @@ const rules = {
     return /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(val)
   }
 }
-let missedRuleValidator = (name = null) => {
-  throw new Error('Validator `' + name + '` is not defined!')
+let missedRuleValidator = () => {
+  throw new Error('Validator `' + this.name + '` is not defined!')
 }
 let missedRuleMessage
 
@@ -402,7 +394,7 @@ class Rules {
    * @return {boolean|undefined}
    */
   _apply(inputValue, ruleValue, attribute, callback = null) {
-    const fn = this.isMissed() ? missedRuleValidator(this.name) : this.fn
+    const fn = this.isMissed() ? missedRuleValidator : this.fn
     return fn.apply(this, [inputValue, ruleValue, attribute, callback])
   }
 
@@ -427,17 +419,22 @@ class Rules {
    */
   getParameters() {
     let value = []
-    if (isString(this.ruleValue)) {
+
+    if (typeof this.ruleValue === 'string') {
       value = this.ruleValue.split(',')
     }
-    if (isNumber(this.ruleValue)) {
+
+    if (typeof this.ruleValue === 'number') {
       value.push(this.ruleValue)
     }
-    if (Array.isArray(this.ruleValue)) {
+
+    if (this.ruleValue instanceof Array) {
       value = this.ruleValue
     }
+
     return value
   }
+
 
   /**
    * Get true size of value
@@ -623,6 +620,11 @@ export const manager = {
     this.asyncRules.push(name)
   },
 
+  /**
+   * Register missing rule
+   * @param {Function} fn
+   * @param {string} message
+   */
   registerMissedRuleValidator(fn, message) {
     missedRuleValidator = fn
     missedRuleMessage = message

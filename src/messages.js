@@ -1,6 +1,8 @@
 import isObject from 'lodash.isobject'
 import isString from 'lodash.isstring'
-import Attributes from './attributes'
+import isUndefined from 'lodash.isundefined'
+import isNull from 'lodash.isnull'
+import { replacements } from './attributes'
 import flatten from './flatten'
 
 class Messages {
@@ -55,8 +57,7 @@ class Messages {
     }
     if (attributes.hasOwnProperty(attribute)) {
       name = attributes[attribute]
-    }
-    if (this.attributeFormatter) {
+    } else if (this.attributeFormatter) {
       name = this.attributeFormatter(name)
     }
     return name
@@ -83,8 +84,8 @@ class Messages {
     }
     const template = this._getTemplate(rule)
     let message
-    if (Attributes.replacements[rule.name]) {
-      message = Attributes.replacements[rule.name].apply(this, [template, rule])
+    if (replacements[rule.name]) {
+      message = replacements[rule.name].apply(this, [template, rule])
     } else {
       message = this._replacePlaceholders(rule, template, {})
     }
@@ -102,14 +103,12 @@ class Messages {
     let template = messages.def
     const customMessages = this.customMessages
     const formats = [rule.name + '.' + rule.attribute, rule.name]
-    let i = 0
-    let format
-    for (; i < formats.length; i++) {
+    for (let i = 0, format; i < formats.length; i++) {
       format = formats[i]
       if (customMessages.hasOwnProperty(format)) {
         template = customMessages[format]
         break
-      } else if (messages.hasOwnProperty(format)) {
+      } else if (messages.hasOwnProperty(format) && messages[format]) {
         template = messages[format]
         break
       }

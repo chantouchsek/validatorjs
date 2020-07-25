@@ -95,7 +95,7 @@ class Errors {
    *
    * @param {String|undefined|Array} attribute
    */
-  clear(attribute) {
+  clear(attribute = '') {
     if (!attribute) return this.flush()
     const errors = Object.assign({}, this.errors)
     if (isArray(attribute)) {

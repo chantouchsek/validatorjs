@@ -545,9 +545,8 @@ export default class Validator {
    */
   makeLang(locale = 'en', attributes = {}, messages = {}) {
     this.messages = Lang._make(locale)
-    this.setAttributeNames(attributes)
     this.messages._setCustom(messages)
-    return this
+    this.setAttributeNames(attributes)
   }
   /**
    * Get messages for given language
@@ -585,10 +584,10 @@ export default class Validator {
    *
    * @param  {string}   name
    * @param  {function} fn
-   * @param  {string}   message
+   * @param  {string|null}   message
    * @return {void}
    */
-  register(name, fn, message) {
+  register(name, fn, message = null) {
     const lang = this.getDefaultLang()
     Rules.register(name, fn)
     Lang._setRuleMessage(lang, name, message)
@@ -641,5 +640,18 @@ export default class Validator {
    */
   registerMissedRuleValidator(fn, message) {
     Rules.registerMissedRuleValidator(fn, message)
+  }
+
+  /**
+   * Set re-initial options
+   * @param {Object} options
+   */
+  setOptions(options = {}) {
+    const { locale = 'en', input = {}, rules = {}, attributes = {}, messages = {} } = options
+    this.input = input
+    this.makeLang(locale, attributes, messages)
+    this.setAttributeFormatter(this.attributeFormatter())
+    this.errors = new Errors()
+    this.rules = this._parseRules(rules)
   }
 }
