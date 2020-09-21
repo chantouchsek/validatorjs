@@ -9,7 +9,7 @@
     "build": "npm run clean && babel src -d dist",
     "prepare": "npm run build",
     "test": "jest --coverage",
-    "release": "yarn prepare && standard-version && git push --follow-tags && npm publish"
+    "release": "yarn prepare && standard-version && git push --follow-tags"
   },
   "repository": {
     "type": "git",
