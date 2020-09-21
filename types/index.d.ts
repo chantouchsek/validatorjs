@@ -1,7 +1,7 @@
 type AsyncFunction = ((arg0: any) => Promise<any>) | Promise<any>;
 
 export default class Validator {
-  constructor(options?: ValidatorOptions)
+  constructor(options?: ValidatorOptions | object)
   errors: ErrorsInstance;
   messages: MessageInterface;
   errorCount: number;
@@ -46,22 +46,26 @@ export default class Validator {
    * @param messages
    */
   setMessages(lang: string, messages: object): object
+
+  /**
+   * Check the validation is fails
+   * @param fails
+   */
+  fails(fails?: undefined): boolean;
+
+  /**
+   * Check the validation is passes
+   * @param passes
+   */
+  passes(passes?: undefined): boolean;
 }
 
 export interface ValidatorOptions {
-  input: {
-    [key: string]: string | object
-  },
-  rules?: {
-    [key: string]: string | object
-  },
+  input: any,
+  rules?: any,
   locale?: string,
-  customMessages?: {
-    [key: string]: string | object
-  },
-  customAttributes?: {
-    [key: string]: string | object
-  },
+  customMessages?: any,
+  customAttributes?: any,
   confirmedReverse: boolean
 }
 
