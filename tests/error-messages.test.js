@@ -141,7 +141,7 @@ describe('Error messages', function() {
         },
       })
       expect(validator.passes()).not.toBeTruthy()
-      expect(validator.errors.first('password')).toEqual('The password confirmation does not match.')
+      expect(validator.errors.first('password')).toEqual('The password does not match.')
     })
 
     it('should fail when the 2 attributes are the same', function() {

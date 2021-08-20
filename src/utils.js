@@ -46,3 +46,15 @@ export function is(errors, error) {
 export function isArray(object) {
   return Object.prototype.toString.call(object) === '[object Array]'
 }
+
+export function toCamelCase (s) {
+  return s.replace(/([-_][a-z])/ig, ($1) => {
+    return $1.toUpperCase()
+      .replace('-', '')
+      .replace('_', '')
+  })
+}
+
+export function toSnakeCase (str) {
+  return str.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`)
+}

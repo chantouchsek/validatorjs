@@ -8,7 +8,7 @@ module.exports = {
   before: 'The :attribute must be before :before.',
   before_or_equal: 'The :attribute must be equal or before :before_or_equal.',
   between: 'The :attribute field must be between :min and :max.',
-  confirmed: 'The :attribute confirmation does not match.',
+  confirmed: 'The :attribute does not match.',
   email: 'The :attribute format is invalid.',
   date: 'The :attribute is not a valid date format.',
   def: 'The :attribute attribute has errors.',
@@ -71,7 +71,7 @@ module.exports = {
   password: 'The :attribute must be password.',
   attributes: {
     form: {
-      age: 'My Age'
+      age: 'My Age',
     }
   }
 }
