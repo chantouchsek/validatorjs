@@ -26,7 +26,7 @@ describe('confirmed validation rule', function() {
     })
     expect(validator.passes()).not.toBeTruthy()
     expect(validator.fails()).toBeTruthy()
-    expect(validator.errors.first('password')).toEqual('The password confirmation does not match.')
+    expect(validator.errors.first('password')).toEqual('The password does not match.')
   })
 
   it('should pass with a matching confirmation field for the field under validation', function() {
@@ -56,6 +56,32 @@ describe('confirmed validation rule', function() {
     })
     expect(validator.passes()).not.toBeTruthy()
     expect(validator.fails()).toBeTruthy()
-    expect(validator.errors.first('password_confirmation')).toEqual('The password confirmation confirmation does not match.')
+    expect(validator.errors.first('password_confirmation')).toEqual('The password confirmation does not match.')
+  })
+
+  it('use camelCase of passwordConfirmation property', function() {
+    const validator = new Validator({
+      input: {
+        form: {
+          password: 'abc-1',
+          passwordConfirmation: 'abc',
+        },
+      },
+      rules: {
+        form: {
+          password: 'confirmed',
+        },
+      },
+      confirmedReverse: true,
+      customAttributes: {
+        form: {
+          password: 'Password',
+          passwordConfirmation: 'Password confirmation'
+        }
+      },
+    })
+    expect(validator.passes()).not.toBeTruthy()
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.errors.first('form.password_confirmation')).toEqual('The Password confirmation does not match.')
   })
 })

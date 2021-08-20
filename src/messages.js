@@ -2,6 +2,7 @@ import isObject from 'lodash.isobject'
 import isString from 'lodash.isstring'
 import { replacements } from './attributes'
 import flatten from './flatten'
+import { toSnakeCase, toCamelCase } from './utils'
 
 class Messages {
   constructor(lang, messages = []) {
@@ -50,8 +51,10 @@ class Messages {
     let name = attribute
     const attributes = flatten(this.messages.attributes)
     const attributeNames = flatten(this.attributeNames)
-    if (attributeNames.hasOwnProperty(attribute)) {
-      return attributeNames[attribute]
+    const camelCase = toCamelCase(attribute)
+    const snakeCase = toSnakeCase(attribute)
+    if (attributeNames.hasOwnProperty(camelCase) || attributeNames.hasOwnProperty(snakeCase)) {
+      return attributeNames[camelCase] || attributeNames[snakeCase]
     }
     if (attributes.hasOwnProperty(attribute)) {
       name = attributes[attribute]

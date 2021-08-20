@@ -1,18 +1,17 @@
-# @chantouchsek/validatorjs
+# ValidatorJs
 
-The @chantouchsek/validatorjs library makes data validation in JavaScript very easy in both the browser and Node.js.
+The ValidatorJs library makes data validation in JavaScript very easy in both the browser and Node.js.
 This library was inspired by the [Laravel framework's Validator](http://laravel.com/docs/validation) and 
 [ValidatorJs](https://github.com/skaterdav85/validatorjs)
 
 [![Build Status](https://travis-ci.org/Chantouch/validator-js.svg?branch=master)](https://travis-ci.org/Chantouch/validator-js.svg?branch=master)
 [![Latest Version on NPM](https://img.shields.io/npm/v/@chantouchsek/validatorjs.svg?style=flat-square)](https://npmjs.com/package/@chantouchsek/validatorjs)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 [![npm](https://img.shields.io/npm/dt/@chantouchsek/validatorjs.svg?style=flat-square)](https://npmjs.com/package/@chantouchsek/validatorjs)
 [![npm](https://img.shields.io/npm/dm/@chantouchsek/validatorjs.svg?style=flat-square)](https://npmjs.com/package/@chantouchsek/validatorjs)
 
 ## Why use @chantouchsek/validatorjs?
 
-* Not dependent on any libraries.
 * Works in both the browser and Node.
 * Readable and declarative validation rules.
 * Error messages with multilingual support.
