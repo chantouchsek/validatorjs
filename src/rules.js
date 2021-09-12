@@ -1,4 +1,3 @@
-import { parseISO, isValid } from 'date-fns'
 import isString from 'lodash.isstring'
 import isUndefined from 'lodash.isundefined'
 import isFunction from 'lodash.isfunction'
@@ -7,51 +6,98 @@ import isNumber from 'lodash.isnumber'
 const leapYear = (year) => {
   return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
 }
-const isValidDate = (inDate) => {
-  if (inDate instanceof Date) {
-    return !isNaN(inDate)
-  }
-  // reformat if supplied as mm.dd.yyyy (period delimiter)
-  if (isString(inDate)) {
-    const pos = inDate.indexOf('.')
-    if (pos > 0 && pos <= 6) {
-      inDate = inDate.replace(/\./g, '-')
+function checkFalsePositiveDates(dateString = '') {
+  if (dateString.length === 10) {
+    // massage input to use yyyy-mm-dd format
+    // we support yyyy/mm/dd or yyyy.mm.dd
+    let normalizedDate = dateString.replace('.', '-').replace('/', '-')
+    let parts = normalizedDate.split('-')
+    if (parts.length === 3) {
+      if (parts[0].length === 4) {
+        // yyyy-mm-dd format
+        let y = parseInt(parts[0])
+        let m = parseInt(parts[1])
+        let d = parseInt(parts[2])
+        if (m === 2) {
+          // return leapYear(y) ? d <= 29 : d <= 28;
+          if (leapYear(y)) {
+            if (d > 29) {
+              return false
+            }
+          } else {
+            if (d > 28) {
+              return false
+            }
+          }
+        }
+        if (m === 4 || m === 6 || m === 9 || m === 11) {
+          if (d > 30) {
+            return false
+          }
+        }
+      }
     }
-    if (inDate.length === 10) {
-      return isValid(parseISO(inDate))
+    return true // we are not in February, proceed
+  }
+  return true // we are not testing formatted date, proceed to rest of validation
+}
+const isValidDate = (dateString) => {
+  let testDate
+  if (typeof dateString === 'number') {
+    testDate = new Date(dateString)
+    if (typeof testDate === 'object') {
+      return true
     }
   }
-  const testDate = new Date(inDate)
-  const yr = testDate.getFullYear()
-  const mo = testDate.getMonth()
-  const day = testDate.getDate()
-  const daysInMonth = [
-    31,
-    leapYear(yr) ? 29 : 28,
-    31,
-    30,
-    31,
-    30,
-    31,
-    31,
-    30,
-    31,
-    30,
-    31
-  ]
-  if (yr < 1000) {
+  // first convert incoming string to date object and see if it correct date and format
+  testDate = new Date(dateString)
+  if (typeof testDate === 'object') {
+    if (testDate.toString() === 'Invalid Date') {
+      return false
+    }
+
+    /**
+     * Check for false positive dates
+     * perform special check on february as JS `new Date` incorrectly returns valid date
+     * Eg.  let newDate = new Date('2020-02-29')  // returns as March 02 2020
+     * Eg.  let newDate = new Date('2019-02-29')  // returns as March 01 2020
+     * Eg.  let newDate = new Date('2019-04-31')  // returns as April 30 2020
+     */
+    if (!checkFalsePositiveDates(dateString)) {
+      return false
+    }
+
+    // valid date object and not a february date
+    return true
+  }
+
+  // First check for the pattern
+  const regex_date = /^\d{4}\-\d{1,2}\-\d{1,2}$/
+
+  if (!regex_date.test(dateString)) {
     return false
   }
-  if (isNaN(mo)) {
+
+  // Parse the date parts to integers
+  const parts = dateString.split('-')
+  const day = parseInt(parts[2], 10)
+  const month = parseInt(parts[1], 10)
+  const year = parseInt(parts[0], 10)
+
+  // Check the ranges of month and year
+  if (year < 1000 || year > 3000 || month === 0 || month > 12) {
     return false
   }
-  if (mo + 1 > 12) {
-    return false
+
+  const monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+  // Adjust for leap years
+  if (year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0)) {
+    monthLength[1] = 29
   }
-  if (isNaN(day)) {
-    return false
-  }
-  return day <= daysInMonth[mo]
+
+  // Check the range of the day
+  return day > 0 && day <= monthLength[month - 1]
 }
 
 const rules = {

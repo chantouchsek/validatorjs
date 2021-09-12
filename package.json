@@ -1,6 +1,6 @@
 {
   "name": "@chantouchsek/validatorjs",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "The validator-js library makes data validation in JavaScript very easy in both the browser and Node.js.",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
@@ -40,8 +40,7 @@
     "lodash.isobject": "^3.0.2",
     "lodash.isstring": "^4.0.1",
     "lodash.isundefined": "^3.0.1",
-    "lodash.merge": "^4.6.2",
-    "date-fns": "^2.15.0"
+    "lodash.merge": "^4.6.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
