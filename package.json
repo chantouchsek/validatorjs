@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Chantouch/validator-js.git"
+    "url": "git+https://github.com/chantouchsek/validator-js.git"
   },
   "files": [
     "dist",
@@ -28,9 +28,9 @@
   "author": "Chantouch Sek",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Chantouch/validator-js/issues"
+    "url": "https://github.com/chantouchsek/validator-js/issues"
   },
-  "homepage": "https://github.com/Chantouch/validator-js#readme",
+  "homepage": "https://github.com/chantouchsek/validator-js#readme",
   "optionalDependencies": {
     "lodash.isboolean": "^3.0.3",
     "lodash.isfunction": "^3.0.9",
