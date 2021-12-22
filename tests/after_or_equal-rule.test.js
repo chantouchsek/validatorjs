@@ -44,6 +44,5 @@ describe('after or equal rule', () => {
     })
     expect(validator.fails()).toBeTruthy()
     // expect(validator.passes()).toBeTruthy()
-    console.log('msg', validator.errors.all())
   })
 })

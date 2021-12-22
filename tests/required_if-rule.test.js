@@ -43,6 +43,5 @@ describe('required if', function() {
     // validation.fails() // true
     // validation.passes() // false
     expect(validator.fails()).toBeTruthy()
-    console.log('msg', validator.errors)
   })
 })
