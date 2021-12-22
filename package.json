@@ -54,7 +54,7 @@
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^8.4.0",
     "babel-eslint": "^10.1.0",
-    "babel-jest": "^26.1.0",
+    "babel-jest": "^27.4.5",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-es2017-object-entries": "0.0.5",
