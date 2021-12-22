@@ -15,7 +15,6 @@ describe('required if', function() {
     expect(validator.passes()).not.toBeTruthy()
     expect(validator.errors.first('flavour')).toEqual('The flavour field is required when desert is icecream.')
   })
-
   it('should pass', function() {
     const validator = new Validator({
       input: {

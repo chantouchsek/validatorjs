@@ -131,6 +131,6 @@ describe('max validation rule', function() {
         val: 'numeric|max:17.5',
       },
     })
-    expect(validator.passes()).not.toBeTruthy()
+    expect(validator.passes()).toBeFalsy()
   })
 })

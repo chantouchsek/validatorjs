@@ -497,7 +497,7 @@ class Rules {
       return value
     }
     if (this.validator._hasNumericRule(this.attribute)) {
-      return parseInt(value, 10)
+      return parseFloat(value, 10)
     }
     return value.length
   }
