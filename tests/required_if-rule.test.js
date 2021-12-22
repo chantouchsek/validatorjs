@@ -29,4 +29,21 @@ describe('required if', function() {
     expect(validator.passes()).toBeTruthy()
     expect(validator.fails()).not.toBeTruthy()
   })
+  it('should checking type validation', function() {
+    let validator = new Validator({
+      input: {
+        age: true,
+        name: ''
+      },
+      rules: {
+        age: ['required', { 'in': [29, 30] }],
+        name: [{ 'required_if': ['age', true] }]
+      }
+    })
+
+    // validation.fails() // true
+    // validation.passes() // false
+    expect(validator.fails()).toBeTruthy()
+    console.log('msg', validator.errors)
+  })
 })

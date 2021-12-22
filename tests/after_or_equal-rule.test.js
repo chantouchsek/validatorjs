@@ -23,7 +23,27 @@ describe('after or equal rule', () => {
       input: { date1: '2020-01-01', date2: '2020-01-02' },
       rules: { date2: 'after_or_equal:date1' },
     })
-    expect(validator.fails()).not.toBeTruthy()
+    expect(validator.fails()).toBeFalsy()
     expect(validator.passes()).toBeTruthy()
+  })
+  it('should pass when the comparing attributes are smaller', function() {
+    const validator = new Validator({
+      input: { startAt: '2021-11-15T17:44', endAt: '2021-11-15T17:45' },
+      rules: {
+        startAt: [
+          'required',
+          {
+            after_or_equal: 'endAt',
+          },
+        ],
+      },
+      customAttributes: {
+        endAt: '',
+        startAt: 'start at'
+      }
+    })
+    expect(validator.fails()).toBeTruthy()
+    // expect(validator.passes()).toBeTruthy()
+    console.log('msg', validator.errors.all())
   })
 })

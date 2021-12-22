@@ -110,7 +110,8 @@ const rules = {
   },
   required_if(val, req) {
     req = this.getParameters()
-    if (this.validator._objectPath(this.validator.input, req[0]) === req[1]) {
+    const path = this.validator._objectPath(this.validator.input, req[0])
+    if (path === req[1]) {
       return this.validator.getRule('required').validate(val)
     }
     return true
@@ -496,7 +497,7 @@ class Rules {
       return value
     }
     if (this.validator._hasNumericRule(this.attribute)) {
-      return parseFloat(value, 10)
+      return parseInt(value, 10)
     }
     return value.length
   }
