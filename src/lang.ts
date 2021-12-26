@@ -1,9 +1,9 @@
 import Massages from './messages'
 
 export default class Lang {
-  private static readonly messages: Record<string, any> = {}
+  static messages: Record<string, any> = {}
 
-  static _set(lang: string, rawMessages: Record<string, any>[]) {
+  static _set(lang: string, rawMessages: Record<string, any> = {}) {
     this.messages[lang] = rawMessages
   }
 
@@ -23,12 +23,13 @@ export default class Lang {
 
   static _load(lang: string) {
     if (!this.messages[lang]) {
-      let rawMessage: Record<string, any>[]
+      let rawMessage
       try {
         rawMessage = require(`'./lang/${lang}`)
       } catch (e: any) {
         rawMessage = require(`./lang/en`)
       }
+      rawMessage = rawMessage.default
       this._set(lang, rawMessage)
     }
   }

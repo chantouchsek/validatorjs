@@ -9,7 +9,7 @@ export default class Errors {
     if (!this.has(attribute)) {
       this.errors[attribute] = []
     }
-    if (this.errors[attribute].includes(message)) {
+    if (!this.errors[attribute].includes(message)) {
       this.errors[attribute].push(message)
     }
   }

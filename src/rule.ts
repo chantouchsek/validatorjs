@@ -12,7 +12,7 @@ export class Rule {
   private _customMessage: any
   private passes: boolean
   private readonly fn: any
-  private readonly name: string
+  readonly name: string
   private callback: any
   attribute: string
   private input: any
@@ -141,7 +141,7 @@ export class Rule {
     return typeof this.fn !== 'function'
   }
 
-  get customMessage() {
+  get customMessages() {
     return this.isMissed() ? missedRuleMessage : this._customMessage
   }
 }
