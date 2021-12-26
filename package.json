@@ -6,71 +6,69 @@
   "types": "types/index.d.ts",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "npm run clean && babel src -d dist",
-    "prepare": "npm run build",
-    "test": "jest --coverage",
-    "release": "yarn prepare && standard-version && git push --follow-tags"
+    "build": "yarn clean && tsc",
+    "test": "jest --passWithNoTests --bail --detectOpenHandles",
+    "test:cov": "jest --coverage",
+    "release": "standard-version && git push --follow-tags origin main && yarn publish",
+    "lint:js": "eslint --ext \".js,.ts\" --ignore-path .gitignore .",
+    "lint:prettier": "prettier --check .",
+    "lint": "yarn lint:js && yarn lint:prettier",
+    "lintfix": "prettier --write --list-different . && yarn lint:js --fix",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chantouchsek/validator-js.git"
   },
   "files": [
-    "dist",
-    "src",
-    "types"
+    "dist"
   ],
   "keywords": [
     "validator",
     "validator-js",
     "node"
   ],
-  "author": "Chantouch Sek",
-  "license": "ISC",
+  "author": {
+    "name": "Chantouch Sek",
+    "email": "chantouchsek.cs83@gmail.com",
+    "url": "https://chantouch.me"
+  },
+  "engines": {
+    "node": "^12.20.0 || >=14.13.0"
+  },
+  "lint-staged": {
+    "*.{js,ts}": "eslint --cache",
+    "*.**": "prettier --check --ignore-unknown"
+  },
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/chantouchsek/validator-js/issues"
   },
   "homepage": "https://github.com/chantouchsek/validator-js#readme",
-  "optionalDependencies": {
-    "lodash.isboolean": "^3.0.3",
-    "lodash.isfunction": "^3.0.9",
-    "lodash.isnan": "^3.0.2",
-    "lodash.isnull": "^3.0.0",
-    "lodash.isnumber": "^3.0.3",
-    "lodash.isobject": "^3.0.2",
-    "lodash.isstring": "^4.0.1",
-    "lodash.isundefined": "^3.0.1",
-    "lodash.merge": "^4.6.2"
-  },
   "devDependencies": {
-    "@babel/cli": "^7.10.5",
-    "@babel/core": "^7.10.5",
-    "@babel/plugin-proposal-class-properties": "^7.10.4",
-    "@babel/plugin-proposal-object-rest-spread": "^7.10.4",
-    "@babel/preset-env": "^7.10.4",
-    "@babel/preset-typescript": "^7.10.4",
-    "@rollup/plugin-babel": "^5.1.0",
-    "@rollup/plugin-commonjs": "^14.0.0",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^8.4.0",
-    "babel-eslint": "^10.1.0",
-    "babel-jest": "^26.1.0",
-    "babel-plugin-external-helpers": "^6.22.0",
-    "babel-plugin-transform-async-to-generator": "^6.24.1",
-    "babel-plugin-transform-es2017-object-entries": "0.0.5",
-    "babel-preset-minify": "^0.5.1",
-    "escape-string-regexp": "^4.0.0",
-    "eslint": "^7.5.0",
-    "eslint-plugin-babel": "^5.3.1",
-    "eslint-plugin-prettier": "^3.1.4",
-    "jest": "^26.1.0",
-    "prettier": "^2.0.5",
+    "@commitlint/cli": "^15.0.0",
+    "@commitlint/config-conventional": "^15.0.0",
+    "@types/jest": "^27.0.1",
+    "@types/lodash": "^4.14.178",
+    "@types/node": "^16.9.3",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.31.1",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "husky": "^7.0.4",
+    "jest": "^27.4.5",
+    "lint-staged": "^12.1.3",
+    "prettier": "^2.5.1",
     "rimraf": "^3.0.2",
-    "rollup": "^2.23.0",
-    "rollup-plugin-uglify": "^6.0.4",
-    "standard-version": "^8.0.2"
+    "standard-version": "^8.0.2",
+    "ts-jest": "^27.1.2",
+    "typescript": "^4.5.3"
   },
-  "directories": {
-    "test": "tests"
+  "dependencies": {
+    "escape-string-regexp": "^5.0.0",
+    "lodash": "^4.17.21"
   }
 }

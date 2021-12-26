@@ -3,11 +3,11 @@ name: ci
 on:
   push:
     branches:
-      - "*"
-      - "!master"
+      - '*'
+      - '!master'
   pull_request:
     branches:
-      - "*"
+      - '*'
 
 jobs:
   lint-and-test:
