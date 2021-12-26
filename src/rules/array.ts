@@ -1,3 +1,3 @@
-export default function (value: any) {
+export const array = (value: any) => {
   return value instanceof Array
 }

@@ -44,7 +44,7 @@ export default class Messages {
     return this.messages
   }
 
-  render(rule: Record<string, any>) {
+  render(rule: Record<string, any>): string {
     if (rule.customMessages) {
       return rule.customMessages
     }

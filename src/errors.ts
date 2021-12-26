@@ -23,9 +23,9 @@ export default class Errors {
 
   first(attribute: string) {
     if (this.has(attribute)) {
-      return this.errors[attribute][0]
+      return this.errors[attribute][0] || null
     }
-    return null
+    return false
   }
 
   all() {

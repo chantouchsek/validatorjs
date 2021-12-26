@@ -19,7 +19,7 @@ describe('array rule', function () {
     expect(validator.passes()).toBeFalsy()
   })
 
-  it.skip('should have a minimum number of array items ', function () {
+  it('should have a minimum number of array items ', function () {
     const validator = new Validator(
       {
         names: [],

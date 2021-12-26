@@ -1,4 +1,4 @@
-export default function (value: any) {
+export const required = (value: any) => {
   let str = ''
   if (value === undefined || value === null) {
     return false

@@ -2,7 +2,7 @@ import Lang from './lang'
 import Messages from './messages'
 import Errors from './errors'
 import { formatter } from './attributes'
-import { Manager, Rule } from './rules'
+import { Manager, Rule } from './rule'
 import AsyncResolvers from './async-resolvers'
 import type { ValidatorOptions } from '../types/validator'
 import { hasOwnProperty } from '../types/object'
@@ -10,8 +10,8 @@ import type { RuleName } from '../types/rule'
 
 export default class Validator {
   private readonly input: Record<string, any> = {}
-  private messages: Messages
-  private errors: Errors
+  readonly messages: Messages
+  readonly errors: Errors
   private errorCount: number
   private hasAsync: boolean
   private lang = 'en'
@@ -32,14 +32,11 @@ export default class Validator {
     const lang = locale || this.getDefaultLang()
     this.manager = new Manager()
     this.input = input || {}
-
     this.messages = Lang._make(lang)
     this.messages._setCustom(customMessages)
     this.setAttributeFormatter(Validator.attributeFormatter)
-
     this.errors = new Errors()
     this.errorCount = 0
-
     this.hasAsync = false
     this.rules = this._parseRules(rules)
   }
@@ -48,11 +45,9 @@ export default class Validator {
     for (const attribute in this.rules) {
       const attributeRules = this.rules[attribute]
       const inputValue = this._objectPath(this.input, attribute)
-
-      if (
-        this._hasRule(attribute, ['sometimes']) &&
-        !this._suppliedWithData(attribute)
-      ) {
+      const findRules = ['sometimes']
+      const hasRule = this._hasRule(attribute, findRules)
+      if (hasRule && !this._suppliedWithData(attribute)) {
         continue
       }
 
@@ -83,17 +78,11 @@ export default class Validator {
   }
 
   checkAsync(passes?: boolean | (() => void), fails?: any) {
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const _this = this
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     passes = passes || function () {}
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     fails = fails || function () {}
-
-    const failsOne = function (rule: Record<string, any>) {
-      _this._addFailure(rule)
-    }
-
+    const failsOne = (rule: Rule) => this._addFailure(rule)
     const resolvedAll = function (allPassed: boolean) {
       if (allPassed && typeof passes === 'function') {
         passes()
@@ -226,10 +215,10 @@ export default class Validator {
       return true
     }
 
-    return this.getRule('required').validate(value, {}, null)
+    return this.getRule('required').validate(value, {}, '')
   }
 
-  _addFailure(rule: Record<string, any>) {
+  _addFailure(rule: Rule) {
     const msg = this.messages.render(rule)
     this.errors.add(rule.attribute, msg)
     this.errorCount++
@@ -425,7 +414,7 @@ export default class Validator {
     const customMessages = this.messages.customMessages
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const self = this
-    Object.keys(customMessages).forEach(function (key) {
+    Object.keys(customMessages).forEach((key) => {
       if (nums) {
         const newKey = self._replaceWildCards(key, nums)
         customMessages[newKey] = customMessages[key]

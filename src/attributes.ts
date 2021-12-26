@@ -1,4 +1,4 @@
-import type { Rule } from './rules'
+import type { Rule } from './rule'
 
 const replacements = {
   between(template: string, rule: Rule): string {
