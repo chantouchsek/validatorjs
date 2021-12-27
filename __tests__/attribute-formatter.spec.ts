@@ -14,9 +14,7 @@ describe('attribute formatter tests', () => {
 
   it('should be able configure global attribute formatter', () => {
     const originalAttributeFormatter = Validator.attributeFormatter
-    Validator.setAttributeFormatter(function (attribute) {
-      return attribute.replace(/_/, ' ')
-    })
+    Validator.setAttributeFormatter((attr: string) => attr.replace(/_/, ' '))
     const validator = new Validator(
       { first_name: '' },
       { first_name: 'required' },
@@ -33,9 +31,7 @@ describe('attribute formatter tests', () => {
       { first_name: '' },
       { first_name: 'required' },
     )
-    validator.setAttributeFormatter(function (attribute) {
-      return attribute
-    })
+    validator.setAttributeFormatter((attribute: string) => attribute)
     expect(validator.fails()).toBeTruthy()
     expect(validator.errors.first('first_name')).toEqual(
       'The first_name field is required.',

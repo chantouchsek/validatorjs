@@ -4,7 +4,7 @@ describe('implicit rule tests', () => {
   it('should fail implicit rule even when undefined', () => {
     Validator.registerImplicit(
       'null_or_number',
-      function (val) {
+      (val: string) => {
         return (val && val.match(/^\d*$/)) || val === null
       },
       ':attribute must be a number or empty',
@@ -22,9 +22,7 @@ describe('implicit rule tests', () => {
   it('should pass implicit rule even when null', () => {
     Validator.registerImplicit(
       'null_or_number',
-      function (val) {
-        return (val && val.match(/^\d*$/)) || val === null
-      },
+      (val: string) => (val && val.match(/^\d*$/)) || val === null,
       ':attribute must be a number or empty',
     )
 
@@ -38,7 +36,7 @@ describe('implicit rule tests', () => {
   it('should fail async implicit rule even when undefined', function (done) {
     Validator.registerAsyncImplicit(
       'async_null',
-      function (value, attribute, req, passes) {
+      (value: string, attribute: string, req: number, passes: any) => {
         setTimeout(() => {
           if (value === null) {
             passes(true)
@@ -62,7 +60,7 @@ describe('implicit rule tests', () => {
   it('should pass async implicit rule even when null', function (done) {
     Validator.registerAsyncImplicit(
       'async_null',
-      function (value, attribute, req, passes) {
+      (value: string, attribute: string, req: number, passes: any) => {
         setTimeout(() => {
           if (value === null) {
             passes(true)

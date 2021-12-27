@@ -1,7 +1,7 @@
 import Validator from '../src/main'
 
 describe('Validator constructor', () => {
-  let validator
+  let validator: Validator
 
   beforeEach(() => {
     validator = new Validator(
@@ -20,27 +20,27 @@ describe('Validator constructor', () => {
   })
 
   it('should have a rules property containing all the validation rules', () => {
-    expect(validator.rules).toBe('object')
+    expect(typeof validator.rules).toBe('object')
   })
 
   it('should have an input property containing the input data to be validated', () => {
-    expect(validator.input).toBe('object')
+    expect(typeof validator.input).toBe('object')
   })
 
   it('should have a messages property containing the combined messages for validation', () => {
-    expect(validator.messages).toBe('object')
+    expect(typeof validator.messages).toBe('object')
   })
 
   it('should have a passes() method', () => {
-    expect(validator.passes).toBe('function')
+    expect(typeof validator.passes).toBe('function')
   })
 
   it('should have a fails() method', () => {
-    expect(validator.fails).toBe('function')
+    expect(typeof validator.fails).toBe('function')
   })
 
   it('should have a check method', () => {
-    expect(validator.check).toBe('function')
+    expect(validator.check).toBeDefined()
   })
 
   it('should handle undefined data', () => {

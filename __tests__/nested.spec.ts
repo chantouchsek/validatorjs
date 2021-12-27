@@ -1,7 +1,7 @@
 import Validator from '../src/main'
 
 describe('nested validation rules', () => {
-  const nestedObject = {
+  const nestedObject: any = {
     name: 'required',
     data: {
       weight: 'required',
@@ -11,13 +11,13 @@ describe('nested validation rules', () => {
     },
   }
 
-  const nestedFlatten = {
+  const nestedFlatten: Record<string, string> = {
     name: 'required',
     'data.weight': 'required',
     'data.hair.color': 'required',
   }
 
-  const dataPass = {
+  const dataPass: Record<string, any> = {
     name: 'David',
     data: {
       weight: 70,
@@ -27,7 +27,7 @@ describe('nested validation rules', () => {
     },
   }
 
-  const failAsserts = [
+  const failAsserts: Record<string, any>[] = [
     [
       {},
       {
@@ -66,14 +66,14 @@ describe('nested validation rules', () => {
   })
 
   it('should fail with validation rules nested object', () => {
-    failAsserts.forEach(function (assert) {
+    for (const assert of failAsserts) {
       const validator = new Validator(assert[0], nestedObject)
       expect(validator.passes()).toBeFalsy()
       expect(validator.fails()).toBeTruthy()
       Object.keys(assert[1]).forEach(function (key) {
         expect(validator.errors.first(key)).toEqual(assert[1][key])
       })
-    })
+    }
   })
 
   it('should pass with validation rules flatten object', () => {
@@ -83,13 +83,14 @@ describe('nested validation rules', () => {
   })
 
   it('should fail with validation rules flatten object', () => {
-    failAsserts.forEach(function (assert) {
+    for (const assert of failAsserts) {
       const validator = new Validator(assert[0], nestedFlatten)
       expect(validator.passes()).toBeFalsy()
       expect(validator.fails()).toBeTruthy()
       Object.keys(assert[1]).forEach(function (key) {
-        expect(validator.errors.first(key)).toEqual(assert[1][key])
+        const obj = assert[1][key]
+        expect(validator.errors.first(key)).toEqual(obj)
       })
-    })
+    }
   })
 }) // Page constructor

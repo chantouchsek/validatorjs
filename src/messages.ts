@@ -159,23 +159,21 @@ export default class Messages {
       if (hasOwnProperty(customMessages, format)) {
         template = customMessages[format]
         break
-      } else if (hasOwnProperty(messages, format)) {
+      } else if (hasOwnProperty(messages, format) && messages[format]) {
         template = messages[format]
         break
       }
-
-      if (typeof template === 'object') {
-        template = template[rule._getValueType()]
-      }
     }
-
+    if (typeof template === 'object') {
+      template = template[rule._getValueType()]
+    }
     return template
   }
 
   _replacePlaceholders(
     rule: Rule,
-    template: any,
-    data: Record<string, any>,
+    template: string | any,
+    data: Record<string, any> = {},
   ): string {
     let message = ''
     let attribute

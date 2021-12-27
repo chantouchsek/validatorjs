@@ -1,3 +1,5 @@
+import { hasOwnProperty } from '../types/object'
+
 export default class Errors {
   private readonly errors: Record<string, any[]> = {}
 
@@ -9,14 +11,14 @@ export default class Errors {
     if (!this.has(attribute)) {
       this.errors[attribute] = []
     }
-    if (!this.errors[attribute].includes(message)) {
+    if (this.errors[attribute].indexOf(message) === -1) {
       this.errors[attribute].push(message)
     }
   }
 
   get(attribute: string) {
     if (this.has(attribute)) {
-      return this.errors[attribute][0]
+      return this.errors[attribute]
     }
     return []
   }
@@ -33,6 +35,6 @@ export default class Errors {
   }
 
   has(attribute: string) {
-    return this.errors.hasOwnProperty(attribute)
+    return hasOwnProperty(this.errors, attribute)
   }
 }

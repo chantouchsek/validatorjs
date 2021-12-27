@@ -125,9 +125,7 @@ describe('Validator custom messages', () => {
   it('can be specified for custom validators', () => {
     Validator.register(
       'telephone',
-      (value) => {
-        return value.match(/^\d{3}-\d{3}-\d{4}$/)
-      },
+      (value: string) => value.match(/^\d{3}-\d{3}-\d{4}$/),
       'The :attribute phone number is not in the format XXX-XXX-XXXX.',
     )
 
@@ -152,9 +150,7 @@ describe('Validator custom messages', () => {
   it('can be specified for custom validators per attribute', () => {
     Validator.register(
       'telephone',
-      function (value) {
-        return value.match(/^\d{3}-\d{3}-\d{4}$/)
-      },
+      (value: string) => value.match(/^\d{3}-\d{3}-\d{4}$/),
       'The :attribute phone number is not in the format XXX-XXX-XXXX.',
     )
 

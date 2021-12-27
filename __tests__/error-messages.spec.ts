@@ -152,7 +152,7 @@ describe('Error messages', () => {
     })
 
     it('should fail the custom telephone rule registration with a default error message', () => {
-      Validator.register('telephone', function (val) {
+      Validator.register('telephone', (val: string) => {
         return val.match(/^\d{3}-\d{3}-\d{4}$/)
       })
 
@@ -169,7 +169,7 @@ describe('Error messages', () => {
     it('should fail the custom telephone rule registration with a custom error message', () => {
       Validator.register(
         'telephone',
-        function (val) {
+        (val: string) => {
           return val.match(/^\d{3}-\d{3}-\d{4}$/)
         },
         'The :attribute phone number is not in the format XXX-XXX-XXXX.',

@@ -20,7 +20,12 @@ describe('sometimes validation pass rules', () => {
   it('should be able to register and pass async rule when the property is passed with data', (done) => {
     Validator.registerAsync(
       'username',
-      (desiredUsername, ruleValue, attribute, passes) => {
+      (
+        desiredUsername: string,
+        ruleValue: string,
+        attribute: string,
+        passes: any,
+      ) => {
         setTimeout(() => {
           if (desiredUsername == 'test') {
             passes()
@@ -40,7 +45,12 @@ describe('sometimes validation pass rules', () => {
   it('should be able to register and pass async rule when the property is not passed with data', (done) => {
     Validator.registerAsync(
       'username',
-      (desiredUsername, ruleValue, attribute, passes) => {
+      (
+        desiredUsername: string,
+        ruleValue: string,
+        attribute: string,
+        passes: any,
+      ) => {
         setTimeout(() => {
           if (desiredUsername == 'test') {
             passes()
