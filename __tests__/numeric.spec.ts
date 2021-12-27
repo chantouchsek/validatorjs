@@ -1,0 +1,68 @@
+import Validator from '../src/main'
+
+describe('numeric validation rule', () => {
+  it('should pass with a numeric value', () => {
+    const validator = new Validator({ age: 44 }, { age: 'numeric' })
+    expect(validator.passes()).toBeTruthy()
+  })
+
+  it('should pass with a decimal numeric value', () => {
+    const validator = new Validator(
+      { measurement: 0.5454 },
+      { measurement: 'numeric' },
+    )
+    expect(validator.passes()).toBeTruthy()
+  })
+
+  it('should pass with a string numeric value', () => {
+    const validator = new Validator({ age: '44' }, { age: 'numeric' })
+    expect(validator.passes()).toBeTruthy()
+  })
+
+  it('should pass with a string decimal numeric value', () => {
+    const validator = new Validator(
+      { measurement: '0.5454' },
+      { measurement: 'numeric' },
+    )
+    expect(validator.passes()).toBeTruthy()
+  })
+
+  it('should fail with a string value', () => {
+    const validator = new Validator({ age: '18something' }, { age: 'numeric' })
+    expect(validator.fails()).toBeTruthy()
+  })
+
+  it('should fail with a boolean true value', () => {
+    const validator = new Validator({ age: true }, { age: 'numeric' })
+    expect(validator.fails()).toBeTruthy()
+  })
+
+  it('should fail with a boolean false value', () => {
+    const validator = new Validator(
+      {
+        age: false,
+      },
+      {
+        age: 'numeric',
+      },
+    )
+    expect(validator.fails()).toBeTruthy()
+  })
+
+  it('should pass with no value', () => {
+    const validator = new Validator(
+      {},
+      {
+        age: 'numeric',
+      },
+    )
+    expect(validator.passes()).toBeTruthy()
+    expect(validator.fails()).toBeFalsy()
+  })
+
+  it('should pass with an empty string value', () => {
+    const validator = new Validator({ age: '' }, { age: 'numeric' })
+    expect(validator.passes()).toBeTruthy()
+    expect(validator.fails()).toBeFalsy()
+  })
+})

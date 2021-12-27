@@ -6,30 +6,29 @@ import { Manager, Rule } from './rule'
 import AsyncResolvers from './async-resolvers'
 import type { ValidatorOptions } from '../types/validator'
 import { hasOwnProperty } from '../types/object'
-import type { RuleName } from '../types/rule'
 
 export default class Validator {
-  private readonly input: Record<string, any> = {}
+  readonly input: Record<string, any> = {}
   readonly messages: Messages
   readonly errors: Errors
-  private errorCount: number
-  private hasAsync: boolean
-  private lang = 'en'
-  private readonly numericRules = ['integer', 'numeric']
+  errorCount: number
+  hasAsync: boolean
+  static lang = 'en'
+  readonly numericRules = ['integer', 'numeric']
   public rules: Record<string, any> = {}
-  private stopOnAttributes: any
-  private static attributeFormatter = formatter
-  private readonly options?: ValidatorOptions
-  private readonly manager: Manager
+  stopOnAttributes: any
+  static attributeFormatter = formatter
+  readonly options?: ValidatorOptions
+  readonly manager: Manager
 
   constructor(
-    input: Record<string, any>,
-    rules: Record<string, any>,
+    input?: Record<string, any>,
+    rules?: Record<string, any>,
     options?: ValidatorOptions,
   ) {
     this.options = options || {}
     const { customMessages, locale } = this.options
-    const lang = locale || this.getDefaultLang()
+    const lang = locale || Validator.getDefaultLang()
     this.manager = new Manager()
     this.input = input || {}
     this.messages = Lang._make(lang)
@@ -139,7 +138,7 @@ export default class Validator {
     asyncResolvers.fire()
   }
 
-  _parseRules(rules: Record<string, any>) {
+  _parseRules(rules: Record<string, any> = {}) {
     const parsedRules: Record<string, any> = {}
     rules = this._flattenObject(rules)
 
@@ -151,8 +150,25 @@ export default class Validator {
     return parsedRules
   }
 
-  private getDefaultLang() {
+  static setMessages(lang: string, messages: Record<string, any>) {
+    Lang._set(lang, messages)
+    return this
+  }
+
+  static getMessages(lang: string) {
+    return Lang._get(lang)
+  }
+
+  static useLang(lang: string) {
+    Validator.lang = lang
+  }
+
+  static getDefaultLang() {
     return this.lang
+  }
+
+  static setAttributeFormatter(func: any) {
+    this.attributeFormatter = func
   }
 
   setAttributeFormatter(func: any) {
@@ -203,7 +219,7 @@ export default class Validator {
     return hasOwnProperty(this.input, attribute)
   }
 
-  getRule(name: RuleName): Rule {
+  getRule(name: string): Rule {
     return this.manager.make(name, this)
   }
 
@@ -241,7 +257,7 @@ export default class Validator {
     return true
   }
 
-  _flattenObject(obj: Record<string, any>) {
+  _flattenObject(obj: Record<string, any> = {}) {
     const flattened: Record<string, any> = {}
 
     function recurse(current: Record<string, any>, property?: string) {
@@ -428,12 +444,16 @@ export default class Validator {
     return this._hasRule(attribute, this.numericRules)
   }
 
-  setAttributeNames(attributes: Record<string, any>[]) {
+  setAttributeNames(attributes: Record<string, any>) {
     this.messages._setAttributeNames(attributes)
   }
 
-  stopOnError(attributes: Record<string, any>[]) {
+  stopOnError(attributes: Record<string, any> | boolean) {
     this.stopOnAttributes = attributes
+  }
+
+  static stopOnError(attributes: Record<string, any> | boolean) {
+    this.prototype.stopOnAttributes = attributes
   }
 
   passes(passes?: () => void) {
@@ -459,5 +479,33 @@ export default class Validator {
     }
 
     return this.hasAsync || hasCallback
+  }
+
+  static register(name: string, fn: any, message = '') {
+    const lang = Validator.getDefaultLang()
+    this.prototype.manager.register(name, fn)
+    Lang._setRuleMessage(lang, name, message)
+  }
+
+  static registerImplicit(name: string, fn: any, message = '') {
+    const lang = Validator.getDefaultLang()
+    this.prototype.manager.registerImplicit(name, fn)
+    Lang._setRuleMessage(lang, name, message)
+  }
+
+  static registerAsync(name: string, fn: any, message: string) {
+    const lang = Validator.getDefaultLang()
+    this.prototype.manager.registerAsync(name, fn)
+    Lang._setRuleMessage(lang, name, message)
+  }
+
+  static registerAsyncImplicit(name: string, fn: any, message: string) {
+    const lang = Validator.getDefaultLang()
+    this.prototype.manager.registerAsyncImplicit(name, fn)
+    Lang._setRuleMessage(lang, name, message)
+  }
+
+  static registerMissedRuleValidator(fn: any, message = '') {
+    this.prototype.manager.registerMissedRuleValidator(fn, message)
   }
 }

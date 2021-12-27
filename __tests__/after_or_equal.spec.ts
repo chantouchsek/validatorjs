@@ -1,7 +1,7 @@
 import Validator from '../src/main'
 
-describe('after or equal rule', function () {
-  it('should fail when the comparing attribute are greather', function () {
+describe('after or equal rule', () => {
+  it('should fail when the comparing attribute are greather', () => {
     const validator = new Validator(
       { date: '1996-12-09', date2: '1995-08-09' },
       { date2: 'after_or_equal:date' },
@@ -14,7 +14,7 @@ describe('after or equal rule', function () {
     )
   })
 
-  it('should pass when the comparing attribute are equal', function () {
+  it('should pass when the comparing attribute are equal', () => {
     const validator = new Validator(
       { date: '1995-08-09', date2: '1995-08-09' },
       { date2: 'after_or_equal:date' },
@@ -24,7 +24,7 @@ describe('after or equal rule', function () {
     expect(validator.passes()).toBeTruthy()
   })
 
-  it('should pass when the comparing attribute are smaller', function () {
+  it('should pass when the comparing attribute are smaller', () => {
     const validator = new Validator(
       { date: '1995-08-09', date2: '1996-12-09' },
       { date2: 'after_or_equal:date' },

@@ -110,7 +110,7 @@ export default class Messages {
     this.customMessages = customMessages || {}
   }
 
-  _setAttributeNames(attributes: Record<string, any>[]) {
+  _setAttributeNames(attributes: Record<string, any>) {
     this.attributeNames = attributes
   }
 
