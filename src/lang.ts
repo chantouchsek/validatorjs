@@ -29,7 +29,7 @@ export default class Lang {
       } catch (e: any) {
         rawMessage = require(`./lang/en`)
       }
-      rawMessage = rawMessage.default
+      rawMessage = rawMessage.default ? rawMessage.default : rawMessage
       this._set(lang, rawMessage)
     }
   }

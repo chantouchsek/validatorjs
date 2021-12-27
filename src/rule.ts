@@ -41,6 +41,14 @@ export class Rule {
         }
         return new Date(val1).getTime() < new Date(val2).getTime()
       },
+      after_or_equal(val: string, req: string) {
+        const val1 = this.validator.input[req]
+        const val2 = val
+        if (!isValidDate(val1) || !isValidDate(val2)) {
+          return false
+        }
+        return new Date(val1).getTime() <= new Date(val2).getTime()
+      },
       min(value: any, req: number | string) {
         const size = this.getSize(value)
         return size >= req
