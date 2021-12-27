@@ -33,7 +33,7 @@ export class Rule {
   static _setRules() {
     Rule.rules = {
       ...rules,
-      after(value: any, req: any) {
+      after(value: string, req: string) {
         const val1 = this.validator.input[req]
         const val2 = value
         if (!isValidDate(val1) || !isValidDate(val2)) {

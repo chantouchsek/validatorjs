@@ -1,4 +1,6 @@
 export * from './accepted'
 export * from './alpha'
+export * from './alpha-dash'
+export * from './alpha-num'
 export * from './array'
 export * from './required'
