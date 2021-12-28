@@ -137,6 +137,9 @@ export default class Messages {
     } else if (this.attributeFormatter) {
       name = this.attributeFormatter(name)
     }
+    while (name.includes('confirmation')) {
+      name = name.replace(new RegExp('\\sconfirmation', 'g'), '')
+    }
     return name
   }
 

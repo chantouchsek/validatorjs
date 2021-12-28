@@ -1,3 +1,8 @@
+import { Rule } from './rule'
+
+type OnFailedOne = (rule: Rule, message?: string) => any
+type OnResolvedAll = (allPassed: boolean) => any
+
 export default class AsyncResolvers {
   private readonly onResolvedAll: any
   private readonly onFailedOne: any
@@ -7,10 +12,7 @@ export default class AsyncResolvers {
   private failed: any[]
   private firing: boolean
 
-  constructor(
-    onFailedOne: (arg: any) => void,
-    onResolvedAll: (arg: any) => void,
-  ) {
+  constructor(onFailedOne: OnFailedOne, onResolvedAll: OnResolvedAll) {
     this.onResolvedAll = onResolvedAll
     this.onFailedOne = onFailedOne
     this.resolvers = {}

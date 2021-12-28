@@ -22,14 +22,14 @@ export default class Validator {
   static attributeFormatter = formatter
   readonly options?: ValidatorOptions
   static manager = new Manager()
+  private confirmedReverse: boolean
 
   constructor(
     input?: Record<string, any> | null,
     rules?: Record<string, any>,
     options?: ValidatorOptions,
   ) {
-    this.options = options || {}
-    const { customAttributes, customMessages, locale } = this.options
+    const { customAttributes, customMessages, locale } = options || {}
     const lang = locale || Validator.getDefaultLang()
     Validator.lang = lang
     this.input = input || {}
@@ -41,10 +41,12 @@ export default class Validator {
     this.errorCount = 0
     this.hasAsync = false
     this.rules = this._parseRules(rules)
+    this.confirmedReverse = options?.confirmedReverse || false
   }
 
   check() {
-    for (const attribute in this.rules) {
+    const confirmedReverse = this.confirmedReverse
+    for (let attribute in this.rules) {
       const attributeRules = this.rules[attribute]
       const inputValue = objectPath(this.input, attribute)
       const findRules = ['sometimes']
@@ -63,17 +65,19 @@ export default class Validator {
         i++
       ) {
         ruleOptions = attributeRules[i]
-        rule = this.getRule(ruleOptions.name)
-
+        const { name, value } = ruleOptions
+        rule = this.getRule(name)
         if (!this._isValidatable(rule, inputValue)) {
           continue
         }
-
-        rulePassed = rule.validate(inputValue, ruleOptions.value, attribute)
+        rulePassed = rule.validate(inputValue, value, attribute)
         if (!rulePassed) {
+          if (name === 'confirmed' && confirmedReverse) {
+            attribute = `${attribute}_confirmation`
+            Object.assign(rule, { attribute })
+          }
           this._addFailure(rule)
         }
-
         if (this._shouldStopValidating(attribute, rulePassed)) {
           break
         }
@@ -85,10 +89,14 @@ export default class Validator {
 
   checkAsync(passes?: boolean | (() => void), fails?: any) {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    passes = passes || function () {}
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    fails = fails || function () {}
-    const failsOne = (rule: Rule) => this._addFailure(rule)
+    const emptyFn = () => {}
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const _this = this
+    passes = passes || emptyFn
+    fails = fails || emptyFn
+    const failsOne = (rule: Rule, message = '') => {
+      return _this._addFailure(rule, message)
+    }
     const resolvedAll = function (allPassed: boolean) {
       if (allPassed && typeof passes === 'function') {
         passes()
@@ -99,13 +107,13 @@ export default class Validator {
 
     const asyncResolvers = new AsyncResolvers(failsOne, resolvedAll)
 
-    const validateRule = function (
+    const validateRule = (
       inputValue: Record<string, any>,
       ruleOptions: Record<string, any>,
       attribute: string,
       rule: Record<string, any>,
-    ) {
-      return function () {
+    ) => {
+      return () => {
         const resolverIndex = asyncResolvers.add(rule)
         rule.validate(inputValue, ruleOptions.value, attribute, function () {
           asyncResolvers.resolve(resolverIndex)
@@ -116,11 +124,8 @@ export default class Validator {
     for (const attribute in this.rules) {
       const attributeRules = this.rules[attribute]
       const inputValue = objectPath(this.input, attribute)
-
-      if (
-        this._hasRule(attribute, ['sometimes']) &&
-        !this._suppliedWithData(attribute)
-      ) {
+      const hasRule = this._hasRule(attribute, ['sometimes'])
+      if (hasRule && !this._suppliedWithData(attribute)) {
         continue
       }
 
@@ -215,8 +220,8 @@ export default class Validator {
     return this.getRule('required').validate(value, {})
   }
 
-  _addFailure(rule: Rule) {
-    const msg = this.messages.render(rule)
+  _addFailure(rule: Rule, message = '') {
+    const msg = this.messages.render(rule) || message
     this.errors.add(rule.attribute, msg)
     this.errorCount++
   }

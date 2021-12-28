@@ -25,4 +25,39 @@ describe('lang / messages', () => {
     expect(validator.errors.first('zip')).toEqual('Le nkundla iyadingeka')
     Validator.useLang(oldLang)
   })
+
+  it('should get lang of ar', () => {
+    const validator = new Validator(
+      undefined,
+      { name: 'required' },
+      { locale: 'ar' },
+    )
+    expect(validator.getDefaultLang()).toEqual('ar')
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.errors.first('name')).toBe('حقل الصفة name مطلوب.')
+  })
+
+  it('should get lang of az', () => {
+    const validator = new Validator(
+      undefined,
+      { name: 'required' },
+      { locale: 'az' },
+    )
+    expect(validator.getDefaultLang()).toEqual('az')
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.errors.first('name')).toBe(' name mütləqdir')
+  })
+
+  it('should get lang of be', () => {
+    const validator = new Validator(
+      undefined,
+      { name: 'required' },
+      { locale: 'be' },
+    )
+    expect(validator.getDefaultLang()).toEqual('be')
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.errors.first('name')).toBe(
+      'Поле name абавязкова для запаўнення.',
+    )
+  })
 })
