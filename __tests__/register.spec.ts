@@ -1,6 +1,6 @@
 import Validator from '../src/main'
 
-describe.only('register a custom validation rule', () => {
+describe('register a custom validation rule', () => {
   it('should be able to get validation rule', () => {
     Validator.register('telephone', (val: string) => {
       return val.match(/^\d{3}-\d{3}-\d{4}$/)
@@ -23,7 +23,7 @@ describe.only('register a custom validation rule', () => {
     expect(validator.passes()).toBeTruthy()
   })
 
-  it.only('should override custom rules', () => {
+  it('should override custom rules', () => {
     Validator.register('string', () => true)
 
     const validator = new Validator(

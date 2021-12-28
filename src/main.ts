@@ -484,31 +484,31 @@ export default class Validator {
     return this.hasAsync || hasCallback
   }
 
-  static register(name: string, fn: any, message = '') {
+  static register(name: string, fn: any, message?: string) {
     const lang = Validator.getDefaultLang()
     this.manager.register(name, fn)
     Lang._setRuleMessage(lang, name, message)
   }
 
-  static registerImplicit(name: string, fn: any, message = '') {
+  static registerImplicit(name: string, fn: any, message?: string) {
     const lang = Validator.getDefaultLang()
     this.manager.registerImplicit(name, fn)
     Lang._setRuleMessage(lang, name, message)
   }
 
-  static registerAsync(name: string, fn: any, message = '') {
+  static registerAsync(name: string, fn: any, message?: string) {
     const lang = Validator.getDefaultLang()
     this.manager.registerAsync(name, fn)
     Lang._setRuleMessage(lang, name, message)
   }
 
-  static registerAsyncImplicit(name: string, fn: any, message: string) {
+  static registerAsyncImplicit(name: string, fn: any, message?: string) {
     const lang = Validator.getDefaultLang()
     this.manager.registerAsyncImplicit(name, fn)
     Lang._setRuleMessage(lang, name, message)
   }
 
-  static registerMissedRuleValidator(fn: any, message = '') {
+  static registerMissedRuleValidator(fn: any, message?: string) {
     this.manager.registerMissedRuleValidator(fn, message)
   }
 }

@@ -19,85 +19,85 @@ export default class Messages {
 
   static _setReplacements() {
     this.replacements = {
-      between(template: any, rule: Rule) {
+      between(template: string, rule: Rule) {
         const parameters = rule.getParameters()
         return this._replacePlaceholders(rule, template, {
           min: parameters[0],
           max: parameters[1],
         })
       },
-      digits_between(template: any, rule: Rule) {
+      digits_between(template: string, rule: Rule) {
         const parameters = rule.getParameters()
         return this._replacePlaceholders(rule, template, {
           min: parameters[0],
           max: parameters[1],
         })
       },
-      required_if(template: any, rule: Rule) {
+      required_if(template: string, rule: Rule) {
         const parameters = rule.getParameters()
         return this._replacePlaceholders(rule, template, {
           other: this._getAttributeName(parameters[0]),
           value: parameters[1],
         })
       },
-      required_unless(template: any, rule: Rule) {
+      required_unless(template: string, rule: Rule) {
         const parameters = rule.getParameters()
         return this._replacePlaceholders(rule, template, {
           other: this._getAttributeName(parameters[0]),
           value: parameters[1],
         })
       },
-      required_with(template: any, rule: Rule) {
+      required_with(template: string, rule: Rule) {
         const parameters = rule.getParameters()
         return this._replacePlaceholders(rule, template, {
           field: this._getAttributeName(parameters[0]),
         })
       },
-      required_with_all(template: any, rule: Rule) {
+      required_with_all(template: string, rule: Rule) {
         const parameters = rule.getParameters()
         const getAttributeName = this._getAttributeName.bind(this)
         return this._replacePlaceholders(rule, template, {
           fields: parameters.map(getAttributeName).join(', '),
         })
       },
-      required_without(template: any, rule: Rule) {
+      required_without(template: string, rule: Rule) {
         const parameters = rule.getParameters()
         return this._replacePlaceholders(rule, template, {
           field: this._getAttributeName(parameters[0]),
         })
       },
-      required_without_all(template: any, rule: Rule) {
+      required_without_all(template: string, rule: Rule) {
         const parameters = rule.getParameters()
         const getAttributeName = this._getAttributeName.bind(this)
         return this._replacePlaceholders(rule, template, {
           fields: parameters.map(getAttributeName).join(', '),
         })
       },
-      after(template: any, rule: Rule) {
+      after(template: string, rule: Rule) {
         const parameters = rule.getParameters()
         return this._replacePlaceholders(rule, template, {
           after: this._getAttributeName(parameters[0]),
         })
       },
-      before(template: any, rule: Rule) {
+      before(template: string, rule: Rule) {
         const parameters = rule.getParameters()
         return this._replacePlaceholders(rule, template, {
           before: this._getAttributeName(parameters[0]),
         })
       },
-      after_or_equal(template: any, rule: Rule) {
+      after_or_equal(template: string, rule: Rule) {
         const parameters = rule.getParameters()
         return this._replacePlaceholders(rule, template, {
           after_or_equal: this._getAttributeName(parameters[0]),
         })
       },
-      before_or_equal(template: any, rule: Rule) {
+      before_or_equal(template: string, rule: Rule) {
         const parameters = rule.getParameters()
         return this._replacePlaceholders(rule, template, {
           before_or_equal: this._getAttributeName(parameters[0]),
         })
       },
-      same(template: any, rule: Rule) {
+      same(template: string, rule: Rule) {
         const parameters = rule.getParameters()
         return this._replacePlaceholders(rule, template, {
           same: this._getAttributeName(parameters[0]),

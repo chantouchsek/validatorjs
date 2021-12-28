@@ -5,7 +5,7 @@ import { isValidDate } from './utils/date'
 let missedRuleValidator = function (this: Rule) {
   throw new Error('Validator `' + this.name + '` is not defined!')
 }
-let missedRuleMessage = ''
+let missedRuleMessage: string | undefined = ''
 
 export class Rule {
   private readonly async: boolean
@@ -529,7 +529,7 @@ export class Manager {
     this.asyncRules.push(name)
   }
 
-  registerMissedRuleValidator(fn: any, message: string) {
+  registerMissedRuleValidator(fn: any, message?: string) {
     missedRuleValidator = fn
     missedRuleMessage = message
   }

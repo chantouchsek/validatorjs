@@ -3,7 +3,7 @@ import Massages from './messages'
 export default class Lang {
   static messages: Record<string, any> = {}
 
-  static _set(lang: string, rawMessages: Record<string, any> = {}) {
+  static _set(lang: string, rawMessages: Record<string, any>) {
     this.messages[lang] = rawMessages
   }
 
@@ -12,7 +12,7 @@ export default class Lang {
     return this.messages[lang]
   }
 
-  static _setRuleMessage(lang: string, attribute: string, message: string) {
+  static _setRuleMessage(lang: string, attribute: string, message?: string) {
     this._load(lang)
     if (message === undefined) {
       message = this.messages[lang].def
@@ -29,7 +29,7 @@ export default class Lang {
       } catch (e: any) {
         rawMessage = require(`./lang/en`)
       }
-      rawMessage = rawMessage.default ? rawMessage.default : rawMessage
+      rawMessage = rawMessage.default
       this._set(lang, rawMessage)
     }
   }

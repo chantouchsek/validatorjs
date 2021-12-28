@@ -7,7 +7,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "build": "yarn clean && tsc",
-    "test": "jest --passWithNoTests --bail --detectOpenHandles",
+    "test": "jest --passWithNoTests --bail --detectOpenHandles --verbose",
     "test:cov": "jest --coverage",
     "release": "standard-version && git push --follow-tags origin main && yarn publish",
     "lint:js": "eslint --ext \".js,.ts\" --ignore-path .gitignore .",

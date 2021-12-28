@@ -1,8 +1,8 @@
-function leapYear(year: number) {
+export function leapYear(year: number) {
   return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
 }
 
-function checkFalsePositiveDates(dateString = '') {
+export function checkFalsePositiveDates(dateString = '') {
   if (dateString.length === 10) {
     const normalizedDate = dateString.replace('.', '-').replace('/', '-')
     const parts = normalizedDate.split('-')
