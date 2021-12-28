@@ -36,4 +36,14 @@ describe('before rule', () => {
     expect(validator.fails()).toBeFalsy()
     expect(validator.passes()).toBeTruthy()
   })
+
+  it('should fail when date is invalid', () => {
+    const validator = new Validator(
+      { date: 'invalid-date', date2: '1994-12-09' },
+      { date2: 'before:date' },
+    )
+
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.passes()).toBeFalsy()
+  })
 })

@@ -29,7 +29,7 @@ export default class Lang {
         rawMessage = rawMessage.default ? rawMessage.default : rawMessage
         this._set(lang, rawMessage)
       } catch (e: any) {
-        throw new Error('Could find `' + lang + '` file for the translation!')
+        this._set(lang, {})
       }
     }
   }

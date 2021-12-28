@@ -4,9 +4,7 @@ describe('required with', () => {
   it('should fail', () => {
     const validator = new Validator(
       {
-        desert: {
-          first: 'icecream',
-        },
+        desert: { first: 'icecream' },
         flavour: '',
       },
       { flavour: 'required_with:desert.first' },
@@ -21,14 +19,22 @@ describe('required with', () => {
   it('should pass', () => {
     const validator = new Validator(
       {
-        desert: {
-          first: 'icecream',
-        },
+        desert: { first: 'icecream' },
         flavour: 'chocolate',
       },
+      { flavour: 'required_with:desert.first' },
+    )
+    expect(validator.passes()).toBeTruthy()
+    expect(validator.fails()).toBeFalsy()
+  })
+
+  it('should pass when with value is empty', () => {
+    const validator = new Validator(
       {
-        flavour: 'required_with:desert.first',
+        desert: { first: '' },
+        flavour: 'chocolate',
       },
+      { flavour: 'required_with:desert.first' },
     )
     expect(validator.passes()).toBeTruthy()
     expect(validator.fails()).toBeFalsy()

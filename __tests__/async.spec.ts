@@ -175,7 +175,6 @@ describe('async rule tests', () => {
   })
 
   // it('should throw exception when attempting to validate and no fail or pass callback', function () {
-  //   // eslint-disable-next-line @typescript-eslint/no-empty-function
   //   Validator.registerAsync('username', function () {})
   //   const validator = new Validator(
   //     { username: 'admin' },

@@ -22,7 +22,7 @@ export default class Validator {
   static attributeFormatter = formatter
   readonly options?: ValidatorOptions
   static manager = new Manager()
-  private confirmedReverse: boolean
+  private readonly confirmedReverse: boolean
 
   constructor(
     input?: Record<string, any> | null,

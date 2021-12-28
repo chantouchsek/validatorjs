@@ -143,10 +143,6 @@ export default class Messages {
     return name
   }
 
-  all() {
-    return this.messages
-  }
-
   render(rule: Rule): string {
     if (rule.customMessages) {
       return rule.customMessages

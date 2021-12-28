@@ -44,4 +44,9 @@ describe('size validation rule', () => {
     )
     expect(validator.passes()).toBeTruthy()
   })
+
+  it('should fail with no value', () => {
+    const validator = new Validator({ age: 0 }, { age: 'numeric|size:1' })
+    expect(validator.fails()).toBeTruthy()
+  })
 })

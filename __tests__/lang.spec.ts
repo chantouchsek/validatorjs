@@ -60,4 +60,14 @@ describe('lang / messages', () => {
       'Поле name абавязкова для запаўнення.',
     )
   })
+  it('should throw exception when attempting to get non exist translation', () => {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    Validator.registerAsync('username', function () {})
+    const validator = new Validator(
+      { username: 'admin' },
+      { username: 'required' },
+      { locale: 'abc' },
+    )
+    expect(validator.passes()).toBeTruthy()
+  })
 })

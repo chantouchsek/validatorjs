@@ -91,7 +91,7 @@ export class Rule {
     return value
   }
 
-  getSize(value?: any) {
+  getSize(value?: string | number | Array<string | number>) {
     const input = value || this.input
     if (input instanceof Array) {
       return input.length

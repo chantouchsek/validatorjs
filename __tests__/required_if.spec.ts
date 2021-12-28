@@ -21,4 +21,13 @@ describe('required if', () => {
     expect(validator.passes()).toBeTruthy()
     expect(validator.fails()).toBeFalsy()
   })
+
+  it('should pass, both value is not the same', () => {
+    const validator = new Validator(
+      { desert: 'chocolate', flavour: 'icecream' },
+      { flavour: 'required_if:desert,icecream' },
+    )
+    expect(validator.passes()).toBeTruthy()
+    expect(validator.fails()).toBeFalsy()
+  })
 })

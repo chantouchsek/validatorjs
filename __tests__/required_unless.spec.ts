@@ -21,4 +21,13 @@ describe('required unless', () => {
     expect(validator.passes()).toBeTruthy()
     expect(validator.fails()).toBeFalsy()
   })
+
+  it('should pass when both value is the same', () => {
+    const validator = new Validator(
+      { desert: 'chocolate', flavour: 'icecream' },
+      { flavour: 'required_unless:desert,chocolate' },
+    )
+    expect(validator.passes()).toBeTruthy()
+    expect(validator.fails()).toBeFalsy()
+  })
 })

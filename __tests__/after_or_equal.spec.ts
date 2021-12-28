@@ -33,4 +33,14 @@ describe('after or equal rule', () => {
     expect(validator.fails()).toBeFalsy()
     expect(validator.passes()).toBeTruthy()
   })
+
+  it('should fail when date is invalid', () => {
+    const validator = new Validator(
+      { date: 'invalid-date', date2: '1996-12-09' },
+      { date2: 'after_or_equal:date' },
+    )
+
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.passes()).toBeFalsy()
+  })
 })
