@@ -1,3 +1,5 @@
+import { hasOwnProperty } from '../../types/object'
+
 export const flattenObject = (obj: Record<string, any> | any = {}) => {
   const flattened: Record<string, any> = {}
 
@@ -23,4 +25,33 @@ export const flattenObject = (obj: Record<string, any> | any = {}) => {
     recurse(obj)
   }
   return flattened
+}
+export const objectPath = (obj: Record<string, any> | any, path: string) => {
+  if (hasOwnProperty(obj, path)) {
+    return obj[path]
+  }
+
+  const keys = path
+    .replace(/\[(\w+)\]/g, '.$1')
+    .replace(/^\./, '')
+    .split('.')
+  let copy: Record<string, any> = {}
+  for (const attr in obj) {
+    if (hasOwnProperty(obj, attr)) {
+      copy[attr] = obj[attr]
+    }
+  }
+
+  for (let i = 0, l = keys.length; i < l; i++) {
+    if (
+      typeof copy === 'object' &&
+      copy !== null &&
+      hasOwnProperty(copy, keys[i])
+    ) {
+      copy = copy[keys[i]]
+    } else {
+      return
+    }
+  }
+  return copy
 }

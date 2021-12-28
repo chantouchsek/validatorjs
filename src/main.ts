@@ -6,7 +6,7 @@ import AsyncResolvers from './async-resolvers'
 import type { ValidatorOptions } from '../types/validator'
 import { hasOwnProperty } from '../types/object'
 import { formatter } from './utils/string'
-import { flattenObject } from './utils/object'
+import { flattenObject, objectPath } from './utils/object'
 
 export default class Validator {
   readonly input: Record<string, any> = {}
@@ -43,7 +43,7 @@ export default class Validator {
   check() {
     for (const attribute in this.rules) {
       const attributeRules = this.rules[attribute]
-      const inputValue = this._objectPath(this.input, attribute)
+      const inputValue = objectPath(this.input, attribute)
       const findRules = ['sometimes']
       const hasRule = this._hasRule(attribute, findRules)
       if (hasRule && !this._suppliedWithData(attribute)) {
@@ -112,7 +112,7 @@ export default class Validator {
 
     for (const attribute in this.rules) {
       const attributeRules = this.rules[attribute]
-      const inputValue = this._objectPath(this.input, attribute)
+      const inputValue = objectPath(this.input, attribute)
 
       if (
         this._hasRule(attribute, ['sometimes']) &&
@@ -189,36 +189,6 @@ export default class Validator {
     return false
   }
 
-  _objectPath(obj: Record<string, any>, path: string) {
-    if (hasOwnProperty(obj, path)) {
-      return obj[path]
-    }
-
-    const keys = path
-      .replace(/\[(\w+)\]/g, '.$1')
-      .replace(/^\./, '')
-      .split('.')
-    let copy: Record<string, any> = {}
-    for (const attr in obj) {
-      if (hasOwnProperty(obj, attr)) {
-        copy[attr] = obj[attr]
-      }
-    }
-
-    for (let i = 0, l = keys.length; i < l; i++) {
-      if (
-        typeof copy === 'object' &&
-        copy !== null &&
-        hasOwnProperty(copy, keys[i])
-      ) {
-        copy = copy[keys[i]]
-      } else {
-        return
-      }
-    }
-    return copy
-  }
-
   _suppliedWithData(attribute: string) {
     return hasOwnProperty(this.input, attribute)
   }
@@ -291,7 +261,7 @@ export default class Validator {
     wildCardValues?: any,
   ) {
     const parentPath = attribute.substring(0, attribute.indexOf('*') - 1)
-    const propertyValue = this._objectPath(this.input, parentPath)
+    const propertyValue = objectPath(this.input, parentPath)
 
     if (propertyValue) {
       for (
@@ -380,7 +350,7 @@ export default class Validator {
     return rule
   }
 
-  _replaceWildCards(path: string, nums: string[]) {
+  _replaceWildCards(path: any, nums: string[]) {
     if (!nums) {
       return path
     }
@@ -394,7 +364,7 @@ export default class Validator {
       if (pos === -1) {
         return path2
       }
-      path2 = path2.substr(0, pos) + value + path2.substr(pos + 1)
+      path2 = path2.substring(0, pos) + value + path2.substring(pos + 1)
     })
     if (Array.isArray(path)) {
       path[0] = path2
