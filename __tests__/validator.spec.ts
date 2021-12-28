@@ -45,11 +45,11 @@ describe('Validator constructor', () => {
 
   it('should handle undefined data', () => {
     const validator = new Validator(undefined, { name: 'required' })
-    validator.fails()
+    expect(validator.fails()).toBeTruthy()
   })
 
   it('should handle null data', () => {
     const validator = new Validator(null, { name: 'required' })
-    validator.fails()
+    expect(validator.fails()).toBeTruthy()
   })
 }) // Page constructor

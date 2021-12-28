@@ -3,9 +3,7 @@ import Validator from '../src/main'
 describe('custom attribute names', () => {
   it('should allow custom attribute names', () => {
     const validator = new Validator({ name: '' }, { name: 'required' })
-    validator.setAttributeNames({
-      name: 'custom_name',
-    })
+    validator.setAttributeNames({ name: 'custom_name' })
     expect(validator.fails()).toBeTruthy()
     expect(validator.errors.first('name')).toEqual(
       'The custom_name field is required.',
