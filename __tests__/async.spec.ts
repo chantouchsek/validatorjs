@@ -32,51 +32,6 @@ describe('async rule tests', () => {
     validator.passes(done)
   })
 
-  it.skip('should be able to fail async rules', (done) => {
-    Validator.registerAsync(
-      'username',
-      (input: string, value: string, attribute: string, passes: any) => {
-        setTimeout(() => {
-          if (input == 'test') {
-            passes(false)
-          }
-        }, 50)
-      },
-      ':attribute is an invalid username',
-    )
-
-    const validator = new Validator(
-      { username: 'test' },
-      { username: 'username' },
-    )
-    validator.fails(done)
-  })
-
-  it.skip('should allow custom error message', (done) => {
-    Validator.registerAsync(
-      'username',
-      (input: string, value: string, attribute: string, passes: any) => {
-        setTimeout(() => {
-          if (input == 'admin') {
-            passes(false, 'This username is banned')
-          }
-        }, 50)
-      },
-      ':attribute is an invalid username',
-    )
-
-    const validator = new Validator(
-      { username: 'admin' },
-      { username: 'username' },
-    )
-    validator.fails(() => {
-      expect(validator.errors.first('username')).toEqual(
-        'This username is banned',
-      )
-      done()
-    })
-  })
-
   it('should pass on multiple async rules', (done) => {
     let passCount = 0
 

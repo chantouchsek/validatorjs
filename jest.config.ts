@@ -14,6 +14,8 @@ const config: InitialOptionsTsJest = {
   testEnvironment: 'node',
   preset: 'ts-jest',
   watchman: true,
+  clearMocks: true,
+  notify: true,
 }
 
 export default config
