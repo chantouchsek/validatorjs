@@ -1,4 +1,4 @@
-import Validator from '../src/main'
+import { flattenObject } from '../src/utils/object'
 
 describe('Validator', () => {
   it('should correctly flatten nested object', () => {
@@ -15,10 +15,9 @@ describe('Validator', () => {
       [{ foo: { bar: { fizz: 'buzz' } } }, { 'foo.bar.fizz': 'buzz' }],
       [{ foo: { bar: { fizz: ['buzz'] } } }, { 'foo.bar.fizz': ['buzz'] }],
     ]
-    const validator = new Validator({}, {})
 
     asserts.forEach(function (assert) {
-      expect(validator._flattenObject(assert[0])).toEqual(assert[1])
+      expect(flattenObject(assert[0])).toEqual(assert[1])
     })
   })
 }) // Page constructor
