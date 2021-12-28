@@ -13,6 +13,7 @@ const config: InitialOptionsTsJest = {
   },
   testEnvironment: 'node',
   preset: 'ts-jest',
+  watchman: true,
 }
 
 export default config

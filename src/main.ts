@@ -316,7 +316,7 @@ export default class Validator {
     parsedRules: Record<string, any>,
     wildCardValues?: any,
   ) {
-    const parentPath = attribute.substr(0, attribute.indexOf('*') - 1)
+    const parentPath = attribute.substring(0, attribute.indexOf('*') - 1)
     const propertyValue = this._objectPath(this.input, parentPath)
 
     if (propertyValue) {
@@ -467,7 +467,7 @@ export default class Validator {
     return this.check()
   }
 
-  fails(fails?: boolean | (() => void)) {
+  fails(fails?: boolean | ((arg?: any) => void)) {
     const async = this._checkAsync('fails', fails)
     if (async) {
       return this.checkAsync(false, fails)
@@ -496,7 +496,7 @@ export default class Validator {
     Lang._setRuleMessage(lang, name, message)
   }
 
-  static registerAsync(name: string, fn: any, message: string) {
+  static registerAsync(name: string, fn: any, message = '') {
     const lang = Validator.getDefaultLang()
     this.manager.registerAsync(name, fn)
     Lang._setRuleMessage(lang, name, message)
