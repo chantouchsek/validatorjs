@@ -80,7 +80,7 @@ describe('email validation rule', () => {
 
   it('should pass with the email addresses at domain 3-n level', () => {
     const validator = new Validator(
-      { email: 'mike.erickson@ru.codedungeon.ru' },
+      { email: 'chantouchsek.cs83@gmail.com.kh' },
       { email: 'email' },
     )
     expect(validator.passes()).toBeTruthy()

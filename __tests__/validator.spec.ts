@@ -32,15 +32,18 @@ describe('Validator constructor', () => {
   })
 
   it('should have a passes() method', () => {
+    expect(validator.passes).toBeDefined()
     expect(typeof validator.passes).toBe('function')
   })
 
   it('should have a fails() method', () => {
+    expect(validator.fails).toBeDefined()
     expect(typeof validator.fails).toBe('function')
   })
 
   it('should have a check method', () => {
     expect(validator.check).toBeDefined()
+    expect(typeof validator.check).toBe('function')
   })
 
   it('should handle undefined data', () => {
@@ -52,4 +55,15 @@ describe('Validator constructor', () => {
     const validator = new Validator(null, { name: 'required' })
     expect(validator.fails()).toBeTruthy()
   })
-}) // Page constructor
+
+  it('should get correct lang with exist', () => {
+    const validator = new Validator(
+      undefined,
+      { name: 'required' },
+      { locale: 'km' },
+    )
+    expect(validator.getDefaultLang()).toEqual('km')
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.errors.first('name')).toBe('ឈ្មោះ ត្រូវតែបញ្ចូលជាដាច់ខាត។')
+  })
+})

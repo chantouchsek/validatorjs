@@ -1,5 +1,7 @@
 import { hasOwnProperty } from '../types/object'
 import type { Rule } from './rule'
+import { flattenObject } from './utils/object'
+import { toCamelCase, toSnakeCase } from './utils/string'
 
 export default class Messages {
   private lang: string
@@ -106,7 +108,7 @@ export default class Messages {
     }
   }
 
-  _setCustom(customMessages?: Record<string, any>) {
+  _setCustom(customMessages: Record<string, any>) {
     this.customMessages = customMessages || {}
   }
 
@@ -120,12 +122,19 @@ export default class Messages {
 
   _getAttributeName(attribute: string) {
     let name = attribute
-    if (hasOwnProperty(this.attributeNames, attribute)) {
-      return this.attributeNames[attribute]
-    } else if (hasOwnProperty(this.messages.attributes, attribute)) {
-      name = this.messages.attributes[attribute]
+    const attributes = flattenObject(this.messages.attributes)
+    const attributeNames = flattenObject(this.attributeNames)
+    const camelCase = toCamelCase(attribute)
+    const snakeCase = toSnakeCase(attribute)
+    if (
+      hasOwnProperty(attributeNames, camelCase) ||
+      hasOwnProperty(attributeNames, snakeCase)
+    ) {
+      return attributeNames[camelCase] || attributeNames[snakeCase]
     }
-    if (this.attributeFormatter) {
+    if (hasOwnProperty(attributes, attribute)) {
+      name = attributes[attribute]
+    } else if (this.attributeFormatter) {
       name = this.attributeFormatter(name)
     }
     return name

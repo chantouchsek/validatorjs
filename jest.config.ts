@@ -1,7 +1,7 @@
 import type { InitialOptionsTsJest } from 'ts-jest/dist/types'
 
 const config: InitialOptionsTsJest = {
-  collectCoverage: true,
+  collectCoverage: false,
   collectCoverageFrom: ['src/**/*.ts', 'src/**/*.js'],
   coverageThreshold: {
     global: {

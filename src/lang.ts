@@ -25,12 +25,12 @@ export default class Lang {
     if (!this.messages[lang]) {
       let rawMessage
       try {
-        rawMessage = require(`'./lang/${lang}`)
+        rawMessage = require(`./lang/${lang}`)
+        rawMessage = rawMessage.default
+        this._set(lang, rawMessage)
       } catch (e: any) {
-        rawMessage = require(`./lang/en`)
+        throw new Error('Could find `' + lang + '` file for translation!')
       }
-      rawMessage = rawMessage.default
-      this._set(lang, rawMessage)
     }
   }
 

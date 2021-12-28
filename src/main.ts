@@ -7,6 +7,7 @@ import type { ValidatorOptions } from '../types/validator'
 import { hasOwnProperty } from '../types/object'
 import { formatter } from './utils/string'
 import { flattenObject, objectPath } from './utils/object'
+import { isArray } from './utils/array'
 
 export default class Validator {
   readonly input: Record<string, any> = {}
@@ -28,11 +29,13 @@ export default class Validator {
     options?: ValidatorOptions,
   ) {
     this.options = options || {}
-    const { customMessages, locale } = this.options
+    const { customAttributes, customMessages, locale } = this.options
     const lang = locale || Validator.getDefaultLang()
+    Validator.lang = lang
     this.input = input || {}
     this.messages = Lang._make(lang)
-    this.messages._setCustom(customMessages)
+    this.messages._setCustom(customMessages || {})
+    this.setAttributeNames(customAttributes || {})
     this.setAttributeFormatter(Validator.attributeFormatter)
     this.errors = new Errors()
     this.errorCount = 0
@@ -175,6 +178,10 @@ export default class Validator {
     this.attributeFormatter = func
   }
 
+  getDefaultLang() {
+    return Validator.lang
+  }
+
   setAttributeFormatter(func: any) {
     this.messages._setAttributeFormatter(func)
   }
@@ -198,7 +205,7 @@ export default class Validator {
   }
 
   _isValidatable(rule: Record<string, any>, value: any) {
-    if (Array.isArray(value)) {
+    if (isArray(value)) {
       return true
     }
     if (Validator.manager.isImplicit(rule.name)) {
@@ -357,7 +364,7 @@ export default class Validator {
 
     let path2 = path
     nums.forEach(function (value) {
-      if (Array.isArray(path2)) {
+      if (isArray(path2)) {
         path2 = path2[0]
       }
       const pos = path2.indexOf('*')
@@ -366,7 +373,7 @@ export default class Validator {
       }
       path2 = path2.substring(0, pos) + value + path2.substring(pos + 1)
     })
-    if (Array.isArray(path)) {
+    if (isArray(path)) {
       path[0] = path2
       path2 = path
     }

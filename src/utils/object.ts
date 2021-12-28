@@ -1,4 +1,5 @@
 import { hasOwnProperty } from '../../types/object'
+import { isArray } from './array'
 
 export const flattenObject = (obj: Record<string, any> | any = {}) => {
   const flattened: Record<string, any> = {}
@@ -7,7 +8,7 @@ export const flattenObject = (obj: Record<string, any> | any = {}) => {
     if (!property && Object.getOwnPropertyNames(current).length === 0) {
       return
     }
-    if (Object(current) !== current || Array.isArray(current)) {
+    if (Object(current) !== current || isArray(current)) {
       flattened[property as string] = current
     } else {
       let isEmpty = true

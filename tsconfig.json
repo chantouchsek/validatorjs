@@ -17,7 +17,7 @@
     "strict": true,
     "declaration": true,
     "outDir": "dist",
-    "types": ["@types/node", "@types/jest", "@types/lodash"],
+    "types": ["@types/node", "@types/jest"],
     "baseUrl": ".",
     "paths": {
       "@types": ["types"]

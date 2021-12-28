@@ -7,8 +7,8 @@ describe('lang / messages', () => {
 
   it('should be able to change lang', () => {
     const oldLang = Validator.getDefaultLang()
-    Validator.useLang('ru')
-    expect(Validator.getDefaultLang()).toEqual('ru')
+    Validator.useLang('ja')
+    expect(Validator.getDefaultLang()).toEqual('ja')
     Validator.useLang(oldLang)
   })
 
