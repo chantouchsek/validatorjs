@@ -4,14 +4,22 @@ describe('lang / messages', () => {
   it('should default to english', () => {
     expect(Validator.getDefaultLang()).toEqual('en')
   })
-
+  it('should throw exception when attempting to get non exist translation', () => {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    Validator.registerAsync('username', function () {})
+    const validator = new Validator(
+      { username: 'admin' },
+      { username: 'required' },
+      { locale: 'abc' },
+    )
+    expect(validator.passes()).toBeTruthy()
+  })
   it('should be able to change lang', () => {
     const oldLang = Validator.getDefaultLang()
     Validator.useLang('ja')
     expect(Validator.getDefaultLang()).toEqual('ja')
     Validator.useLang(oldLang)
   })
-
   it('should be able to add custom', () => {
     const oldLang = Validator.getDefaultLang()
     const rawMessages = { required: 'Le nkundla iyadingeka', attributes: {} }
@@ -25,7 +33,6 @@ describe('lang / messages', () => {
     expect(validator.errors.first('zip')).toEqual('Le nkundla iyadingeka')
     Validator.useLang(oldLang)
   })
-
   it('should get lang of ar', () => {
     const validator = new Validator(
       undefined,
@@ -36,7 +43,6 @@ describe('lang / messages', () => {
     expect(validator.fails()).toBeTruthy()
     expect(validator.errors.first('name')).toBe('حقل الصفة name مطلوب.')
   })
-
   it('should get lang of az', () => {
     const validator = new Validator(
       undefined,
@@ -47,7 +53,6 @@ describe('lang / messages', () => {
     expect(validator.fails()).toBeTruthy()
     expect(validator.errors.first('name')).toBe(' name mütləqdir')
   })
-
   it('should get lang of be', () => {
     const validator = new Validator(
       undefined,
@@ -60,14 +65,36 @@ describe('lang / messages', () => {
       'Поле name абавязкова для запаўнення.',
     )
   })
-  it('should throw exception when attempting to get non exist translation', () => {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    Validator.registerAsync('username', function () {})
+  it('should get lang of bg', () => {
     const validator = new Validator(
-      { username: 'admin' },
-      { username: 'required' },
-      { locale: 'abc' },
+      undefined,
+      { name: 'required' },
+      { locale: 'bg' },
     )
-    expect(validator.passes()).toBeTruthy()
+    expect(validator.getDefaultLang()).toEqual('bg')
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.errors.first('name')).toBe('Полето name е задължително.')
+  })
+  it('should get lang of bs', () => {
+    const validator = new Validator(
+      undefined,
+      { name: 'accepted' },
+      { locale: 'bs' },
+    )
+    expect(validator.getDefaultLang()).toEqual('bs')
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.errors.first('name')).toBe(
+      'Polje name mora biti prihvaćeno.',
+    )
+  })
+  it('should get lang of ca', () => {
+    const validator = new Validator(
+      undefined,
+      { name: 'accepted' },
+      { locale: 'ca' },
+    )
+    expect(validator.getDefaultLang()).toEqual('ca')
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.errors.first('name')).toBe('El camp name pot ser aceptat.')
   })
 })
