@@ -5,10 +5,10 @@ const config: InitialOptionsTsJest = {
   collectCoverageFrom: ['src/**/*.ts', 'src/**/*.js'],
   coverageThreshold: {
     global: {
-      lines: 100,
-      functions: 100,
-      branches: 90,
-      statements: 99,
+      lines: 98,
+      functions: 99,
+      branches: 91,
+      statements: 98,
     },
   },
   testEnvironment: 'node',

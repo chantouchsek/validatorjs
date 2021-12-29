@@ -31,7 +31,7 @@ export default class Validator {
   ) {
     const { customAttributes, customMessages, locale } = options || {}
     const lang = locale || Validator.getDefaultLang()
-    Validator.lang = lang
+    Validator.useLang(lang)
     this.input = input || {}
     this.messages = Lang._make(lang)
     this.messages._setCustom(customMessages || {})
@@ -88,25 +88,22 @@ export default class Validator {
   }
 
   checkAsync(passes?: boolean | (() => void), fails?: any) {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    const emptyFn = () => {}
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const _this = this
+    const emptyFn = () => {
+      // empty code block
+    }
     passes = passes || emptyFn
     fails = fails || emptyFn
     const failsOne = (rule: Rule, message = '') => {
-      return _this._addFailure(rule, message)
+      return this._addFailure(rule, message)
     }
-    const resolvedAll = function (allPassed: boolean) {
+    const resolvedAll = (allPassed: boolean) => {
       if (allPassed && typeof passes === 'function') {
         passes()
       } else {
         fails()
       }
     }
-
     const asyncResolvers = new AsyncResolvers(failsOne, resolvedAll)
-
     const validateRule = (
       inputValue: Record<string, any>,
       ruleOptions: Record<string, any>,
@@ -115,8 +112,8 @@ export default class Validator {
     ) => {
       return () => {
         const resolverIndex = asyncResolvers.add(rule)
-        rule.validate(inputValue, ruleOptions.value, attribute, function () {
-          asyncResolvers.resolve(resolverIndex)
+        rule.validate(inputValue, ruleOptions.value, attribute, () => {
+          return asyncResolvers.resolve(resolverIndex)
         })
       }
     }
@@ -135,14 +132,10 @@ export default class Validator {
         i++
       ) {
         ruleOptions = attributeRules[i]
-
         rule = this.getRule(ruleOptions.name)
-
-        if (!this._isValidatable(rule, inputValue)) {
-          continue
+        if (this._isValidatable(rule, inputValue)) {
+          validateRule(inputValue, ruleOptions, attribute, rule)()
         }
-
-        validateRule(inputValue, ruleOptions, attribute, rule)()
       }
     }
 
@@ -153,10 +146,8 @@ export default class Validator {
   _parseRules(rules: Record<string, any> = {}) {
     const parsedRules: Record<string, any> = {}
     rules = flattenObject(rules)
-
     for (const attribute in rules) {
       const rulesArray = rules[attribute]
-
       this._parseRulesCheck(attribute, rulesArray, parsedRules)
     }
     return parsedRules
@@ -193,8 +184,8 @@ export default class Validator {
 
   _hasRule(attribute: string, findRules: string[]) {
     const rules = this.rules[attribute] || []
-    for (let i = 0, len = rules.length; i < len; i++) {
-      if (findRules.indexOf(rules[i].name) > -1) {
+    for (const { name } of rules) {
+      if (findRules.indexOf(name) > -1) {
         return true
       }
     }
@@ -209,11 +200,8 @@ export default class Validator {
     return Validator.manager.make(name, this)
   }
 
-  _isValidatable(rule: Record<string, any>, value: any) {
-    if (isArray(value)) {
-      return true
-    }
-    if (Validator.manager.isImplicit(rule.name)) {
+  _isValidatable(rule: Record<string, any>, value: any): boolean {
+    if (isArray(value) || Validator.manager.isImplicit(rule.name)) {
       return true
     }
 
@@ -228,11 +216,8 @@ export default class Validator {
 
   _shouldStopValidating(attribute: string, rulePassed: any) {
     const stopOnAttributes = this.stopOnAttributes
-    if (
-      typeof stopOnAttributes === 'undefined' ||
-      stopOnAttributes === false ||
-      rulePassed === true
-    ) {
+    const isUndefined = typeof stopOnAttributes === 'undefined'
+    if (isUndefined || stopOnAttributes === false || rulePassed === true) {
       return false
     }
 
@@ -362,13 +347,13 @@ export default class Validator {
     return rule
   }
 
-  _replaceWildCards(path: any, nums: string[]) {
+  _replaceWildCards(path: string | string[] | any, nums: string[]) {
     if (!nums) {
       return path
     }
 
     let path2 = path
-    nums.forEach(function (value) {
+    for (const num of nums) {
       if (isArray(path2)) {
         path2 = path2[0]
       }
@@ -376,8 +361,8 @@ export default class Validator {
       if (pos === -1) {
         return path2
       }
-      path2 = path2.substring(0, pos) + value + path2.substring(pos + 1)
-    })
+      path2 = path2.substring(0, pos) + num + path2.substring(pos + 1)
+    }
     if (isArray(path)) {
       path[0] = path2
       path2 = path
@@ -387,14 +372,13 @@ export default class Validator {
 
   _replaceWildCardsMessages(nums: string[]) {
     const customMessages = this.messages.customMessages
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const self = this
-    Object.keys(customMessages).forEach((key) => {
+    for (const key of Object.keys(customMessages)) {
       if (nums) {
-        const newKey = self._replaceWildCards(key, nums)
+        const path = isArray(key) ? key : [key]
+        const newKey = this._replaceWildCards(path, nums)
         customMessages[newKey] = customMessages[key]
       }
-    })
+    }
 
     this.messages._setCustom(customMessages)
   }

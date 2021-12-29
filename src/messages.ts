@@ -11,9 +11,9 @@ export default class Messages {
   private attributeFormatter: ((arg: any) => any) | undefined
   static replacements: any = {}
 
-  constructor(lang: string, messages: Record<string, any> = {}) {
+  constructor(lang: string, messages: Record<string, any>) {
     this.lang = lang
-    this.messages = messages || {}
+    this.messages = messages
     this.customMessages = {}
     this.attributeNames = {}
     Messages._setReplacements()
@@ -109,7 +109,7 @@ export default class Messages {
   }
 
   _setCustom(customMessages: Record<string, any>) {
-    this.customMessages = customMessages || {}
+    this.customMessages = customMessages
   }
 
   _setAttributeNames(attributes: Record<string, any>) {
@@ -130,7 +130,7 @@ export default class Messages {
       hasOwnProperty(attributeNames, camelCase) ||
       hasOwnProperty(attributeNames, snakeCase)
     ) {
-      return attributeNames[camelCase] || attributeNames[snakeCase]
+      return attributeNames[snakeCase] || attributeNames[camelCase]
     }
     if (hasOwnProperty(attributes, attribute)) {
       name = attributes[attribute]
@@ -181,7 +181,7 @@ export default class Messages {
   _replacePlaceholders(
     rule: Rule,
     template: string | any,
-    data: Record<string, any> = {},
+    data: Record<string, any>,
   ): string {
     let message = ''
     let attribute

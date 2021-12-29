@@ -1,4 +1,5 @@
+import { onlyDigits } from '../utils/string'
+
 export const numeric = (value: string | number | boolean) => {
-  const num = Number(value)
-  return !isNaN(num) && typeof value !== 'boolean'
+  return onlyDigits(value)
 }

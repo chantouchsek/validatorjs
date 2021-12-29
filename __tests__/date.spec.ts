@@ -14,11 +14,11 @@ describe('date rule', () => {
       new Date(),
     ]
 
-    asserts.forEach(function (assert) {
+    for (const assert of asserts) {
       const validator = new Validator({ date: assert }, { date: 'date' })
       expect(validator.passes()).toBeTruthy()
       expect(validator.fails()).toBeFalsy()
-    })
+    }
   })
 
   it('should pass for correct date formats', () => {
@@ -88,10 +88,10 @@ describe('date rule', () => {
       '2020-11-31',
       '2020-12-32',
     ]
-    invalidDates.forEach((dateValue) => {
+    for (const dateValue of invalidDates) {
       validator = new Validator({ failDate: dateValue }, { failDate: 'date' })
       expect(validator.passes()).toBeFalsy()
-    })
+    }
 
     const validDates = [
       '2020-01-31',
@@ -106,11 +106,12 @@ describe('date rule', () => {
       '2020-10-31',
       '2020-11-30',
       '2020-12-31',
+      '02-12-2012',
     ]
-    validDates.forEach((dateValue) => {
+    for (const dateValue of validDates) {
       validator = new Validator({ failDate: dateValue }, { failDate: 'date' })
       expect(validator.passes()).toBeTruthy()
-    })
+    }
   })
 
   it('should support alternate date formats', () => {

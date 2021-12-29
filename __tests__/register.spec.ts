@@ -31,9 +31,8 @@ describe('register a custom validation rule', () => {
       { field: 'string' },
     )
 
-    // expect(validator.passes()).toBeTruthy()
-    validator.passes()
-    // expect(validator.fails()).toBeFalsy()
+    expect(validator.passes()).toBeTruthy()
+    expect(validator.fails()).toBeFalsy()
     Validator.register(
       'string',
       (val: string) => typeof val === 'string',

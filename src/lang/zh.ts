@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   accepted: ':attribute必须是可接受的.',
   alpha: ':attribute只能包含字母.',
   alpha_dash: ':attribute只能包含字母,连字符和下划线.',

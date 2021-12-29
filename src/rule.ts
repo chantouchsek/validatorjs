@@ -16,7 +16,7 @@ export class Rule {
   readonly name: string
   private callback: any
   attribute: string
-  private input: any
+  private input: Record<string, any> | string | number | undefined
   private rule: any
   private validator?: Validator
   static rules: any = rules
@@ -100,9 +100,9 @@ export class Rule {
       return input
     }
     if (this.validator?._hasNumericRule(this.attribute as string)) {
-      return parseFloat(input)
+      return parseFloat(<string>input)
     }
-    return input.length
+    return input?.length
   }
 
   _getValueType() {

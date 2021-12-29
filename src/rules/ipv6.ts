@@ -1,5 +1,5 @@
 export const ipv6 = (value: string | number) => {
-  if (typeof value != 'string') return false
+  if (typeof value !== 'string') return false
 
   // regex to check that each hextet is valid
   const er = /^[0-9a-f]+$/
@@ -12,7 +12,7 @@ export const ipv6 = (value: string | number) => {
   if (colons != null && matcher.length > 1) return false
 
   // check 2: ipv6 should not be ending or starting with colon
-  //          edge case: not with consecutive colons
+  // edge case: not with consecutive colons
   if (value[0] == ':' && (colons == null || colons.index != 0)) return false
   if (
     value[value.length - 1] == ':' &&
@@ -21,11 +21,11 @@ export const ipv6 = (value: string | number) => {
     return false
 
   // check 3: ipv6 should contain no less than 3 sector
-  //         minimum ipv6 addres - ::1
+  // minimum ipv6 addres - ::1
   if (3 > hextets.length) return false
 
   // check 4: ipv6 should contain no more than 8 sectors
-  //         only 1 edge case: when first or last sector is ommited
+  // only 1 edge case: when first or last sector is ommited
   const isEdgeCase =
     hextets.length == 9 &&
     colons != null &&
@@ -44,8 +44,8 @@ export const ipv6 = (value: string | number) => {
     if (!er.test(element)) return false
 
     // check 7: all of hextet values should be less then ffff (in hexadeimal)
-    //          checking using length of hextet. lowest invalid value's length is 5.
-    //          so all valid hextets are length of 4 or less
+    // checking using length of hextet. lowest invalid value's length is 5.
+    // so all valid hextets are length of 4 or less
     if (element.length > 4) return false
   }
   return true

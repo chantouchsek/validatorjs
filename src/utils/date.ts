@@ -1,8 +1,7 @@
 export function leapYear(year: number) {
   return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
 }
-
-export function checkFalsePositiveDates(dateString = '') {
+export function checkFalsePositiveDates(dateString: string) {
   if (dateString.length === 10) {
     const normalizedDate = dateString.replace('.', '-').replace('/', '-')
     const parts = normalizedDate.split('-')
@@ -49,8 +48,8 @@ export function isValidDate(dateString: any) {
     }
     return checkFalsePositiveDates(dateString)
   }
-  const regex_date = /^\d{4}\-\d{1,2}\-\d{1,2}$/
-  if (!regex_date.test(dateString)) {
+  const regexDate = /^\d{4}\-\d{1,2}\-\d{1,2}$/
+  if (!regexDate.test(dateString)) {
     return false
   }
   const parts = dateString.split('-')
