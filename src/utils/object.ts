@@ -1,4 +1,4 @@
-import { hasOwnProperty } from '../../types/object'
+import { hasOwnProperty } from '../types/object'
 import { isArray } from './array'
 
 export const flattenObject = (obj: Record<string, any> | any = {}) => {

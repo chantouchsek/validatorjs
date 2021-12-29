@@ -2,8 +2,8 @@
   "name": "@chantouchsek/validatorjs",
   "version": "0.0.7",
   "description": "The validator-js library makes data validation in JavaScript very easy in both the browser and Node.js.",
-  "main": "dist/index.js",
-  "types": "types/index.d.ts",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
   "scripts": {
     "clean": "rimraf dist",
     "build": "yarn clean && tsc",

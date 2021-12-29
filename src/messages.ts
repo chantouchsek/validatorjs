@@ -1,4 +1,4 @@
-import { hasOwnProperty } from '../types/object'
+import { hasOwnProperty } from './types/object'
 import type { Rule } from './rule'
 import { flattenObject } from './utils/object'
 import { toCamelCase, toSnakeCase } from './utils/string'
