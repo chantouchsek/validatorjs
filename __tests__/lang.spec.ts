@@ -301,8 +301,6 @@ describe('lang / messages', () => {
     expect(Validator.getDefaultLang()).toEqual('en')
   })
   it('should throw exception when attempting to get non exist translation', () => {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    Validator.registerAsync('username', function () {})
     const validator = new Validator(
       { username: 'admin' },
       { username: 'required' },
