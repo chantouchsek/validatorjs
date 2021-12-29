@@ -1,6 +1,302 @@
 import Validator from '../src/main'
 
 describe('lang / messages', () => {
+  const languages = [
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'ar',
+      message: 'الصفة name يجب أن تكون مقبولة',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'az',
+      message: 'name qəbul edilməlidir',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'be',
+      message: 'Вы павінны прыняць name.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'bg',
+      message: 'Трябва да приемете name.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'bs',
+      message: 'Polje name mora biti prihvaćeno.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'ca',
+      message: 'El camp name pot ser aceptat.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'cs',
+      message: 'name musí být přijat.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'cy',
+      message: 'Rhaid derbyn name.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'da',
+      message: 'name skal accepteres.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'de',
+      message: 'Das name Feld muss akzeptiert werden.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'el',
+      message: 'Το πεδίο name πρέπει να γίνει αποδεκτό.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'en',
+      message: 'The name must be accepted.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'es',
+      message: 'El campo name debe ser aceptado.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'et',
+      message: 'name tuleb aktsepteerida.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'eu',
+      message: 'name onartua izan behar da.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'fa',
+      message: 'فیلد name می بایست تایید شود',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'fi',
+      message: 'name on oltava hyväksytty.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'fr',
+      message: 'Le champ name doit être accepté.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'hr',
+      message: 'Polje name mora biti prihvaćeno.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'hu',
+      message: 'A(z) name el kell legyen fogadva!',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'id',
+      message: 'name harus disetujui.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'it',
+      message: 'Il campo name deve essere accettato.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'ja',
+      message: 'nameを確認してください。',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'ka',
+      message: 'name უნდა იყოს მონიშნული.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'km',
+      message: 'ឈ្មោះ ត្រូវតែទទួលយក។',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'ko',
+      message: 'name을(를) 동의해야 합니다.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'lt',
+      message: 'Laukas name turi būti priimtas.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'lv',
+      message: ' name ir jābūt pieņemtam.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'mk',
+      message: 'Полето name мора да биде прифатено.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'mn',
+      message: 'name баталсан байх шаардлагатай.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'ms',
+      message: 'name mesti diterima pakai.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'nb_NO',
+      message: 'name må være akseptert.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'nl',
+      message: 'Het name veld moet geaccepteerd worden.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'pl',
+      message: 'Pole name musi być zaakceptowane.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'pt',
+      message: 'O campo name deverá ser aceite.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'pt_BR',
+      message: 'O campo name deve ser aceito.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'ro',
+      message: 'name trebuie acceptat.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'ru',
+      message: 'Вы должны принять name.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'se',
+      message: 'name måste vara accepterat.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'sl',
+      message: 'name mora biti sprejet.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'sq',
+      message: 'name duhet të pranohet.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'sr',
+      message: 'Polje name mora biti prihvaćeno.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'sv',
+      message: 'name måste accepteras.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'tr',
+      message: 'name kabul edilmeli.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'ua',
+      message: 'name повиннен бути прийнятий.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'uk',
+      message: 'Ви повинні прийняти name.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'vi',
+      message: 'name phải được chấp nhận.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'zh',
+      message: 'name必须是可接受的.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
+      locale: 'zh_TW',
+      message: 'name必須接受。',
+    },
+  ]
   it('should default to english', () => {
     expect(Validator.getDefaultLang()).toEqual('en')
   })
@@ -33,68 +329,14 @@ describe('lang / messages', () => {
     expect(validator.errors.first('zip')).toEqual('Le nkundla iyadingeka')
     Validator.useLang(oldLang)
   })
-  it('should get lang of ar', () => {
-    const validator = new Validator(
-      undefined,
-      { name: 'required' },
-      { locale: 'ar' },
-    )
-    expect(validator.getDefaultLang()).toEqual('ar')
-    expect(validator.fails()).toBeTruthy()
-    expect(validator.errors.first('name')).toBe('حقل الصفة name مطلوب.')
-  })
-  it('should get lang of az', () => {
-    const validator = new Validator(
-      undefined,
-      { name: 'required' },
-      { locale: 'az' },
-    )
-    expect(validator.getDefaultLang()).toEqual('az')
-    expect(validator.fails()).toBeTruthy()
-    expect(validator.errors.first('name')).toBe(' name mütləqdir')
-  })
-  it('should get lang of be', () => {
-    const validator = new Validator(
-      undefined,
-      { name: 'required' },
-      { locale: 'be' },
-    )
-    expect(validator.getDefaultLang()).toEqual('be')
-    expect(validator.fails()).toBeTruthy()
-    expect(validator.errors.first('name')).toBe(
-      'Поле name абавязкова для запаўнення.',
-    )
-  })
-  it('should get lang of bg', () => {
-    const validator = new Validator(
-      undefined,
-      { name: 'required' },
-      { locale: 'bg' },
-    )
-    expect(validator.getDefaultLang()).toEqual('bg')
-    expect(validator.fails()).toBeTruthy()
-    expect(validator.errors.first('name')).toBe('Полето name е задължително.')
-  })
-  it('should get lang of bs', () => {
-    const validator = new Validator(
-      undefined,
-      { name: 'accepted' },
-      { locale: 'bs' },
-    )
-    expect(validator.getDefaultLang()).toEqual('bs')
-    expect(validator.fails()).toBeTruthy()
-    expect(validator.errors.first('name')).toBe(
-      'Polje name mora biti prihvaćeno.',
-    )
-  })
-  it('should get lang of ca', () => {
-    const validator = new Validator(
-      undefined,
-      { name: 'accepted' },
-      { locale: 'ca' },
-    )
-    expect(validator.getDefaultLang()).toEqual('ca')
-    expect(validator.fails()).toBeTruthy()
-    expect(validator.errors.first('name')).toBe('El camp name pot ser aceptat.')
+  it('should get message of current locale', () => {
+    for (const language of languages) {
+      const { input, rules, locale, message } = language
+      const validator = new Validator(input, rules, { locale })
+      expect(validator.getDefaultLang()).toEqual(locale)
+      expect(validator.passes()).toBeFalsy()
+      expect(validator.fails()).toBeTruthy()
+      expect(validator.errors.first('name')).toBe(message)
+    }
   })
 })
