@@ -1,7 +1,6 @@
 import Validator from './main'
 import * as rules from './rules'
-import { isValidDate } from './utils/date'
-import { flattenObject, objectPath } from './utils/object'
+import { isValidDate, flattenObject, objectPath } from './utils'
 
 let missedRuleValidator = function (this: Rule) {
   throw new Error('Validator `' + this.name + '` is not defined!')

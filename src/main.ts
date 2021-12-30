@@ -4,10 +4,13 @@ import Errors from './errors'
 import { Manager, Rule } from './rule'
 import AsyncResolvers from './async-resolvers'
 import type { ValidatorOptions } from './types/validator'
-import { hasOwnProperty } from './types/object'
-import { formatter } from './utils/string'
-import { flattenObject, objectPath } from './utils/object'
-import { isArray } from './utils/array'
+import {
+  flattenObject,
+  objectPath,
+  formatter,
+  isArray,
+  hasOwnProperty,
+} from './utils'
 
 export default class Validator {
   readonly input: Record<string, any> = {}

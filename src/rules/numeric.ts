@@ -1,4 +1,4 @@
-import { onlyDigits } from '../utils/string'
+import { onlyDigits } from '../utils'
 
 export const numeric = (value: string | number | boolean) => {
   return onlyDigits(value)

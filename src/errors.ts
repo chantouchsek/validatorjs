@@ -1,4 +1,4 @@
-import { hasOwnProperty } from './types/object'
+import { hasOwnProperty } from './utils'
 
 export default class Errors {
   private readonly errors: Record<string, any[]> = {}

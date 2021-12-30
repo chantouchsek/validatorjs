@@ -1,7 +1,10 @@
-import { hasOwnProperty } from './types/object'
 import type { Rule } from './rule'
-import { flattenObject } from './utils/object'
-import { toCamelCase, toSnakeCase } from './utils/string'
+import {
+  flattenObject,
+  hasOwnProperty,
+  toCamelCase,
+  toSnakeCase,
+} from './utils'
 
 export default class Messages {
   private lang: string

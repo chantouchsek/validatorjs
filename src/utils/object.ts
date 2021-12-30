@@ -1,6 +1,12 @@
-import { hasOwnProperty } from '../types/object'
 import { isArray } from './array'
 
+export function hasOwnProperty(
+  object?: Record<string, any> | any,
+  key?: string | number | symbol,
+) {
+  if (!object || !key) return false
+  return Object.prototype.hasOwnProperty.call(object, key)
+}
 export const flattenObject = (obj: Record<string, any> | any = {}) => {
   const flattened: Record<string, any> = {}
 
