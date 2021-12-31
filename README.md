@@ -58,10 +58,10 @@ const validation = new Validator(data, rules, options)
 **options** {Object} - Optional custom **options** to return
 
 - Options
-  - _locale_?: string
-  - _confirmedReverse_?: boolean
-  - _customMessages_?: Record<string, any> | Optional custom error messages to return
-  - _customAttributes_?: Record<string, any> | Optional custom attribute name to return
+  - locale?: string
+  - confirmedReverse?: boolean | Optional showing error message on confirmation field instead of password
+  - customMessages?: Record<string, any> | Optional custom error messages to return
+  - customAttributes?: Record<string, any> | Optional custom attribute name to return
 
 #### Example 1 - Passing Validation
 
