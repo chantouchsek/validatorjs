@@ -52,9 +52,7 @@ export default class Validator {
     for (let attribute in this.rules) {
       const attributeRules = this.rules[attribute]
       const inputValue = objectPath(this.input, attribute)
-      const findRules = ['sometimes']
-      const hasRule = this._hasRule(attribute, findRules)
-      if (hasRule && !this._suppliedWithData(attribute)) {
+      if (this._passesOptionalCheck(attribute)) {
         continue
       }
 
@@ -124,8 +122,7 @@ export default class Validator {
     for (const attribute in this.rules) {
       const attributeRules = this.rules[attribute]
       const inputValue = objectPath(this.input, attribute)
-      const hasRule = this._hasRule(attribute, ['sometimes'])
-      if (hasRule && !this._suppliedWithData(attribute)) {
+      if (this._passesOptionalCheck(attribute)) {
         continue
       }
 
@@ -195,8 +192,35 @@ export default class Validator {
     return false
   }
 
+  _passesOptionalCheck(attribute: string) {
+    const find = ['sometimes']
+    return this._hasRule(attribute, find) && !this._suppliedWithData(attribute)
+  }
+
   _suppliedWithData(attribute: string) {
-    return hasOwnProperty(this.input, attribute)
+    function hasNested(
+      obj: undefined | Record<string, any>,
+      key: string,
+      ...args: string[]
+    ): boolean {
+      if (obj === undefined) {
+        return false
+      }
+
+      if (args.length == 0 && hasOwnProperty(obj, key)) {
+        return true
+      }
+
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      return hasNested(obj[key], ...args)
+    }
+
+    const keys = attribute.split('.')
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    return hasNested(this.input, ...keys)
   }
 
   getRule(name: string): Rule {
