@@ -1,7 +1,7 @@
 # ValidatorJs
 
 The ValidatorJs library makes data validation in JavaScript very easy in both the browser and Node.js. This library was
-forked from [ValidatorJs](https://github.com/mikeerickson/validatorjs) to re-write in typescript and add more rules and
+forked from [ValidatorJs](https://github.com/mikeerickson/validatorjs) to re-write in typescript to add more rules and
 features.
 
 ## Why use ValidatorJs?
@@ -58,7 +58,7 @@ const validation = new Validator(data, rules, options)
 **options** {Object} - Optional custom **options** to return
 
 - Options
-  - locale?: string
+  - locale?: string | Optional passing locale from config
   - confirmedReverse?: boolean | Optional showing error message on confirmation field instead of password
   - customMessages?: Record<string, any> | Optional custom error messages to return
   - customAttributes?: Record<string, any> | Optional custom attribute name to return
@@ -599,9 +599,9 @@ script tag and call `Validator.useLang('lang_code')`.
 
 ```html
 <script src="dist/validator.js"></script>
-<script src="dist/lang/ru.js"></script>
+<script src="dist/lang/km.js"></script>
 <script>
-  Validator.useLang('es')
+  Validator.useLang('km')
 </script>
 ```
 
@@ -609,7 +609,7 @@ In Node, it will automatically pickup on the language source files.
 
 ```js
 let Validator = require('validatorjs')
-Validator.useLang('ru')
+Validator.useLang('km')
 ```
 
 If you don't see support for your language, please add one to `src/lang`!
