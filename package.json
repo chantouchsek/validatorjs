@@ -5,6 +5,7 @@
   "main": "dist/main.js",
   "types": "dist/main.d.ts",
   "scripts": {
+    "dev": "tsc -w",
     "clean": "rimraf dist",
     "build": "yarn clean && tsc",
     "test": "jest --passWithNoTests --bail --detectOpenHandles --verbose",
