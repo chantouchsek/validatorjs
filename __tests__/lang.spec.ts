@@ -281,6 +281,12 @@ describe('lang / messages', () => {
     {
       input: undefined,
       rules: { name: 'accepted' },
+      locale: 'uz',
+      message: 'Siz name ni qabul qilishingiz kerak.',
+    },
+    {
+      input: undefined,
+      rules: { name: 'accepted' },
       locale: 'vi',
       message: 'name phải được chấp nhận.',
     },
