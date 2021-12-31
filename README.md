@@ -648,52 +648,6 @@ messages.required = 'Whoops, :attribute field is required.'
 Validator.setMessages('en', messages)
 ```
 
-Breaking change from **v0.0.7** to **v1.0.0**
-
-Using options has been remove and change to option.
-
-### Before:
-
-```js
-import Validator from '@chantouchsek/validatorjs'
-let validation = new Validator({
-  input: {
-    name: 'Doe',
-    salary: '10,000.00',
-    yearOfBirth: '1980',
-  },
-  rule: {
-    name: 'required|size:3',
-    salary: ['required', 'regex:/^(?!0\\.00)\\d{1,3}(,\\d{3})*(\\.\\d\\d)?$/'],
-    yearOfBirth: ['required', 'regex:/^(19|20)[\\d]{2,2}$/'],
-  },
-  customMessages: {},
-  ...
-})
-```
-
-### After:
-
-```js
-import Validator from '@chantouchsek/validatorjs'
-let validation = new Validator(
-        {
-          name: 'Doe',
-          salary: '10,000.00',
-          yearOfBirth: '1980',
-        },
-        {
-          name: 'required|size:3',
-          salary: ['required', 'regex:/^(?!0\\.00)\\d{1,3}(,\\d{3})*(\\.\\d\\d)?$/'],
-          yearOfBirth: ['required', 'regex:/^(19|20)[\\d]{2,2}$/'],
-        },
-        {
-          customMessages: {},
-          ...
-        }
-)
-```
-
 ### License
 
 Copyright &copy; 2020-Present Chantouch Sek
