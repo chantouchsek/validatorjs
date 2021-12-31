@@ -81,7 +81,7 @@ describe('same validation rule', () => {
     expect(validator.fails()).toBeTruthy()
     expect(validator.passes()).toBeFalsy()
     expect(validator.errors.first('username')).toEqual(
-      'The username and payload.username fields must match.',
+      'The username and payload username fields must match.',
     )
   })
 })

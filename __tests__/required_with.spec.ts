@@ -12,7 +12,7 @@ describe('required with', () => {
     expect(validator.fails()).toBeTruthy()
     expect(validator.passes()).toBeFalsy()
     expect(validator.errors.first('flavour')).toEqual(
-      'The flavour field is required when desert.first is not empty.',
+      'The flavour field is required when desert first is not empty.',
     )
   })
 

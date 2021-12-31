@@ -198,7 +198,7 @@ The field under validation must be after the given date.
 
 #### after_or_equal:date
 
-The field unter validation must be after or equal to the given field
+The field under validation must be after or equal to the given field
 
 #### alpha
 
@@ -300,11 +300,11 @@ The field under validation must be present in the input data but can be empty.
 
 Checks if the length of the String representation of the value is >
 
-#### required_if:anotherfield,value
+#### required_if:another_field,value
 
 The field under validation must be present and not empty if the anotherfield field is equal to any value.
 
-#### required_unless:anotherfield,value
+#### required_unless:another_field,value
 
 The field under validation must be present and not empty unless the anotherfield field is equal to any value.
 
@@ -505,7 +505,7 @@ validation.passes()
 validation.errors.first('name') // returns 'You forgot to give a name'
 ```
 
-Some of the validators have string and numeric versions. You can change them too.
+Some validators have string and numeric versions. You can change them too.
 
 ```js
 let input = {

@@ -1,5 +1,5 @@
 export const formatter = (attribute: string) => {
-  return attribute.replace(/[_\[]/g, ' ').replace(/]/g, '')
+  return attribute.replace(/[_.\[]/g, ' ').replace(/]/g, '')
 }
 export function toCamelCase(s: string) {
   return s.replace(/([-_][a-z])/gi, ($1) => {

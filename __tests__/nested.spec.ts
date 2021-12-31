@@ -32,29 +32,29 @@ describe('nested validation rules', () => {
       {},
       {
         name: 'The name field is required.',
-        'data.weight': 'The data.weight field is required.',
-        'data.hair.color': 'The data.hair.color field is required.',
+        'data.weight': 'The data weight field is required.',
+        'data.hair.color': 'The data hair color field is required.',
       },
     ],
     [
       { name: 'David' },
       {
-        'data.weight': 'The data.weight field is required.',
-        'data.hair.color': 'The data.hair.color field is required.',
+        'data.weight': 'The data weight field is required.',
+        'data.hair.color': 'The data hair color field is required.',
       },
     ],
     [
       { data: { weight: 70 } },
       {
         name: 'The name field is required.',
-        'data.hair.color': 'The data.hair.color field is required.',
+        'data.hair.color': 'The data hair color field is required.',
       },
     ],
     [
       { data: { hair: { color: 'black' } } },
       {
         name: 'The name field is required.',
-        'data.weight': 'The data.weight field is required.',
+        'data.weight': 'The data weight field is required.',
       },
     ],
   ]

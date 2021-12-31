@@ -23,7 +23,7 @@ export default class Errors {
     return []
   }
 
-  first(attribute: string) {
+  first(attribute: string): string | boolean {
     if (this.has(attribute)) {
       return this.errors[attribute][0]
     }

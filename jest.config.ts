@@ -1,14 +1,14 @@
-import type { InitialOptionsTsJest } from 'ts-jest/dist/types'
+import type { InitialOptionsTsJest } from 'ts-jest'
 
 const config: InitialOptionsTsJest = {
   collectCoverage: false,
   collectCoverageFrom: ['src/**/*.ts', 'src/**/*.js'],
   coverageThreshold: {
     global: {
-      lines: 98,
-      functions: 99,
-      branches: 91,
-      statements: 98,
+      lines: 99.73,
+      functions: 99.37,
+      branches: 97.61,
+      statements: 99.62,
     },
   },
   testEnvironment: 'node',
