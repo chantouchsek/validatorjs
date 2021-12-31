@@ -4,3 +4,4 @@ export interface ValidatorOptions {
   customMessages?: Record<string, any>
   customAttributes?: Record<string, any>
 }
+export type VoidFunction = boolean | ((arg?: any) => any)

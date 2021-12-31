@@ -3,7 +3,7 @@ import Messages from './messages'
 import Errors from './errors'
 import { Manager, Rule } from './rule'
 import AsyncResolvers from './async-resolvers'
-import type { ValidatorOptions } from './types/validator'
+import type { ValidatorOptions, VoidFunction } from './types/validator'
 import {
   flattenObject,
   objectPath,
@@ -434,7 +434,7 @@ export default class Validator {
     return this.check()
   }
 
-  fails(fails?: boolean | ((arg?: any) => void)) {
+  fails(fails?: VoidFunction) {
     const async = this._checkAsync('fails', fails)
     if (async) {
       return this.checkAsync(false, fails)
@@ -449,6 +449,49 @@ export default class Validator {
     }
 
     return this.hasAsync || hasCallback
+  }
+
+  validated(passes?: VoidFunction, fails?: VoidFunction) {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const _this = this
+    if (this._checkAsync('passes', passes)) {
+      return this.checkAsync(
+        function () {
+          if (passes && typeof passes === 'function') {
+            passes(_this._onlyInputWithRules())
+          }
+        }.bind(this),
+        fails,
+      )
+    } else {
+      if (this.check()) {
+        return this._onlyInputWithRules()
+      } else {
+        throw new Error('Validation failed!')
+      }
+    }
+  }
+
+  _onlyInputWithRules(obj?: Record<string, any>, keyPrefix?: string) {
+    const prefix = keyPrefix || ''
+    const values: Record<string, any> = JSON.parse(
+      JSON.stringify(obj === undefined ? this.input : obj),
+    )
+
+    for (const key of Object.keys(values)) {
+      if (values[key] !== null && typeof values[key] === 'object') {
+        values[key] = this._onlyInputWithRules(values[key], prefix + key + '.')
+      } else {
+        if (
+          values[key] === undefined ||
+          !Object.keys(this.rules).includes(prefix + key)
+        ) {
+          delete values[key]
+        }
+      }
+    }
+
+    return values
   }
 
   static register(name: string, fn: any, message?: string) {
