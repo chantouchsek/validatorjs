@@ -1,5 +1,5 @@
-import { onlyDigits } from '../utils'
+import { isArray, onlyDigits } from '../utils'
 
 export const numeric = (value: string | number | boolean) => {
-  return onlyDigits(value)
+  return onlyDigits(value) && !isArray(value)
 }

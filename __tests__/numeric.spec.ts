@@ -32,6 +32,12 @@ describe('numeric validation rule', () => {
     expect(validator.fails()).toBeTruthy()
   })
 
+  it('should fail with an array value', () => {
+    const validator = new Validator({ age: [13] }, { age: 'numeric' })
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.passes()).toBeFalsy()
+  })
+
   it('should fail with a boolean true value', () => {
     const validator = new Validator({ age: true }, { age: 'numeric' })
     expect(validator.fails()).toBeTruthy()

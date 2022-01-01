@@ -115,6 +115,19 @@ describe('integer fail rules', () => {
     expect(validator.passes()).toBeFalsy()
   })
 
+  it('should fail if the value is an array with one integer value', () => {
+    const validator = new Validator(
+      {
+        age: [7],
+      },
+      {
+        age: 'required|integer',
+      },
+    )
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.passes()).toBeFalsy()
+  })
+
   it('should fail if the value is an object', () => {
     const validator = new Validator(
       {

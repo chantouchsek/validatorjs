@@ -1,3 +1,5 @@
+import { isArray } from '../utils'
+
 export const integer = (value: string) => {
-  return String(parseInt(value, 10)) === String(value)
+  return !isArray(value) && String(parseInt(value, 10)) === String(value)
 }
