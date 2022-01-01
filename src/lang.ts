@@ -7,7 +7,7 @@ export default class Lang {
     this.messages[lang] = rawMessages
   }
 
-  static _get(lang: string) {
+  static _get(lang: string): Record<string, string> {
     this._load(lang)
     return this.messages[lang]
   }

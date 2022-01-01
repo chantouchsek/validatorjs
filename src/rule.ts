@@ -1,6 +1,6 @@
 import Validator from './main'
 import * as rules from './rules'
-import { isValidDate, flattenObject, objectPath } from './utils'
+import { flattenObject, isValidDate, objectPath } from './utils'
 
 let missedRuleValidator = function (this: Rule) {
   throw new Error('Validator `' + this.name + '` is not defined!')
@@ -9,9 +9,9 @@ let missedRuleMessage: string | undefined = ''
 
 export class Rule {
   private readonly async: boolean
-  private _customMessage: any
+  private _customMessage: string | undefined
   private passes: boolean
-  private readonly fn: any
+  private readonly fn: VoidFunction
   readonly name: string
   private callback: any
   attribute: string
@@ -20,7 +20,7 @@ export class Rule {
   private validator?: Validator
   static rules: any = rules
 
-  constructor(name: string, fn: any, async: boolean) {
+  constructor(name: string, fn: VoidFunction, async: boolean) {
     this.name = name
     this.fn = fn
     this.passes = false
@@ -32,7 +32,7 @@ export class Rule {
 
   validate(
     input: Record<string, any> | string | number,
-    rule: any,
+    rule: Record<string, any>,
     attribute = '',
     callback = null,
   ) {
@@ -58,12 +58,12 @@ export class Rule {
 
   _apply(
     input: Record<string, any> | string | number,
-    rule: any,
+    rule: Record<string, any>,
     attribute: string | null,
     callback = null,
-  ) {
+  ): any {
     const fn = this.isMissed() ? missedRuleValidator : this.fn
-    return fn.apply(this, [input, rule, attribute, callback])
+    return fn.apply(this, [input, rule, attribute, callback] as any)
   }
 
   _setValidatingData(
