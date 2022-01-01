@@ -6,6 +6,7 @@ module.exports = {
     'Le champ :attribute ne peut contenir que des caractères alphanumériques, des tirets et des underscores.',
   alpha_num:
     'Le champ :attribute ne peut contenir que des caractères alphanumériques.',
+  attributes: {},
   between:
     'La longueur du champ :attribute doit être comprise entre :min and :max.',
   confirmed: "Le champ :attribute n'est pas confirmé.",
@@ -38,5 +39,4 @@ module.exports = {
   },
   url: 'Le format du champ :attribute est invalide.',
   regex: 'Le format du champ :attribute est invalide.',
-  attributes: {},
 }

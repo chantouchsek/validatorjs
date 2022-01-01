@@ -6,6 +6,7 @@ module.exports = {
   alpha: ':attribute må kun bestå af bogstaver.',
   alpha_dash: ':attribute må kun bestå af bogstaver, tal og bindestreger.',
   alpha_num: ':attribute må kun bestå af bogstaver og tal.',
+  attributes: {},
   before: ':attribute skal være en dato før :before.',
   before_or_equal:
     ':attribute skal være en dato før eller lig med :before_or_equal.',
@@ -47,5 +48,4 @@ module.exports = {
   string: ':attribute skal være en streng.',
   url: ':attribute formatet er ugyldigt.',
   regex: ':attribute formatet er ugyldigt.',
-  attributes: {},
 }

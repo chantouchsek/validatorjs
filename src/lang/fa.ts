@@ -4,6 +4,7 @@ module.exports = {
   alpha_dash:
     'فیلد :attribute می بایست فقط شامل حروف انگلیسی و خط تیره و زیرخط باشد',
   alpha_num: 'فیلد :attribute می بایست فقط شامل حروف و اعداد باشد',
+  attributes: {},
   between: 'فیلد :attribute می بایست بزرگتر از :min و کوچکتر از :max باشد',
   confirmed: 'تطبیق فیلد :attribute صحیح نمی باشد',
   email: 'فرمت ایمیل وارد شده در :attribute صحیح نمی‌باشد',
@@ -36,5 +37,4 @@ module.exports = {
   string: 'فیلد :attribute می بایست متنی باشد',
   url: 'آدرس فیلد :attribute صحیح نمی باشد',
   regex: 'فرمت آدرس :attribute صحیح نمی باشد',
-  attributes: {},
 }

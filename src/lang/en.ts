@@ -6,6 +6,7 @@ module.exports = {
   alpha_dash:
     'The :attribute field may only contain alpha-numeric characters, as well as dashes and underscores.',
   alpha_num: 'The :attribute field must be alphanumeric.',
+  attributes: {},
   before: 'The :attribute must be before :before.',
   before_or_equal: 'The :attribute must be equal or before :before_or_equal.',
   between: {
@@ -51,5 +52,4 @@ module.exports = {
   string: 'The :attribute must be a string.',
   url: 'The :attribute format is invalid.',
   regex: 'The :attribute format is invalid.',
-  attributes: {},
 }

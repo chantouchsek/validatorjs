@@ -5,6 +5,7 @@ module.exports = {
   alpha: ':attributeは英字のみで入力してください。',
   alpha_dash: ':attributeは英字とダッシュと下線のみで入力してください。',
   alpha_num: ':attributeは英数字のみで入力してください。',
+  attributes: {},
   before: ':attributeは:beforeより前の日付を入力してください。',
   before_or_equal: ':attributeは:before_or_equal以前の日付を入力してください。',
   between: ':attributeは:min〜:max文字で入力してください。',
@@ -45,5 +46,4 @@ module.exports = {
   url: ':attributeは正しいURIを入力してください。',
   regex: ':attributeの値はパターンにマッチする必要があります。',
   password: ':attributeパスワードでなければなりません。',
-  attributes: {},
 }

@@ -3,6 +3,7 @@ export default {
   alpha: ':attribute只能包含字母.',
   alpha_dash: ':attribute只能包含字母,连字符和下划线.',
   alpha_num: ':attribute只能包含字母和数字.',
+  attributes: {},
   between: ':attribute的(大小,长度等)只能在:min和:max之间.',
   confirmed: ':attribute确认不一致.',
   email: ':attribute格式不正确.',
@@ -35,5 +36,4 @@ export default {
   string: ':attribute必须是一个字符串.',
   url: ':attribute格式不正确.',
   regex: ':attribute格式不正确.',
-  attributes: {},
 }

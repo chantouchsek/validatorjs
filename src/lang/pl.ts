@@ -7,6 +7,7 @@ module.exports = {
   alpha_dash:
     'Pole :attribute może zawierać tylko znaki alfanumeryczne, myślinki oraz podkreślenia.',
   alpha_num: 'Pole :attribute może zawierać tylko znaki alfanumeryczne.',
+  attributes: {},
   before: 'Data w polu :attribute musi być przed :before',
   before_or_equal:
     'Data w polu :attribute musi być większa lub równa :before_or_equal.',
@@ -57,5 +58,4 @@ module.exports = {
   string: 'Pole :attribute musi być ciągiem znaków.',
   url: 'Pole :attribute musi być prawidłowym adresem URL.',
   regex: 'Pole :attribute nie spełnia warunku.',
-  attributes: {},
 }

@@ -8,6 +8,7 @@ module.exports = {
     ':attribute kenttä saa sisältää ainoastaan kirjaimia tai numeroita, sekä pisteitä ja alaviivoja.',
   alpha_num:
     ':attribute kenttä saa sisältää ainoastaan kirjaimia tai numeroita.',
+  attributes: {},
   before: ':attribute on oltava ennen kuin :before.',
   before_or_equal: ':attribute on oltava sama tai ennen kuin :before_or_equal.',
   between: ':attribute on oltava :min ja :max väliltä.',
@@ -52,5 +53,4 @@ module.exports = {
   string: ':attribute on oltava merkkijono.',
   url: ':attribute on väärässä muodossa.',
   regex: ':attribute on väärässä muodossa.',
-  attributes: {},
 }

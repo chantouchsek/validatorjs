@@ -8,6 +8,7 @@ module.exports = {
   alpha_dash:
     ':attribute får endast innehålla bokstäver, siffror och bindestreck.',
   alpha_num: ':attribute får endast innehålla bokstäver och siffror.',
+  attributes: {},
   array: ':attribute måste vara en array.',
   before: ':attribute måste vara ett datum innan den :date.',
   before_or_equal:

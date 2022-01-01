@@ -7,6 +7,7 @@ module.exports = {
   alpha_dash:
     ':attribute får bara bestå av alfanumeriska tecken, bindestreck och understreck.',
   alpha_num: ':attribute får bara bestå av alfanumeriska tecken',
+  attributes: {},
   before: ':attribute måste vara före :before.',
   before_or_equal:
     ':attribute måste vara samtidigt eller före :before_or_equal.',
@@ -47,5 +48,4 @@ module.exports = {
   string: ':attribute måste vara en sträng.',
   url: ':attribute formatet är ogiltigt.',
   regex: ':attribute formatet är ogiltigt.',
-  attributes: {},
 }

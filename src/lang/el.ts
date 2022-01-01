@@ -6,6 +6,7 @@ module.exports = {
     'Το πεδίο :attribute μπορεί να περιέχει μόνο γράμματα, αριθμούς, και παύλες.',
   alpha_num:
     'Το πεδίο :attribute μπορεί να περιέχει μόνο γράμματα και αριθμούς.',
+  attributes: {},
   between: 'Το πεδίο :attribute πρέπει να είναι μεταξύ :min και :max.',
   confirmed: 'Η επιβεβαίωση του :attribute δεν ταιριάζει.',
   email: 'Το πεδίο :attribute πρέπει να είναι μία έγκυρη διεύθυνση email.',
@@ -41,5 +42,4 @@ module.exports = {
   string: 'Το πεδίο :attribute πρέπει να είναι αλφαριθμητικό.',
   url: 'Το πεδίο :attribute δεν είναι έγκυρη διεύθυνση URL.',
   regex: 'Η μορφή του :attribute δεν είναι αποδεκτή.',
-  attributes: {},
 }

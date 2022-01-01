@@ -4,6 +4,7 @@ module.exports = {
   alpha_dash:
     ':attribute feltet kan kun inneholde alfanumeriske tegn, i tillegg til bindestreker og understreker.',
   alpha_num: ':attribute feltet må være alfanumerisk.',
+  attributes: {},
   between: ':attribute feltet må være mellom :min og :max.',
   confirmed: ':attribute feltet stemmer ikke overens med bekreftelsen.',
   email: ':attribute formatet er ugyldig.',
@@ -36,5 +37,4 @@ module.exports = {
   string: ':attribute må være tekst.',
   url: ':attribute formatet er ugyldig.',
   regex: ':attribute formatet er ugyldig.',
-  attributes: {},
 }

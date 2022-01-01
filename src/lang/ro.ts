@@ -6,6 +6,7 @@ module.exports = {
   alpha_dash:
     'Câmpul:attribute poate conține numai caractere alfanumerice, precum și liniuțe și subliniere.',
   alpha_num: 'Câmpul :attribute trebuie să fie alfanumeric.',
+  attributes: {},
   before: ':attribute trebuie să fie înainte :before.',
   before_or_equal:
     ':attribute trebuie să fie egal sau înainte :before_or_equal.',
@@ -51,5 +52,4 @@ module.exports = {
   string: ':attribute trebuie să fie un contina doar caractere alfabetice.',
   url: 'Formatul :attribute nu este valid.',
   regex: 'Formatul :attribute nu este valid.',
-  attributes: {},
 }

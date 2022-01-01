@@ -4,6 +4,7 @@ module.exports = {
   alpha_dash:
     'Поле :attribute может содержать только буквы, цифры, дефисы и символы подчёркивания.',
   alpha_num: 'Поле :attribute может содержать только буквы и цифры.',
+  attributes: {},
   between: 'Поле :attribute должно быть между :min и :max.',
   confirmed: 'Поле :attribute не совпадает с подтверждением.',
   email: 'Поле :attribute должно быть действительным электронным адресом.',
@@ -36,5 +37,4 @@ module.exports = {
   },
   url: 'Поле :attribute должно содержать валидный URL.',
   regex: 'Неверный формат поля :attribute.',
-  attributes: {},
 }

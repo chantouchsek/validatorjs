@@ -4,6 +4,7 @@ module.exports = {
   alpha_dash:
     'Поле :attribute може складатись тільки з літер, чисел, дефісів та символів підкреслення.',
   alpha_num: 'Поле :attribute може складатись тільки з літер та чисел.',
+  attributes: {},
   between: 'Значення поля :attribute повинно знаходитись між :min і :max.',
   confirmed: 'Поле :attribute не співпадає з підтвердженням.',
   email: 'Значення поля :attribute повинно бути існуючою електронною адресою.',
@@ -36,5 +37,4 @@ module.exports = {
   },
   url: 'Поле :attribute повинне містити валідний URL.',
   regex: 'Неправильний формат значення :attribute.',
-  attributes: {},
 }

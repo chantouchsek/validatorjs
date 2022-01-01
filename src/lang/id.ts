@@ -5,6 +5,7 @@ module.exports = {
   alpha: ':attribute hanya boleh berisi huruf.',
   alpha_dash: ':attribute hanya boleh berisi huruf, - atau _.',
   alpha_num: ':attribute hanya boleh berisi huruf dan angka.',
+  attributes: {},
   before: ':attribute harus sebelum :before.',
   before_or_equal:
     ':attribute harus sama dengan atau sebelum :before_or_equal.',
@@ -45,5 +46,4 @@ module.exports = {
   string: ':attribute harus berupa string.',
   url: ':attribute harus berupa format url.',
   regex: ':attribute format tidak benar.',
-  attributes: {},
 }

@@ -7,6 +7,7 @@ module.exports = {
   alpha_dash:
     'Das :attribute Feld darf nur aus Buchstaben, Zahlen, Binde- und Unterstrichen bestehen.',
   alpha_num: 'Das :attribute Feld darf nur aus Buchstaben und Zahlen bestehen.',
+  attributes: {},
   before: 'Das :attribute muss ein Datum vor dem :before sein.',
   before_or_equal:
     'Das :attribute Datum muss größer oder gleich dem :before_or_equal sein.',
@@ -44,5 +45,4 @@ module.exports = {
   string: 'Das :attribute Feld muss ein Satz sein.',
   url: 'Das Format von :attribute ist ungültig.',
   regex: 'Das :attribute Format ist ungültig.',
-  attributes: {},
 }

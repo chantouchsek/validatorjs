@@ -3,6 +3,7 @@ module.exports = {
   alpha: ':attribute只能包含字母。',
   alpha_dash: ':attribute只能包含字母，連字符和下划線。',
   alpha_num: ':attribute只能包含字母和數字。',
+  attributes: {},
   between: ':attribute的值只能在:min和:max之間。',
   confirmed: ':attribute與確認輸入不一致。',
   email: ':attribute的格式錯誤。',
@@ -35,5 +36,4 @@ module.exports = {
   string: ':attribute必須是一個字串。',
   url: ':attribute格式不正確。',
   regex: ':attribute格式不正確。',
-  attributes: {},
 }

@@ -4,6 +4,7 @@ module.exports = {
   alpha_dash:
     'Il campo :attribute può contenere solo caratteri alfanumerici oltre a trattini e trattini bassi.',
   alpha_num: 'Il campo :attribute deve essere alfanumerico.',
+  attributes: {},
   between: 'Il campo :attribute deve essere compreso tra :min e :max.',
   confirmed: 'Il campo conferma :attribute non è uguale.',
   email: "Il formato dell'attributo :attribute non è valido.",
@@ -38,5 +39,4 @@ module.exports = {
   string: 'Il campo :attribute deve essere una stringa.',
   url: 'Il formato del campo :attribute non è valido.',
   regex: 'Il formato del campo :attribute non è valido.',
-  attributes: {},
 }

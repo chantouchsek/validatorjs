@@ -6,6 +6,7 @@ module.exports = {
   alpha_dash:
     'Het :attribute veld mag alleen maar letters, cijfers en (liggende) streepjes bevatten.',
   alpha_num: 'Het :attribute veld mag alleen maar letters en cijfers bevatten.',
+  attributes: {},
   before: ':attribute moet vòòr :before zijn.',
   before_or_equal: ':attribute moet vòòr of op :before_or_equal zijn.',
   between: 'Het :attribute veld moet tussen :min en :max liggen.',
@@ -52,5 +53,4 @@ module.exports = {
   string: 'Het :attribute veld moet een woord of zin zijn.',
   url: 'Het :attribute veld heeft een ongeldig formaat.',
   regex: 'Het :attribute veld heeft een ongeldig formaat.',
-  attributes: {},
 }

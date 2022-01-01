@@ -4,6 +4,7 @@ module.exports = {
   alpha_dash:
     ':attribute chỉ chấp nhận ký tự chữ cái, số, dấu gạch chéo và gạch dưới.',
   alpha_num: ':attribute phải là ký tự chữ cái hoặc chữ số.',
+  attributes: {},
   between: ':attribute phải nằm trong khoảng :min và :max.',
   confirmed: ':attribute xác nhận không trùng khớp.',
   email: ':attribute không phải là email.',
@@ -37,5 +38,4 @@ module.exports = {
   string: ':attribute không phải là một chuỗi',
   url: ':attribute không phải là một Url hợp lệ.',
   regex: ':attribute không đúng định dạng',
-  attributes: {},
 }

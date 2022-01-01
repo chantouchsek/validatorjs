@@ -7,6 +7,7 @@ module.exports = {
   alpha: 'O campo :attribute deve conter apenas letras.',
   alpha_dash: 'O campo :attribute deve conter apenas letras, números e traços.',
   alpha_num: 'O campo :attribute deve conter apenas letras e números .',
+  attributes: {},
   array: 'O campo :attribute deve conter um array.',
   before: 'O campo :attribute deve conter uma data anterior a :date.',
   before_or_equal:

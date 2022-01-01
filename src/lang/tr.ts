@@ -7,6 +7,7 @@ module.exports = {
   alpha_dash:
     ':attribute alanı sadece alfa-nümerik, tire ve alt çizgi karakterlerden oluşabilir.',
   alpha_num: ':attribute alanı alfa-nümerik olmalıdır.',
+  attributes: {},
   before: ':attribute alanı :before alanından önce olmalıdır.',
   before_or_equal:
     ':attribute alanı :before_or_equal alanına eşit veya önce olmalıdır.',
@@ -48,5 +49,4 @@ module.exports = {
   string: ':attribute alfa-numerik olmalı.',
   url: ':attribute formatı geçersiz.',
   regex: ':attribute formatı geçersiz.',
-  attributes: {},
 }

@@ -5,6 +5,7 @@ module.exports = {
     ':attribute maydoni faqat harflar, raqamlar, chiziqlar va pastki chiziqlardan iborat bo`lishi mumkin.',
   alpha_num:
     ':attribute maydoni faqat harflar va raqamlarni o`z ichiga olishi mumkin.',
+  attributes: {},
   between: ':attribute maydoni :min va :max orasida bo`lishi kerak.',
   confirmed: ':attribute maydoni tasdiq bilan mos kelmaydi.',
   email:
@@ -43,5 +44,4 @@ module.exports = {
   },
   url: ':attribute maydonida to`g`ri URL manzili kiritilishi kerak.',
   regex: ':attribute maydon formati noto`g`ri.',
-  attributes: {},
 }
