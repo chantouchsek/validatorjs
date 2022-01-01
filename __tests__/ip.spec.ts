@@ -135,6 +135,17 @@ describe('IP Validation rules', () => {
       )
       expect(validator.passes()).toBeTruthy()
     })
+    it('should fail normal ipv6 address over range', () => {
+      const validator = new Validator(
+        {
+          ipAddr: '2001:0db8:85g3:0000:0000:8a2e:0370:7334',
+        },
+        {
+          ipAddr: 'ipv6',
+        },
+      )
+      expect(validator.fails()).toBeTruthy()
+    })
 
     it('should pass normal ipv6 address with ommited zeros', () => {
       const validator = new Validator(

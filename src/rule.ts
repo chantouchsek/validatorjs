@@ -2,7 +2,7 @@ import Validator from './main'
 import * as rules from './rules'
 import { flattenObject, isValidDate, objectPath } from './utils'
 
-let missedRuleValidator = function (this: Rule) {
+let missedRuleValidator: VoidFunction = function (this: Rule) {
   throw new Error('Validator `' + this.name + '` is not defined!')
 }
 let missedRuleMessage: string | undefined = ''
@@ -356,26 +356,26 @@ export class Manager {
     return this.implicitRules.indexOf(name) > -1
   }
 
-  register(name: string, fn: any) {
+  register(name: string, fn: VoidFunction) {
     Rule.rules[name] = fn
   }
 
-  registerImplicit(name: string, fn: any) {
+  registerImplicit(name: string, fn: VoidFunction) {
     this.register(name, fn)
     this.implicitRules.push(name)
   }
 
-  registerAsync(name: string, fn: any) {
+  registerAsync(name: string, fn: VoidFunction) {
     this.register(name, fn)
     this.asyncRules.push(name)
   }
 
-  registerAsyncImplicit(name: string, fn: any) {
+  registerAsyncImplicit(name: string, fn: VoidFunction) {
     this.registerImplicit(name, fn)
     this.asyncRules.push(name)
   }
 
-  registerMissedRuleValidator(fn: any, message?: string) {
+  registerMissedRuleValidator(fn: VoidFunction, message?: string) {
     missedRuleValidator = fn
     missedRuleMessage = message
   }
