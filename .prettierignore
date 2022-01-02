@@ -94,3 +94,5 @@ sw.*
 
 # Vim swap files
 *.swp
+
+CHANGELOG.md
