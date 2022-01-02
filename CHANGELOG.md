@@ -1,7 +1,13 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
-See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [1.0.1](https://github.com/chantouchsek/validator-js/compare/v1.0.0...v1.0.1) (2022-01-02)
+
+
+### Bug Fixes
+
+* :beer: change targe build to es2019 ([b9e6712](https://github.com/chantouchsek/validator-js/commit/b9e671260cc33e2bd5e432c99f38e515b0d568f1))
 
 ### [1.0.0](https://github.com/chantouchsek/validator-js/compare/v0.0.7...v1.0.0) (2022-01-01)
 
