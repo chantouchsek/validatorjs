@@ -1,7 +1,5 @@
 # ValidatorJs
 
----
-
 [![ci](https://github.com/chantouchsek/validator-js/actions/workflows/ci.yml/badge.svg)](https://github.com/chantouchsek/validator-js/actions/workflows/ci.yml)
 [![Latest Version on NPM](https://img.shields.io/npm/v/@chantouchsek/validatorjs.svg?style=flat-square)](https://npmjs.com/package/@chantouchsek/validatorjs)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
