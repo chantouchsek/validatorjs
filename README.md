@@ -1,5 +1,13 @@
 # ValidatorJs
 
+---
+
+[![ci](https://github.com/chantouchsek/validator-js/actions/workflows/ci.yml/badge.svg)](https://github.com/chantouchsek/validator-js/actions/workflows/ci.yml)
+[![Latest Version on NPM](https://img.shields.io/npm/v/@chantouchsek/validatorjs.svg?style=flat-square)](https://npmjs.com/package/@chantouchsek/validatorjs)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
+[![npm](https://img.shields.io/npm/dt/@chantouchsek/validatorjs.svg?style=flat-square)](https://npmjs.com/package/@chantouchsek/validatorjs)
+[![npm](https://img.shields.io/npm/dm/@chantouchsek/validatorjs.svg?style=flat-square)](https://npmjs.com/package/@chantouchsek/validatorjs)
+
 The ValidatorJs library makes data validation in JavaScript very easy in both the browser and Node.js. This library was
 forked from [ValidatorJs](https://github.com/mikeerickson/validatorjs) to re-write in typescript to add more rules and
 features.
