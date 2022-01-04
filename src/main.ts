@@ -236,7 +236,7 @@ export default class Validator {
   }
 
   _addFailure(rule: Rule, message = '') {
-    const msg = this.messages.render(rule) || message
+    const msg = message || this.messages.render(rule)
     this.errors.add(rule.attribute, msg)
     this.errorCount++
   }
