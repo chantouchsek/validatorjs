@@ -6,9 +6,9 @@ const config: InitialOptionsTsJest = {
   coverageThreshold: {
     global: {
       lines: 99.73,
-      functions: 99.37,
-      branches: 97.61,
-      statements: 99.62,
+      functions: 99.39,
+      branches: 97.74,
+      statements: 99.75,
     },
   },
   testEnvironment: 'node',

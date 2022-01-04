@@ -81,11 +81,11 @@ export class Rule {
     if (typeof this.rule === 'string') {
       value = this.rule.split(',')
     }
-    if (typeof this.rule === 'number') {
-      value.push(this.rule)
-    }
     if (this.rule instanceof Array) {
       value = this.rule
+    }
+    if (typeof this.rule === 'number') {
+      value.push(this.rule)
     }
     return value
   }

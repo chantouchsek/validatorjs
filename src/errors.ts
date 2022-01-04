@@ -1,11 +1,7 @@
 import { hasOwnProperty } from './utils'
 
 export default class Errors {
-  private readonly errors: Record<string, any[]> = {}
-
-  constructor() {
-    this.errors = {}
-  }
+  private readonly errors: Record<string, string[]> = {}
 
   add(attribute: string, message: string) {
     if (!this.has(attribute)) {
