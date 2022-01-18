@@ -1,4 +1,4 @@
-export default {
+const tr = {
   accepted: ':attribute kabul edilmeli.',
   after: ':attribute alanı :after alanından sonra olmalıdır.',
   after_or_equal:
@@ -50,3 +50,5 @@ export default {
   url: ':attribute formatı geçersiz.',
   regex: ':attribute formatı geçersiz.',
 }
+
+export default tr

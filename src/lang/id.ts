@@ -1,4 +1,4 @@
-export default {
+const id = {
   accepted: ':attribute harus disetujui.',
   after: ':attribute harus setelah :after.',
   after_or_equal: ':attribute harus sama dengan atau setelah :after_or_equal.',
@@ -47,3 +47,5 @@ export default {
   url: ':attribute harus berupa format url.',
   regex: ':attribute format tidak benar.',
 }
+
+export default id

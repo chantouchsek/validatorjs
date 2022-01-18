@@ -1,4 +1,4 @@
-export default {
+const et = {
   accepted: ':attribute tuleb aktsepteerida.',
   active_url: ':attribute ei ole kehtiv URL.',
   after: ':attribute peab olema kuupäev pärast :date.',
@@ -103,3 +103,5 @@ export default {
   uploaded: ':attribute ei õnnestunud laadida.',
   url: ':attribute vorming on vigane.',
 }
+
+export default et

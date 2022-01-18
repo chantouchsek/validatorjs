@@ -1,4 +1,4 @@
-export default {
+const hu = {
   accepted: 'A(z) :attribute el kell legyen fogadva!',
   active_url: 'A(z) :attribute nem érvényes url!',
   after: 'A(z) :attribute :date utáni dátum kell, hogy legyen!',
@@ -117,3 +117,5 @@ export default {
   uploaded: 'A(z) :attribute feltöltése sikertelen.',
   url: 'A(z) :attribute érvénytelen link.',
 }
+
+export default hu

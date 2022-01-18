@@ -1,4 +1,4 @@
-export default {
+const bg = {
   accepted: 'Трябва да приемете :attribute.',
   active_url: 'Полето :attribute не е валиден URL адрес.',
   after: 'Полето :attribute трябва да бъде дата след :date.',
@@ -108,3 +108,5 @@ export default {
   uploaded: 'Неуспешно качване на :attribute.',
   url: 'Полето :attribute е в невалиден формат.',
 }
+
+export default bg

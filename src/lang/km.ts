@@ -1,4 +1,4 @@
-export default {
+const km = {
   accepted: ':attribute ត្រូវតែទទួលយក។',
   after: ':attribute ត្រូវតែនៅបន្ទាប់ពី :after។',
   after_or_equal: ':attribute ត្រូវតែមានតម្លៃស្មើរឬលើស :after_or_equal។',
@@ -52,3 +52,5 @@ export default {
     },
   },
 }
+
+export default km

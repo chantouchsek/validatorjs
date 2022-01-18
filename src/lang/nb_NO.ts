@@ -1,4 +1,4 @@
-export default {
+const nb_No = {
   accepted: ':attribute må være akseptert.',
   alpha: ':attribute feltet kan kun inneholde alfabetiske tegn.',
   alpha_dash:
@@ -38,3 +38,5 @@ export default {
   url: ':attribute formatet er ugyldig.',
   regex: ':attribute formatet er ugyldig.',
 }
+
+export default nb_No

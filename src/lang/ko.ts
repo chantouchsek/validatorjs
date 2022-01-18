@@ -1,4 +1,4 @@
-export default {
+const ko = {
   accepted: ':attribute을(를) 동의해야 합니다.',
   active_url: ':attribute은(는) 유효한 URL이 아닙니다.',
   after: ':attribute은(는) :date 이후 날짜여야 합니다.',
@@ -105,3 +105,5 @@ export default {
   uploaded: ':attribute을(를) 업로드하지 못했습니다.',
   url: ':attribute 형식은 유효하지 않습니다.',
 }
+
+export default ko

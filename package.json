@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "description": "The validator-js library makes data validation in JavaScript very easy in both the browser and Node.js.",
   "main": "dist/main.js",
-  "types": "dist/main.d.ts",
+  "types": "typings/main.d.ts",
   "scripts": {
     "dev": "tsc -w",
     "clean": "rimraf dist",
@@ -23,7 +23,8 @@
     "url": "git+https://github.com/chantouchsek/validator-js.git"
   },
   "files": [
-    "dist"
+    "dist",
+    "typings"
   ],
   "keywords": [
     "validator",

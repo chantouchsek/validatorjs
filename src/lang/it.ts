@@ -1,4 +1,4 @@
-export default {
+const it = {
   accepted: 'Il campo :attribute deve essere accettato.',
   alpha: 'Il campo :attribute deve contenere sono caratteri alfabetici.',
   alpha_dash:
@@ -40,3 +40,5 @@ export default {
   url: 'Il formato del campo :attribute non è valido.',
   regex: 'Il formato del campo :attribute non è valido.',
 }
+
+export default it

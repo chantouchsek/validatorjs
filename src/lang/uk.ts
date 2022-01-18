@@ -1,4 +1,4 @@
-export default {
+const uk = {
   accepted: 'Ви повинні прийняти :attribute.',
   active_url: 'Поле :attribute не є правильним URL.',
   after: 'Поле :attribute має містити дату не раніше :date.',
@@ -111,3 +111,5 @@ export default {
   uploaded: 'Завантаження поля :attribute не вдалося.',
   url: 'Формат поля :attribute неправильний.',
 }
+
+export default uk

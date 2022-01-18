@@ -1,4 +1,4 @@
-export default {
+const fi = {
   accepted: ':attribute on oltava hyväksytty.',
   after: ':attribute on oltava :after jälkeen.',
   after_or_equal:
@@ -54,3 +54,5 @@ export default {
   url: ':attribute on väärässä muodossa.',
   regex: ':attribute on väärässä muodossa.',
 }
+
+export default fi

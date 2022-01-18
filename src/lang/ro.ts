@@ -1,4 +1,4 @@
-export default {
+const ro = {
   accepted: ':attribute trebuie acceptat.',
   after: ':attribute trebuie să fie după :after.',
   after_or_equal: ':attribute trebuie să fie egal sau după :after_or_equal.',
@@ -53,3 +53,5 @@ export default {
   url: 'Formatul :attribute nu este valid.',
   regex: 'Formatul :attribute nu este valid.',
 }
+
+export default ro

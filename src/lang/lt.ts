@@ -1,4 +1,4 @@
-export default {
+const lt = {
   accepted: 'Laukas :attribute turi būti priimtas.',
   active_url: 'Laukas :attribute nėra galiojantis internetinis adresas.',
   after: 'Lauko :attribute reikšmė turi būti po :date datos.',
@@ -111,3 +111,5 @@ export default {
   uploaded: 'The :attribute failed to upload.',
   url: 'Negaliojantis lauko :attribute formatas.',
 }
+
+export default lt

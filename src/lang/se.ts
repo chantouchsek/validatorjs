@@ -1,4 +1,4 @@
-export default {
+const se = {
   accepted: ':attribute måste vara accepterat.',
   after: ':attribute måste vara efter :after.',
   after_or_equal:
@@ -49,3 +49,5 @@ export default {
   url: ':attribute formatet är ogiltigt.',
   regex: ':attribute formatet är ogiltigt.',
 }
+
+export default se
