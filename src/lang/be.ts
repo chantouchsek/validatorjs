@@ -1,4 +1,4 @@
-module.exports = {
+const be = {
   accepted: 'Вы павінны прыняць :attribute.',
   active_url: 'Поле :attribute утрымлівае несапраўдны URL.',
   after: 'У полі :attribute павінна быць дата пасля :date.',
@@ -112,3 +112,5 @@ module.exports = {
   uploaded: 'The :attribute failed to upload.',
   url: 'Поле :attribute мае памылковы фармат.',
 }
+
+export default be

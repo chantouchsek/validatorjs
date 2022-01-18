@@ -1,4 +1,4 @@
-module.exports = {
+const ms = {
   accepted: ':attribute mesti diterima pakai.',
   active_url: ':attribute bukan URL yang sah.',
   after: ':attribute mesti tarikh selepas :date.',
@@ -105,3 +105,5 @@ module.exports = {
   uploaded: ':attribute gagal dimuat naik.',
   url: ':attribute format tidak sah.',
 }
+
+export default ms

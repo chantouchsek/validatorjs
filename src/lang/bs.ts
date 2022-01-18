@@ -1,4 +1,4 @@
-module.exports = {
+const bs = {
   accepted: 'Polje :attribute mora biti prihvaćeno.',
   active_url: 'Polje :attribute nije validan URL.',
   after: 'Polje :attribute mora biti datum poslije :date.',
@@ -103,3 +103,5 @@ module.exports = {
   uploaded: 'The :attribute failed to upload.',
   url: 'Format polja :attribute nije validan.',
 }
+
+export default bs

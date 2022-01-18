@@ -1,4 +1,4 @@
-module.exports = {
+const el = {
   accepted: 'Το πεδίο :attribute πρέπει να γίνει αποδεκτό.',
   after: 'Το πεδίο :attribute πρέπει να είναι μία ημερομηνία μετά από :after.',
   alpha: 'Το πεδίο :attribute μπορεί να περιέχει μόνο γράμματα.',
@@ -43,3 +43,5 @@ module.exports = {
   url: 'Το πεδίο :attribute δεν είναι έγκυρη διεύθυνση URL.',
   regex: 'Η μορφή του :attribute δεν είναι αποδεκτή.',
 }
+
+export default el

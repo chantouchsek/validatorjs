@@ -1,4 +1,4 @@
-module.exports = {
+const ua = {
   accepted: ':attribute повиннен бути прийнятий.',
   alpha: 'Поле :attribute може складатись тільки з літер.',
   alpha_dash:
@@ -38,3 +38,5 @@ module.exports = {
   url: 'Поле :attribute повинне містити валідний URL.',
   regex: 'Неправильний формат значення :attribute.',
 }
+
+export default ua

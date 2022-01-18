@@ -1,4 +1,4 @@
-module.exports = {
+const uz = {
   accepted: 'Siz :attribute ni qabul qilishingiz kerak.',
   alpha: ':attribute maydoni faqat harflardan iborat bo`lishi mumkin.',
   alpha_dash:
@@ -45,3 +45,5 @@ module.exports = {
   url: ':attribute maydonida to`g`ri URL manzili kiritilishi kerak.',
   regex: ':attribute maydon formati noto`g`ri.',
 }
+
+export default uz

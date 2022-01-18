@@ -1,4 +1,4 @@
-module.exports = {
+const da = {
   accepted: ':attribute skal accepteres.',
   after: ':attribute skal være en dato efter :after.',
   after_or_equal:
@@ -49,3 +49,5 @@ module.exports = {
   url: ':attribute formatet er ugyldigt.',
   regex: ':attribute formatet er ugyldigt.',
 }
+
+export default da

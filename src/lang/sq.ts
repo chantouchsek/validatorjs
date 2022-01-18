@@ -1,4 +1,4 @@
-module.exports = {
+const sq = {
   accepted: ':attribute duhet të pranohet.',
   active_url: ':attribute nuk është adresë e saktë.',
   after: ':attribute duhet të jetë datë pas :date.',
@@ -104,3 +104,5 @@ module.exports = {
   uploaded: 'The :attribute failed to upload.',
   url: 'Formati i :attribute është i pasaktë.',
 }
+
+export default sq

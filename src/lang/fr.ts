@@ -1,4 +1,4 @@
-module.exports = {
+const fr = {
   accepted: 'Le champ :attribute doit être accepté.',
   alpha:
     'Le champ :attribute ne peut contenir que des caractères alphabétiques.',
@@ -40,3 +40,5 @@ module.exports = {
   url: 'Le format du champ :attribute est invalide.',
   regex: 'Le format du champ :attribute est invalide.',
 }
+
+export default fr

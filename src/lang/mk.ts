@@ -1,4 +1,4 @@
-module.exports = {
+const mk = {
   accepted: 'Полето :attribute мора да биде прифатено.',
   active_url: 'Полето :attribute не е валиден URL.',
   after: 'Полето :attribute мора да биде датум после :date.',
@@ -106,3 +106,5 @@ module.exports = {
   uploaded: 'The :attribute failed to upload.',
   url: 'Полето :attribute не е во валиден формат.',
 }
+
+export default mk

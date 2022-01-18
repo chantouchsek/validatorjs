@@ -1,4 +1,4 @@
-module.exports = {
+const de = {
   accepted: 'Das :attribute Feld muss akzeptiert werden.',
   after: 'Das :attribute muss ein Datum nach dem :after sein.',
   after_or_equal:
@@ -46,3 +46,5 @@ module.exports = {
   url: 'Das Format von :attribute ist ungültig.',
   regex: 'Das :attribute Format ist ungültig.',
 }
+
+export default de

@@ -1,4 +1,4 @@
-export default {
+const zh = {
   accepted: ':attribute必须是可接受的.',
   alpha: ':attribute只能包含字母.',
   alpha_dash: ':attribute只能包含字母,连字符和下划线.',
@@ -37,3 +37,5 @@ export default {
   url: ':attribute格式不正确.',
   regex: ':attribute格式不正确.',
 }
+
+export default zh

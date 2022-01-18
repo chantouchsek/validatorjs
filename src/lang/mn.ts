@@ -1,4 +1,4 @@
-module.exports = {
+const mn = {
   accepted: ':attribute баталсан байх шаардлагатай.',
   active_url: ':attribute талбарт зөв URL хаяг оруулна уу.',
   after: ':attribute талбарт :date-с хойш огноо оруулна уу.',
@@ -112,3 +112,5 @@ module.exports = {
   uploaded: ':attribute талбарт оруулсан файлыг хуулхад алдаа гарлаа.',
   url: ':attribute зөв url хаяг оруулна уу.',
 }
+
+export default mn

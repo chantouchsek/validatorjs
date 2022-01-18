@@ -1,4 +1,4 @@
-module.exports = {
+const eu = {
   accepted: ':attribute onartua izan behar da.',
   active_url: ':attribute ez da baliozko URL bat.',
   after: ':attribute :date osteko data izan behar da.',
@@ -106,3 +106,5 @@ module.exports = {
   uploaded: ':attribute igotzerakoan huts egin du.',
   url: ':attribute-k ez dauka formatu egokirik.',
 }
+
+export default eu

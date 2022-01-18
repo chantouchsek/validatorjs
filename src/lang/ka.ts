@@ -1,4 +1,4 @@
-module.exports = {
+const ka = {
   accepted: ':attribute უნდა იყოს მონიშნული.',
   active_url: ':attribute უნდა იყოს URL მისამართი.',
   after: ':attribute უნდა იყოს :date-ის შემდეგ.',
@@ -103,3 +103,5 @@ module.exports = {
   uploaded: ':attribute-ის ატვირთვა ვერ მოხერხდა.',
   url: ':attribute უნდა იყოს URL მისამართი.',
 }
+
+export default ka

@@ -1,4 +1,4 @@
-module.exports = {
+const ja = {
   accepted: ':attributeを確認してください。',
   after: ':attributeは:afterより後の日付を入力してください。',
   after_or_equal: ':attributeは:after_or_equal以降の日付を入力してください。',
@@ -47,3 +47,5 @@ module.exports = {
   regex: ':attributeの値はパターンにマッチする必要があります。',
   password: ':attributeパスワードでなければなりません。',
 }
+
+export default ja

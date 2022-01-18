@@ -1,4 +1,4 @@
-module.exports = {
+const sv = {
   accepted: ':attribute måste accepteras.',
   active_url: ':attribute är inte en giltig webbadress.',
   after: ':attribute måste vara ett datum efter den :date.',
@@ -107,3 +107,5 @@ module.exports = {
   uploaded: ':attribute kunde inte laddas upp.',
   url: ':attribute har ett ogiltigt format.',
 }
+
+export default sv

@@ -1,4 +1,4 @@
-module.exports = {
+const az = {
   accepted: ':attribute qəbul edilməlidir',
   active_url: ':attribute doğru URL deyil',
   after: ':attribute :date tarixindən sonra olmalıdır',
@@ -101,3 +101,5 @@ module.exports = {
   uploaded: ' :attribute yüklənməsi mümkün olmadı',
   url: ' :attribute formatı yanlışdır',
 }
+
+export default az

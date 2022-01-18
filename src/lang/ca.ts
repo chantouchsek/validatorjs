@@ -1,4 +1,4 @@
-module.exports = {
+const ca = {
   accepted: 'El camp :attribute pot ser aceptat.',
   after: 'El camp :attribute pot ser una data posterior a :after.',
   alpha: 'El camp :attribute només pot contenir lletras.',
@@ -36,3 +36,5 @@ module.exports = {
   },
   url: 'El format de :attribute es invàlid.',
 }
+
+export default ca

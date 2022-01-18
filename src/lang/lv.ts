@@ -1,4 +1,4 @@
-module.exports = {
+const lv = {
   accepted: ' :attribute ir jābūt pieņemtam.',
   active_url: ' :attribute ir ar nederīgu linku.',
   after: ' :attribute ir jābūt ar datumu pēc :datums.',
@@ -108,3 +108,5 @@ module.exports = {
   uploaded: ' :attribute netika augšuplādēts.',
   url: ' :attribute formāts ir nederīgs.',
 }
+
+export default lv

@@ -1,4 +1,4 @@
-module.exports = {
+const vi = {
   accepted: ':attribute phải được chấp nhận.',
   alpha: 'Trường :attribute phải là ký tự',
   alpha_dash:
@@ -39,3 +39,5 @@ module.exports = {
   url: ':attribute không phải là một Url hợp lệ.',
   regex: ':attribute không đúng định dạng',
 }
+
+export default vi

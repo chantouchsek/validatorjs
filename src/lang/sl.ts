@@ -1,4 +1,4 @@
-module.exports = {
+const sl = {
   accepted: ':attribute mora biti sprejet.',
   active_url: ':attribute ni pravilen.',
   after: ':attribute mora biti za datumom :date.',
@@ -102,3 +102,5 @@ module.exports = {
   uploaded: 'Nalaganje :attribute ni uspelo.',
   url: ':attribute format je neveljaven.',
 }
+
+export default sl

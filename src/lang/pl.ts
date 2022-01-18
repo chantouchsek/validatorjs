@@ -1,4 +1,4 @@
-module.exports = {
+const pl = {
   accepted: 'Pole :attribute musi być zaakceptowane.',
   after: 'Pole :attribute musi być datą po :after',
   after_or_equal:
@@ -59,3 +59,5 @@ module.exports = {
   url: 'Pole :attribute musi być prawidłowym adresem URL.',
   regex: 'Pole :attribute nie spełnia warunku.',
 }
+
+export default pl

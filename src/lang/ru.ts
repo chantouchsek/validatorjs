@@ -1,4 +1,4 @@
-module.exports = {
+const ru = {
   accepted: 'Вы должны принять :attribute.',
   alpha: 'Поле :attribute может содержать только буквы.',
   alpha_dash:
@@ -38,3 +38,5 @@ module.exports = {
   url: 'Поле :attribute должно содержать валидный URL.',
   regex: 'Неверный формат поля :attribute.',
 }
+
+export default ru

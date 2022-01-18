@@ -1,4 +1,4 @@
-module.exports = {
+const pt_BR = {
   accepted: 'O campo :attribute deve ser aceito.',
   active_url: 'O campo :attribute deve conter uma URL válida.',
   after: 'O campo :attribute deve conter uma data posterior a :date.',
@@ -112,3 +112,5 @@ module.exports = {
   uploaded: 'Falha no Upload do arquivo :attribute.',
   url: 'O formato da URL informada para o campo :attribute é inválido.',
 }
+
+export default pt_BR

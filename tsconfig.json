@@ -17,6 +17,7 @@
     "strict": true,
     "declaration": true,
     "outDir": "dist",
+    "declarationDir": "typings",
     "types": ["@types/node", "@types/jest"]
   },
   "include": ["src"],

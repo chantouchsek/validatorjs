@@ -1,4 +1,4 @@
-module.exports = {
+const hr = {
   accepted: 'Polje :attribute mora biti prihvaćeno.',
   active_url: 'Polje :attribute nije ispravan URL.',
   after: 'Polje :attribute mora biti datum nakon :date.',
@@ -103,3 +103,5 @@ module.exports = {
   uploaded: 'Polje :attribute nije uspešno učitano.',
   url: 'Polje :attribute nije ispravnog formata.',
 }
+
+export default hr

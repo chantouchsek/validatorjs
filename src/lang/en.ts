@@ -1,4 +1,4 @@
-module.exports = {
+const en = {
   accepted: 'The :attribute must be accepted.',
   after: 'The :attribute must be after :after.',
   after_or_equal: 'The :attribute must be equal or after :after_or_equal.',
@@ -53,3 +53,5 @@ module.exports = {
   url: 'The :attribute format is invalid.',
   regex: 'The :attribute format is invalid.',
 }
+
+export default en

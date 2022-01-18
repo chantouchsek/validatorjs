@@ -1,4 +1,4 @@
-module.exports = {
+const fa = {
   accepted: 'فیلد :attribute می بایست تایید شود',
   alpha: 'فیلد :attribute می بایست فقط شامل حروف انگلیسی باشد',
   alpha_dash:
@@ -38,3 +38,5 @@ module.exports = {
   url: 'آدرس فیلد :attribute صحیح نمی باشد',
   regex: 'فرمت آدرس :attribute صحیح نمی باشد',
 }
+
+export default fa

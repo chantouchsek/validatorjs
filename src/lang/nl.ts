@@ -1,4 +1,4 @@
-module.exports = {
+const nl = {
   accepted: 'Het :attribute veld moet geaccepteerd worden.',
   after: ':attribute moet een datum na :after zijn.',
   after_or_equal: 'De :attribute datum moet op of na :after_or_equal zijn.',
@@ -54,3 +54,5 @@ module.exports = {
   url: 'Het :attribute veld heeft een ongeldig formaat.',
   regex: 'Het :attribute veld heeft een ongeldig formaat.',
 }
+
+export default nl

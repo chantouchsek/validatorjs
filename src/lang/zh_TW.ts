@@ -1,4 +1,4 @@
-module.exports = {
+const zh_TW = {
   accepted: ':attribute必須接受。',
   alpha: ':attribute只能包含字母。',
   alpha_dash: ':attribute只能包含字母，連字符和下划線。',
@@ -37,3 +37,5 @@ module.exports = {
   url: ':attribute格式不正確。',
   regex: ':attribute格式不正確。',
 }
+
+export default zh_TW
