@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.2](https://github.com/chantouchsek/validator-js/compare/v1.0.1...v1.0.2) (2022-01-18)
+
+
+### Bug Fixes
+
+* :fire: fix linting ([32013a0](https://github.com/chantouchsek/validator-js/commit/32013a0057e1ed3a1424b3a1f6d06a69e0ea22d7))
+* change export and typing folder ([d04186e](https://github.com/chantouchsek/validator-js/commit/d04186e237383455c3ea4f0c78dbbda3897800e3))
+* make export default of all lang file ([d88200a](https://github.com/chantouchsek/validator-js/commit/d88200a1da39d7f44e361849e2905a34076d0faa))
+
 ### [1.0.1](https://github.com/chantouchsek/validator-js/compare/v1.0.0...v1.0.1) (2022-01-02)
 
 
