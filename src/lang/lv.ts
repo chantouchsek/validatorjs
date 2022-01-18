@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   accepted: ' :attribute ir jābūt pieņemtam.',
   active_url: ' :attribute ir ar nederīgu linku.',
   after: ' :attribute ir jābūt ar datumu pēc :datums.',

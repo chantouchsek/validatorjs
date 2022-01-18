@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   accepted: ':attribute უნდა იყოს მონიშნული.',
   active_url: ':attribute უნდა იყოს URL მისამართი.',
   after: ':attribute უნდა იყოს :date-ის შემდეგ.',

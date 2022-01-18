@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   accepted: ':attribute musí být přijat.',
   active_url: ':attribute není platnou URL adresou.',
   after: ':attribute musí být datum po :date.',

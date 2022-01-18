@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   accepted: ':attribute måste accepteras.',
   active_url: ':attribute är inte en giltig webbadress.',
   after: ':attribute måste vara ett datum efter den :date.',

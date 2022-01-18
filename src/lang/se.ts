@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   accepted: ':attribute måste vara accepterat.',
   after: ':attribute måste vara efter :after.',
   after_or_equal:

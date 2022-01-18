@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   accepted: ':attribute onartua izan behar da.',
   active_url: ':attribute ez da baliozko URL bat.',
   after: ':attribute :date osteko data izan behar da.',

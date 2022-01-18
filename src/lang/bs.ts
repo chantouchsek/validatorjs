@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   accepted: 'Polje :attribute mora biti prihvaćeno.',
   active_url: 'Polje :attribute nije validan URL.',
   after: 'Polje :attribute mora biti datum poslije :date.',

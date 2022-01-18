@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   accepted: 'Le champ :attribute doit être accepté.',
   alpha:
     'Le champ :attribute ne peut contenir que des caractères alphabétiques.',

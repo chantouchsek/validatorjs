@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   accepted: 'Вы павінны прыняць :attribute.',
   active_url: 'Поле :attribute утрымлівае несапраўдны URL.',
   after: 'У полі :attribute павінна быць дата пасля :date.',

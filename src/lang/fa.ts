@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   accepted: 'فیلد :attribute می بایست تایید شود',
   alpha: 'فیلد :attribute می بایست فقط شامل حروف انگلیسی باشد',
   alpha_dash:

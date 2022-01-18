@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   accepted: 'Laukas :attribute turi būti priimtas.',
   active_url: 'Laukas :attribute nėra galiojantis internetinis adresas.',
   after: 'Lauko :attribute reikšmė turi būti po :date datos.',

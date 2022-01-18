@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   accepted: 'Siz :attribute ni qabul qilishingiz kerak.',
   alpha: ':attribute maydoni faqat harflardan iborat bo`lishi mumkin.',
   alpha_dash:

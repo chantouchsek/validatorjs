@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   accepted: ':attribute kabul edilmeli.',
   after: ':attribute alanı :after alanından sonra olmalıdır.',
   after_or_equal:

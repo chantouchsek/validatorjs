@@ -26,7 +26,7 @@ export default class Lang {
       let rawMessage
       try {
         rawMessage = require(`./lang/${lang}`)
-        rawMessage = rawMessage.default ? rawMessage.default : rawMessage
+        rawMessage = rawMessage.default || rawMessage
         this._set(lang, rawMessage)
       } catch (e: any) {
         this._set(lang, {})

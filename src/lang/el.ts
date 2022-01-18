@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   accepted: 'Το πεδίο :attribute πρέπει να γίνει αποδεκτό.',
   after: 'Το πεδίο :attribute πρέπει να είναι μία ημερομηνία μετά από :after.',
   alpha: 'Το πεδίο :attribute μπορεί να περιέχει μόνο γράμματα.',

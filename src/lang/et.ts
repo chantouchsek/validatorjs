@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   accepted: ':attribute tuleb aktsepteerida.',
   active_url: ':attribute ei ole kehtiv URL.',
   after: ':attribute peab olema kuupäev pärast :date.',

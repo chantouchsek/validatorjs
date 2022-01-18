@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   accepted: ':attribute phải được chấp nhận.',
   alpha: 'Trường :attribute phải là ký tự',
   alpha_dash:

@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   accepted: ':attribute trebuie acceptat.',
   after: ':attribute trebuie să fie după :after.',
   after_or_equal: ':attribute trebuie să fie egal sau după :after_or_equal.',

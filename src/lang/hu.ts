@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   accepted: 'A(z) :attribute el kell legyen fogadva!',
   active_url: 'A(z) :attribute nem érvényes url!',
   after: 'A(z) :attribute :date utáni dátum kell, hogy legyen!',

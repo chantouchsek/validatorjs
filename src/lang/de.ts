@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   accepted: 'Das :attribute Feld muss akzeptiert werden.',
   after: 'Das :attribute muss ein Datum nach dem :after sein.',
   after_or_equal:

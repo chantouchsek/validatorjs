@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   accepted: ':attribute qəbul edilməlidir',
   active_url: ':attribute doğru URL deyil',
   after: ':attribute :date tarixindən sonra olmalıdır',

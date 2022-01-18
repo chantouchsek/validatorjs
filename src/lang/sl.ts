@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   accepted: ':attribute mora biti sprejet.',
   active_url: ':attribute ni pravilen.',
   after: ':attribute mora biti za datumom :date.',

@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   accepted: ':attribute повиннен бути прийнятий.',
   alpha: 'Поле :attribute може складатись тільки з літер.',
   alpha_dash:

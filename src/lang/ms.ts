@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   accepted: ':attribute mesti diterima pakai.',
   active_url: ':attribute bukan URL yang sah.',
   after: ':attribute mesti tarikh selepas :date.',

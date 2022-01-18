@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   accepted: 'O campo :attribute deve ser aceito.',
   active_url: 'O campo :attribute deve conter uma URL válida.',
   after: 'O campo :attribute deve conter uma data posterior a :date.',

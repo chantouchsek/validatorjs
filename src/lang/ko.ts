@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   accepted: ':attribute을(를) 동의해야 합니다.',
   active_url: ':attribute은(는) 유효한 URL이 아닙니다.',
   after: ':attribute은(는) :date 이후 날짜여야 합니다.',

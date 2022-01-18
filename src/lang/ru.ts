@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   accepted: 'Вы должны принять :attribute.',
   alpha: 'Поле :attribute может содержать только буквы.',
   alpha_dash:
