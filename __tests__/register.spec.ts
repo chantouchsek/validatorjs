@@ -43,8 +43,12 @@ describe('register a custom validation rule', () => {
   it('should throw error in case of unknown validator rule', () => {
     const validator = new Validator({ field: 'test' }, { field: 'unknown' })
 
-    expect(validator.passes).toThrow()
-    expect(validator.fails).toThrow()
+    try {
+      validator.passes()
+      expect(validator.fails).toThrow()
+    } catch (e: any) {
+      expect(e.message).toBe('Validator `unknown` is not defined!')
+    }
   })
 
   it('should allow to add custom validator to unknown validator rules', () => {

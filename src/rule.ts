@@ -78,14 +78,15 @@ export class Rule {
 
   getParameters() {
     let value = []
+    if (!isNaN(parseFloat(this.rule)) && isFinite(this.rule)) {
+      this.rule = parseFloat(this.rule)
+      value.push(this.rule)
+    }
     if (typeof this.rule === 'string') {
       value = this.rule.split(',')
     }
     if (this.rule instanceof Array) {
       value = this.rule
-    }
-    if (typeof this.rule === 'number') {
-      value.push(this.rule)
     }
     return value
   }
