@@ -59,4 +59,23 @@ describe('register a custom validation rule', () => {
     expect(validator.passes()).toBeTruthy()
     expect(validator.fails()).toBeFalsy()
   })
+
+  it('should be able to register rule with params', () => {
+    Validator.register(
+      'hello_param',
+      (val: string, req: number[], attribute: string) => {
+        console.warn('value', val)
+        console.warn('req', req)
+        console.warn('attribute', attribute)
+        return true
+      },
+    )
+
+    const validator = new Validator(
+      { field: 'test' },
+      { field: 'hello_param:12,34' },
+    )
+
+    expect(validator.passes()).toBeTruthy()
+  })
 })

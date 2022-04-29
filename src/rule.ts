@@ -278,8 +278,8 @@ export class Rule {
         }
         return returnVal
       },
-      confirmed(val: string, req: string, key: string) {
-        const confirmedKey = key + '_confirmation'
+      confirmed(val: string, req: string, attribute: string) {
+        const confirmedKey = attribute + '_confirmation'
         return this.validator.input[confirmedKey] === val
       },
       digits(val: Record<string, any>, req: string) {
