@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.3](https://github.com/chantouchsek/validator-js/compare/v1.0.2...v1.0.3) (2022-04-30)
+
+
+### Bug Fixes
+
+* add ts-node ([4def6dc](https://github.com/chantouchsek/validator-js/commit/4def6dcfda3dafa39704537536eba78089e10e78))
+* **deps:** bump actions/checkout from 2.4.0 to 3.0.2 ([e64c8c7](https://github.com/chantouchsek/validator-js/commit/e64c8c7030a11f502c3b511d6c57cb605ab85ad7))
+* **deps:** bump actions/setup-node from 2.5.1 to 3.1.1 ([5192f4c](https://github.com/chantouchsek/validator-js/commit/5192f4ccba6d27abbfdd79121b7a91b9d11a24ff))
+* **deps:** bump actions/stale from 4 to 5 ([2abf89a](https://github.com/chantouchsek/validator-js/commit/2abf89a7245a38e1b9a6b59be8b218255f5988b0))
+* **deps:** bump github/codeql-action from 1 to 2 ([a2db7c1](https://github.com/chantouchsek/validator-js/commit/a2db7c105de307cce839a0cae3181f665d0e5cb1))
+* **deps:** bump minimist from 1.2.5 to 1.2.6 ([f8aaf29](https://github.com/chantouchsek/validator-js/commit/f8aaf29cc17fb98bf4048d8a150897b3e85c635c))
+
 ### [1.0.2](https://github.com/chantouchsek/validator-js/compare/v1.0.1...v1.0.2) (2022-01-18)
 
 
