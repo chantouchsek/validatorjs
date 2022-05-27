@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.5](https://github.com/chantouchsek/validator-js/compare/v1.0.4...v1.0.5) (2022-05-27)
+
+
+### Bug Fixes
+
+* change key code from km to kh ([fc0e064](https://github.com/chantouchsek/validator-js/commit/fc0e064b89c40aa0794cfb188ad3f1cba1be2661))
+* **deps:** bump actions/setup-node from 3.1.1 to 3.2.0 ([510f24b](https://github.com/chantouchsek/validator-js/commit/510f24b3908fb851e5a42df0644efc7a49daac42))
+
 ### [1.0.4](https://github.com/chantouchsek/validator-js/compare/v1.0.3...v1.0.4) (2022-04-30)
 
 ### [1.0.3](https://github.com/chantouchsek/validator-js/compare/v1.0.2...v1.0.3) (2022-04-30)
