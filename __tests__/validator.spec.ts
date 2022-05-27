@@ -60,9 +60,9 @@ describe('Validator constructor', () => {
     const validator = new Validator(
       undefined,
       { name: 'required' },
-      { locale: 'km' },
+      { locale: 'kh' },
     )
-    expect(validator.getDefaultLang()).toEqual('km')
+    expect(validator.getDefaultLang()).toEqual('kh')
     expect(validator.fails()).toBeTruthy()
     expect(validator.errors.first('name')).toBe('ឈ្មោះ ត្រូវតែបញ្ចូលជាដាច់ខាត។')
   })

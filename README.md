@@ -681,9 +681,9 @@ script tag and call `Validator.useLang('lang_code')`.
 
 ```html
 <script src="dist/validator.js"></script>
-<script src="dist/lang/km.js"></script>
+<script src="dist/lang/kh.js"></script>
 <script>
-  Validator.useLang('km')
+  Validator.useLang('kh')
 </script>
 ```
 
@@ -691,7 +691,7 @@ In Node, it will automatically pickup on the language source files.
 
 ```js
 let Validator = require('validatorjs')
-Validator.useLang('km')
+Validator.useLang('kh')
 ```
 
 If you don't see support for your language, please add one to `src/lang`!
