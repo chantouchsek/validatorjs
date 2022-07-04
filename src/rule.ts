@@ -99,8 +99,8 @@ export class Rule {
     if (typeof input === 'number') {
       return input
     }
-    if (this.validator?._hasNumericRule(this.attribute as string)) {
-      return parseFloat(<string>input)
+    if (this.validator?._hasNumericRule(this.attribute)) {
+      return parseFloat(input as string)
     }
     return input?.length
   }
@@ -286,7 +286,7 @@ export class Rule {
         const numericRule = this.validator.getRule('numeric')
         return !!(
           numericRule.validate(val, {}) &&
-          String(val.trim()).length === parseInt(req)
+          String(val).trim().length === parseInt(req)
         )
       },
       digits_between(val: string | number) {
