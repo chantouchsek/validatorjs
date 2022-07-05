@@ -1,6 +1,7 @@
 import Validator from './main'
 import * as rules from './rules'
 import { flattenObject, isValidDate, objectPath } from './utils'
+import { integer } from './rules'
 
 let missedRuleValidator: VoidFunction = function (this: Rule) {
   throw new Error('Validator `' + this.name + '` is not defined!')
@@ -91,7 +92,7 @@ export class Rule {
     return value
   }
 
-  getSize(value?: string | number | Array<string | number>) {
+  getSize(value?: string | number | Array<string | number>): string | number {
     const input = value || this.input
     if (input instanceof Array) {
       return input.length
@@ -152,10 +153,6 @@ export class Rule {
         }
         return new Date(val1).getTime() <= new Date(val2).getTime()
       },
-      min(value: any, req: number | string) {
-        const size = this.getSize(value)
-        return size >= req
-      },
       required_if(val: Record<string, any>, req: string[]) {
         req = this.getParameters()
         if (objectPath(this.validator.input, req[0]) === req[1]) {
@@ -213,8 +210,24 @@ export class Rule {
         const size = this.getSize()
         return size === req
       },
-      max(val: string, req: number) {
-        const size = this.getSize()
+      min(val: any, req: number | string) {
+        const size = this.getSize(val)
+        const numericRule = this.validator?.getRule('numeric')
+        const rules = ['numeric']
+        const hasNumericRule = this.validator?._hasRule(this.attribute, rules)
+        if (numericRule.validate(val, {}) && hasNumericRule && integer(val)) {
+          return String(val).trim().length >= parseInt(<string>req)
+        }
+        return size >= req
+      },
+      max(val: string, req: number | string) {
+        const size = this.getSize(val)
+        const numericRule = this.validator?.getRule('numeric')
+        const rules = ['numeric']
+        const hasNumericRule = this.validator?._hasRule(this.attribute, rules)
+        if (numericRule.validate(val, {}) && hasNumericRule && integer(val)) {
+          return String(val).trim().length <= parseInt(<string>req)
+        }
         return size <= req
       },
       between(val: string, req: string[]) {

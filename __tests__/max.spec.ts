@@ -62,8 +62,8 @@ describe('max validation rule', () => {
     expect(validator.passes()).toBeFalsy()
   })
 
-  // it.skip('should passed when given string numeric', () => {
-  //   const validator = new Validator({ val: 17 }, { val: 'numeric|max:5' })
-  //   expect(validator.passes()).toBeTruthy()
-  // })
+  it('should be passed when given string numeric', () => {
+    const validator = new Validator({ val: '12345' }, { val: 'numeric|max:5' })
+    expect(validator.passes()).toBeTruthy()
+  })
 })

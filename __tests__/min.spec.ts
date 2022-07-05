@@ -27,74 +27,42 @@ describe('min validation rule', () => {
   })
 
   it('should fail with boolean true value', () => {
-    const validator = new Validator(
-      {
-        val: true,
-      },
-      {
-        val: 'min:0.05',
-      },
-    )
+    const validator = new Validator({ val: true }, { val: 'min:0.05' })
     expect(validator.fails()).toBeTruthy()
   })
 
   it('should fail with boolean false value', () => {
-    const validator = new Validator(
-      {
-        val: false,
-      },
-      {
-        val: 'min:0.05',
-      },
-    )
+    const validator = new Validator({ val: false }, { val: 'min:0.05' })
     expect(validator.fails()).toBeTruthy()
   })
 
   it('should pass with an undefined value', () => {
-    const validator = new Validator(
-      {},
-      {
-        val: 'min:0.05',
-      },
-    )
+    const validator = new Validator({}, { val: 'min:0.05' })
     expect(validator.fails()).toBeFalsy()
     expect(validator.passes()).toBeTruthy()
   })
 
   it('should pass with an empty string value', () => {
-    const validator = new Validator(
-      {
-        val: '',
-      },
-      {
-        val: 'min:0.05',
-      },
-    )
+    const validator = new Validator({ val: '' }, { val: 'min:0.05' })
     expect(validator.fails()).toBeFalsy()
     expect(validator.passes()).toBeTruthy()
   })
 
   it('should pass when given string-integer value', () => {
-    const validator = new Validator(
-      {
-        val: '18',
-      },
-      {
-        val: 'integer|min:16',
-      },
-    )
+    const validator = new Validator({ val: '18' }, { val: 'integer|min:16' })
     expect(validator.passes()).toBeTruthy()
   })
 
   it('should pass when given string-float value', () => {
     const validator = new Validator(
-      {
-        val: '17.56',
-      },
-      {
-        val: 'numeric|min:17.5',
-      },
+      { val: '17.56' },
+      { val: 'numeric|min:17.5' },
     )
+    expect(validator.passes()).toBeTruthy()
+  })
+
+  it('should be passed when given string numeric', () => {
+    const validator = new Validator({ val: '12345' }, { val: 'numeric|min:5' })
     expect(validator.passes()).toBeTruthy()
   })
 })
