@@ -212,7 +212,7 @@ export class Rule {
         return size === req
       },
       min(val: string, req: number | string) {
-        const size = this.getSize(val)
+        const size: number = this.getSize(val)
         const numericRule = this.validator.getRule('numeric')
         const hasNumeric = this.validator._hasRule(this.attribute, numericRules)
         if (
@@ -220,12 +220,12 @@ export class Rule {
           hasNumeric &&
           Rule.rules.integer(val)
         ) {
-          return String(val).trim().length >= parseInt(<string>req)
+          return String(val).trim().length >= parseInt(req as string)
         }
         return size >= req
       },
       max(val: string, req: number | string) {
-        const size = this.getSize(val)
+        const size: number = this.getSize(val)
         const numericRule = this.validator.getRule('numeric')
         const hasNumeric = this.validator._hasRule(this.attribute, numericRules)
         if (
@@ -233,7 +233,7 @@ export class Rule {
           hasNumeric &&
           Rule.rules.integer(val)
         ) {
-          return String(val).trim().length <= parseInt(<string>req)
+          return String(val).trim().length <= parseInt(req as string)
         }
         return size <= req
       },
