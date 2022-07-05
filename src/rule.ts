@@ -18,7 +18,7 @@ export class Rule {
   attribute: string
   private input: Record<string, any> | string | number | undefined
   private rule: any
-  private validator?: Validator
+  private validator!: Validator
   static rules: any = rules
 
   constructor(name: string, fn: VoidFunction, async: boolean) {
@@ -100,16 +100,16 @@ export class Rule {
     if (typeof input === 'number') {
       return input
     }
-    if (this.validator?._hasNumericRule(this.attribute)) {
+    if (this.validator._hasNumericRule(this.attribute)) {
       return parseFloat(input as string)
     }
-    return input?.length
+    return (input as string).length
   }
 
   _getValueType() {
     if (
       typeof this.input === 'number' ||
-      this.validator?._hasNumericRule(this.attribute as string)
+      this.validator._hasNumericRule(this.attribute as string)
     ) {
       return 'numeric'
     }
@@ -135,6 +135,7 @@ export class Rule {
   }
 
   static _setRules() {
+    const numericRules = ['numeric']
     Rule.rules = {
       ...this.rules,
       after(value: string, req: string) {
@@ -210,22 +211,28 @@ export class Rule {
         const size = this.getSize()
         return size === req
       },
-      min(val: any, req: number | string) {
+      min(val: string, req: number | string) {
         const size = this.getSize(val)
-        const numericRule = this.validator?.getRule('numeric')
-        const rules = ['numeric']
-        const hasNumericRule = this.validator?._hasRule(this.attribute, rules)
-        if (numericRule.validate(val, {}) && hasNumericRule && integer(val)) {
+        const numericRule = this.validator.getRule('numeric')
+        const hasNumeric = this.validator._hasRule(this.attribute, numericRules)
+        if (
+          numericRule.validate(val, {}) &&
+          hasNumeric &&
+          Rule.rules.integer(val)
+        ) {
           return String(val).trim().length >= parseInt(<string>req)
         }
         return size >= req
       },
       max(val: string, req: number | string) {
         const size = this.getSize(val)
-        const numericRule = this.validator?.getRule('numeric')
-        const rules = ['numeric']
-        const hasNumericRule = this.validator?._hasRule(this.attribute, rules)
-        if (numericRule.validate(val, {}) && hasNumericRule && integer(val)) {
+        const numericRule = this.validator.getRule('numeric')
+        const hasNumeric = this.validator._hasRule(this.attribute, numericRules)
+        if (
+          numericRule.validate(val, {}) &&
+          hasNumeric &&
+          Rule.rules.integer(val)
+        ) {
           return String(val).trim().length <= parseInt(<string>req)
         }
         return size <= req
