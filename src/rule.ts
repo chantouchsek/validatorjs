@@ -1,6 +1,6 @@
 import Validator from './main'
 import * as rules from './rules'
-import { flattenObject, isValidDate, objectPath } from './utils'
+import { flattenObject, isFloat, isValidDate, objectPath } from './utils'
 
 let missedRuleValidator: VoidFunction = function (this: Rule) {
   throw new Error('Validator `' + this.name + '` is not defined!')
@@ -214,11 +214,7 @@ export class Rule {
         const size: number = this.getSize(val)
         const numericRule = this.validator.getRule('numeric')
         const hasNumeric = this.validator._hasRule(this.attribute, numericRules)
-        if (
-          numericRule.validate(val, {}) &&
-          hasNumeric &&
-          Rule.rules.integer(val)
-        ) {
+        if (numericRule.validate(val, {}) && hasNumeric && !isFloat(val)) {
           return String(val).trim().length >= parseInt(req as string)
         }
         return size >= req
@@ -227,11 +223,7 @@ export class Rule {
         const size: number = this.getSize(val)
         const numericRule = this.validator.getRule('numeric')
         const hasNumeric = this.validator._hasRule(this.attribute, numericRules)
-        if (
-          numericRule.validate(val, {}) &&
-          hasNumeric &&
-          Rule.rules.integer(val)
-        ) {
+        if (numericRule.validate(val, {}) && hasNumeric && !isFloat(val)) {
           return String(val).trim().length <= parseInt(req as string)
         }
         return size <= req
