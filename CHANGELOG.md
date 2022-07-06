@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://github.com/chantouchsek/validator-js/compare/v1.1.0...v1.1.1) (2022-07-06)
+
+
+### Bug Fixes
+
+* :fire: detect the prototyp polluting ([9950186](https://github.com/chantouchsek/validator-js/commit/99501868f92fb9a50869109d651b2bec54e324fc))
+* :fire: incomplete string escaping or encoding ([d8cfb69](https://github.com/chantouchsek/validator-js/commit/d8cfb6926002d341e65916a051f9ebe19c76ef1b))
+* correct type of step on ([3a5d87e](https://github.com/chantouchsek/validator-js/commit/3a5d87e356821a15b8da644c4162c80fec5b1915))
+* inefficient regular expression ([4bdf2a1](https://github.com/chantouchsek/validator-js/commit/4bdf2a16a812119e593be5c064eac5b11ab3788c))
+* using object create ([887319d](https://github.com/chantouchsek/validator-js/commit/887319dd4431331fefef38987cc07f9853de4ac3))
+
 ## [1.1.0](https://github.com/chantouchsek/validator-js/compare/v1.0.5...v1.1.0) (2022-07-06)
 
 
