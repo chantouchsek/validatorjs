@@ -1,6 +1,6 @@
-import { flattenObject } from '../src/utils/object'
+import { flattenObject, isEmpty } from '../src/utils'
 
-describe('Validator', () => {
+describe('Object', () => {
   it('should correctly flatten nested object', () => {
     const asserts = [
       [undefined, {}],
@@ -19,5 +19,14 @@ describe('Validator', () => {
     asserts.forEach(function (assert) {
       expect(flattenObject(assert[0])).toEqual(assert[1])
     })
+  })
+  it('isObject test', () => {
+    expect(isEmpty(0)).toBeFalsy()
+    expect(isEmpty('0')).toBeFalsy()
+    expect(isEmpty([])).toBeTruthy()
+    expect(isEmpty({})).toBeTruthy()
+    expect(isEmpty(false)).toBeFalsy()
+    expect(isEmpty(null)).toBeTruthy()
+    expect(isEmpty(undefined)).toBeTruthy()
   })
 }) // Page constructor
