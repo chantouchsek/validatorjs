@@ -41,14 +41,7 @@ describe('in validation rule', () => {
   })
 
   it('should pass when the value is in the set of comma separated values', () => {
-    const validator = new Validator(
-      {
-        quantity: 1,
-      },
-      {
-        quantity: 'in:0,1,2',
-      },
-    )
+    const validator = new Validator({ quantity: 1 }, { quantity: 'in:0,1,2' })
     expect(validator.passes()).toBeTruthy()
     expect(validator.fails()).toBeFalsy()
   })
@@ -69,5 +62,11 @@ describe('in validation rule', () => {
     )
 
     expect(validator.passes()).toBeFalsy()
+  })
+
+  it('should fail when 0 (zero) is not in giving array', function () {
+    const validator = new Validator({ quantity: 0 }, { quantity: 'in:1,2' })
+    expect(validator.passes()).toBeFalsy()
+    expect(validator.fails()).toBeTruthy()
   })
 })

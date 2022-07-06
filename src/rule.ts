@@ -1,6 +1,12 @@
 import Validator from './main'
 import * as rules from './rules'
-import { flattenObject, isFloat, isValidDate, objectPath } from './utils'
+import {
+  flattenObject,
+  isEmpty,
+  isFloat,
+  isValidDate,
+  objectPath,
+} from './utils'
 
 let missedRuleValidator: VoidFunction = function (this: Rule) {
   throw new Error('Validator `' + this.name + '` is not defined!')
@@ -244,12 +250,12 @@ export class Rule {
         return val1 !== val
       },
       in(val: string | string[]) {
-        let list
+        let list: (string | number)[] = []
         let i
-        if (val) {
+        if (!isEmpty(val)) {
           list = this.getParameters()
         }
-        if (val && !(val instanceof Array)) {
+        if (!isEmpty(val) && !(val instanceof Array)) {
           let localValue = val
           for (i = 0; i < list.length; i++) {
             if (typeof list[i] === 'string') {
