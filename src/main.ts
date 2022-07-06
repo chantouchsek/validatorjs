@@ -27,7 +27,7 @@ export default class Validator {
   static attributeFormatter = formatter
   readonly options!: ValidatorOptions
   static manager = new Manager()
-  private readonly confirmedReverse: boolean
+  private readonly confirmedReverse?: boolean
 
   constructor(
     input?: Record<string, any> | null,
@@ -38,14 +38,14 @@ export default class Validator {
     Validator.useLang(lang)
     this.input = input || {}
     this.messages = Lang._make(lang)
-    this.messages._setCustom(options?.customMessages || {})
-    this.setAttributeNames(options?.customAttributes || {})
+    this.messages._setCustom(options.customMessages)
+    this.setAttributeNames(options.customAttributes)
     this.setAttributeFormatter(Validator.attributeFormatter)
     this.errors = new Errors()
     this.errorCount = 0
     this.hasAsync = false
     this.rules = this._parseRules(rules)
-    this.confirmedReverse = options?.confirmedReverse || false
+    this.confirmedReverse = options.confirmedReverse
   }
 
   check() {
@@ -183,7 +183,7 @@ export default class Validator {
   }
 
   _hasRule(attribute: string, findRules: string[]) {
-    const rules = this.rules[attribute] || []
+    const rules = this.rules[attribute]
     for (const { name } of rules) {
       if (findRules.indexOf(name) > -1) {
         return true
@@ -282,7 +282,7 @@ export default class Validator {
     attribute: string,
     rulesArray: Record<any, string>,
     parsedRules: Record<string, any>,
-    wildCardValues?: any,
+    wildCardValues?: number[],
   ) {
     const parentPath = attribute.substring(0, attribute.indexOf('*') - 1)
     const propertyValue = objectPath(this.input, parentPath)
@@ -293,7 +293,7 @@ export default class Validator {
         propertyNumber < propertyValue.length;
         propertyNumber++
       ) {
-        const workingValues = wildCardValues ? wildCardValues.slice() : []
+        const workingValues = wildCardValues?.slice() || []
         workingValues.push(propertyNumber)
         this._parseRulesCheck(
           attribute.replace(/\*/g, String(propertyNumber)),
@@ -414,7 +414,7 @@ export default class Validator {
     return this._hasRule(attribute, this.numericRules)
   }
 
-  setAttributeNames(attributes: Record<string, any>) {
+  setAttributeNames(attributes: Record<string, any> = {}) {
     this.messages._setAttributeNames(attributes)
   }
 
