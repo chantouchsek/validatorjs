@@ -11,6 +11,8 @@ import {
   isArray,
   hasOwnProperty,
 } from './utils'
+import { LangTypes } from './types/lang'
+import { RuleType } from './types/rule'
 
 export default class Validator {
   readonly input: Record<string, any> = {}
@@ -18,9 +20,9 @@ export default class Validator {
   readonly errors: Errors
   errorCount: number
   hasAsync: boolean
-  static lang = 'en'
+  static lang: LangTypes = 'en'
   readonly numericRules = ['integer', 'numeric']
-  public rules: Record<string, any> = {}
+  public rules: Record<RuleType, any> = {}
   stopOnAttributes: Record<string, any> | boolean | string[] | undefined
   static attributeFormatter = formatter
   readonly options!: ValidatorOptions
@@ -141,8 +143,8 @@ export default class Validator {
     asyncResolvers.fire()
   }
 
-  _parseRules(rules: Record<string, any> = {}) {
-    const parsedRules: Record<string, any> = {}
+  _parseRules(rules: Record<RuleType, any> = {}) {
+    const parsedRules: Record<RuleType, any> = {}
     rules = flattenObject(rules)
     for (const attribute in rules) {
       const rulesArray = rules[attribute]
@@ -151,16 +153,16 @@ export default class Validator {
     return parsedRules
   }
 
-  static setMessages(lang: string, messages: Record<string, any>) {
+  static setMessages(lang: LangTypes, messages: Record<string, any>) {
     Lang._set(lang, messages)
     return this
   }
 
-  static getMessages(lang: string) {
+  static getMessages(lang: LangTypes) {
     return Lang._get(lang)
   }
 
-  static useLang(lang: string) {
+  static useLang(lang: LangTypes) {
     Validator.lang = lang
   }
 
