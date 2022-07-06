@@ -296,7 +296,7 @@ export default class Validator {
         const workingValues = wildCardValues ? wildCardValues.slice() : []
         workingValues.push(propertyNumber)
         this._parseRulesCheck(
-          attribute.replace('*', String(propertyNumber)),
+          attribute.replace(/\*/g, String(propertyNumber)),
           rulesArray,
           parsedRules,
           workingValues,
