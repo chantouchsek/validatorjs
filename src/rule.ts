@@ -1,6 +1,6 @@
 import Validator from './main'
 import * as rules from './rules'
-import { flattenObject, isValidDate, objectPath } from './utils'
+import { flattenObject, isFloat, isValidDate, objectPath } from './utils'
 
 let missedRuleValidator: VoidFunction = function (this: Rule) {
   throw new Error('Validator `' + this.name + '` is not defined!')
@@ -17,7 +17,7 @@ export class Rule {
   attribute: string
   private input: Record<string, any> | string | number | undefined
   private rule: any
-  private validator?: Validator
+  private validator!: Validator
   static rules: any = rules
 
   constructor(name: string, fn: VoidFunction, async: boolean) {
@@ -91,7 +91,7 @@ export class Rule {
     return value
   }
 
-  getSize(value?: string | number | Array<string | number>) {
+  getSize(value?: string | number | Array<string | number>): string | number {
     const input = value || this.input
     if (input instanceof Array) {
       return input.length
@@ -99,16 +99,16 @@ export class Rule {
     if (typeof input === 'number') {
       return input
     }
-    if (this.validator?._hasNumericRule(this.attribute as string)) {
-      return parseFloat(<string>input)
+    if (this.validator._hasNumericRule(this.attribute)) {
+      return parseFloat(input as string)
     }
-    return input?.length
+    return (input as string).length
   }
 
   _getValueType() {
     if (
       typeof this.input === 'number' ||
-      this.validator?._hasNumericRule(this.attribute as string)
+      this.validator._hasNumericRule(this.attribute as string)
     ) {
       return 'numeric'
     }
@@ -134,6 +134,7 @@ export class Rule {
   }
 
   static _setRules() {
+    const numericRules = ['numeric']
     Rule.rules = {
       ...this.rules,
       after(value: string, req: string) {
@@ -151,10 +152,6 @@ export class Rule {
           return false
         }
         return new Date(val1).getTime() <= new Date(val2).getTime()
-      },
-      min(value: any, req: number | string) {
-        const size = this.getSize(value)
-        return size >= req
       },
       required_if(val: Record<string, any>, req: string[]) {
         req = this.getParameters()
@@ -213,8 +210,22 @@ export class Rule {
         const size = this.getSize()
         return size === req
       },
-      max(val: string, req: number) {
-        const size = this.getSize()
+      min(val: string, req: number | string) {
+        const size: number = this.getSize(val)
+        const numericRule = this.validator.getRule('numeric')
+        const hasNumeric = this.validator._hasRule(this.attribute, numericRules)
+        if (numericRule.validate(val, {}) && hasNumeric && !isFloat(val)) {
+          return String(val).trim().length >= parseInt(req as string)
+        }
+        return size >= req
+      },
+      max(val: string, req: number | string) {
+        const size: number = this.getSize(val)
+        const numericRule = this.validator.getRule('numeric')
+        const hasNumeric = this.validator._hasRule(this.attribute, numericRules)
+        if (numericRule.validate(val, {}) && hasNumeric && !isFloat(val)) {
+          return String(val).trim().length <= parseInt(req as string)
+        }
         return size <= req
       },
       between(val: string, req: string[]) {
@@ -286,7 +297,7 @@ export class Rule {
         const numericRule = this.validator.getRule('numeric')
         return !!(
           numericRule.validate(val, {}) &&
-          String(val.trim()).length === parseInt(req)
+          String(val).trim().length === parseInt(req)
         )
       },
       digits_between(val: string | number) {

@@ -284,11 +284,59 @@ Validate that an attribute is no greater than a given size
 
 _Note: Maximum checks are inclusive._
 
+#### Example 1 - Max validation
+
+```js
+let rules = {
+  phone: 'required|numeric|max:11',
+}
+let input = {
+  phone: '01234567890',
+}
+// passes: true
+```
+
+#### Example 2 - Max validation
+
+```js
+let rules = {
+  phone: 'integer|max:16',
+}
+let input = {
+  phone: '18',
+}
+// passes: false
+```
+
 #### min:value
 
 Validate that an attribute is at least a given size.
 
 _Note: Minimum checks are inclusive._
+
+#### Example 1 - Min validation
+
+```js
+let rules = {
+  phone: 'required|numeric|min:11',
+}
+let input = {
+  phone: '01234567890',
+}
+// passes: true
+```
+
+#### Example 2 - Min validation
+
+```js
+let rules = {
+  phone: 'integer|min:11',
+}
+let input = {
+  phone: '18',
+}
+// passes: false
+```
 
 #### not_in:foo,bar,...
 
