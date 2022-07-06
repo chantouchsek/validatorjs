@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/chantouchsek/validator-js/compare/v1.0.5...v1.1.0) (2022-07-06)
+
+
+### Features
+
+* :beers: added validate on numeric max and min ([e3e27d1](https://github.com/chantouchsek/validator-js/commit/e3e27d14c688d03122d7e364de969baecd9b1f7f))
+
+
+### Bug Fixes
+
+* :fire: min and max value, also update readme ([27a56e6](https://github.com/chantouchsek/validator-js/commit/27a56e6a0f0a119ad1257c0260bb843a1623844d))
+* cast the type ([3f6835e](https://github.com/chantouchsek/validator-js/commit/3f6835e4e3486fadbbcdd07414be4281d37bb16c))
+* **deps:** bump actions/setup-node from 3.2.0 to 3.3.0 ([4b9def6](https://github.com/chantouchsek/validator-js/commit/4b9def6f7de1ec70a06aff9efbf75ae18c08eb80))
+* initial optimized ([f61e73e](https://github.com/chantouchsek/validator-js/commit/f61e73e1120673c81ee54ba7eebdb22017536425))
+* removed unusd import ([43a7925](https://github.com/chantouchsek/validator-js/commit/43a7925499a316e8805cdbb3c81ff6221f1c305a))
+
 ### [1.0.5](https://github.com/chantouchsek/validator-js/compare/v1.0.4...v1.0.5) (2022-05-27)
 
 
