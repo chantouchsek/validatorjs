@@ -14,11 +14,12 @@ export default class Lang {
 
   static _setRuleMessage(lang: string, attribute: string, message?: string) {
     this._load(lang)
+    const messages: Record<string, any> = Object.create(this.messages)
     if (message === undefined) {
-      message = this.messages[lang].def
+      message = messages[lang].def
     }
 
-    this.messages[lang][attribute] = message
+    messages[lang][attribute] = message
   }
 
   static _load(lang: string) {

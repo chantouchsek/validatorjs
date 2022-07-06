@@ -23,22 +23,21 @@ export default class Validator {
   public rules: Record<string, any> = {}
   stopOnAttributes: any
   static attributeFormatter = formatter
-  readonly options?: ValidatorOptions
+  readonly options!: ValidatorOptions
   static manager = new Manager()
   private readonly confirmedReverse: boolean
 
   constructor(
     input?: Record<string, any> | null,
     rules?: Record<string, any>,
-    options?: ValidatorOptions,
+    options: Partial<ValidatorOptions> = {},
   ) {
-    const { customAttributes, customMessages, locale } = options || {}
-    const lang = locale || Validator.getDefaultLang()
+    const lang = options?.locale || Validator.getDefaultLang()
     Validator.useLang(lang)
     this.input = input || {}
     this.messages = Lang._make(lang)
-    this.messages._setCustom(customMessages || {})
-    this.setAttributeNames(customAttributes || {})
+    this.messages._setCustom(options?.customMessages || {})
+    this.setAttributeNames(options?.customAttributes || {})
     this.setAttributeFormatter(Validator.attributeFormatter)
     this.errors = new Errors()
     this.errorCount = 0
@@ -48,7 +47,6 @@ export default class Validator {
   }
 
   check() {
-    const confirmedReverse = this.confirmedReverse
     for (let attribute in this.rules) {
       const attributeRules = this.rules[attribute]
       const inputValue = objectPath(this.input, attribute)
@@ -73,7 +71,7 @@ export default class Validator {
         }
         rulePassed = rule.validate(inputValue, value, attribute)
         if (!rulePassed) {
-          if (name === 'confirmed' && confirmedReverse) {
+          if (name === 'confirmed' && this.confirmedReverse) {
             attribute = `${attribute}_confirmation`
             Object.assign(rule, { attribute })
           }
