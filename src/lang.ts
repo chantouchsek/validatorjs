@@ -1,27 +1,29 @@
 import Massages from './messages'
+import { LangTypes } from './types/lang'
 
 export default class Lang {
-  static messages: Record<string, any> = {}
+  static messages: Record<LangTypes, any> = Object.create({})
 
-  static _set(lang: string, rawMessages: Record<string, any>) {
+  static _set(lang: LangTypes, rawMessages: Record<string, any>) {
     this.messages[lang] = rawMessages
   }
 
-  static _get(lang: string): Record<string, string> {
+  static _get(lang: LangTypes): Record<string, string> {
     this._load(lang)
     return this.messages[lang]
   }
 
-  static _setRuleMessage(lang: string, attribute: string, message?: string) {
+  static _setRuleMessage(lang: LangTypes, attribute: string, message?: string) {
     this._load(lang)
+    const messages: Record<string, any> = Object.create(this.messages)
     if (message === undefined) {
-      message = this.messages[lang].def
+      message = messages[lang].def
     }
 
-    this.messages[lang][attribute] = message
+    messages[lang][attribute] = message
   }
 
-  static _load(lang: string) {
+  static _load(lang: LangTypes) {
     if (!this.messages[lang]) {
       let rawMessage
       try {
@@ -33,8 +35,9 @@ export default class Lang {
     }
   }
 
-  static _make(lang: string) {
+  static _make(lang: LangTypes) {
+    const messages = Object.create(this.messages)
     this._load(lang)
-    return new Massages(lang, this.messages[lang])
+    return new Massages(lang, messages[lang])
   }
 }

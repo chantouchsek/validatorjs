@@ -11,6 +11,8 @@ import {
   isArray,
   hasOwnProperty,
 } from './utils'
+import { LangTypes } from './types/lang'
+import { RuleType } from './types/rule'
 
 export default class Validator {
   readonly input: Record<string, any> = {}
@@ -18,27 +20,26 @@ export default class Validator {
   readonly errors: Errors
   errorCount: number
   hasAsync: boolean
-  static lang = 'en'
+  static lang: LangTypes = 'en'
   readonly numericRules = ['integer', 'numeric']
-  public rules: Record<string, any> = {}
-  stopOnAttributes: any
+  public rules: Record<RuleType, any> = {}
+  stopOnAttributes: Record<string, any> | boolean | string[] | undefined
   static attributeFormatter = formatter
-  readonly options?: ValidatorOptions
+  readonly options!: ValidatorOptions
   static manager = new Manager()
   private readonly confirmedReverse: boolean
 
   constructor(
     input?: Record<string, any> | null,
     rules?: Record<string, any>,
-    options?: ValidatorOptions,
+    options: Partial<ValidatorOptions> = {},
   ) {
-    const { customAttributes, customMessages, locale } = options || {}
-    const lang = locale || Validator.getDefaultLang()
+    const lang = options?.locale || Validator.getDefaultLang()
     Validator.useLang(lang)
     this.input = input || {}
     this.messages = Lang._make(lang)
-    this.messages._setCustom(customMessages || {})
-    this.setAttributeNames(customAttributes || {})
+    this.messages._setCustom(options?.customMessages || {})
+    this.setAttributeNames(options?.customAttributes || {})
     this.setAttributeFormatter(Validator.attributeFormatter)
     this.errors = new Errors()
     this.errorCount = 0
@@ -48,7 +49,6 @@ export default class Validator {
   }
 
   check() {
-    const confirmedReverse = this.confirmedReverse
     for (let attribute in this.rules) {
       const attributeRules = this.rules[attribute]
       const inputValue = objectPath(this.input, attribute)
@@ -73,7 +73,7 @@ export default class Validator {
         }
         rulePassed = rule.validate(inputValue, value, attribute)
         if (!rulePassed) {
-          if (name === 'confirmed' && confirmedReverse) {
+          if (name === 'confirmed' && this.confirmedReverse) {
             attribute = `${attribute}_confirmation`
             Object.assign(rule, { attribute })
           }
@@ -143,8 +143,8 @@ export default class Validator {
     asyncResolvers.fire()
   }
 
-  _parseRules(rules: Record<string, any> = {}) {
-    const parsedRules: Record<string, any> = {}
+  _parseRules(rules: Record<RuleType, any> = {}) {
+    const parsedRules: Record<RuleType, any> = {}
     rules = flattenObject(rules)
     for (const attribute in rules) {
       const rulesArray = rules[attribute]
@@ -153,16 +153,16 @@ export default class Validator {
     return parsedRules
   }
 
-  static setMessages(lang: string, messages: Record<string, any>) {
+  static setMessages(lang: LangTypes, messages: Record<string, any>) {
     Lang._set(lang, messages)
     return this
   }
 
-  static getMessages(lang: string) {
+  static getMessages(lang: LangTypes) {
     return Lang._get(lang)
   }
 
-  static useLang(lang: string) {
+  static useLang(lang: LangTypes) {
     Validator.lang = lang
   }
 
