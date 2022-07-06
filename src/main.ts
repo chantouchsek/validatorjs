@@ -21,7 +21,7 @@ export default class Validator {
   static lang = 'en'
   readonly numericRules = ['integer', 'numeric']
   public rules: Record<string, any> = {}
-  stopOnAttributes: any
+  stopOnAttributes: Record<string, any> | boolean | string[] | undefined
   static attributeFormatter = formatter
   readonly options!: ValidatorOptions
   static manager = new Manager()
