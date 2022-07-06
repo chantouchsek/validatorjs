@@ -111,7 +111,7 @@ export default class Messages {
     }
   }
 
-  _setCustom(customMessages: Record<string, any>) {
+  _setCustom(customMessages: Record<string, any> = {}) {
     this.customMessages = customMessages
   }
 
