@@ -1,7 +1,7 @@
 import Massages from './messages'
 
 export default class Lang {
-  static messages: Record<string, any> = {}
+  static messages: Record<string, any> = Object.create({})
 
   static _set(lang: string, rawMessages: Record<string, any>) {
     this.messages[lang] = rawMessages
@@ -35,7 +35,8 @@ export default class Lang {
   }
 
   static _make(lang: string) {
+    const messages = Object.create(this.messages)
     this._load(lang)
-    return new Massages(lang, this.messages[lang])
+    return new Massages(lang, messages[lang])
   }
 }
