@@ -23,7 +23,7 @@ export type LangTypes =
   | 'it'
   | 'ja'
   | 'ka'
-  | 'kh'
+  | 'km'
   | 'ko'
   | 'lt'
   | 'lv'

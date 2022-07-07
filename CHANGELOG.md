@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* :fire: detect the prototyp polluting ([9950186](https://github.com/chantouchsek/validator-js/commit/99501868f92fb9a50869109d651b2bec54e324fc))
+* :fire: detect the prototype polluting ([9950186](https://github.com/chantouchsek/validator-js/commit/99501868f92fb9a50869109d651b2bec54e324fc))
 * :fire: incomplete string escaping or encoding ([d8cfb69](https://github.com/chantouchsek/validator-js/commit/d8cfb6926002d341e65916a051f9ebe19c76ef1b))
 * correct type of step on ([3a5d87e](https://github.com/chantouchsek/validator-js/commit/3a5d87e356821a15b8da644c4162c80fec5b1915))
 * inefficient regular expression ([4bdf2a1](https://github.com/chantouchsek/validator-js/commit/4bdf2a16a812119e593be5c064eac5b11ab3788c))
@@ -35,7 +35,6 @@ All notable changes to this project will be documented in this file. See [standa
 ### Bug Fixes
 
 * change key code from km to kh ([fc0e064](https://github.com/chantouchsek/validator-js/commit/fc0e064b89c40aa0794cfb188ad3f1cba1be2661))
-* **deps:** bump actions/setup-node from 3.1.1 to 3.2.0 ([510f24b](https://github.com/chantouchsek/validator-js/commit/510f24b3908fb851e5a42df0644efc7a49daac42))
 
 ### [1.0.4](https://github.com/chantouchsek/validator-js/compare/v1.0.3...v1.0.4) (2022-04-30)
 
