@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.2](https://github.com/chantouchsek/validator-js/compare/v1.1.1...v1.1.2) (2022-07-07)
+
+
+### Bug Fixes
+
+* :fire: change file from kh to km ([7c781a3](https://github.com/chantouchsek/validator-js/commit/7c781a31f7627aa8c22155417a22f5fe14202768))
+* :fire: fix falsy in rule and update test ([c684be6](https://github.com/chantouchsek/validator-js/commit/c684be69e657c4e0bae91a34176da0b64e67d52b))
+* typing typo ([4896923](https://github.com/chantouchsek/validator-js/commit/489692369029c89ae448b3b7ffa427e55d9ecb42))
+
 ### [1.1.1](https://github.com/chantouchsek/validator-js/compare/v1.1.0...v1.1.1) (2022-07-06)
 
 
