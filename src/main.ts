@@ -362,7 +362,6 @@ export default class Validator {
     let ruleArray
 
     rule.name = ruleString
-    rule.value = ''
 
     if (ruleString.indexOf(':') >= 0) {
       ruleArray = ruleString.split(':')
