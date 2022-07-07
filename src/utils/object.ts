@@ -39,7 +39,7 @@ export const objectPath = (obj: Record<string, any> | any, path: string) => {
   }
 
   const keys = path
-    .replace(/\[(\w+)\]/g, '.$1')
+    .replace(/\[(\w+)/g, '.$1')
     .replace(/^\./, '')
     .split('.')
   let copy: Record<string, any> = {}
