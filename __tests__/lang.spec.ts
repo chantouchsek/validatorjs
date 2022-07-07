@@ -149,7 +149,7 @@ describe('lang / messages', () => {
     {
       input: undefined,
       rules: { name: 'accepted' },
-      locale: 'kh',
+      locale: 'km',
       message: 'ឈ្មោះ ត្រូវតែទទួលយក។',
     },
     {
