@@ -118,4 +118,16 @@ describe('Wildcard', () => {
       })
     })
   })
+  it('should it take the custom message if provide', () => {
+    const validator = new Validator(
+      { conditions: [{ values: null, age: null }] },
+      { 'conditions.*.values': 'required' },
+      { customMessages: { 'required.conditions.*.values': 'Required' } },
+    )
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.passes()).toBeFalsy()
+    expect(validator.errors.all()).toEqual({
+      'conditions.0.values': ['Required'],
+    })
+  })
 })

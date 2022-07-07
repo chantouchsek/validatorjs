@@ -146,7 +146,7 @@ export default class Messages {
     return name
   }
 
-  render(rule: Rule): string {
+  render(rule: Rule) {
     if (rule.customMessages) {
       return rule.customMessages
     }
