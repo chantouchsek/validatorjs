@@ -34,7 +34,7 @@ export default class Validator {
     rules?: Record<string, any>,
     options: Partial<ValidatorOptions> = {},
   ) {
-    const lang = options?.locale || Validator.getDefaultLang()
+    const lang = options.locale || Validator.getDefaultLang()
     Validator.useLang(lang)
     this.input = input || {}
     this.messages = Lang._make(lang)
@@ -257,7 +257,7 @@ export default class Validator {
 
   _parseRulesCheck(
     attribute: string,
-    rulesArray: Record<string, any>,
+    rulesArray: Record<string, any>[] | any[] | string,
     parsedRules: Record<string, any>,
     wildCardValues?: any[],
   ) {
@@ -280,9 +280,9 @@ export default class Validator {
 
   _parsedRulesRecurse(
     attribute: string,
-    rulesArray: Record<any, string>,
+    rulesArray: Record<string, any>[] | any[] | string,
     parsedRules: Record<string, any>,
-    wildCardValues?: number[],
+    wildCardValues: number[] = [],
   ) {
     const parentPath = attribute.substring(0, attribute.indexOf('*') - 1)
     const propertyValue = objectPath(this.input, parentPath)
@@ -293,7 +293,7 @@ export default class Validator {
         propertyNumber < propertyValue.length;
         propertyNumber++
       ) {
-        const workingValues = wildCardValues?.slice() || []
+        const workingValues = wildCardValues.slice()
         workingValues.push(propertyNumber)
         this._parseRulesCheck(
           attribute.replace(/\*/g, String(propertyNumber)),
@@ -307,7 +307,7 @@ export default class Validator {
 
   _parseRulesDefault(
     attribute: string,
-    rulesArray: Record<string, any> | any,
+    rulesArray: Record<string, any>[] | any[] | string,
     parsedRules: Record<string, any> | any,
     wildCardValues?: any,
   ) {
@@ -321,15 +321,12 @@ export default class Validator {
       rulesArray = rulesArray.split('|')
     }
 
-    for (let i = 0, len = rulesArray.length, rule; i < len; i++) {
-      rule =
-        typeof rulesArray[i] === 'string'
-          ? this._extractRuleAndRuleValue(rulesArray[i])
-          : rulesArray[i]
+    for (const ruleKey of rulesArray) {
+      const rule = this._extractRuleAndRuleValue(ruleKey)
       if (rule.value) {
         rule.value = this._replaceWildCards(rule.value, wildCardValues)
-        this._replaceWildCardsMessages(wildCardValues)
       }
+      this._replaceWildCardsMessages(wildCardValues)
 
       if (Validator.manager.isAsync(rule.name)) {
         this.hasAsync = true
@@ -340,26 +337,27 @@ export default class Validator {
     parsedRules[attribute] = attributeRules
   }
 
-  _prepareRulesArray(rulesArray: Record<string, any> | any) {
+  _prepareRulesArray(rulesArray: Record<string, any>[] | any[]) {
     const rules: Record<string, any>[] = []
 
-    for (let i = 0, len = rulesArray.length; i < len; i++) {
-      if (typeof rulesArray[i] === 'object') {
-        for (const rule in rulesArray[i]) {
+    for (const ruleArray of rulesArray) {
+      if (typeof ruleArray === 'object') {
+        for (const rule in ruleArray) {
           rules.push({
             name: rule,
-            value: rulesArray[i][rule],
+            value: ruleArray[rule],
           })
         }
       } else {
-        rules.push(rulesArray[i])
+        rules.push(ruleArray)
       }
     }
 
     return rules
   }
 
-  _extractRuleAndRuleValue(ruleString: string) {
+  _extractRuleAndRuleValue(ruleString: string | Record<string, any>) {
+    if (typeof ruleString !== 'string') return ruleString
     const rule: Record<string, any> = {}
     let ruleArray
 
@@ -400,11 +398,9 @@ export default class Validator {
   _replaceWildCardsMessages(nums: string[]) {
     const customMessages = this.messages.customMessages
     for (const key of Object.keys(customMessages)) {
-      if (nums) {
-        const path = isArray(key) ? key : [key]
-        const newKey = this._replaceWildCards(path, nums)
-        customMessages[newKey] = customMessages[key]
-      }
+      const path = isArray(key) ? key : [key]
+      const newKey = this._replaceWildCards(path, nums)
+      customMessages[newKey] = customMessages[key]
     }
 
     this.messages._setCustom(customMessages)

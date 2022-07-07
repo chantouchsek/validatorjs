@@ -184,8 +184,8 @@ export class Rule {
       required_with_all(val: Record<string, any>, req: string[]) {
         req = this.getParameters()
 
-        for (let i = 0; i < req.length; i++) {
-          if (!objectPath(this.validator.input, req[i])) {
+        for (const re of req) {
+          if (!objectPath(this.validator.input, re)) {
             return true
           }
         }
@@ -202,8 +202,8 @@ export class Rule {
       required_without_all(val: Record<string, any>, req: string) {
         req = this.getParameters()
 
-        for (let i = 0; i < req.length; i++) {
-          if (objectPath(this.validator.input, req[i])) {
+        for (const re of req) {
+          if (objectPath(this.validator.input, re)) {
             return true
           }
         }
@@ -257,19 +257,19 @@ export class Rule {
         }
         if (!isEmpty(val) && !(val instanceof Array)) {
           let localValue = val
-          for (i = 0; i < list.length; i++) {
-            if (typeof list[i] === 'string') {
+          for (const li of list) {
+            if (typeof li === 'string') {
               localValue = String(val)
             }
-            if (localValue === list[i]) {
+            if (localValue === li) {
               return true
             }
           }
           return false
         }
         if (val && val instanceof Array) {
-          for (i = 0; i < val.length; i++) {
-            if (list.indexOf(val[i]) < 0) {
+          for (const va of val) {
+            if (list.indexOf(va) < 0) {
               return false
             }
           }
@@ -277,18 +277,17 @@ export class Rule {
         return true
       },
       not_in(val: string) {
-        const list = this.getParameters()
-        const len = list.length
+        const list: (string | number)[] = this.getParameters()
         let returnVal = true
 
-        for (let i = 0; i < len; i++) {
+        for (const li of list) {
           let localValue = val
 
-          if (typeof list[i] === 'string') {
+          if (typeof li === 'string') {
             localValue = String(val)
           }
 
-          if (localValue === list[i]) {
+          if (localValue === li) {
             returnVal = false
             break
           }
@@ -362,8 +361,8 @@ export class Manager {
   }
 
   isAsync(name: string) {
-    for (let i = 0, len = this.asyncRules.length; i < len; i++) {
-      if (this.asyncRules[i] === name) {
+    for (const rule of this.asyncRules) {
+      if (rule === name) {
         return true
       }
     }
