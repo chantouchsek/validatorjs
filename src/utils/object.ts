@@ -49,13 +49,13 @@ export const objectPath = (obj: Record<string, any> | any, path: string) => {
     }
   }
 
-  for (let i = 0, l = keys.length; i < l; i++) {
+  for (const key of keys) {
     if (
       typeof copy === 'object' &&
       copy !== null &&
-      hasOwnProperty(copy, keys[i])
+      hasOwnProperty(copy, key)
     ) {
-      copy = copy[keys[i]]
+      copy = copy[key]
     } else {
       return
     }

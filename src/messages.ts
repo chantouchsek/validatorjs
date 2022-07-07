@@ -165,8 +165,7 @@ export default class Messages {
     let template = this.messages.def
     const customMessages = this.customMessages
     const formats = [`${rule.name}.${rule.attribute}`, rule.name]
-    for (let i = 0, format; i < formats.length; i++) {
-      format = formats[i]
+    for (const format of formats) {
       if (hasOwnProperty(customMessages, format)) {
         template = customMessages[format]
         break

@@ -337,19 +337,19 @@ export default class Validator {
     parsedRules[attribute] = attributeRules
   }
 
-  _prepareRulesArray(rulesArray: Record<string, any> | any) {
+  _prepareRulesArray(rulesArray: Record<string, any>[] | any[]) {
     const rules: Record<string, any>[] = []
 
-    for (let i = 0, len = rulesArray.length; i < len; i++) {
-      if (typeof rulesArray[i] === 'object') {
-        for (const rule in rulesArray[i]) {
+    for (const ruleArray of rulesArray) {
+      if (typeof ruleArray === 'object') {
+        for (const rule in ruleArray) {
           rules.push({
             name: rule,
-            value: rulesArray[i][rule],
+            value: ruleArray[rule],
           })
         }
       } else {
-        rules.push(rulesArray[i])
+        rules.push(ruleArray)
       }
     }
 

@@ -35,15 +35,15 @@ export const ipv6 = (value: string | number) => {
   // check 5: ipv6 should contain exactly one consecutive colons if it has less than 8 sectors
   if (hextets.length != 8 && colons == null) return false
 
-  for (let i = 0; i < hextets.length; i++) {
-    const element = hextets[i]
+  for (const hex of hextets) {
+    const element = hex
 
     if (element.length == 0) continue
 
     // check 6: all of hextets should contain numbers from 0 to f (in hexadecimal)
     if (!er.test(element)) return false
 
-    // check 7: all of hextet values should be less then ffff (in hexadeimal)
+    // check 7: all of hextet values should be less than ffff (in hexadeimal)
     // checking using length of hextet. lowest invalid value's length is 5.
     // so all valid hextets are length of 4 or less
     if (element.length > 4) return false
