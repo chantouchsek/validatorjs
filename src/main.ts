@@ -34,7 +34,7 @@ export default class Validator {
     rules?: Record<string, any>,
     options: Partial<ValidatorOptions> = {},
   ) {
-    const lang = options?.locale || Validator.getDefaultLang()
+    const lang = options.locale || Validator.getDefaultLang()
     Validator.useLang(lang)
     this.input = input || {}
     this.messages = Lang._make(lang)
@@ -282,7 +282,7 @@ export default class Validator {
     attribute: string,
     rulesArray: Record<string, any>[] | any[] | string,
     parsedRules: Record<string, any>,
-    wildCardValues?: number[],
+    wildCardValues: number[] = [],
   ) {
     const parentPath = attribute.substring(0, attribute.indexOf('*') - 1)
     const propertyValue = objectPath(this.input, parentPath)
@@ -293,7 +293,7 @@ export default class Validator {
         propertyNumber < propertyValue.length;
         propertyNumber++
       ) {
-        const workingValues = wildCardValues?.slice() || []
+        const workingValues = wildCardValues.slice()
         workingValues.push(propertyNumber)
         this._parseRulesCheck(
           attribute.replace(/\*/g, String(propertyNumber)),
