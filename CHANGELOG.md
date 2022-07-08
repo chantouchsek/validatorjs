@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.3](https://github.com/chantouchsek/validator-js/compare/v1.1.2...v1.1.3) (2022-07-08)
+
+
+### Bug Fixes
+
+* :fire: change loop ([e026c53](https://github.com/chantouchsek/validator-js/commit/e026c534fee81f875727c39ee630f6fb4ecf5221))
+* custom messaage * and test ([ce1563e](https://github.com/chantouchsek/validator-js/commit/ce1563eaa0cfaeb5f50838ed2097cb47d15604cf))
+* remove redundant characters ([d397f45](https://github.com/chantouchsek/validator-js/commit/d397f451bc00e65a7ada3af60af24b75c75a385c))
+* remove value ([ad7532d](https://github.com/chantouchsek/validator-js/commit/ad7532da6c7ac546687d947023f59188aebfd1b4))
+
 ### [1.1.2](https://github.com/chantouchsek/validator-js/compare/v1.1.1...v1.1.2) (2022-07-07)
 
 
