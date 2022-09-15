@@ -13,12 +13,3 @@ export function onlyDigits(str: string | boolean | number) {
   const num = Number(str)
   return !isNaN(num) && typeof str !== 'boolean'
 }
-export function isFloat(n: string | number, shouldCoerce = true) {
-  if (shouldCoerce) {
-    if (typeof n === 'string') {
-      n = parseFloat(n)
-    }
-  }
-
-  return n === +n && n !== (n | 0)
-}
