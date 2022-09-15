@@ -147,9 +147,7 @@ export class Rule {
       after_or_equal(val: string, req: string) {
         const val1 = this.validator.input[req]
         const val2 = val
-        if (!isValidDate(val1) || !isValidDate(val2)) {
-          return false
-        }
+        if (!isValidDate(val1) || !isValidDate(val2)) return false
         return new Date(val1).getTime() <= new Date(val2).getTime()
       },
       required_if(val: Record<string, any>, req: string[]) {
@@ -178,9 +176,7 @@ export class Rule {
         req = this.getParameters()
 
         for (const re of req) {
-          if (!objectPath(this.validator.input, re)) {
-            return true
-          }
+          if (!objectPath(this.validator.input, re)) return true
         }
 
         return this.validator.getRule('required').validate(val, {})
