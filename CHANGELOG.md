@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.4](https://github.com/chantouchsek/validator-js/compare/v1.1.3...v1.1.4) (2022-09-15)
+
+
+### Bug Fixes
+
+* :fire: remove change string length with numeric validator ([28505da](https://github.com/chantouchsek/validator-js/commit/28505da073e250feb6bdb571ddd883a236777f28))
+* :fire: remove change string length with numeric validator ([f5ee019](https://github.com/chantouchsek/validator-js/commit/f5ee0190a2a58b98a7554d3a6cc6664b0b995ace))
+* **deps:** bump actions/setup-node from 3.3.0 to 3.4.1 ([a6ea5b2](https://github.com/chantouchsek/validator-js/commit/a6ea5b2653a1b28112a9714d8caeb5bc35ec0148))
+
 ### [1.1.3](https://github.com/chantouchsek/validator-js/compare/v1.1.2...v1.1.3) (2022-07-08)
 
 
