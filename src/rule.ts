@@ -1,12 +1,6 @@
 import Validator from './main'
 import * as rules from './rules'
-import {
-  flattenObject,
-  isEmpty,
-  isFloat,
-  isValidDate,
-  objectPath,
-} from './utils'
+import { flattenObject, isEmpty, isValidDate, objectPath } from './utils'
 
 let missedRuleValidator: VoidFunction = function (this: Rule) {
   throw new Error('Validator `' + this.name + '` is not defined!')
@@ -140,7 +134,6 @@ export class Rule {
   }
 
   static _setRules() {
-    const numericRules = ['numeric']
     Rule.rules = {
       ...this.rules,
       after(value: string, req: string) {
@@ -154,9 +147,7 @@ export class Rule {
       after_or_equal(val: string, req: string) {
         const val1 = this.validator.input[req]
         const val2 = val
-        if (!isValidDate(val1) || !isValidDate(val2)) {
-          return false
-        }
+        if (!isValidDate(val1) || !isValidDate(val2)) return false
         return new Date(val1).getTime() <= new Date(val2).getTime()
       },
       required_if(val: Record<string, any>, req: string[]) {
@@ -185,9 +176,7 @@ export class Rule {
         req = this.getParameters()
 
         for (const re of req) {
-          if (!objectPath(this.validator.input, re)) {
-            return true
-          }
+          if (!objectPath(this.validator.input, re)) return true
         }
 
         return this.validator.getRule('required').validate(val, {})
@@ -218,20 +207,10 @@ export class Rule {
       },
       min(val: string, req: number | string) {
         const size: number = this.getSize(val)
-        const numericRule = this.validator.getRule('numeric')
-        const hasNumeric = this.validator._hasRule(this.attribute, numericRules)
-        if (numericRule.validate(val, {}) && hasNumeric && !isFloat(val)) {
-          return String(val).trim().length >= parseInt(req as string)
-        }
         return size >= req
       },
       max(val: string, req: number | string) {
         const size: number = this.getSize(val)
-        const numericRule = this.validator.getRule('numeric')
-        const hasNumeric = this.validator._hasRule(this.attribute, numericRules)
-        if (numericRule.validate(val, {}) && hasNumeric && !isFloat(val)) {
-          return String(val).trim().length <= parseInt(req as string)
-        }
         return size <= req
       },
       between(val: string, req: string[]) {
@@ -251,7 +230,6 @@ export class Rule {
       },
       in(val: string | string[]) {
         let list: (string | number)[] = []
-        let i
         if (!isEmpty(val)) {
           list = this.getParameters()
         }
@@ -354,8 +332,8 @@ export class Manager {
 
   make(name: string, validator: Validator) {
     Rule._setRules()
-    const async = this.isAsync(name)
-    const rule = new Rule(name, Rule.rules[name], async)
+    const isAsync = this.isAsync(name)
+    const rule = new Rule(name, Rule.rules[name], isAsync)
     rule.setValidator(validator)
     return rule
   }

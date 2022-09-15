@@ -62,17 +62,18 @@ describe('max validation rule', () => {
     expect(validator.passes()).toBeFalsy()
   })
 
-  it('should be passed when given string numeric', () => {
-    const validator = new Validator({ val: '12345' }, { val: 'numeric|max:5' })
-    expect(validator.passes()).toBeTruthy()
+  it('should be failed when given string numeric', () => {
+    const validator = new Validator({ val: '6' }, { val: 'numeric|max:5' })
+    expect(validator.passes()).toBeFalsy()
   })
 
-  it('should be passed when given string as phone number', () => {
+  it('should be failed when given value over max', () => {
     const validator = new Validator(
-      { val: '01234567890' },
-      { val: 'numeric|max:11' },
+      { val: '100.1' },
+      { val: 'numeric|max:100' },
     )
-    expect(validator.passes()).toBeTruthy()
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.passes()).toBeFalsy()
   })
 
   it('should be failed when given string as phone number over max', () => {

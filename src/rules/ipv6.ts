@@ -21,11 +21,11 @@ export const ipv6 = (value: string | number) => {
     return false
 
   // check 3: ipv6 should contain no less than 3 sector
-  // minimum ipv6 addres - ::1
+  // minimum ipv6 address - ::1
   if (3 > hextets.length) return false
 
   // check 4: ipv6 should contain no more than 8 sectors
-  // only 1 edge case: when first or last sector is ommited
+  // only 1 edge case: when first or last sector is omitted
   const isEdgeCase =
     hextets.length == 9 &&
     colons != null &&
@@ -43,7 +43,7 @@ export const ipv6 = (value: string | number) => {
     // check 6: all of hextets should contain numbers from 0 to f (in hexadecimal)
     if (!er.test(element)) return false
 
-    // check 7: all of hextet values should be less than ffff (in hexadeimal)
+    // check 7: all of hextet values should be less than ffff (in hexadecimal)
     // checking using length of hextet. lowest invalid value's length is 5.
     // so all valid hextets are length of 4 or less
     if (element.length > 4) return false

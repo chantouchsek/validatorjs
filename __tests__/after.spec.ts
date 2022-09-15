@@ -1,7 +1,7 @@
 import Validator from '../src/main'
 
 describe('after rule', () => {
-  it('should fail when the comparing attribute are greather', () => {
+  it('should fail when the comparing attribute are greater', () => {
     const validator = new Validator(
       { date: '1996-12-09', date2: '1995-08-09' },
       { date2: 'after:date' },
