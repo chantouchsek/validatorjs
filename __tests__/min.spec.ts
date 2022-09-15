@@ -77,7 +77,7 @@ describe('min validation rule', () => {
   it('should be failed when given string as phone number lower than min', () => {
     const validator = new Validator(
       { val: '0123456789' },
-      { val: 'numeric|min:11' },
+      { val: 'digits|min:11' },
     )
     expect(validator.fails()).toBeTruthy()
   })

@@ -1,12 +1,6 @@
 import Validator from './main'
 import * as rules from './rules'
-import {
-  flattenObject,
-  isEmpty,
-  isFloat,
-  isValidDate,
-  objectPath,
-} from './utils'
+import { flattenObject, isEmpty, isValidDate, objectPath } from './utils'
 
 let missedRuleValidator: VoidFunction = function (this: Rule) {
   throw new Error('Validator `' + this.name + '` is not defined!')
@@ -140,7 +134,6 @@ export class Rule {
   }
 
   static _setRules() {
-    const numericRules = ['numeric']
     Rule.rules = {
       ...this.rules,
       after(value: string, req: string) {
@@ -218,20 +211,10 @@ export class Rule {
       },
       min(val: string, req: number | string) {
         const size: number = this.getSize(val)
-        const numericRule = this.validator.getRule('numeric')
-        const hasNumeric = this.validator._hasRule(this.attribute, numericRules)
-        if (numericRule.validate(val, {}) && hasNumeric && !isFloat(val)) {
-          return String(val).trim().length >= parseInt(req as string)
-        }
         return size >= req
       },
       max(val: string, req: number | string) {
         const size: number = this.getSize(val)
-        const numericRule = this.validator.getRule('numeric')
-        const hasNumeric = this.validator._hasRule(this.attribute, numericRules)
-        if (numericRule.validate(val, {}) && hasNumeric && !isFloat(val)) {
-          return String(val).trim().length <= parseInt(req as string)
-        }
         return size <= req
       },
       between(val: string, req: string[]) {
@@ -251,7 +234,6 @@ export class Rule {
       },
       in(val: string | string[]) {
         let list: (string | number)[] = []
-        let i
         if (!isEmpty(val)) {
           list = this.getParameters()
         }
@@ -354,8 +336,8 @@ export class Manager {
 
   make(name: string, validator: Validator) {
     Rule._setRules()
-    const async = this.isAsync(name)
-    const rule = new Rule(name, Rule.rules[name], async)
+    const isAsync = this.isAsync(name)
+    const rule = new Rule(name, Rule.rules[name], isAsync)
     rule.setValidator(validator)
     return rule
   }

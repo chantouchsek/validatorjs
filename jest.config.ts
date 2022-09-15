@@ -7,7 +7,7 @@ const config: InitialOptionsTsJest = {
     global: {
       lines: 100,
       functions: 100,
-      branches: 97.76,
+      branches: 99.32,
       statements: 100,
     },
   },
