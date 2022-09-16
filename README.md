@@ -734,7 +734,7 @@ Error messages are in English by default. To include another language in the bro
 script tag and call `Validator.useLang('lang_code')`.
 
 ```html
-<script src="dist/validator.js"></script>
+<script src="dist/main.js"></script>
 <script src="dist/lang/km.js"></script>
 <script>
   Validator.useLang('km')
