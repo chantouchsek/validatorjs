@@ -79,7 +79,7 @@ describe('max validation rule', () => {
   it('should be failed when given string as phone number over max', () => {
     const validator = new Validator(
       { val: '012345678901' },
-      { val: 'numeric|max:11' },
+      { val: 'digits|max:11' },
     )
     expect(validator.fails()).toBeTruthy()
   })
