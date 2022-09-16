@@ -69,16 +69,13 @@ describe('min validation rule', () => {
   it('should be passed when given string as phone number', () => {
     const validator = new Validator(
       { val: '01234567890' },
-      { val: 'numeric|min:11' },
+      { val: 'digits:11' },
     )
     expect(validator.passes()).toBeTruthy()
   })
 
   it('should be failed when given string as phone number lower than min', () => {
-    const validator = new Validator(
-      { val: '0123456789' },
-      { val: 'digits|min:11' },
-    )
+    const validator = new Validator({ val: '0123456789' }, { val: 'digits:11' })
     expect(validator.fails()).toBeTruthy()
   })
 })

@@ -212,11 +212,11 @@ The field under validation must be entirely alphabetic characters.
 
 #### alpha_dash
 
-The field under validation may have alpha-numeric characters, as well as dashes and underscores.
+The field under validation may have alphanumeric characters, as well as dashes and underscores.
 
 #### alpha_num
 
-The field under validation must be entirely alpha-numeric characters.
+The field under validation must be entirely alphanumeric characters.
 
 #### array
 
@@ -259,7 +259,7 @@ The field under validation must be numeric and must have length between given mi
 
 #### different:attribute
 
-The given field must be different than the field under validation.
+The given field must be different from the field under validation.
 
 #### email
 
@@ -288,7 +288,7 @@ _Note: Maximum checks are inclusive._
 
 ```js
 let rules = {
-  phone: 'required|numeric|max:11',
+  phone: 'required|digits|max:11',
 }
 let input = {
   phone: '01234567890',
@@ -318,7 +318,7 @@ _Note: Minimum checks are inclusive._
 
 ```js
 let rules = {
-  phone: 'required|numeric|min:11',
+  phone: 'required|digits|min:11',
 }
 let input = {
   phone: '01234567890',
@@ -346,6 +346,12 @@ The field under validation must not be included in the given list of values.
 
 Validate that an attribute is numeric. The string representation of a number will pass.
 
+```js
+let rules = {
+  amount: 'numeric|digits:5',
+}
+```
+
 #### present
 
 The field under validation must be present in the input data but can be empty.
@@ -356,11 +362,11 @@ Checks if the length of the String representation of the value is >
 
 #### required_if:another_field,value
 
-The field under validation must be present and not empty if the anotherfield field is equal to any value.
+The field under validation must be present and not empty if the another field is equal to any value.
 
 #### required_unless:another_field,value
 
-The field under validation must be present and not empty unless the anotherfield field is equal to any value.
+The field under validation must be present and not empty unless the another field is equal to any value.
 
 #### required_with:foo,bar,...
 
@@ -368,7 +374,7 @@ The field under validation must be present and not empty only if any of the othe
 
 #### required_with_all:foo,bar,...
 
-The field under validation must be present and not empty only if all of the other specified fields are present.
+The field under validation must be present and not empty only if all the other specified fields are present.
 
 #### required_without:foo,bar,...
 
@@ -376,7 +382,7 @@ The field under validation must be present and not empty only when any of the ot
 
 #### required_without_all:foo,bar,...
 
-The field under validation must be present and not empty only when all of the other specified fields are not present.
+The field under validation must be present and not empty only when all the other specified fields are not present.
 
 #### sometimes
 
@@ -536,7 +542,7 @@ let validation = new Validator(
 validation.validated() // will return `{ "name": "John", "age": 28 }`
 ```
 
-`validated()` method will thrown an error when current validation is failing.
+`validated()` method will throw an error when current validation is failing.
 
 ```js
 let validation = new Validator(
@@ -615,7 +621,7 @@ validator.errors.get('email') // returns an array of error messages for the emai
 
 ### Custom Error Messages
 
-If you need a specific error message and you don't want to override the default one, you can pass an override as the
+If you need a specific error message, and you don't want to override the default one, you can pass an override as the
 third argument to the Validator object, just like
 with [Laravel](http://laravel.com/docs/validation#custom-error-messages).
 
@@ -655,7 +661,7 @@ validation.passes()
 validation.errors.first('username') // returns 'The username is too long. Max length is 16.'
 ```
 
-You can even provide error messages on a per attribute basis! Just set the message's key to 'validator.attribute'
+You can even provide error messages on a per-attribute basis! Just set the message's key to 'validator.attribute'
 
 ```js
 let input = { name: '', email: '' }
@@ -735,7 +741,7 @@ script tag and call `Validator.useLang('lang_code')`.
 </script>
 ```
 
-In Node, it will automatically pickup on the language source files.
+In Node, it will automatically pick up on the language source files.
 
 ```js
 let Validator = require('validatorjs')
