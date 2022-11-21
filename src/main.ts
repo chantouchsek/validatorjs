@@ -44,17 +44,13 @@ export default class Validator {
     for (let attribute in this.rules) {
       const attributeRules = this.rules[attribute]
       const inputValue = objectPath(this.input, attribute)
-      if (this._passesOptionalCheck(attribute)) {
-        continue
-      }
+      if (this._passesOptionalCheck(attribute)) continue
 
       for (let i = 0, len = attributeRules.length, rule: Rule, ruleOptions, rulePassed; i < len; i++) {
         ruleOptions = attributeRules[i]
         const { name, value } = ruleOptions
         rule = this.getRule(name)
-        if (!this._isValidatable(rule, inputValue)) {
-          continue
-        }
+        if (!this._isValidatable(rule, inputValue)) continue
         rulePassed = rule.validate(inputValue, value, attribute)
         if (!rulePassed) {
           if (name === 'confirmed' && this.confirmedReverse) {
@@ -63,9 +59,7 @@ export default class Validator {
           }
           this._addFailure(rule)
         }
-        if (this._shouldStopValidating(attribute, rulePassed)) {
-          break
-        }
+        if (this._shouldStopValidating(attribute, rulePassed)) break
       }
     }
 
@@ -106,9 +100,7 @@ export default class Validator {
     for (const attribute in this.rules) {
       const attributeRules = this.rules[attribute]
       const inputValue = objectPath(this.input, attribute)
-      if (this._passesOptionalCheck(attribute)) {
-        continue
-      }
+      if (this._passesOptionalCheck(attribute)) continue
 
       for (let i = 0, len = attributeRules.length, rule, ruleOptions; i < len; i++) {
         ruleOptions = attributeRules[i]
@@ -165,9 +157,7 @@ export default class Validator {
   _hasRule(attribute: string, findRules: string[]) {
     const rules = this.rules[attribute]
     for (const { name } of rules) {
-      if (findRules.indexOf(name) > -1) {
-        return true
-      }
+      if (findRules.indexOf(name) > -1) return true
     }
     return false
   }
@@ -179,13 +169,9 @@ export default class Validator {
 
   _suppliedWithData(attribute: string) {
     function hasNested(obj: undefined | Record<string, any>, key: string, ...args: string[]): boolean {
-      if (obj === undefined) {
-        return false
-      }
+      if (obj === undefined) return false
 
-      if (args.length == 0 && hasOwnProperty(obj, key)) {
-        return true
-      }
+      if (args.length == 0 && hasOwnProperty(obj, key)) return true
 
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
@@ -204,9 +190,7 @@ export default class Validator {
   }
 
   _isValidatable(rule: Record<string, any>, value: any): boolean {
-    if (isArray(value) || Validator.manager.isImplicit(rule.name)) {
-      return true
-    }
+    if (isArray(value) || Validator.manager.isImplicit(rule.name)) return true
 
     return this.getRule('required').validate(value, {})
   }
@@ -220,9 +204,7 @@ export default class Validator {
   _shouldStopValidating(attribute: string, rulePassed: any) {
     const stopOnAttributes = this.stopOnAttributes
     const isUndefined = typeof stopOnAttributes === 'undefined'
-    if (isUndefined || stopOnAttributes === false || rulePassed === true) {
-      return false
-    }
+    if (isUndefined || stopOnAttributes === false || rulePassed === true) return false
 
     if (stopOnAttributes instanceof Array) {
       return stopOnAttributes.indexOf(attribute) > -1
@@ -280,14 +262,10 @@ export default class Validator {
 
     for (const ruleKey of rulesArray) {
       const rule = this._extractRuleAndRuleValue(ruleKey)
-      if (rule.value) {
-        rule.value = this._replaceWildCards(rule.value, wildCardValues)
-      }
+      if (rule.value) rule.value = this._replaceWildCards(rule.value, wildCardValues)
       this._replaceWildCardsMessages(wildCardValues)
 
-      if (Validator.manager.isAsync(rule.name)) {
-        this.hasAsync = true
-      }
+      if (Validator.manager.isAsync(rule.name)) this.hasAsync = true
       attributeRules.push(rule)
     }
 
@@ -300,10 +278,7 @@ export default class Validator {
     for (const ruleArray of rulesArray) {
       if (typeof ruleArray === 'object') {
         for (const rule in ruleArray) {
-          rules.push({
-            name: rule,
-            value: ruleArray[rule],
-          })
+          rules.push({ name: rule, value: ruleArray[rule] })
         }
       } else {
         rules.push(ruleArray)
@@ -330,9 +305,7 @@ export default class Validator {
   }
 
   _replaceWildCards(path: string | string[] | any, nums: string[]) {
-    if (!nums) {
-      return path
-    }
+    if (!nums) return path
 
     let path2 = path
     for (const num of nums) {
@@ -340,9 +313,7 @@ export default class Validator {
         path2 = path2[0]
       }
       const pos = path2.indexOf('*')
-      if (pos === -1) {
-        return path2
-      }
+      if (pos === -1) return path2
       path2 = path2.substring(0, pos) + num + path2.substring(pos + 1)
     }
     if (isArray(path)) {
@@ -381,17 +352,13 @@ export default class Validator {
 
   passes(passes?: () => void) {
     const async = this._checkAsync('passes', passes)
-    if (async) {
-      return this.checkAsync(passes)
-    }
+    if (async) return this.checkAsync(passes)
     return this.check()
   }
 
   fails(fails?: VoidFunction) {
     const async = this._checkAsync('fails', fails)
-    if (async) {
-      return this.checkAsync(false, fails)
-    }
+    if (async) return this.checkAsync(false, fails)
     return !this.check()
   }
 
