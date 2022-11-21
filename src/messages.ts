@@ -120,7 +120,7 @@ export default class Messages {
 
   _getAttributeName(attribute: string): string {
     let name = attribute
-    const attributes = flattenObject(this.messages.attributes)
+    const attributes = flattenObject(this.messages?.attributes)
     const attributeNames = flattenObject(this.attributeNames)
     const camelCase = toCamelCase(attribute)
     const snakeCase = toSnakeCase(attribute)
@@ -154,7 +154,7 @@ export default class Messages {
 
   _getTemplate(rule: Rule): string {
     const messages = this.messages
-    let template = this.messages.def
+    let template = this.messages?.def
     const customMessages = this.customMessages
     const formats = [`${rule.name}.${rule.attribute}`, rule.name]
     for (const format of formats) {

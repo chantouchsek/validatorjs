@@ -2,7 +2,7 @@ import Massages from './messages'
 import { LangTypes } from './types/lang'
 
 export default class Lang {
-  static messages: Record<LangTypes, any> = Object.create({})
+  static messages: Record<LangTypes, any> = {}
 
   static _set(lang: LangTypes, rawMessages: Record<string, any>) {
     this.messages[lang] = rawMessages

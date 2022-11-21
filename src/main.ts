@@ -63,7 +63,7 @@ export default class Validator {
       }
     }
 
-    return this.errorCount === 0
+    return !this.errorCount
   }
 
   checkAsync(passes?: boolean | (() => void), fails?: any) {
