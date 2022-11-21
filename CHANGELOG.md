@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.5](https://github.com/chantouchsek/validator-js/compare/v1.1.4...v1.1.5) (2022-11-21)
+
+
+### Bug Fixes
+
+* :monocle_face: update readme according to the code change and update testsa ([104ba86](https://github.com/chantouchsek/validator-js/commit/104ba863891accee528a6b9d118de46ffd658a9d))
+* change undefined to null ([e7b162c](https://github.com/chantouchsek/validator-js/commit/e7b162c0dcc1b88f2f2a7da3dfd2cf4eca86c507))
+* correct file name import ([7299ec6](https://github.com/chantouchsek/validator-js/commit/7299ec6e475fc735e7c2a0249cad6445d9c4afff))
+* **deps:** bump actions/checkout from 3.0.2 to 3.1.0 ([fbe97b5](https://github.com/chantouchsek/validator-js/commit/fbe97b56d8e0c8fa6a60756b9dc1c452569ec479))
+* **deps:** bump actions/setup-node from 3.4.1 to 3.5.0 ([9dc4226](https://github.com/chantouchsek/validator-js/commit/9dc422635c008050182a8c40854f375efeb800a3))
+* **deps:** bump actions/setup-node from 3.5.0 to 3.5.1 ([87c3344](https://github.com/chantouchsek/validator-js/commit/87c33447caebac9a96a9fcf976df08e82efcabb3))
+* **deps:** bump actions/stale from 5 to 6 ([4afdc03](https://github.com/chantouchsek/validator-js/commit/4afdc03e8fb3641f1a572328cc35f32dccdbf98e))
+* enable printwith to 120 ([d275015](https://github.com/chantouchsek/validator-js/commit/d2750152241d473b35d9f294ca932f0e5a6ab571))
+* export the errors class ([6c47a69](https://github.com/chantouchsek/validator-js/commit/6c47a692842077caf2f3810c3600076ef628862d))
+* inject more type ([b21aeab](https://github.com/chantouchsek/validator-js/commit/b21aeab597909fec39e3eb05a04d0e3bed336c73))
+* prevent the message is undefined ([d898877](https://github.com/chantouchsek/validator-js/commit/d898877351f4936087e96a8717bf87152f94225f))
+* statically import three languages ([cf1c311](https://github.com/chantouchsek/validator-js/commit/cf1c3118cdce0a2ecae321804f2654824edb3937))
+
 ### [1.1.4](https://github.com/chantouchsek/validator-js/compare/v1.1.3...v1.1.4) (2022-09-15)
 
 
