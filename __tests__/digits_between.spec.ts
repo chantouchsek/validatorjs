@@ -41,10 +41,7 @@ describe('digits between rule', () => {
   })
 
   it('should support unsigned', () => {
-    const validator = new Validator({
-      input: { num: -3 },
-      rules: { num: 'digits_between:-4,-2' },
-    })
+    const validator = new Validator({ num: -3 }, { num: 'digits_between:-4,-2' })
     expect(validator.passes()).toBeTruthy()
     expect(validator.fails()).not.toBeTruthy()
   })

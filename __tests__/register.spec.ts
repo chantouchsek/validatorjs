@@ -6,7 +6,7 @@ describe('register a custom validation rule', () => {
       return val.match(/^\d{3}-\d{3}-\d{4}$/)
     })
 
-    const validator = new Validator()
+    const validator = new Validator(null)
     const validate = validator.getRule('telephone').validate
     expect(typeof validate).toBe('function')
   })

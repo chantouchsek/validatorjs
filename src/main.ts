@@ -25,11 +25,7 @@ export default class Validator {
   static manager = new Manager()
   private readonly confirmedReverse?: boolean
 
-  constructor(
-    input?: Record<string, any> | null,
-    rules?: Record<string, any>,
-    options: Partial<ValidatorOptions> = {},
-  ) {
+  constructor(input: Record<string, any> | null, rules?: Record<string, any>, options: Partial<ValidatorOptions> = {}) {
     const lang = options.locale || Validator.getDefaultLang()
     Validator.useLang(lang)
     this.input = input || {}
