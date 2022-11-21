@@ -83,14 +83,11 @@ const sq = {
   regex: 'Formati i :attribute është i pasaktë.',
   required: 'Fusha :attribute është e kërkuar.',
   required_if: 'Fusha :attribute është e kërkuar kur :other është :value.',
-  required_unless:
-    'The :attribute field is required unless :other is in :values.',
+  required_unless: 'The :attribute field is required unless :other is in :values.',
   required_with: 'Fusha :attribute është e kërkuar kur :values ekziston.',
   required_with_all: 'Fusha :attribute është e kërkuar kur :values ekziston.',
-  required_without:
-    'Fusha :attribute është e kërkuar kur :values nuk ekziston.',
-  required_without_all:
-    'Fusha :attribute është e kërkuar kur nuk ekziston asnjë nga :values.',
+  required_without: 'Fusha :attribute është e kërkuar kur :values nuk ekziston.',
+  required_without_all: 'Fusha :attribute është e kërkuar kur nuk ekziston asnjë nga :values.',
   same: ':attribute dhe :other duhet të përputhen.',
   size: {
     numeric: ':attribute duhet të jetë :size.',

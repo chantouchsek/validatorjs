@@ -4,13 +4,7 @@ import Errors from './errors'
 import { Manager, Rule } from './rule'
 import AsyncResolvers from './async-resolvers'
 import type { ValidatorOptions, VoidFunction } from './types/validator'
-import {
-  flattenObject,
-  objectPath,
-  formatter,
-  isArray,
-  hasOwnProperty,
-} from './utils'
+import { flattenObject, objectPath, formatter, isArray, hasOwnProperty } from './utils'
 import { LangTypes } from './types/lang'
 import { RuleType } from './types/rule'
 
@@ -58,15 +52,7 @@ export default class Validator {
         continue
       }
 
-      for (
-        let i = 0,
-          len = attributeRules.length,
-          rule: Rule,
-          ruleOptions,
-          rulePassed;
-        i < len;
-        i++
-      ) {
+      for (let i = 0, len = attributeRules.length, rule: Rule, ruleOptions, rulePassed; i < len; i++) {
         ruleOptions = attributeRules[i]
         const { name, value } = ruleOptions
         rule = this.getRule(name)
@@ -128,11 +114,7 @@ export default class Validator {
         continue
       }
 
-      for (
-        let i = 0, len = attributeRules.length, rule, ruleOptions;
-        i < len;
-        i++
-      ) {
+      for (let i = 0, len = attributeRules.length, rule, ruleOptions; i < len; i++) {
         ruleOptions = attributeRules[i]
         rule = this.getRule(ruleOptions.name)
         if (this._isValidatable(rule, inputValue)) {
@@ -200,11 +182,7 @@ export default class Validator {
   }
 
   _suppliedWithData(attribute: string) {
-    function hasNested(
-      obj: undefined | Record<string, any>,
-      key: string,
-      ...args: string[]
-    ): boolean {
+    function hasNested(obj: undefined | Record<string, any>, key: string, ...args: string[]): boolean {
       if (obj === undefined) {
         return false
       }
@@ -264,19 +242,9 @@ export default class Validator {
     wildCardValues?: any[],
   ) {
     if (attribute.indexOf('*') > -1) {
-      this._parsedRulesRecurse(
-        attribute,
-        rulesArray,
-        parsedRules,
-        wildCardValues,
-      )
+      this._parsedRulesRecurse(attribute, rulesArray, parsedRules, wildCardValues)
     } else {
-      this._parseRulesDefault(
-        attribute,
-        rulesArray,
-        parsedRules,
-        wildCardValues,
-      )
+      this._parseRulesDefault(attribute, rulesArray, parsedRules, wildCardValues)
     }
   }
 
@@ -290,19 +258,10 @@ export default class Validator {
     const propertyValue = objectPath(this.input, parentPath)
 
     if (propertyValue) {
-      for (
-        let propertyNumber = 0;
-        propertyNumber < propertyValue.length;
-        propertyNumber++
-      ) {
+      for (let propertyNumber = 0; propertyNumber < propertyValue.length; propertyNumber++) {
         const workingValues = wildCardValues.slice()
         workingValues.push(propertyNumber)
-        this._parseRulesCheck(
-          attribute.replace(/\*/g, String(propertyNumber)),
-          rulesArray,
-          parsedRules,
-          workingValues,
-        )
+        this._parseRulesCheck(attribute.replace(/\*/g, String(propertyNumber)), rulesArray, parsedRules, workingValues)
       }
     }
   }
@@ -472,18 +431,13 @@ export default class Validator {
 
   _onlyInputWithRules(obj?: Record<string, any>, keyPrefix?: string) {
     const prefix = keyPrefix || ''
-    const values: Record<string, any> = JSON.parse(
-      JSON.stringify(obj === undefined ? this.input : obj),
-    )
+    const values: Record<string, any> = JSON.parse(JSON.stringify(obj === undefined ? this.input : obj))
 
     for (const key of Object.keys(values)) {
       if (values[key] !== null && typeof values[key] === 'object') {
         values[key] = this._onlyInputWithRules(values[key], prefix + key + '.')
       } else {
-        if (
-          values[key] === undefined ||
-          !Object.keys(this.rules).includes(prefix + key)
-        ) {
+        if (values[key] === undefined || !Object.keys(this.rules).includes(prefix + key)) {
           delete values[key]
         }
       }

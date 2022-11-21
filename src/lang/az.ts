@@ -4,8 +4,7 @@ const az = {
   after: ':attribute :date tarixindən sonra olmalıdır',
   after_or_equal: ':attribute :date tarixi ilə eyni və ya sonra olmalıdır',
   alpha: ':attribute yalnız hərflərdən ibarət ola bilər',
-  alpha_dash:
-    ':attribute yalnız hərf, rəqəm və tire simvolundan ibarət ola bilər',
+  alpha_dash: ':attribute yalnız hərf, rəqəm və tire simvolundan ibarət ola bilər',
   alpha_num: ':attribute yalnız hərf və rəqəmlərdən ibarət ola bilər',
   attributes: {},
   array: ':attribute massiv formatında olmalıdır',

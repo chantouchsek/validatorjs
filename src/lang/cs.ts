@@ -15,8 +15,7 @@ const cs = {
     numeric: ':attribute musí být hodnota mezi :min a :max.',
     file: ':attribute musí být větší než :min a menší než :max Kilobytů.',
     string: ':attribute musí být delší než :min a kratší než :max znaků.',
-    array:
-      ':attribute musí obsahovat nejméně :min a nesmí obsahovat více než :max prvků.',
+    array: ':attribute musí obsahovat nejméně :min a nesmí obsahovat více než :max prvků.',
   },
   boolean: ':attribute musí být true nebo false',
   confirmed: ':attribute nebylo odsouhlaseno.',
@@ -24,8 +23,7 @@ const cs = {
   date_format: ':attribute není platný formát data podle :format.',
   different: ':attribute a :other se musí lišit.',
   digits: ':attribute musí být :digits pozic dlouhé.',
-  digits_between:
-    ':attribute musí být dlouhé nejméně :min a nejvíce :max pozic.',
+  digits_between: ':attribute musí být dlouhé nejméně :min a nejvíce :max pozic.',
   dimensions: ':attribute má neplatné rozměry.',
   distinct: ':attribute má duplicitní hodnotu.',
   email: ':attribute není platný formát.',
@@ -90,8 +88,7 @@ const cs = {
   required_with: ':attribute musí být vyplněno pokud :field je vyplněno.',
   required_with_all: ':attribute musí být vyplněno pokud :fields je zvoleno.',
   required_without: ':attribute musí být vyplněno pokud :field není vyplněno.',
-  required_without_all:
-    ':attribute musí být vyplněno pokud není žádné z :fields zvoleno.',
+  required_without_all: ':attribute musí být vyplněno pokud není žádné z :fields zvoleno.',
   same: ':attribute a :other se musí shodovat.',
   size: {
     numeric: ':attribute musí být přesně :size.',

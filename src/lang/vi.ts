@@ -1,8 +1,7 @@
 const vi = {
   accepted: ':attribute phải được chấp nhận.',
   alpha: 'Trường :attribute phải là ký tự',
-  alpha_dash:
-    ':attribute chỉ chấp nhận ký tự chữ cái, số, dấu gạch chéo và gạch dưới.',
+  alpha_dash: ':attribute chỉ chấp nhận ký tự chữ cái, số, dấu gạch chéo và gạch dưới.',
   alpha_num: ':attribute phải là ký tự chữ cái hoặc chữ số.',
   attributes: {},
   between: ':attribute phải nằm trong khoảng :min và :max.',
@@ -11,8 +10,7 @@ const vi = {
   date: ':attribute không phải là ngày hợp lệ',
   def: 'Thuộc tính :attribute có lỗi.',
   digits: ':attribute phải là số và có chiều dài bằng :digits.',
-  digits_between:
-    'Độ dài của trường :attribute phải nằm trong khoảng :min and :max chữ số.',
+  digits_between: 'Độ dài của trường :attribute phải nằm trong khoảng :min and :max chữ số.',
   different: 'Giá trị của hai trường :attribute và :different phải khác nhau.',
   in: 'Giá trị được chọn của :attribute không hợp lệ.',
   integer: ':attribute phải là số nguyên.',

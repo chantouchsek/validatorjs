@@ -3,8 +3,7 @@ const en = {
   after: 'The :attribute must be after :after.',
   after_or_equal: 'The :attribute must be equal or after :after_or_equal.',
   alpha: 'The :attribute field must contain only alphabetic characters.',
-  alpha_dash:
-    'The :attribute field may only contain alpha-numeric characters, as well as dashes and underscores.',
+  alpha_dash: 'The :attribute field may only contain alpha-numeric characters, as well as dashes and underscores.',
   alpha_num: 'The :attribute field must be alphanumeric.',
   attributes: {},
   before: 'The :attribute must be before :before.',
@@ -36,14 +35,11 @@ const en = {
   present: 'The :attribute field must be present (but can be empty).',
   required: 'The :attribute field is required.',
   required_if: 'The :attribute field is required when :other is :value.',
-  required_unless:
-    'The :attribute field is required when :other is not :value.',
+  required_unless: 'The :attribute field is required when :other is not :value.',
   required_with: 'The :attribute field is required when :field is not empty.',
-  required_with_all:
-    'The :attribute field is required when :fields are not empty.',
+  required_with_all: 'The :attribute field is required when :fields are not empty.',
   required_without: 'The :attribute field is required when :field is empty.',
-  required_without_all:
-    'The :attribute field is required when :fields are empty.',
+  required_without_all: 'The :attribute field is required when :fields are empty.',
   same: 'The :attribute and :same fields must match.',
   size: {
     numeric: 'The :attribute must be :size.',

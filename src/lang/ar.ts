@@ -1,15 +1,12 @@
 const ar = {
   accepted: 'الصفة :attribute يجب أن تكون مقبولة',
   after: 'الصفة :attribute يجب أن تكون بعد الصفة :after.',
-  after_or_equal:
-    'الصفة :attribute يجب أن تكون مساوية أو بعد الصفة :after_or_equal.',
+  after_or_equal: 'الصفة :attribute يجب أن تكون مساوية أو بعد الصفة :after_or_equal.',
   alpha: 'حقل الصفة  :attribute يجب أن تحتوي على أحرف فقط',
-  alpha_dash:
-    'حقل الصفة :attribute مسموح بأن يحتوي على حروف و أرقام و شرطة و شرطة منخفضة',
+  alpha_dash: 'حقل الصفة :attribute مسموح بأن يحتوي على حروف و أرقام و شرطة و شرطة منخفضة',
   alpha_num: 'حقل الصفة :attribute يجب أن يحتوي على أحرف و أرقام',
   before: 'الصفة :attribute يجب أن تكون قبل :before.',
-  before_or_equal:
-    'الصفة :attribute يجب أن تكون مساوية أو قبل الصفة :before_or_equal.',
+  before_or_equal: 'الصفة :attribute يجب أن تكون مساوية أو قبل الصفة :before_or_equal.',
   between: 'حقل الصفة :attribute يجب أن يكون بين :min و :max.',
   confirmed: 'تأكيد الصفة :attribute غير متطابق.',
   email: 'الصفة :attribute صيغتها غير صحيحة',
@@ -33,16 +30,12 @@ const ar = {
   numeric: 'الصفة :attribute يجب أن تكون رقما.',
   present: 'حقل الصفة :attribute يجب أن يكون معرفا ، يمكن أن يكون فارغا.',
   required: 'حقل الصفة :attribute مطلوب.',
-  required_if:
-    'حقل الصفة :attribute مطلوب حين تكون قيمة الحقل :other تساوي :value.',
-  required_unless:
-    'حقل الصفة :attribute مطلوب حين تكون قيم الحقل :other لا تساوي :value.',
+  required_if: 'حقل الصفة :attribute مطلوب حين تكون قيمة الحقل :other تساوي :value.',
+  required_unless: 'حقل الصفة :attribute مطلوب حين تكون قيم الحقل :other لا تساوي :value.',
   required_with: 'حقل الصفة :attribute مطلوب حين يكون الحقا :field غير فارغ.',
-  required_with_all:
-    'حقل الصفة :attribute مطلوب حين تكون الحقول :fields غير فارغة.',
+  required_with_all: 'حقل الصفة :attribute مطلوب حين تكون الحقول :fields غير فارغة.',
   required_without: 'حقل الصفة :attribute مطلوب حين يكون الحقل :field فارغا.',
-  required_without_all:
-    'حقل الصفة :attribute مطلوب حين تكون الحقول :fields فارغة.',
+  required_without_all: 'حقل الصفة :attribute مطلوب حين تكون الحقول :fields فارغة.',
   same: 'حقل الصفة :attribute و حقل الصفة :same يجب أن يتطابقا.',
   size: {
     numeric: 'الصفة :attribute يجب أن تكون :size.',

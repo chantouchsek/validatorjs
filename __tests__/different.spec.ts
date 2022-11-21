@@ -2,19 +2,13 @@ import Validator from '../src/main'
 
 describe('different validation rule', () => {
   it('should fail when the 2 attributes are the same', () => {
-    const validator = new Validator(
-      { field1: 'abc', field2: 'abc' },
-      { field2: 'different:field1' },
-    )
+    const validator = new Validator({ field1: 'abc', field2: 'abc' }, { field2: 'different:field1' })
     expect(validator.passes()).toBeFalsy()
     expect(validator.fails()).toBeTruthy()
   })
 
   it('should pass when the 2 attributes are different', () => {
-    const validator = new Validator(
-      { field1: 'abc', field2: 'abcd' },
-      { field2: 'different:field1' },
-    )
+    const validator = new Validator({ field1: 'abc', field2: 'abcd' }, { field2: 'different:field1' })
     expect(validator.passes()).toBeTruthy()
     expect(validator.fails()).toBeFalsy()
   })
@@ -49,8 +43,6 @@ describe('different validation rule', () => {
     )
     expect(validator.fails()).toBeTruthy()
     expect(validator.passes()).toBeFalsy()
-    expect(validator.errors.first('username')).toEqual(
-      'The username and payload.username must be different.',
-    )
+    expect(validator.errors.first('username')).toEqual('The username and payload.username must be different.')
   })
 })

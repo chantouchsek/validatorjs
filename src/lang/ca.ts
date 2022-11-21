@@ -2,8 +2,7 @@ const ca = {
   accepted: 'El camp :attribute pot ser aceptat.',
   after: 'El camp :attribute pot ser una data posterior a :after.',
   alpha: 'El camp :attribute només pot contenir lletras.',
-  alpha_dash:
-    'El camp :attribute només pot contenir lletras, nombres y guions.',
+  alpha_dash: 'El camp :attribute només pot contenir lletras, nombres y guions.',
   alpha_num: 'El camp :attribute només pot contenir lletras y nombres.',
   attributes: {},
   between: 'El camp :attribute té que estar entre :min - :max.',

@@ -1,8 +1,7 @@
 const ua = {
   accepted: ':attribute повиннен бути прийнятий.',
   alpha: 'Поле :attribute може складатись тільки з літер.',
-  alpha_dash:
-    'Поле :attribute може складатись тільки з літер, чисел, дефісів та символів підкреслення.',
+  alpha_dash: 'Поле :attribute може складатись тільки з літер, чисел, дефісів та символів підкреслення.',
   alpha_num: 'Поле :attribute може складатись тільки з літер та чисел.',
   attributes: {},
   between: 'Значення поля :attribute повинно знаходитись між :min і :max.',
@@ -10,8 +9,7 @@ const ua = {
   email: 'Значення поля :attribute повинно бути існуючою електронною адресою.',
   def: 'Поле :attribute містить помилки.',
   digits: 'Довжина числового поля :attribute повинна бути :digits.',
-  digits_between:
-    'Довжина цифрового поля :attribute повинна бути від :min до :max.',
+  digits_between: 'Довжина цифрового поля :attribute повинна бути від :min до :max.',
   different: 'Поля :attribute і :different повинні відрізнятись.',
   in: 'Обране значення для :attribute помилкове.',
   integer: 'Значення поля :attribute повинно бути цілим числом.',
@@ -28,8 +26,7 @@ const ua = {
   numeric: 'Значення поля :attribute повинно бути числом.',
   present: 'Поле :attribute повинно бути присутнім (але може бути пустим).',
   required: "Поле :attribute обов'язкове для заповнення.",
-  required_if:
-    'Поле :attribute потрібне у випадку коли значення поля :other рівне :value.',
+  required_if: 'Поле :attribute потрібне у випадку коли значення поля :other рівне :value.',
   same: 'Значеня поля :attribute повинно співпадати з :same.',
   size: {
     numeric: 'Значення поля :attribute повинно бути рівним :size.',

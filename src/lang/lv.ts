@@ -9,8 +9,7 @@ const lv = {
   attributes: {},
   array: ' :attribute ir jābūt sakārtotam.',
   before: ' :attribute ir jābūt ar datumu pirms :datums.',
-  before_or_equal:
-    ' :attribute ir jābūt ar datumu pirms vai vienādu ar :datums.',
+  before_or_equal: ' :attribute ir jābūt ar datumu pirms vai vienādu ar :datums.',
   between: {
     numeric: ' :attribute jābūt starp :min un :max.',
     file: ' :attribute jābūt starp :min un :max kilobaiti.',
@@ -83,18 +82,12 @@ const lv = {
   present: ' :attribute laikums ir nepieciešams.',
   regex: ' :attribute formāts ir nederīgs.',
   required: ' :attribute laukums ir nepieciešams.',
-  required_if:
-    ' :attribute laukums ir nepieciešams, ja vien :other ir :values.',
-  required_unless:
-    ' :attribute laukums ir nepieciešams, ja vien :other ir :values.',
-  required_with:
-    ' :attribute laukums ir nepieciešams, kad :values ir pieejama.',
-  required_with_all:
-    ' :attribute laukums ir nepieciešams, kad :values ir pieejama.',
-  required_without:
-    ' :attribute laukums ir nepieciešams, kad :values nav pieejama.',
-  required_without_all:
-    ' :attribute laukums ir nepieciešams, kad neviena no :values nav pieejama.',
+  required_if: ' :attribute laukums ir nepieciešams, ja vien :other ir :values.',
+  required_unless: ' :attribute laukums ir nepieciešams, ja vien :other ir :values.',
+  required_with: ' :attribute laukums ir nepieciešams, kad :values ir pieejama.',
+  required_with_all: ' :attribute laukums ir nepieciešams, kad :values ir pieejama.',
+  required_without: ' :attribute laukums ir nepieciešams, kad :values nav pieejama.',
+  required_without_all: ' :attribute laukums ir nepieciešams, kad neviena no :values nav pieejama.',
   same: ' :attribute un :citiem ir jāsakrīt.',
   size: {
     numeric: ' :attribute jābūt :size.',

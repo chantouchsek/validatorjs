@@ -112,9 +112,7 @@ describe('Wildcard', () => {
       expect(validator.passes()).toBeFalsy()
       expect(validator.errors.all()).toEqual({
         'users.0.age': ['Required'],
-        'users.0.lastName': [
-          'The users 0 lastName field is required when users 0 name is not empty.',
-        ],
+        'users.0.lastName': ['The users 0 lastName field is required when users 0 name is not empty.'],
       })
     })
   })

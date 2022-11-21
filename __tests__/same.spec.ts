@@ -13,9 +13,7 @@ describe('same validation rule', () => {
     )
     expect(validator.fails()).toBeTruthy()
     expect(validator.passes()).toBeFalsy()
-    expect(validator.errors.first('pw2')).toEqual(
-      'The pw2 and pw fields must match.',
-    )
+    expect(validator.errors.first('pw2')).toEqual('The pw2 and pw fields must match.')
   })
 
   it('should fail when the the comparing attribute doesnt exist', () => {
@@ -29,9 +27,7 @@ describe('same validation rule', () => {
     )
     expect(validator.fails()).toBeTruthy()
     expect(validator.passes()).toBeFalsy()
-    expect(validator.errors.first('pw2')).toEqual(
-      'The pw2 and pw fields must match.',
-    )
+    expect(validator.errors.first('pw2')).toEqual('The pw2 and pw fields must match.')
   })
 
   it('should pass when the 2 attributes are equal', () => {
@@ -80,8 +76,6 @@ describe('same validation rule', () => {
     )
     expect(validator.fails()).toBeTruthy()
     expect(validator.passes()).toBeFalsy()
-    expect(validator.errors.first('username')).toEqual(
-      'The username and payload username fields must match.',
-    )
+    expect(validator.errors.first('username')).toEqual('The username and payload username fields must match.')
   })
 })

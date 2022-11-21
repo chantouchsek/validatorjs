@@ -1,16 +1,13 @@
 const se = {
   accepted: ':attribute måste vara accepterat.',
   after: ':attribute måste vara efter :after.',
-  after_or_equal:
-    ':attribute måste vara samtidigt eller efter :after_or_equal.',
+  after_or_equal: ':attribute måste vara samtidigt eller efter :after_or_equal.',
   alpha: ':attribute får bara bestå av bokstäver.',
-  alpha_dash:
-    ':attribute får bara bestå av alfanumeriska tecken, bindestreck och understreck.',
+  alpha_dash: ':attribute får bara bestå av alfanumeriska tecken, bindestreck och understreck.',
   alpha_num: ':attribute får bara bestå av alfanumeriska tecken',
   attributes: {},
   before: ':attribute måste vara före :before.',
-  before_or_equal:
-    ':attribute måste vara samtidigt eller före :before_or_equal.',
+  before_or_equal: ':attribute måste vara samtidigt eller före :before_or_equal.',
   between: ':attribute måste vara mellan :min och :max.',
   confirmed: ':attribute stämmer inte överens med bekräftelsefältet.',
   email: 'Felaktigt format för :attribute.',
@@ -38,8 +35,7 @@ const se = {
   required_with: ':attribute måste vara ifyllt när :field är ifyllt.',
   required_with_all: ':attribute måste vara ifyllt när :fields är ifyllda.',
   required_without: ':attribute måste vara ifyllt när :field inte är ifyllt.',
-  required_without_all:
-    ':attribute måste vara ifyllt när ingen av :fields är ifyllda.',
+  required_without_all: ':attribute måste vara ifyllt när ingen av :fields är ifyllda.',
   same: ':attribute och :same måste matcha.',
   size: {
     numeric: ':attribute måste vara :size.',

@@ -7,10 +7,7 @@ describe('boolean validation rule', () => {
   })
 
   it('should pass with a decimal boolean value', () => {
-    const validator = new Validator(
-      { isHappy: 1, isSad: 0 },
-      { isHappy: 'boolean', isSad: 'boolean' },
-    )
+    const validator = new Validator({ isHappy: 1, isSad: 0 }, { isHappy: 'boolean', isSad: 'boolean' })
     expect(validator.passes()).toBeTruthy()
   })
 
@@ -28,10 +25,7 @@ describe('boolean validation rule', () => {
   })
 
   it('should fail with an incorrect string value', () => {
-    const validator = new Validator(
-      { firstOne: 'truee' },
-      { firstOne: 'boolean' },
-    )
+    const validator = new Validator({ firstOne: 'truee' }, { firstOne: 'boolean' })
     expect(validator.fails()).toBeTruthy()
   })
 

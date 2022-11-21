@@ -31,10 +31,7 @@ describe('between rule', () => {
   })
 
   it('should threat string 25 as numeric when other numeric rules are set and pass when between is set to 25 - 30', () => {
-    const validator = new Validator(
-      { num: '25' },
-      { num: 'between:25,30|numeric' },
-    )
+    const validator = new Validator({ num: '25' }, { num: 'between:25,30|numeric' })
     expect(validator.passes()).toBeTruthy()
     expect(validator.fails()).toBeFalsy()
   })
@@ -55,10 +52,7 @@ describe('between rule', () => {
   })
 
   it('should support array', () => {
-    const validator = new Validator(
-      { array2: ['a', 'b'] },
-      { array2: 'required|between:1,2' },
-    )
+    const validator = new Validator({ array2: ['a', 'b'] }, { array2: 'required|between:1,2' })
     expect(validator.passes()).toBeTruthy()
     expect(validator.fails()).toBeFalsy()
   })
@@ -66,20 +60,13 @@ describe('between rule', () => {
   it('should generate proper error message for numeric field', () => {
     const validator = new Validator({ num: 14 }, { num: 'between:16,23' })
     expect(validator.fails()).toBeTruthy()
-    expect(validator.errors.first('num')).toEqual(
-      'The num field must be between 16 and 23.',
-    )
+    expect(validator.errors.first('num')).toEqual('The num field must be between 16 and 23.')
   })
 
   it('should generate proper error message for string field (characters)', () => {
-    const validator = new Validator(
-      { name: 'mike erickson' },
-      { name: 'between:1,4' },
-    )
+    const validator = new Validator({ name: 'mike erickson' }, { name: 'between:1,4' })
     expect(validator.fails()).toBeTruthy()
-    expect(validator.errors.first('name')).toEqual(
-      'The name field must be between 1 and 4 characters.',
-    )
+    expect(validator.errors.first('name')).toEqual('The name field must be between 1 and 4 characters.')
   })
 
   it('should fail when passed invalid values', () => {

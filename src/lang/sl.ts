@@ -87,8 +87,7 @@ const sl = {
   required_with: 'Polje :attribute je obvezno, če je :values prisoten.',
   required_with_all: 'Polje :attribute je obvezno, če so :values prisoten.',
   required_without: 'Polje :attribute je obvezno, če :values ni prisoten.',
-  required_without_all:
-    'Polje :attribute je obvezno, če :values niso prisotni.',
+  required_without_all: 'Polje :attribute je obvezno, če :values niso prisotni.',
   same: 'Polje :attribute in :other se morata ujemati.',
   size: {
     numeric: ':attribute mora biti :size.',

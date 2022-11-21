@@ -2,10 +2,7 @@ import Validator from '../src/main'
 
 describe('present validation rule', () => {
   it('should pass with attribute present', () => {
-    const validator = new Validator(
-      { email: 'name@domain.com' },
-      { email: 'present' },
-    )
+    const validator = new Validator({ email: 'name@domain.com' }, { email: 'present' })
     expect(validator.passes()).toBeTruthy()
   })
 

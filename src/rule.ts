@@ -30,12 +30,7 @@ export class Rule {
     this.attribute = ''
   }
 
-  validate(
-    input: Record<string, any> | string | number,
-    rule: Record<string, any>,
-    attribute = '',
-    callback = null,
-  ) {
+  validate(input: Record<string, any> | string | number, rule: Record<string, any>, attribute = '', callback = null) {
     this._setValidatingData(attribute, input, rule)
     if (typeof callback === 'function') {
       this.callback = callback
@@ -43,12 +38,7 @@ export class Rule {
         return this.response(passes, message)
       }
       if (this.async) {
-        return this._apply(
-          input,
-          rule,
-          attribute,
-          handleResponse as unknown as null,
-        )
+        return this._apply(input, rule, attribute, handleResponse as unknown as null)
       } else {
         return handleResponse(this._apply(input, rule, attribute))
       }
@@ -66,11 +56,7 @@ export class Rule {
     return fn.apply(this, [input, rule, attribute, callback] as any)
   }
 
-  _setValidatingData(
-    attribute: string,
-    input: Record<string, any> | string | number,
-    rule: any,
-  ) {
+  _setValidatingData(attribute: string, input: Record<string, any> | string | number, rule: any) {
     this.attribute = attribute
     this.input = input
     this.rule = rule
@@ -106,10 +92,7 @@ export class Rule {
   }
 
   _getValueType() {
-    if (
-      typeof this.input === 'number' ||
-      this.validator._hasNumericRule(this.attribute as string)
-    ) {
+    if (typeof this.input === 'number' || this.validator._hasNumericRule(this.attribute as string)) {
       return 'numeric'
     }
     return 'string'
@@ -278,10 +261,7 @@ export class Rule {
       },
       digits(val: Record<string, any>, req: string) {
         const numericRule = this.validator.getRule('numeric')
-        return !!(
-          numericRule.validate(val, {}) &&
-          String(val).trim().length === parseInt(req)
-        )
+        return !!(numericRule.validate(val, {}) && String(val).trim().length === parseInt(req))
       },
       digits_between(val: string | number) {
         const numericRule = this.validator.getRule('numeric')
@@ -307,10 +287,7 @@ export class Rule {
         return new Date(val1).getTime() >= new Date(val2).getTime()
       },
       ip(val: string, req: number, attribute: string) {
-        return (
-          Rule.rules['ipv4'](val, req, attribute) ||
-          Rule.rules['ipv6'](val, req, attribute)
-        )
+        return Rule.rules['ipv4'](val, req, attribute) || Rule.rules['ipv6'](val, req, attribute)
       },
     }
   }

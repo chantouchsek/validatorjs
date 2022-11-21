@@ -7,10 +7,7 @@ describe('numeric validation rule', () => {
   })
 
   it('should pass with a decimal numeric value', () => {
-    const validator = new Validator(
-      { measurement: 0.5454 },
-      { measurement: 'numeric' },
-    )
+    const validator = new Validator({ measurement: 0.5454 }, { measurement: 'numeric' })
     expect(validator.passes()).toBeTruthy()
   })
 
@@ -20,10 +17,7 @@ describe('numeric validation rule', () => {
   })
 
   it('should pass with a string decimal numeric value', () => {
-    const validator = new Validator(
-      { measurement: '0.5454' },
-      { measurement: 'numeric' },
-    )
+    const validator = new Validator({ measurement: '0.5454' }, { measurement: 'numeric' })
     expect(validator.passes()).toBeTruthy()
   })
 
@@ -73,19 +67,13 @@ describe('numeric validation rule', () => {
   })
 
   it('should pass when combine with digits', () => {
-    const validator = new Validator(
-      { age: '12345' },
-      { age: 'numeric|digits:5' },
-    )
+    const validator = new Validator({ age: '12345' }, { age: 'numeric|digits:5' })
     expect(validator.passes()).toBeTruthy()
     expect(validator.fails()).toBeFalsy()
   })
 
   it('should be failed when combine with digits', () => {
-    const validator = new Validator(
-      { age: '1234.5' },
-      { age: 'numeric|digits:5' },
-    )
+    const validator = new Validator({ age: '1234.5' }, { age: 'numeric|digits:5' })
     expect(validator.fails()).toBeTruthy()
     expect(validator.passes()).toBeFalsy()
   })

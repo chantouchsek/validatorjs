@@ -38,10 +38,7 @@ describe('size validation rule', () => {
   })
 
   it('should pass with float-integer', () => {
-    const validator = new Validator(
-      { age: '65.36' },
-      { age: 'numeric|size:65.36' },
-    )
+    const validator = new Validator({ age: '65.36' }, { age: 'numeric|size:65.36' })
     expect(validator.passes()).toBeTruthy()
   })
 

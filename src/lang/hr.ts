@@ -86,10 +86,8 @@ const hr = {
   required_unless: 'Polje :attribute je obavezno osim :other je u :values.',
   required_with: 'Polje :attribute je obavezno kada postoji polje :values.',
   required_with_all: 'Polje :attribute je obavezno kada postje polja :values.',
-  required_without:
-    'Polje :attribute je obavezno kada ne postoji polje :values.',
-  required_without_all:
-    'Polje :attribute je obavezno kada nijedno od polja :values ne postoji.',
+  required_without: 'Polje :attribute je obavezno kada ne postoji polje :values.',
+  required_without_all: 'Polje :attribute je obavezno kada nijedno od polja :values ne postoji.',
   same: 'Polja :attribute i :other se moraju podudarati.',
   size: {
     numeric: 'Polje :attribute mora biti :size.',

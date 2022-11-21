@@ -15,9 +15,7 @@ describe('required without', () => {
     )
     expect(validator.fails()).toBeTruthy()
     expect(validator.passes()).toBeFalsy()
-    expect(validator.errors.first('flavour')).toEqual(
-      'The flavour field is required when desert second is empty.',
-    )
+    expect(validator.errors.first('flavour')).toEqual('The flavour field is required when desert second is empty.')
   })
 
   it('should pass', () => {

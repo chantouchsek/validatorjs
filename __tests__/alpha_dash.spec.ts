@@ -14,10 +14,7 @@ describe('alpha_dash validation rule', () => {
   })
 
   it('should pass with only alpha dash characters', () => {
-    const validator = new Validator(
-      { name: 'David9_-' },
-      { name: 'alpha_dash' },
-    )
+    const validator = new Validator({ name: 'David9_-' }, { name: 'alpha_dash' })
     expect(validator.passes()).toBeTruthy()
     expect(validator.fails()).toBeFalsy()
   })

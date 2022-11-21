@@ -1,8 +1,7 @@
 const fa = {
   accepted: 'فیلد :attribute می بایست تایید شود',
   alpha: 'فیلد :attribute می بایست فقط شامل حروف انگلیسی باشد',
-  alpha_dash:
-    'فیلد :attribute می بایست فقط شامل حروف انگلیسی و خط تیره و زیرخط باشد',
+  alpha_dash: 'فیلد :attribute می بایست فقط شامل حروف انگلیسی و خط تیره و زیرخط باشد',
   alpha_num: 'فیلد :attribute می بایست فقط شامل حروف و اعداد باشد',
   attributes: {},
   between: 'فیلد :attribute می بایست بزرگتر از :min و کوچکتر از :max باشد',

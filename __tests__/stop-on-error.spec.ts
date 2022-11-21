@@ -23,10 +23,7 @@ describe('stopOnError tests', () => {
   // });
 
   it('only certain fields', () => {
-    const validator = new Validator(
-      { email1: 'x', email2: 'x' },
-      { email1: 'min:5|email', email2: 'min:5|email' },
-    )
+    const validator = new Validator({ email1: 'x', email2: 'x' }, { email1: 'min:5|email', email2: 'min:5|email' })
     validator.stopOnError(['email2'])
     expect(validator.fails()).toBeTruthy()
     expect(validator.errors.get('email1')).toHaveLength(2)

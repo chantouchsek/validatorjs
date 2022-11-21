@@ -307,11 +307,7 @@ describe('lang / messages', () => {
     expect(Validator.getDefaultLang()).toEqual('en')
   })
   it('should throw exception when attempting to get non exist translation', () => {
-    const validator = new Validator(
-      { username: 'admin' },
-      { username: 'required' },
-      { locale: 'abc' },
-    )
+    const validator = new Validator({ username: 'admin' }, { username: 'required' }, { locale: 'abc' })
     expect(validator.passes()).toBeTruthy()
   })
   it('should be able to change lang', () => {

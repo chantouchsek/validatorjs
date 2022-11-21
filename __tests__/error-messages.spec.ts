@@ -3,45 +3,27 @@ import Validator from '../src/main'
 describe('Error messages', () => {
   describe('first()', () => {
     it('should return an error message that states the email is required', () => {
-      const validator = new Validator(
-        { email: '' },
-        { email: 'required|email' },
-      )
+      const validator = new Validator({ email: '' }, { email: 'required|email' })
       expect(validator.passes()).toBeFalsy()
-      expect(validator.errors.first('email')).toEqual(
-        'The email field is required.',
-      )
+      expect(validator.errors.first('email')).toEqual('The email field is required.')
     })
 
     it('should have a method on the errors object to retrieve the first error message for an attribute', () => {
-      const validator = new Validator(
-        { email: '' },
-        { email: 'required|email' },
-      )
+      const validator = new Validator({ email: '' }, { email: 'required|email' })
       expect(validator.passes()).toBeFalsy()
-      expect(validator.errors.first('email')).toEqual(
-        'The email field is required.',
-      )
+      expect(validator.errors.first('email')).toEqual('The email field is required.')
     })
 
     it('should return false if errors.first() is called and there are no errors', () => {
-      const validator = new Validator(
-        { email: 'john@yahoo.com' },
-        { email: 'required|email' },
-      )
+      const validator = new Validator({ email: 'john@yahoo.com' }, { email: 'required|email' })
       expect(validator.passes()).toBeTruthy()
       expect(validator.errors.first('email')).toEqual(false)
     })
 
     it('should return an error message that states the email must be valid', () => {
-      const validator = new Validator(
-        { email: 'john@yahoo' },
-        { email: 'required|email' },
-      )
+      const validator = new Validator({ email: 'john@yahoo' }, { email: 'required|email' })
       expect(validator.passes()).toBeFalsy()
-      expect(validator.errors.first('email')).toEqual(
-        'The email format is invalid.',
-      )
+      expect(validator.errors.first('email')).toEqual('The email format is invalid.')
     })
 
     it('should return null for a key without an error message', () => {
@@ -73,25 +55,13 @@ describe('Error messages', () => {
       )
 
       expect(validator.passes()).toBeFalsy()
-      expect(validator.errors.first('age')).toEqual(
-        'The age must be at least 18.',
-      ) // min numeric
-      expect(validator.errors.first('description')).toEqual(
-        'The description must be at least 5 characters.',
-      ) // min string
-      expect(validator.errors.first('info')).toEqual(
-        'The info field is required.',
-      )
+      expect(validator.errors.first('age')).toEqual('The age must be at least 18.') // min numeric
+      expect(validator.errors.first('description')).toEqual('The description must be at least 5 characters.') // min string
+      expect(validator.errors.first('info')).toEqual('The info field is required.')
       expect(validator.errors.first('hours')).toEqual('The hours must be 5.') // size numeric
-      expect(validator.errors.first('pin')).toEqual(
-        'The pin must be 4 characters.',
-      ) // size string
-      expect(validator.errors.first('range')).toEqual(
-        'The range may not be greater than 10.',
-      ) // max numeric
-      expect(validator.errors.first('tweet')).toEqual(
-        'The tweet may not be greater than 5 characters.',
-      ) // max string
+      expect(validator.errors.first('pin')).toEqual('The pin must be 4 characters.') // size string
+      expect(validator.errors.first('range')).toEqual('The range may not be greater than 10.') // max numeric
+      expect(validator.errors.first('tweet')).toEqual('The tweet may not be greater than 5 characters.') // max string
     })
 
     it('should return a customized alpha error message', () => {
@@ -104,16 +74,11 @@ describe('Error messages', () => {
         },
       )
       expect(validator.passes()).toBeFalsy()
-      expect(validator.errors.first('name')).toEqual(
-        'The name field must contain only alphabetic characters.',
-      )
+      expect(validator.errors.first('name')).toEqual('The name field must contain only alphabetic characters.')
     })
 
     it('should fail with non alpha dash characters', () => {
-      const validator = new Validator(
-        { name: 'David *' },
-        { name: 'alpha_dash' },
-      )
+      const validator = new Validator({ name: 'David *' }, { name: 'alpha_dash' })
       expect(validator.passes()).toBeFalsy()
       expect(validator.errors.first('name')).toEqual(
         'The name field may only contain alpha-numeric characters, as well as dashes and underscores.',
@@ -121,34 +86,22 @@ describe('Error messages', () => {
     })
 
     it('should fail without a matching confirmation field for the field under validation', () => {
-      const validator = new Validator(
-        { password: 'abc' },
-        { password: 'confirmed' },
-      )
+      const validator = new Validator({ password: 'abc' }, { password: 'confirmed' })
       expect(validator.passes()).toBeFalsy()
-      expect(validator.errors.first('password')).toEqual(
-        'The password confirmation does not match.',
-      )
+      expect(validator.errors.first('password')).toEqual('The password confirmation does not match.')
     })
 
     it('should fail when the 2 attributes are the same', () => {
-      const validator = new Validator(
-        { field1: 'abc', field2: 'abc' },
-        { field2: 'different:field1' },
-      )
+      const validator = new Validator({ field1: 'abc', field2: 'abc' }, { field2: 'different:field1' })
       expect(validator.passes()).toBeFalsy()
-      expect(validator.errors.first('field2')).toEqual(
-        'The field2 and field1 must be different.',
-      )
+      expect(validator.errors.first('field2')).toEqual('The field2 and field1 must be different.')
     })
 
     it('should fail with a url only containing http://', () => {
       const link = 'http://'
       const validator = new Validator({ link: link }, { link: 'url' })
       expect(validator.passes()).toBeFalsy()
-      expect(validator.errors.first('link')).toEqual(
-        'The link format is invalid.',
-      )
+      expect(validator.errors.first('link')).toEqual('The link format is invalid.')
     })
 
     it('should fail the custom telephone rule registration with a default error message', () => {
@@ -156,14 +109,9 @@ describe('Error messages', () => {
         return val.match(/^\d{3}-\d{3}-\d{4}$/)
       })
 
-      const validator = new Validator(
-        { phone: '4213-454-9988' },
-        { phone: 'telephone' },
-      )
+      const validator = new Validator({ phone: '4213-454-9988' }, { phone: 'telephone' })
       expect(validator.passes()).toBeFalsy()
-      expect(validator.errors.first('phone')).toEqual(
-        'The phone attribute has errors.',
-      )
+      expect(validator.errors.first('phone')).toEqual('The phone attribute has errors.')
     })
 
     it('should fail the custom telephone rule registration with a custom error message', () => {
@@ -184,18 +132,13 @@ describe('Error messages', () => {
         },
       )
       expect(validator.passes()).toBeFalsy()
-      expect(validator.errors.first('cell')).toEqual(
-        'The cell phone number is not in the format XXX-XXX-XXXX.',
-      )
+      expect(validator.errors.first('cell')).toEqual('The cell phone number is not in the format XXX-XXX-XXXX.')
     })
   })
 
   describe('get()', () => {
     it('should return an array of all email error messages', () => {
-      const validator = new Validator(
-        { email: '' },
-        { email: 'required|email' },
-      )
+      const validator = new Validator({ email: '' }, { email: 'required|email' })
 
       expect(validator.passes()).toBeFalsy()
       expect(validator.errors.get('email')).toBeInstanceOf(Array)
@@ -261,17 +204,13 @@ describe('Error messages', () => {
     it('should give correct error message with numeric rule', () => {
       const validator = new Validator({ val: '1' }, { val: 'numeric|min:2' })
       expect(validator.fails()).toBeTruthy()
-      expect(validator.errors.first('val')).toEqual(
-        'The val must be at least 2.',
-      )
+      expect(validator.errors.first('val')).toEqual('The val must be at least 2.')
     })
 
     it('should give correct error message with integer rule', () => {
       const validator = new Validator({ val: '1' }, { val: 'integer|min:2' })
       expect(validator.fails()).toBeTruthy()
-      expect(validator.errors.first('val')).toEqual(
-        'The val must be at least 2.',
-      )
+      expect(validator.errors.first('val')).toEqual('The val must be at least 2.')
     })
   })
 })

@@ -21,9 +21,7 @@ describe('regex validation rule for most common regular expressions', () => {
     const validator = new Validator(
       { pattern: '03/11/2015' },
       {
-        pattern: [
-          'regex:/^([1-9]|0[1-9]|[12][0-9]|3[01])\\D([1-9]|0[1-9]|1[012])\\D(19[0-9][0-9]|20[0-9][0-9])$/',
-        ],
+        pattern: ['regex:/^([1-9]|0[1-9]|[12][0-9]|3[01])\\D([1-9]|0[1-9]|1[012])\\D(19[0-9][0-9]|20[0-9][0-9])$/'],
       },
     )
     expect(validator.passes()).toBeTruthy()
@@ -32,26 +30,18 @@ describe('regex validation rule for most common regular expressions', () => {
     const validator = new Validator(
       { pattern: '0311/2015' },
       {
-        pattern: [
-          'regex:/^([1-9]|0[1-9]|[12][0-9]|3[01])\\D([1-9]|0[1-9]|1[012])\\D(19[0-9][0-9]|20[0-9][0-9])$/',
-        ],
+        pattern: ['regex:/^([1-9]|0[1-9]|[12][0-9]|3[01])\\D([1-9]|0[1-9]|1[012])\\D(19[0-9][0-9]|20[0-9][0-9])$/'],
       },
     )
     expect(validator.fails()).toBeTruthy()
   })
 
   it('should pass with the year pattern: 2015', () => {
-    const validator = new Validator(
-      { pattern: '2015' },
-      { pattern: ['regex:/^(19|20)[\\d]{2,2}$/'] },
-    )
+    const validator = new Validator({ pattern: '2015' }, { pattern: ['regex:/^(19|20)[\\d]{2,2}$/'] })
     expect(validator.passes()).toBeTruthy()
   })
   it('should fail with the year pattern:: 20151', () => {
-    const validator = new Validator(
-      { pattern: '20151' },
-      { pattern: ['regex:/^(19|20)[\\d]{2,2}$/'] },
-    )
+    const validator = new Validator({ pattern: '20151' }, { pattern: ['regex:/^(19|20)[\\d]{2,2}$/'] })
     expect(validator.fails()).toBeTruthy()
   })
 
@@ -266,9 +256,7 @@ describe('regex validation rule for most common regular expressions', () => {
     const validator = new Validator(
       { pattern: 'SomePass1#' },
       {
-        pattern: [
-          'regex:/^(?=.{10,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\\W).*$/',
-        ],
+        pattern: ['regex:/^(?=.{10,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\\W).*$/'],
       },
     )
 
@@ -277,9 +265,7 @@ describe('regex validation rule for most common regular expressions', () => {
     const validator2 = new Validator(
       { pattern: 'SmePass1#' }, // less than 10 digits
       {
-        pattern: [
-          'regex:/^(?=.{10,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\\W).*$/',
-        ],
+        pattern: ['regex:/^(?=.{10,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\\W).*$/'],
       },
     )
 

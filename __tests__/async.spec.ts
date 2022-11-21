@@ -6,12 +6,7 @@ describe('async rule tests', () => {
   it('should be able to register and pass async rule', (done) => {
     Validator.registerAsync(
       'username',
-      (
-        desiredUsername: string,
-        ruleValue: string,
-        attribute: string,
-        passes: any,
-      ) => {
+      (desiredUsername: string, ruleValue: string, attribute: string, passes: any) => {
         setTimeout(() => {
           if (desiredUsername == 'test') {
             passes()
@@ -61,10 +56,7 @@ describe('async rule tests', () => {
       ':attribute is an invalid username',
     )
 
-    const validator = new Validator(
-      { username: 'test' },
-      { username: 'username1|username2' },
-    )
+    const validator = new Validator({ username: 'test' }, { username: 'username1|username2' })
     validator.passes(() => {
       expect(passCount).toEqual(2)
       done()
@@ -101,10 +93,7 @@ describe('async rule tests', () => {
       ':attribute is an invalid username',
     )
 
-    const validator = new Validator(
-      { username: 'test' },
-      { username: 'username1|username2' },
-    )
+    const validator = new Validator({ username: 'test' }, { username: 'username1|username2' })
     validator.fails(() => {
       expect(passCount).toEqual(1)
       expect(failedCount).toEqual(1)
@@ -145,10 +134,7 @@ describe('async rule tests', () => {
       ':attribute is an invalid username',
     )
 
-    const validator = new Validator(
-      { username: 'test' },
-      { username: 'required|min:3|username' },
-    )
+    const validator = new Validator({ username: 'test' }, { username: 'required|min:3|username' })
     validator.passes(done)
   })
 
@@ -177,16 +163,11 @@ describe('async rule tests', () => {
   it('should throw exception when attempting to validate and no fail or pass callback', function () {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     Validator.registerAsync('username', function () {})
-    const validator = new Validator(
-      { username: 'admin' },
-      { username: 'username' },
-    )
+    const validator = new Validator({ username: 'admin' }, { username: 'username' })
     try {
       validator.passes()
     } catch (e) {
-      expect(e).toBe(
-        'passes expects a callback when async rules are being tested.',
-      )
+      expect(e).toBe('passes expects a callback when async rules are being tested.')
     }
   })
 })

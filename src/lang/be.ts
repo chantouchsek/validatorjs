@@ -13,10 +13,8 @@ const be = {
   between: {
     numeric: 'Поле :attribute павінна быць паміж :min і :max.',
     file: 'Памер файла ў поле :attribute павінен быць паміж :min і :max кілабайт.',
-    string:
-      'Колькасць сiмвалаў у поле :attribute павінна быць паміж :min і :max.',
-    array:
-      'Колькасць элементаў у поле :attribute павінна быць паміж :min і :max.',
+    string: 'Колькасць сiмвалаў у поле :attribute павінна быць паміж :min і :max.',
+    array: 'Колькасць элементаў у поле :attribute павінна быць паміж :min і :max.',
   },
   boolean: 'Поле :attribute павінна мець значэнне лагічнага тыпу.',
   confirmed: 'Поле :attribute не супадае з пацвярджэннем.',
@@ -24,8 +22,7 @@ const be = {
   date_format: 'Поле :attribute не адпавядае фармату :format.',
   different: 'Палі :attribute і :other павінны адрознівацца.',
   digits: 'Даўжыня лічбавага поля :attribute павінна быць :digits.',
-  digits_between:
-    'Даўжыня лічбавага поля :attribute павінна быць паміж :min і :max.',
+  digits_between: 'Даўжыня лічбавага поля :attribute павінна быць паміж :min і :max.',
   dimensions: 'The :attribute has invalid image dimensions.',
   distinct: 'The :attribute field has a duplicate value.',
   email: 'Поле :attribute павінна быць сапраўдным электронным адрасам.',
@@ -71,10 +68,8 @@ const be = {
     string: 'Колькасць сiмвалаў у поле :attribute не можа перавышаць :max.',
     array: 'Колькасць элементаў у поле :attribute не можа перавышаць :max.',
   },
-  mimes:
-    'Поле :attribute павінна быць файлам аднаго з наступных тыпаў: :values.',
-  mimetypes:
-    'Поле :attribute павінна быць файлам аднаго з наступных тыпаў: :values.',
+  mimes: 'Поле :attribute павінна быць файлам аднаго з наступных тыпаў: :values.',
+  mimetypes: 'Поле :attribute павінна быць файлам аднаго з наступных тыпаў: :values.',
   min: {
     numeric: 'Поле :attribute павінна быць не менш :min.',
     file: 'Памер файла ў полее :attribute павінен быць не менш :min кілабайт.',
@@ -87,18 +82,12 @@ const be = {
   present: 'The :attribute field must be present.',
   regex: 'Поле :attribute мае памылковы фармат.',
   required: 'Поле :attribute абавязкова для запаўнення.',
-  required_if:
-    'Поле :attribute абавязкова для запаўнення, калі :other раўняецца :value.',
-  required_unless:
-    'Поле :attribute абавязкова для запаўнення, калі :other не раўняецца :values.',
-  required_with:
-    'Поле :attribute абавязкова для запаўнення, калі :values ўказана.',
-  required_with_all:
-    'Поле :attribute абавязкова для запаўнення, калі :values ўказана.',
-  required_without:
-    'Поле :attribute абавязкова для запаўнення, калі :values не ўказана.',
-  required_without_all:
-    'Поле :attribute абавязкова для запаўнення, калі ні адно з :values не ўказана.',
+  required_if: 'Поле :attribute абавязкова для запаўнення, калі :other раўняецца :value.',
+  required_unless: 'Поле :attribute абавязкова для запаўнення, калі :other не раўняецца :values.',
+  required_with: 'Поле :attribute абавязкова для запаўнення, калі :values ўказана.',
+  required_with_all: 'Поле :attribute абавязкова для запаўнення, калі :values ўказана.',
+  required_without: 'Поле :attribute абавязкова для запаўнення, калі :values не ўказана.',
+  required_without_all: 'Поле :attribute абавязкова для запаўнення, калі ні адно з :values не ўказана.',
   same: 'Значэнне :attribute павінна супадаць з :other.',
   size: {
     numeric: 'Поле :attribute павінна быць :size.',

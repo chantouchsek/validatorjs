@@ -3,13 +3,11 @@ const ro = {
   after: ':attribute trebuie să fie după :after.',
   after_or_equal: ':attribute trebuie să fie egal sau după :after_or_equal.',
   alpha: 'Câmpul :attribute rebuie să conțină numai caractere alfabetice.',
-  alpha_dash:
-    'Câmpul:attribute poate conține numai caractere alfanumerice, precum și liniuțe și subliniere.',
+  alpha_dash: 'Câmpul:attribute poate conține numai caractere alfanumerice, precum și liniuțe și subliniere.',
   alpha_num: 'Câmpul :attribute trebuie să fie alfanumeric.',
   attributes: {},
   before: ':attribute trebuie să fie înainte :before.',
-  before_or_equal:
-    ':attribute trebuie să fie egal sau înainte :before_or_equal.',
+  before_or_equal: ':attribute trebuie să fie egal sau înainte :before_or_equal.',
   between: ':attribute trebuie să fie între :min și :max.',
   confirmed: 'Confirmarea :attribute nu se potrivește.',
   email: 'Formatul :attribute nu este valid.',
@@ -34,16 +32,11 @@ const ro = {
   present: ':attribute trebuie sa fie prezent(dar poate fi gol).',
   required: ' Câmpul :attribute este obligatoriu.',
   required_if: 'Câmpul :attribute este obligatoriu cănd :other este :value.',
-  required_unless:
-    'Câmpul :attribute este obligatoriu cănd :other nu este :value.',
-  required_with:
-    'Câmpul :attribute este obligatoriu cănd :field este completat.',
-  required_with_all:
-    'Câmpul :attribute este obligatoriu cănd :fields sunt completate.',
-  required_without:
-    'Câmpul :attribute este obligatoriu cănd :field nu este completat.',
-  required_without_all:
-    'Câmpul :attribute este obligatoriu cănd :fields nu sunt completate.',
+  required_unless: 'Câmpul :attribute este obligatoriu cănd :other nu este :value.',
+  required_with: 'Câmpul :attribute este obligatoriu cănd :field este completat.',
+  required_with_all: 'Câmpul :attribute este obligatoriu cănd :fields sunt completate.',
+  required_without: 'Câmpul :attribute este obligatoriu cănd :field nu este completat.',
+  required_without_all: 'Câmpul :attribute este obligatoriu cănd :fields nu sunt completate.',
   same: 'Câmpurile :attribute și :same trebuie să fie egale.',
   size: {
     numeric: ':attribute trebuie să fie :size.',

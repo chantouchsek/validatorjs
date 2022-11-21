@@ -3,8 +3,7 @@ const nl = {
   after: ':attribute moet een datum na :after zijn.',
   after_or_equal: 'De :attribute datum moet op of na :after_or_equal zijn.',
   alpha: 'Het :attribute veld mag alleen maar letters bevatten.',
-  alpha_dash:
-    'Het :attribute veld mag alleen maar letters, cijfers en (liggende) streepjes bevatten.',
+  alpha_dash: 'Het :attribute veld mag alleen maar letters, cijfers en (liggende) streepjes bevatten.',
   alpha_num: 'Het :attribute veld mag alleen maar letters en cijfers bevatten.',
   attributes: {},
   before: ':attribute moet vòòr :before zijn.',
@@ -15,8 +14,7 @@ const nl = {
   date: 'Het :attribute veld moet een geldige datum zijn.',
   def: 'Het :attribute veld bevat fouten.',
   digits: 'Het :attribute veld moet :digits cijfers hebben.',
-  digits_between:
-    ':attribute moet bestaan uit minimaal :min en maximaal :max cijfers.',
+  digits_between: ':attribute moet bestaan uit minimaal :min en maximaal :max cijfers.',
   different: 'Het :attribute en :different veld moeten verschillend zijn.',
   in: 'De gekozen waarde voor :attribute is ongeldig.',
   integer: 'Het :attribute veld moet een geheel getal zijn.',
@@ -33,18 +31,12 @@ const nl = {
   numeric: 'Het :attribute veld moet een getal zijn.',
   present: 'Het :attribute veld moet aanwezig zijn (maar mag leeg zijn).',
   required: 'Het :attribute veld moet ingevuld zijn.',
-  required_if:
-    'Het :attribute veld moet ingevuld zijn, wanneer :other :value is.',
-  required_unless:
-    'Het :attribute veld moet ingevuld zijn, wanneer :other niet :value is.',
-  required_with:
-    'Het :attribute veld moet ingevuld zijn, wanneer :field niet leeg is.',
-  required_with_all:
-    'Het :attribute veld moet ingevuld zijn, wanneer :fields niet leeg zijn.',
-  required_without:
-    'Het :attribute veld moet ingevuld zijn, wanneer :field leeg is.',
-  required_without_all:
-    'Het :attribute veld moet ingevuld zijn, wanneer :fields leeg zijn.',
+  required_if: 'Het :attribute veld moet ingevuld zijn, wanneer :other :value is.',
+  required_unless: 'Het :attribute veld moet ingevuld zijn, wanneer :other niet :value is.',
+  required_with: 'Het :attribute veld moet ingevuld zijn, wanneer :field niet leeg is.',
+  required_with_all: 'Het :attribute veld moet ingevuld zijn, wanneer :fields niet leeg zijn.',
+  required_without: 'Het :attribute veld moet ingevuld zijn, wanneer :field leeg is.',
+  required_without_all: 'Het :attribute veld moet ingevuld zijn, wanneer :fields leeg zijn.',
   same: 'De :attribute en :same velden moeten overeenkomen.',
   size: {
     numeric: 'Het :attribute veld moet :size zijn.',

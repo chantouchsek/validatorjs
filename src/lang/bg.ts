@@ -2,17 +2,14 @@ const bg = {
   accepted: 'Трябва да приемете :attribute.',
   active_url: 'Полето :attribute не е валиден URL адрес.',
   after: 'Полето :attribute трябва да бъде дата след :date.',
-  after_or_equal:
-    'Полето :attribute трябва да бъде дата след или равна на :date.',
+  after_or_equal: 'Полето :attribute трябва да бъде дата след или равна на :date.',
   alpha: 'Полето :attribute трябва да съдържа само букви.',
-  alpha_dash:
-    'Полето :attribute трябва да съдържа само букви, цифри, долна черта и тире.',
+  alpha_dash: 'Полето :attribute трябва да съдържа само букви, цифри, долна черта и тире.',
   alpha_num: 'Полето :attribute трябва да съдържа само букви и цифри.',
   attributes: {},
   array: 'Полето :attribute трябва да бъде масив.',
   before: 'Полето :attribute трябва да бъде дата преди :date.',
-  before_or_equal:
-    'Полето :attribute трябва да бъде дата преди или равна на :date.',
+  before_or_equal: 'Полето :attribute трябва да бъде дата преди или равна на :date.',
   between: {
     numeric: 'Полето :attribute трябва да бъде между :min и :max.',
     file: 'Полето :attribute трябва да бъде между :min и :max килобайта.',
@@ -86,15 +83,11 @@ const bg = {
   regex: 'Полето :attribute е в невалиден формат.',
   required: 'Полето :attribute е задължително.',
   required_if: 'Полето :attribute се изисква, когато :other е :value.',
-  required_unless:
-    'Полето :attribute се изисква, освен ако :other не е в :values.',
+  required_unless: 'Полето :attribute се изисква, освен ако :other не е в :values.',
   required_with: 'Полето :attribute се изисква, когато :values има стойност.',
-  required_with_all:
-    'Полето :attribute е задължително, когато :values имат стойност.',
-  required_without:
-    'Полето :attribute се изисква, когато :values няма стойност.',
-  required_without_all:
-    'Полето :attribute се изисква, когато никое от полетата :values няма стойност.',
+  required_with_all: 'Полето :attribute е задължително, когато :values имат стойност.',
+  required_without: 'Полето :attribute се изисква, когато :values няма стойност.',
+  required_without_all: 'Полето :attribute се изисква, когато никое от полетата :values няма стойност.',
   same: 'Полетата :attribute и :other трябва да съвпадат.',
   size: {
     numeric: 'Полето :attribute трябва да бъде :size.',

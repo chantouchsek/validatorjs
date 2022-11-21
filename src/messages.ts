@@ -1,10 +1,5 @@
 import type { Rule } from './rule'
-import {
-  flattenObject,
-  hasOwnProperty,
-  toCamelCase,
-  toSnakeCase,
-} from './utils'
+import { flattenObject, hasOwnProperty, toCamelCase, toSnakeCase } from './utils'
 
 export default class Messages {
   private lang: string
@@ -129,10 +124,7 @@ export default class Messages {
     const attributeNames = flattenObject(this.attributeNames)
     const camelCase = toCamelCase(attribute)
     const snakeCase = toSnakeCase(attribute)
-    if (
-      hasOwnProperty(attributeNames, camelCase) ||
-      hasOwnProperty(attributeNames, snakeCase)
-    ) {
+    if (hasOwnProperty(attributeNames, camelCase) || hasOwnProperty(attributeNames, snakeCase)) {
       return attributeNames[snakeCase] || attributeNames[camelCase]
     }
     if (hasOwnProperty(attributes, attribute)) {
@@ -180,11 +172,7 @@ export default class Messages {
     return template
   }
 
-  _replacePlaceholders(
-    rule: Rule,
-    template: string | any,
-    data: Record<string, any>,
-  ): string {
+  _replacePlaceholders(rule: Rule, template: string | any, data: Record<string, any>): string {
     let message = ''
     let attribute
     data.attribute = this._getAttributeName(rule.attribute)

@@ -4,8 +4,7 @@ const hu = {
   after: 'A(z) :attribute :date utáni dátum kell, hogy legyen!',
   after_or_equal: 'A(z) :attribute nem lehet korábbi dátum, mint :date!',
   alpha: 'A(z) :attribute kizárólag betűket tartalmazhat!',
-  alpha_dash:
-    'A(z) :attribute kizárólag betűket, számokat és kötőjeleket tartalmazhat!',
+  alpha_dash: 'A(z) :attribute kizárólag betűket, számokat és kötőjeleket tartalmazhat!',
   alpha_num: 'A(z) :attribute kizárólag betűket és számokat tartalmazhat!',
   attributes: {},
   array: 'A(z) :attribute egy tömb kell, hogy legyen!',
@@ -14,18 +13,14 @@ const hu = {
   between: {
     numeric: 'A(z) :attribute :min és :max közötti szám kell, hogy legyen!',
     file: 'A(z) :attribute mérete :min és :max kilobájt között kell, hogy legyen!',
-    string:
-      'A(z) :attribute hossza :min és :max karakter között kell, hogy legyen!',
-    array:
-      'A(z) :attribute :min - :max közötti elemet kell, hogy tartalmazzon!',
+    string: 'A(z) :attribute hossza :min és :max karakter között kell, hogy legyen!',
+    array: 'A(z) :attribute :min - :max közötti elemet kell, hogy tartalmazzon!',
   },
   boolean: 'A(z) :attribute mező csak true vagy false értéket kaphat!',
   confirmed: 'A(z) :attribute nem egyezik a megerősítéssel.',
   date: 'A(z) :attribute nem érvényes dátum.',
-  date_format:
-    'A(z) :attribute nem egyezik az alábbi dátum formátummal :format!',
-  different:
-    'A(z) :attribute és :other értékei különbözőek kell, hogy legyenek!',
+  date_format: 'A(z) :attribute nem egyezik az alábbi dátum formátummal :format!',
+  different: 'A(z) :attribute és :other értékei különbözőek kell, hogy legyenek!',
   digits: 'A(z) :attribute :digits számjegyű kell, hogy legyen!',
   digits_between: 'A(z) :attribute értéke :min és :max közötti számjegy lehet!',
   dimensions: 'A(z) :attribute felbontása nem megfelelő.',
@@ -41,8 +36,7 @@ const hu = {
     array: 'A(z) :attribute több, mint :value elemet kell, hogy tartalmazzon.',
   },
   gte: {
-    numeric:
-      'A(z) :attribute nagyobb vagy egyenlő kell, hogy legyen, mint :value!',
+    numeric: 'A(z) :attribute nagyobb vagy egyenlő kell, hogy legyen, mint :value!',
     file: 'A(z) :attribute mérete nem lehet kevesebb, mint :value kilobájt.',
     string: 'A(z) :attribute hossza nem lehet kevesebb, mint :value karakter.',
     array: 'A(z) :attribute legalább :value elemet kell, hogy tartalmazzon.',
@@ -60,12 +54,10 @@ const hu = {
     numeric: 'A(z) :attribute kisebb kell, hogy legyen, mint :value!',
     file: 'A(z) :attribute mérete kisebb kell, hogy legyen, mint :value kilobájt.',
     string: 'A(z) :attribute rövidebb kell, hogy legyen, mint :value karakter.',
-    array:
-      'A(z) :attribute kevesebb, mint :value elemet kell, hogy tartalmazzon.',
+    array: 'A(z) :attribute kevesebb, mint :value elemet kell, hogy tartalmazzon.',
   },
   lte: {
-    numeric:
-      'A(z) :attribute kisebb vagy egyenlő kell, hogy legyen, mint :value!',
+    numeric: 'A(z) :attribute kisebb vagy egyenlő kell, hogy legyen, mint :value!',
     file: 'A(z) :attribute mérete nem lehet több, mint :value kilobájt.',
     string: 'A(z) :attribute hossza nem lehet több, mint :value karakter.',
     array: 'A(z) :attribute legfeljebb :value elemet kell, hogy tartalmazzon.',
@@ -76,10 +68,8 @@ const hu = {
     string: 'A(z) :attribute hossza nem lehet több, mint :max karakter.',
     array: 'A(z) :attribute legfeljebb :max elemet kell, hogy tartalmazzon.',
   },
-  mimes:
-    'A(z) :attribute kizárólag az alábbi fájlformátumok egyike lehet: :values.',
-  mimetypes:
-    'A(z) :attribute kizárólag az alábbi fájlformátumok egyike lehet: :values.',
+  mimes: 'A(z) :attribute kizárólag az alábbi fájlformátumok egyike lehet: :values.',
+  mimetypes: 'A(z) :attribute kizárólag az alábbi fájlformátumok egyike lehet: :values.',
   min: {
     numeric: 'A(z) :attribute értéke nem lehet kisebb, mint :min!',
     file: 'A(z) :attribute mérete nem lehet kevesebb, mint :min kilobájt.',
@@ -92,18 +82,12 @@ const hu = {
   present: 'A(z) :attribute mező nem található!',
   regex: 'A(z) :attribute formátuma érvénytelen.',
   required: 'A(z) :attribute megadása kötelező!',
-  required_if:
-    'A(z) :attribute megadása kötelező, ha a(z) :other értéke :value!',
-  required_unless:
-    'A(z) :attribute megadása kötelező, ha a(z) :other értéke nem :values!',
-  required_with:
-    'A(z) :attribute megadása kötelező, ha a(z) :values érték létezik.',
-  required_with_all:
-    'A(z) :attribute megadása kötelező, ha a(z) :values értékek léteznek.',
-  required_without:
-    'A(z) :attribute megadása kötelező, ha a(z) :values érték nem létezik.',
-  required_without_all:
-    'A(z) :attribute megadása kötelező, ha egyik :values érték sem létezik.',
+  required_if: 'A(z) :attribute megadása kötelező, ha a(z) :other értéke :value!',
+  required_unless: 'A(z) :attribute megadása kötelező, ha a(z) :other értéke nem :values!',
+  required_with: 'A(z) :attribute megadása kötelező, ha a(z) :values érték létezik.',
+  required_with_all: 'A(z) :attribute megadása kötelező, ha a(z) :values értékek léteznek.',
+  required_without: 'A(z) :attribute megadása kötelező, ha a(z) :values érték nem létezik.',
+  required_without_all: 'A(z) :attribute megadása kötelező, ha egyik :values érték sem létezik.',
   same: 'A(z) :attribute és :other mezőknek egyezniük kell!',
   size: {
     numeric: 'A(z) :attribute értéke :size kell, hogy legyen!',

@@ -83,13 +83,11 @@ const bs = {
   regex: 'Polje :attribute ima neispravan format.',
   required: 'Polje :attribute je obavezno.',
   required_if: 'Polje :attribute je obavezno kada :other je :value.',
-  required_unless:
-    'The :attribute field is required unless :other is in :values.',
+  required_unless: 'The :attribute field is required unless :other is in :values.',
   required_with: 'Polje :attribute je obavezno kada je :values prikazano.',
   required_with_all: 'Polje :attribute je obavezno kada je :values prikazano.',
   required_without: 'Polje :attribute je obavezno kada :values nije prikazano.',
-  required_without_all:
-    'Polje :attribute je obavezno kada nijedno :values nije prikazano.',
+  required_without_all: 'Polje :attribute je obavezno kada nijedno :values nije prikazano.',
   same: 'Polja :attribute i :other se moraju poklapati.',
   size: {
     numeric: 'Polje :attribute mora biti :size.',

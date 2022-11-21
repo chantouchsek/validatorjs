@@ -2,17 +2,14 @@ const mn = {
   accepted: ':attribute баталсан байх шаардлагатай.',
   active_url: ':attribute талбарт зөв URL хаяг оруулна уу.',
   after: ':attribute талбарт :date-с хойш огноо оруулна уу.',
-  after_or_equal:
-    ':attribute талбарт :date эсвэл түүнээс хойш огноо оруулна уу.',
+  after_or_equal: ':attribute талбарт :date эсвэл түүнээс хойш огноо оруулна уу.',
   alpha: ':attribute талбарт латин үсэг оруулна уу.',
-  alpha_dash:
-    ':attribute талбарт латин үсэг, тоо болон зураас оруулах боломжтой.',
+  alpha_dash: ':attribute талбарт латин үсэг, тоо болон зураас оруулах боломжтой.',
   alpha_num: ':attribute талбарт латин үсэг болон тоо оруулах боломжтой.',
   attributes: {},
   array: ':attribute талбар массив байх шаардлагатай.',
   before: ':attribute талбарт :date-с өмнөх огноо оруулна уу.',
-  before_or_equal:
-    ':attribute талбарт :date эсвэл түүнээс өмнөх огноо оруулна уу.',
+  before_or_equal: ':attribute талбарт :date эсвэл түүнээс өмнөх огноо оруулна уу.',
   between: {
     numeric: ':attribute талбарт :min-:max хооронд тоо оруулна уу.',
     file: ':attribute талбарт :min-:max килобайт хэмжээтэй файл оруулна уу.',
@@ -25,8 +22,7 @@ const mn = {
   date_format: ':attribute талбарт :format хэлбэртэй огноо оруулна уу.',
   different: ':attribute талбарт :other -с өөр утга оруулах шаардлагатай.',
   digits: ':attribute талбарт дараах цифрүүдээс оруулах боломжтой. :digits.',
-  digits_between:
-    ':attribute талбарт :min-:max хоорондох цифр оруулах боломжтой.',
+  digits_between: ':attribute талбарт :min-:max хоорондох цифр оруулах боломжтой.',
   dimensions: ':attribute талбарийн зургийн хэмжээс буруу байна.',
   distinct: ':attribute талбарт ялгаатай утга оруулах шаардлагатай.',
   email: ':attribute талбарт зөв и-мэйл хаяг оруулах шаардлагатай.',
@@ -73,13 +69,11 @@ const mn = {
     array: ':attribute талбарт хамгийн ихдээ :max элемэнт оруулах боломжтой.',
   },
   mimes: ':attribute талбарт дараах төрлийн файл оруулах боломжтой: :values.',
-  mimetypes:
-    ':attribute талбарт дараах төрлийн файл оруулах боломжтой: :values.',
+  mimetypes: ':attribute талбарт дараах төрлийн файл оруулах боломжтой: :values.',
   min: {
     numeric: ':attribute талбарт :min буюу түүнээс их тоо оруулна уу.',
     file: ':attribute талбарт :min килобайтаас их хэмжээтэй файл оруулна уу.',
-    string:
-      ':attribute талбарт :min буюу түүнээс их үсэг бүхий текст оруулна уу.',
+    string: ':attribute талбарт :min буюу түүнээс их үсэг бүхий текст оруулна уу.',
     array: ':attribute талбарт хамгийн багадаа :min элемэнт оруулах боломжтой.',
   },
   not_in: 'Буруу :attribute сонгогдсон байна.',
@@ -88,17 +82,12 @@ const mn = {
   present: ':attribute талбар байх шаардлагатай.',
   regex: ':attribute талбарт оруулсан утга буруу байна.',
   required: ':attribute талбар шаардлагатай.',
-  required_if:
-    'Хэрэв :other :value бол :attribute табларт утга оруулах шаардлагатай.',
-  required_unless:
-    ':other :values дотор байхгүй бол :attribute талбарт утга оруулах шаардлагатай.',
-  required_with:
-    ':values утгуудийн аль нэг байвал :attribute талбар шаардлагатай.',
+  required_if: 'Хэрэв :other :value бол :attribute табларт утга оруулах шаардлагатай.',
+  required_unless: ':other :values дотор байхгүй бол :attribute талбарт утга оруулах шаардлагатай.',
+  required_with: ':values утгуудийн аль нэг байвал :attribute талбар шаардлагатай.',
   required_with_all: ':values утгууд байвал :attribute талбар шаардлагатай.',
-  required_without:
-    'The :attribute field is required when :values is not present.',
-  required_without_all:
-    'The :attribute field is required when none of :values are present.',
+  required_without: 'The :attribute field is required when :values is not present.',
+  required_without_all: 'The :attribute field is required when none of :values are present.',
   same: 'The :attribute and :other must match.',
   size: {
     numeric: ':attribute :size хэмжээтэй байх шаардлагатай.',

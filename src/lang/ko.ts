@@ -2,16 +2,14 @@ const ko = {
   accepted: ':attribute을(를) 동의해야 합니다.',
   active_url: ':attribute은(는) 유효한 URL이 아닙니다.',
   after: ':attribute은(는) :date 이후 날짜여야 합니다.',
-  after_or_equal:
-    ':attribute은(는) :date 이후 날짜이거나 같은 날짜여야 합니다.',
+  after_or_equal: ':attribute은(는) :date 이후 날짜이거나 같은 날짜여야 합니다.',
   alpha: ':attribute은(는) 문자만 포함할 수 있습니다.',
   alpha_dash: ':attribute은(는) 문자, 숫자, 대쉬(-)만 포함할 수 있습니다.',
   alpha_num: ':attribute은(는) 문자와 숫자만 포함할 수 있습니다.',
   attributes: {},
   array: ':attribute은(는) 배열이어야 합니다.',
   before: ':attribute은(는) :date 이전 날짜여야 합니다.',
-  before_or_equal:
-    ':attribute은(는) :date 이전 날짜이거나 같은 날짜여야 합니다.',
+  before_or_equal: ':attribute은(는) :date 이전 날짜이거나 같은 날짜여야 합니다.',
   between: {
     numeric: ':attribute은(는) :min에서 :max 사이여야 합니다.',
     file: ':attribute은(는) :min에서 :max 킬로바이트 사이여야 합니다.',
@@ -87,11 +85,9 @@ const ko = {
   required_if: ':other이(가) :value 일 때 :attribute 필드는 필수입니다.',
   required_unless: ':other이(가) :value에 없다면 :attribute 필드는 필수입니다.',
   required_with: ':values이(가) 있는 경우 :attribute 필드는 필수입니다.',
-  required_with_all:
-    ':values이(가) 모두 있는 경우 :attribute 필드는 필수입니다.',
+  required_with_all: ':values이(가) 모두 있는 경우 :attribute 필드는 필수입니다.',
   required_without: ':values이(가) 없는 경우 :attribute 필드는 필수입니다.',
-  required_without_all:
-    ':values이(가) 모두 없는 경우 :attribute 필드는 필수입니다.',
+  required_without_all: ':values이(가) 모두 없는 경우 :attribute 필드는 필수입니다.',
   same: ':attribute와(과) :other은(는) 일치해야 합니다.',
   size: {
     numeric: ':attribute은(는) :size (이)여야 합니다.',

@@ -7,8 +7,7 @@ const id = {
   alpha_num: ':attribute hanya boleh berisi huruf dan angka.',
   attributes: {},
   before: ':attribute harus sebelum :before.',
-  before_or_equal:
-    ':attribute harus sama dengan atau sebelum :before_or_equal.',
+  before_or_equal: ':attribute harus sama dengan atau sebelum :before_or_equal.',
   between: ':attribute harus berisi antara :min dan :max.',
   confirmed: ':attribute konfirmasi tidak sama.',
   email: ':attribute harus berupa email.',
