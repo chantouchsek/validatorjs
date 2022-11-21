@@ -6,7 +6,7 @@ import en from './lang/en'
 import km from './lang/km'
 
 export default class Lang {
-  static messages: Record<LangTypes, any> = { en, ja, km }
+  static messages: Record<LangTypes, Record<string, any>> = { en, ja, km }
 
   static _set(lang: LangTypes, rawMessages: Record<string, any>) {
     this.messages[lang] = rawMessages
