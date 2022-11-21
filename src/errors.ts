@@ -1,7 +1,7 @@
 import { hasOwnProperty } from './utils'
 
 export default class Errors {
-  private readonly errors: Record<string, string[]> = {}
+  private errors: Record<string, string[]> = {}
 
   add(attribute: string, message: string) {
     if (!this.has(attribute)) {
@@ -32,5 +32,9 @@ export default class Errors {
 
   has(attribute: string) {
     return hasOwnProperty(this.errors, attribute)
+  }
+
+  fill(errors: Record<string, string[]>) {
+    this.errors = errors
   }
 }

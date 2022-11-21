@@ -4,8 +4,7 @@ const lt = {
   after: 'Lauko :attribute reikšmė turi būti po :date datos.',
   after_or_equal: 'The :attribute must be a date after or equal to :date.',
   alpha: 'Laukas :attribute gali turėti tik raides.',
-  alpha_dash:
-    'Laukas :attribute gali turėti tik raides, skaičius ir brūkšnelius.',
+  alpha_dash: 'Laukas :attribute gali turėti tik raides, skaičius ir brūkšnelius.',
   alpha_num: 'Laukas :attribute gali turėti tik raides ir skaičius.',
   attributes: {},
   array: 'Laukas :attribute turi būti masyvas.',
@@ -24,8 +23,7 @@ const lt = {
   different: 'Laukų :attribute ir :other reikšmės turi skirtis.',
   digits: 'Laukas :attribute turi būti sudarytas iš :digits skaitmenų.',
   digits_between: 'Laukas :attribute tuti turėti nuo :min iki :max skaitmenų.',
-  dimensions:
-    'Lauke :attribute įkeltas paveiksliukas neatitinka išmatavimų reikalavimo.',
+  dimensions: 'Lauke :attribute įkeltas paveiksliukas neatitinka išmatavimų reikalavimo.',
   distinct: 'Laukas :attribute pasikartoja.',
   email: 'Lauko :attribute reikšmė turi būti galiojantis el. pašto adresas.',
   file: 'The :attribute must be a file.',
@@ -67,15 +65,11 @@ const lt = {
   max: {
     numeric: 'Lauko :attribute reikšmė negali būti didesnė nei :max.',
     file: 'Failo dydis lauke :attribute reikšmė negali būti didesnė nei :max kilobaitų.',
-    string:
-      'Simbolių kiekis lauke :attribute reikšmė negali būti didesnė nei :max simbolių.',
-    array:
-      'Elementų kiekis lauke :attribute negali turėti daugiau nei :max elementų.',
+    string: 'Simbolių kiekis lauke :attribute reikšmė negali būti didesnė nei :max simbolių.',
+    array: 'Elementų kiekis lauke :attribute negali turėti daugiau nei :max elementų.',
   },
-  mimes:
-    'Lauko reikšmė :attribute turi būti failas vieno iš sekančių tipų: :values.',
-  mimetypes:
-    'Lauko reikšmė :attribute turi būti failas vieno iš sekančių tipų: :values.',
+  mimes: 'Lauko reikšmė :attribute turi būti failas vieno iš sekančių tipų: :values.',
+  mimetypes: 'Lauko reikšmė :attribute turi būti failas vieno iš sekančių tipų: :values.',
   min: {
     numeric: 'Lauko :attribute reikšmė turi būti ne mažesnė nei :min.',
     file: 'Failo dydis lauke :attribute turi būti ne mažesnis nei :min kilobaitų.',
@@ -89,15 +83,11 @@ const lt = {
   regex: 'Negaliojantis lauko :attribute formatas.',
   required: 'Privaloma užpildyti lauką :attribute.',
   required_if: 'Privaloma užpildyti lauką :attribute kai :other yra :value.',
-  required_unless:
-    'Laukas :attribute yra privalomas, nebent :other yra tarp :values reikšmių.',
+  required_unless: 'Laukas :attribute yra privalomas, nebent :other yra tarp :values reikšmių.',
   required_with: 'Privaloma užpildyti lauką :attribute kai pateikta :values.',
-  required_with_all:
-    'Privaloma užpildyti lauką :attribute kai pateikta :values.',
-  required_without:
-    'Privaloma užpildyti lauką :attribute kai nepateikta :values.',
-  required_without_all:
-    'Privaloma užpildyti lauką :attribute kai nepateikta nei viena iš reikšmių :values.',
+  required_with_all: 'Privaloma užpildyti lauką :attribute kai pateikta :values.',
+  required_without: 'Privaloma užpildyti lauką :attribute kai nepateikta :values.',
+  required_without_all: 'Privaloma užpildyti lauką :attribute kai nepateikta nei viena iš reikšmių :values.',
   same: 'Laukai :attribute ir :other turi sutapti.',
   size: {
     numeric: 'Lauko :attribute reikšmė turi būti :size.',

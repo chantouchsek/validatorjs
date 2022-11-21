@@ -2,17 +2,14 @@ const sv = {
   accepted: ':attribute måste accepteras.',
   active_url: ':attribute är inte en giltig webbadress.',
   after: ':attribute måste vara ett datum efter den :date.',
-  after_or_equal:
-    ':attribute måste vara ett datum senare eller samma dag som :date.',
+  after_or_equal: ':attribute måste vara ett datum senare eller samma dag som :date.',
   alpha: ':attribute får endast innehålla bokstäver.',
-  alpha_dash:
-    ':attribute får endast innehålla bokstäver, siffror och bindestreck.',
+  alpha_dash: ':attribute får endast innehålla bokstäver, siffror och bindestreck.',
   alpha_num: ':attribute får endast innehålla bokstäver och siffror.',
   attributes: {},
   array: ':attribute måste vara en array.',
   before: ':attribute måste vara ett datum innan den :date.',
-  before_or_equal:
-    ':attribute måste vara ett datum före eller samma dag som :date.',
+  before_or_equal: ':attribute måste vara ett datum före eller samma dag som :date.',
   between: {
     numeric: ':attribute måste vara en siffra mellan :min och :max.',
     file: ':attribute måste vara mellan :min till :max kilobyte stor.',
@@ -63,8 +60,7 @@ const sv = {
     numeric: ':attribute måste vara lika med eller mindre än :value.',
     file: ':attribute måste vara lika med eller mindre än :value kilobyte stor.',
     string: ':attribute måste vara lika med eller kortare än :value tecken.',
-    array:
-      ':attribute måste innehålla lika många eller färre än :value objekt.',
+    array: ':attribute måste innehålla lika många eller färre än :value objekt.',
   },
   max: {
     numeric: ':attribute får inte vara större än :max.',
@@ -87,13 +83,11 @@ const sv = {
   regex: ':attribute har ogiltigt format.',
   required: ':attribute är obligatoriskt.',
   required_if: ':attribute är obligatoriskt när :other är :value.',
-  required_unless:
-    ':attribute är obligatoriskt när inte :other finns bland :values.',
+  required_unless: ':attribute är obligatoriskt när inte :other finns bland :values.',
   required_with: ':attribute är obligatoriskt när :values är ifyllt.',
   required_with_all: ':attribute är obligatoriskt när :values är ifyllt.',
   required_without: ':attribute är obligatoriskt när :values ej är ifyllt.',
-  required_without_all:
-    ':attribute är obligatoriskt när ingen av :values är ifyllt.',
+  required_without_all: ':attribute är obligatoriskt när ingen av :values är ifyllt.',
   same: ':attribute och :other måste vara lika.',
   size: {
     numeric: ':attribute måste vara :size.',

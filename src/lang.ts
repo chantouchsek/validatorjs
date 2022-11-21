@@ -1,8 +1,12 @@
 import Massages from './messages'
 import { LangTypes } from './types/lang'
 
+import ja from './lang/ja'
+import en from './lang/en'
+import km from './lang/km'
+
 export default class Lang {
-  static messages: Record<LangTypes, any> = Object.create({})
+  static messages: Record<LangTypes, Record<string, any>> = { en, ja, km }
 
   static _set(lang: LangTypes, rawMessages: Record<string, any>) {
     this.messages[lang] = rawMessages
@@ -30,6 +34,7 @@ export default class Lang {
         rawMessage = require(`./lang/${lang}`)
         this._set(lang, rawMessage.default)
       } catch (e) {
+        console.warn('e', e)
         this._set(lang, {})
       }
     }

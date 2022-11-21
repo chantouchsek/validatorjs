@@ -59,10 +59,8 @@ const ms = {
   lte: {
     numeric: ':attribute mesti kurang daripada atau bersamaan dengan :value.',
     file: ':attribute mesti kurang daripada atau bersamaan dengan :value kilobait.',
-    string:
-      ':attribute mesti kurang daripada atau bersamaan dengan :value aksara.',
-    array:
-      ':attribute mesti mengandungi kurang daripada atau bersamaan dengan :value perkara.',
+    string: ':attribute mesti kurang daripada atau bersamaan dengan :value aksara.',
+    array: ':attribute mesti mengandungi kurang daripada atau bersamaan dengan :value perkara.',
   },
   max: {
     numeric: 'Jumlah :attribute mesti tidak melebihi :max.',
@@ -85,13 +83,11 @@ const ms = {
   regex: 'Format :attribute tidak sah.',
   required: 'Ruangan :attribute diperlukan.',
   required_if: 'Ruangan :attribute diperlukan bila :other sama dengan :value.',
-  required_unless:
-    'Ruangan :attribute diperlukan sekiranya :other ada dalam :values.',
+  required_unless: 'Ruangan :attribute diperlukan sekiranya :other ada dalam :values.',
   required_with: 'Ruangan :attribute diperlukan bila :values wujud.',
   required_with_all: 'Ruangan :attribute diperlukan bila :values wujud.',
   required_without: 'Ruangan :attribute diperlukan bila :values tidak wujud.',
-  required_without_all:
-    'Ruangan :attribute diperlukan bila kesemua :values wujud.',
+  required_without_all: 'Ruangan :attribute diperlukan bila kesemua :values wujud.',
   same: 'Ruangan :attribute dan :other mesti sepadan.',
   size: {
     numeric: 'Saiz :attribute mesti :size.',

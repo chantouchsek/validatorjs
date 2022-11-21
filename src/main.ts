@@ -4,15 +4,11 @@ import Errors from './errors'
 import { Manager, Rule } from './rule'
 import AsyncResolvers from './async-resolvers'
 import type { ValidatorOptions, VoidFunction } from './types/validator'
-import {
-  flattenObject,
-  objectPath,
-  formatter,
-  isArray,
-  hasOwnProperty,
-} from './utils'
+import { flattenObject, objectPath, formatter, isArray, hasOwnProperty } from './utils'
 import { LangTypes } from './types/lang'
 import { RuleType } from './types/rule'
+
+export { Errors }
 
 export default class Validator {
   readonly input: Record<string, any> = {}
@@ -29,11 +25,7 @@ export default class Validator {
   static manager = new Manager()
   private readonly confirmedReverse?: boolean
 
-  constructor(
-    input?: Record<string, any> | null,
-    rules?: Record<string, any>,
-    options: Partial<ValidatorOptions> = {},
-  ) {
+  constructor(input: Record<string, any> | null, rules?: Record<string, any>, options: Partial<ValidatorOptions> = {}) {
     const lang = options.locale || Validator.getDefaultLang()
     Validator.useLang(lang)
     this.input = input || {}
@@ -52,25 +44,13 @@ export default class Validator {
     for (let attribute in this.rules) {
       const attributeRules = this.rules[attribute]
       const inputValue = objectPath(this.input, attribute)
-      if (this._passesOptionalCheck(attribute)) {
-        continue
-      }
+      if (this._passesOptionalCheck(attribute)) continue
 
-      for (
-        let i = 0,
-          len = attributeRules.length,
-          rule: Rule,
-          ruleOptions,
-          rulePassed;
-        i < len;
-        i++
-      ) {
+      for (let i = 0, len = attributeRules.length, rule: Rule, ruleOptions, rulePassed; i < len; i++) {
         ruleOptions = attributeRules[i]
         const { name, value } = ruleOptions
         rule = this.getRule(name)
-        if (!this._isValidatable(rule, inputValue)) {
-          continue
-        }
+        if (!this._isValidatable(rule, inputValue)) continue
         rulePassed = rule.validate(inputValue, value, attribute)
         if (!rulePassed) {
           if (name === 'confirmed' && this.confirmedReverse) {
@@ -79,13 +59,11 @@ export default class Validator {
           }
           this._addFailure(rule)
         }
-        if (this._shouldStopValidating(attribute, rulePassed)) {
-          break
-        }
+        if (this._shouldStopValidating(attribute, rulePassed)) break
       }
     }
 
-    return this.errorCount === 0
+    return !this.errorCount
   }
 
   checkAsync(passes?: boolean | (() => void), fails?: any) {
@@ -122,15 +100,9 @@ export default class Validator {
     for (const attribute in this.rules) {
       const attributeRules = this.rules[attribute]
       const inputValue = objectPath(this.input, attribute)
-      if (this._passesOptionalCheck(attribute)) {
-        continue
-      }
+      if (this._passesOptionalCheck(attribute)) continue
 
-      for (
-        let i = 0, len = attributeRules.length, rule, ruleOptions;
-        i < len;
-        i++
-      ) {
+      for (let i = 0, len = attributeRules.length, rule, ruleOptions; i < len; i++) {
         ruleOptions = attributeRules[i]
         rule = this.getRule(ruleOptions.name)
         if (this._isValidatable(rule, inputValue)) {
@@ -185,9 +157,7 @@ export default class Validator {
   _hasRule(attribute: string, findRules: string[]) {
     const rules = this.rules[attribute]
     for (const { name } of rules) {
-      if (findRules.indexOf(name) > -1) {
-        return true
-      }
+      if (findRules.indexOf(name) > -1) return true
     }
     return false
   }
@@ -198,18 +168,10 @@ export default class Validator {
   }
 
   _suppliedWithData(attribute: string) {
-    function hasNested(
-      obj: undefined | Record<string, any>,
-      key: string,
-      ...args: string[]
-    ): boolean {
-      if (obj === undefined) {
-        return false
-      }
+    function hasNested(obj: undefined | Record<string, any>, key: string, ...args: string[]): boolean {
+      if (obj === undefined) return false
 
-      if (args.length == 0 && hasOwnProperty(obj, key)) {
-        return true
-      }
+      if (args.length == 0 && hasOwnProperty(obj, key)) return true
 
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
@@ -228,9 +190,7 @@ export default class Validator {
   }
 
   _isValidatable(rule: Record<string, any>, value: any): boolean {
-    if (isArray(value) || Validator.manager.isImplicit(rule.name)) {
-      return true
-    }
+    if (isArray(value) || Validator.manager.isImplicit(rule.name)) return true
 
     return this.getRule('required').validate(value, {})
   }
@@ -244,9 +204,7 @@ export default class Validator {
   _shouldStopValidating(attribute: string, rulePassed: any) {
     const stopOnAttributes = this.stopOnAttributes
     const isUndefined = typeof stopOnAttributes === 'undefined'
-    if (isUndefined || stopOnAttributes === false || rulePassed === true) {
-      return false
-    }
+    if (isUndefined || stopOnAttributes === false || rulePassed === true) return false
 
     if (stopOnAttributes instanceof Array) {
       return stopOnAttributes.indexOf(attribute) > -1
@@ -262,19 +220,9 @@ export default class Validator {
     wildCardValues?: any[],
   ) {
     if (attribute.indexOf('*') > -1) {
-      this._parsedRulesRecurse(
-        attribute,
-        rulesArray,
-        parsedRules,
-        wildCardValues,
-      )
+      this._parsedRulesRecurse(attribute, rulesArray, parsedRules, wildCardValues)
     } else {
-      this._parseRulesDefault(
-        attribute,
-        rulesArray,
-        parsedRules,
-        wildCardValues,
-      )
+      this._parseRulesDefault(attribute, rulesArray, parsedRules, wildCardValues)
     }
   }
 
@@ -288,19 +236,10 @@ export default class Validator {
     const propertyValue = objectPath(this.input, parentPath)
 
     if (propertyValue) {
-      for (
-        let propertyNumber = 0;
-        propertyNumber < propertyValue.length;
-        propertyNumber++
-      ) {
+      for (let propertyNumber = 0; propertyNumber < propertyValue.length; propertyNumber++) {
         const workingValues = wildCardValues.slice()
         workingValues.push(propertyNumber)
-        this._parseRulesCheck(
-          attribute.replace(/\*/g, String(propertyNumber)),
-          rulesArray,
-          parsedRules,
-          workingValues,
-        )
+        this._parseRulesCheck(attribute.replace(/\*/g, String(propertyNumber)), rulesArray, parsedRules, workingValues)
       }
     }
   }
@@ -323,14 +262,10 @@ export default class Validator {
 
     for (const ruleKey of rulesArray) {
       const rule = this._extractRuleAndRuleValue(ruleKey)
-      if (rule.value) {
-        rule.value = this._replaceWildCards(rule.value, wildCardValues)
-      }
+      if (rule.value) rule.value = this._replaceWildCards(rule.value, wildCardValues)
       this._replaceWildCardsMessages(wildCardValues)
 
-      if (Validator.manager.isAsync(rule.name)) {
-        this.hasAsync = true
-      }
+      if (Validator.manager.isAsync(rule.name)) this.hasAsync = true
       attributeRules.push(rule)
     }
 
@@ -343,10 +278,7 @@ export default class Validator {
     for (const ruleArray of rulesArray) {
       if (typeof ruleArray === 'object') {
         for (const rule in ruleArray) {
-          rules.push({
-            name: rule,
-            value: ruleArray[rule],
-          })
+          rules.push({ name: rule, value: ruleArray[rule] })
         }
       } else {
         rules.push(ruleArray)
@@ -373,9 +305,7 @@ export default class Validator {
   }
 
   _replaceWildCards(path: string | string[] | any, nums: string[]) {
-    if (!nums) {
-      return path
-    }
+    if (!nums) return path
 
     let path2 = path
     for (const num of nums) {
@@ -383,9 +313,7 @@ export default class Validator {
         path2 = path2[0]
       }
       const pos = path2.indexOf('*')
-      if (pos === -1) {
-        return path2
-      }
+      if (pos === -1) return path2
       path2 = path2.substring(0, pos) + num + path2.substring(pos + 1)
     }
     if (isArray(path)) {
@@ -424,17 +352,13 @@ export default class Validator {
 
   passes(passes?: () => void) {
     const async = this._checkAsync('passes', passes)
-    if (async) {
-      return this.checkAsync(passes)
-    }
+    if (async) return this.checkAsync(passes)
     return this.check()
   }
 
   fails(fails?: VoidFunction) {
     const async = this._checkAsync('fails', fails)
-    if (async) {
-      return this.checkAsync(false, fails)
-    }
+    if (async) return this.checkAsync(false, fails)
     return !this.check()
   }
 
@@ -470,18 +394,13 @@ export default class Validator {
 
   _onlyInputWithRules(obj?: Record<string, any>, keyPrefix?: string) {
     const prefix = keyPrefix || ''
-    const values: Record<string, any> = JSON.parse(
-      JSON.stringify(obj === undefined ? this.input : obj),
-    )
+    const values: Record<string, any> = JSON.parse(JSON.stringify(obj === undefined ? this.input : obj))
 
     for (const key of Object.keys(values)) {
       if (values[key] !== null && typeof values[key] === 'object') {
         values[key] = this._onlyInputWithRules(values[key], prefix + key + '.')
       } else {
-        if (
-          values[key] === undefined ||
-          !Object.keys(this.rules).includes(prefix + key)
-        ) {
+        if (values[key] === undefined || !Object.keys(this.rules).includes(prefix + key)) {
           delete values[key]
         }
       }

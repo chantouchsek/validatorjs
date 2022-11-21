@@ -16,10 +16,7 @@ describe('async rule tests', () => {
       ':attribute is an invalid username',
     )
 
-    const validator = new Validator(
-      { username: 'test' },
-      { username: 'username' },
-    )
+    const validator = new Validator({ username: 'test' }, { username: 'username' })
     validator.fails(done)
   })
 })

@@ -2,17 +2,14 @@ const pt = {
   accepted: 'O campo :attribute deverá ser aceite.',
   active_url: 'O campo :attribute não contém um URL válido.',
   after: 'O campo :attribute deverá conter uma data posterior a :date.',
-  after_or_equal:
-    'O campo :attribute deverá conter uma data posterior ou igual a :date.',
+  after_or_equal: 'O campo :attribute deverá conter uma data posterior ou igual a :date.',
   alpha: 'O campo :attribute deverá conter apenas letras.',
-  alpha_dash:
-    'O campo :attribute deverá conter apenas letras, números e traços.',
+  alpha_dash: 'O campo :attribute deverá conter apenas letras, números e traços.',
   alpha_num: 'O campo :attribute deverá conter apenas letras e números .',
   attributes: {},
   array: 'O campo :attribute deverá conter uma coleção de elementos.',
   before: 'O campo :attribute deverá conter uma data anterior a :date.',
-  before_or_equal:
-    'O Campo :attribute deverá conter uma data anterior ou igual a :date.',
+  before_or_equal: 'O Campo :attribute deverá conter uma data anterior ou igual a :date.',
   between: {
     numeric: 'O campo :attribute deverá ter um valor entre :min - :max.',
     file: 'O campo :attribute deverá ter um tamanho entre :min - :max kilobytes.',
@@ -22,16 +19,13 @@ const pt = {
   boolean: 'O campo :attribute deverá conter o valor verdadeiro ou falso.',
   confirmed: 'A confirmação para o campo :attribute não coincide.',
   date: 'O campo :attribute não contém uma data válida.',
-  date_format:
-    'A data indicada para o campo :attribute não respeita o formato :format.',
+  date_format: 'A data indicada para o campo :attribute não respeita o formato :format.',
   different: 'Os campos :attribute e :other deverão conter valores diferentes.',
   digits: 'O campo :attribute deverá conter :digits caracteres.',
-  digits_between:
-    'O campo :attribute deverá conter entre :min a :max caracteres.',
+  digits_between: 'O campo :attribute deverá conter entre :min a :max caracteres.',
   dimensions: 'O campo :attribute deverá conter uma dimensão de imagem válida.',
   distinct: 'O campo :attribute contém um valor duplicado.',
-  email:
-    'O campo :attribute não contém um endereço de correio eletrónico válido.',
+  email: 'O campo :attribute não contém um endereço de correio eletrónico válido.',
   exists: 'O valor selecionado para o campo :attribute é inválido.',
   file: 'O campo :attribute deverá conter um ficheiro.',
   filled: 'É obrigatória a indicação de um valor para o campo :attribute.',
@@ -92,12 +86,10 @@ const pt = {
     'É obrigatória a indicação de um valor para o campo :attribute quando o valor do campo :other é igual a :value.',
   required_unless:
     'É obrigatória a indicação de um valor para o campo :attribute a menos que :other esteja presente em :values.',
-  required_with:
-    'É obrigatória a indicação de um valor para o campo :attribute quando :values está presente.',
+  required_with: 'É obrigatória a indicação de um valor para o campo :attribute quando :values está presente.',
   required_with_all:
     'É obrigatória a indicação de um valor para o campo :attribute quando um dos :values está presente.',
-  required_without:
-    'É obrigatória a indicação de um valor para o campo :attribute quando :values não está presente.',
+  required_without: 'É obrigatória a indicação de um valor para o campo :attribute quando :values não está presente.',
   required_without_all:
     'É obrigatória a indicação de um valor para o campo :attribute quando nenhum dos :values está presente.',
   same: 'Os campos :attribute e :other deverão conter valores iguais.',

@@ -2,15 +2,10 @@ import Validator from '../src/main'
 
 describe('in validation rule', () => {
   it('should fail when the value is not in the set of comma separated values', () => {
-    const validator = new Validator(
-      { state: 'fakeState' },
-      { state: 'in:CA,TX,FL' },
-    )
+    const validator = new Validator({ state: 'fakeState' }, { state: 'in:CA,TX,FL' })
     expect(validator.passes()).toBeFalsy()
     expect(validator.fails()).toBeTruthy()
-    expect(validator.errors.first('state')).toEqual(
-      'The selected state is invalid.',
-    )
+    expect(validator.errors.first('state')).toEqual('The selected state is invalid.')
   })
 
   it('should pass when the value is in the set of comma separated values', () => {
@@ -35,9 +30,7 @@ describe('in validation rule', () => {
     const validator = new Validator({ quantity: 10 }, { quantity: 'in:0,1,2' })
     expect(validator.passes()).toBeFalsy()
     expect(validator.fails()).toBeTruthy()
-    expect(validator.errors.first('quantity')).toEqual(
-      'The selected quantity is invalid.',
-    )
+    expect(validator.errors.first('quantity')).toEqual('The selected quantity is invalid.')
   })
 
   it('should pass when the value is in the set of comma separated values', () => {
@@ -47,19 +40,13 @@ describe('in validation rule', () => {
   })
 
   it('should pass when all values are present', () => {
-    const validator = new Validator(
-      { fruits: ['apple', 'strawberry'] },
-      { fruits: 'array|in:apple,strawberry,kiwi' },
-    )
+    const validator = new Validator({ fruits: ['apple', 'strawberry'] }, { fruits: 'array|in:apple,strawberry,kiwi' })
 
     expect(validator.passes()).toBeTruthy()
   })
 
   it('should fail when not all values are present', () => {
-    const validator = new Validator(
-      { fruits: ['strawberry', 'kiwi'] },
-      { fruits: 'array|in:apple,strawberry' },
-    )
+    const validator = new Validator({ fruits: ['strawberry', 'kiwi'] }, { fruits: 'array|in:apple,strawberry' })
 
     expect(validator.passes()).toBeFalsy()
   })

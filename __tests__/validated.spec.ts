@@ -126,9 +126,7 @@ describe('validated()', () => {
         throw new Error("passes callback shouldn't be called!")
       },
       function () {
-        expect(validator.errors.first('user')).toEqual(
-          'The user can not be Dustin.',
-        )
+        expect(validator.errors.first('user')).toEqual('The user can not be Dustin.')
         done()
       },
     )

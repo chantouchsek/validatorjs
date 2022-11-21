@@ -26,10 +26,7 @@ describe('implicit rule tests', () => {
       ':attribute must be a number or empty',
     )
 
-    const validator = new Validator(
-      { value: null },
-      { value: 'null_or_number' },
-    )
+    const validator = new Validator({ value: null }, { value: 'null_or_number' })
     expect(validator.passes()).toBeTruthy()
   })
 

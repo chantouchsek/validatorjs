@@ -1,20 +1,15 @@
 const fr = {
   accepted: 'Le champ :attribute doit être accepté.',
-  alpha:
-    'Le champ :attribute ne peut contenir que des caractères alphabétiques.',
-  alpha_dash:
-    'Le champ :attribute ne peut contenir que des caractères alphanumériques, des tirets et des underscores.',
-  alpha_num:
-    'Le champ :attribute ne peut contenir que des caractères alphanumériques.',
+  alpha: 'Le champ :attribute ne peut contenir que des caractères alphabétiques.',
+  alpha_dash: 'Le champ :attribute ne peut contenir que des caractères alphanumériques, des tirets et des underscores.',
+  alpha_num: 'Le champ :attribute ne peut contenir que des caractères alphanumériques.',
   attributes: {},
-  between:
-    'La longueur du champ :attribute doit être comprise entre :min and :max.',
+  between: 'La longueur du champ :attribute doit être comprise entre :min and :max.',
   confirmed: "Le champ :attribute n'est pas confirmé.",
   email: 'Le champ :attribute contient un format invalide.',
   def: 'Le champ :attribute contient un attribut erroné.',
   digits: 'Le champ :attribute doit être composé de :digits chiffres.',
-  digits_between:
-    'Le champ :attribute doit contenir entre :min et :max chiffres.',
+  digits_between: 'Le champ :attribute doit contenir entre :min et :max chiffres.',
   different: 'Les champs :attribute et :different doivent être différents.',
   in: 'Le champ :attribute est invalide.',
   integer: 'Le champ :attribute doit être un entier.',

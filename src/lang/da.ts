@@ -1,15 +1,13 @@
 const da = {
   accepted: ':attribute skal accepteres.',
   after: ':attribute skal være en dato efter :after.',
-  after_or_equal:
-    ':attribute skal være en dato efter eller lig med :after_or_equal.',
+  after_or_equal: ':attribute skal være en dato efter eller lig med :after_or_equal.',
   alpha: ':attribute må kun bestå af bogstaver.',
   alpha_dash: ':attribute må kun bestå af bogstaver, tal og bindestreger.',
   alpha_num: ':attribute må kun bestå af bogstaver og tal.',
   attributes: {},
   before: ':attribute skal være en dato før :before.',
-  before_or_equal:
-    ':attribute skal være en dato før eller lig med :before_or_equal.',
+  before_or_equal: ':attribute skal være en dato før eller lig med :before_or_equal.',
   between: ':attribute skal være mellem :min og :max.',
   confirmed: ':attribute er ikke det samme som bekræftelsesfeltet.',
   email: ':attribute skal være en gyldig email.',
@@ -38,8 +36,7 @@ const da = {
   required_with: ':attribute skal udfyldes når :field er udfyldt.',
   required_with_all: ':attribute skal udfyldes når :fields er udfyldt.',
   required_without: ':attribute skal udfyldes når :field ikke er udfyldt.',
-  required_without_all:
-    ':attribute skal udfyldes når ingen af :fields er udfyldt.',
+  required_without_all: ':attribute skal udfyldes når ingen af :fields er udfyldt.',
   same: ':attribute og :same skal være ens.',
   size: {
     numeric: ':attribute skal være :size.',

@@ -56,10 +56,7 @@ describe('required validation pass rules', () => {
   })
 
   it('should not fail when not an empty array', () => {
-    const validator = new Validator(
-      { users: [false] },
-      { users: 'required|array' },
-    )
+    const validator = new Validator({ users: [false] }, { users: 'required|array' })
     expect(validator.passes()).toBeTruthy()
     expect(validator.fails()).toBeFalsy()
   })

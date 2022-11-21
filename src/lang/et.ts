@@ -83,13 +83,11 @@ const et = {
   regex: ':attribute vorming on vigane.',
   required: ':attribute väli on nõutud.',
   required_if: ':attribute väli on nõutud, kui :other on :value.',
-  required_unless:
-    ':attribute väli on nõutud, välja arvatud, kui :other on :values.',
+  required_unless: ':attribute väli on nõutud, välja arvatud, kui :other on :values.',
   required_with: ':attribute väli on nõutud, kui :values on esindatud.',
   required_with_all: ':attribute väli on nõutud, kui :values on esindatud.',
   required_without: ':attribute väli on nõutud, kui :values ei ole esindatud.',
-  required_without_all:
-    ':attribute väli on nõutud, kui ükski :values pole esindatud.',
+  required_without_all: ':attribute väli on nõutud, kui ükski :values pole esindatud.',
   same: ':attribute ja :other peavad sobima.',
   size: {
     numeric: ':attribute peab olema :size.',

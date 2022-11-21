@@ -1,9 +1,6 @@
 import { isArray } from './array'
 
-export function hasOwnProperty(
-  object?: Record<string, any> | any,
-  key?: string | number | symbol,
-) {
+export function hasOwnProperty(object?: Record<string, any> | any, key?: string | number | symbol) {
   if (!object || !key) return false
   return Object.prototype.hasOwnProperty.call(object, key)
 }
@@ -50,11 +47,7 @@ export const objectPath = (obj: Record<string, any> | any, path: string) => {
   }
 
   for (const key of keys) {
-    if (
-      typeof copy === 'object' &&
-      copy !== null &&
-      hasOwnProperty(copy, key)
-    ) {
+    if (typeof copy === 'object' && copy !== null && hasOwnProperty(copy, key)) {
       copy = copy[key]
     } else {
       return
@@ -66,8 +59,7 @@ export function isEmpty(obj: any) {
   if (typeof obj === 'number') return false
   else if (typeof obj === 'string') return obj.length === 0
   else if (Array.isArray(obj)) return obj.length === 0
-  else if (typeof obj === 'object')
-    return obj === null || Object.keys(obj).length === 0
+  else if (typeof obj === 'object') return obj === null || Object.keys(obj).length === 0
   else if (typeof obj === 'boolean') return false
   else return !obj
 }

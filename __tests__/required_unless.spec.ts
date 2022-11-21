@@ -2,15 +2,10 @@ import Validator from '../src/main'
 
 describe('required unless', () => {
   it('should fail', () => {
-    const validator = new Validator(
-      { desert: 'icecream', flavour: '' },
-      { flavour: 'required_unless:desert,cake' },
-    )
+    const validator = new Validator({ desert: 'icecream', flavour: '' }, { flavour: 'required_unless:desert,cake' })
     expect(validator.fails()).toBeTruthy()
     expect(validator.passes()).toBeFalsy()
-    expect(validator.errors.first('flavour')).toEqual(
-      'The flavour field is required when desert is not cake.',
-    )
+    expect(validator.errors.first('flavour')).toEqual('The flavour field is required when desert is not cake.')
   })
 
   it('should pass', () => {

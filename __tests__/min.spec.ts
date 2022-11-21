@@ -54,10 +54,7 @@ describe('min validation rule', () => {
   })
 
   it('should pass when given string-float value', () => {
-    const validator = new Validator(
-      { val: '17.56' },
-      { val: 'numeric|min:17.5' },
-    )
+    const validator = new Validator({ val: '17.56' }, { val: 'numeric|min:17.5' })
     expect(validator.passes()).toBeTruthy()
   })
 
@@ -67,10 +64,7 @@ describe('min validation rule', () => {
   })
 
   it('should be passed when given string as phone number', () => {
-    const validator = new Validator(
-      { val: '01234567890' },
-      { val: 'digits:11' },
-    )
+    const validator = new Validator({ val: '01234567890' }, { val: 'digits:11' })
     expect(validator.passes()).toBeTruthy()
   })
 

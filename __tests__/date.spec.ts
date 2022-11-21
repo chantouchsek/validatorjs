@@ -24,34 +24,19 @@ describe('date rule', () => {
   it('should pass for correct date formats', () => {
     let validator
 
-    validator = new Validator(
-      { passingDate: 'Friday, March 17 2017' },
-      { passingDate: 'date' },
-    )
+    validator = new Validator({ passingDate: 'Friday, March 17 2017' }, { passingDate: 'date' })
     expect(validator.passes()).toBeTruthy()
 
-    validator = new Validator(
-      { passingDate: '2017-03-18' },
-      { passingDate: 'date' },
-    )
+    validator = new Validator({ passingDate: '2017-03-18' }, { passingDate: 'date' })
     expect(validator.passes()).toBeTruthy()
 
-    validator = new Validator(
-      { passingDate: '2017-03-18' },
-      { passingDate: 'date' },
-    )
+    validator = new Validator({ passingDate: '2017-03-18' }, { passingDate: 'date' })
     expect(validator.passes()).toBeTruthy()
 
-    validator = new Validator(
-      { passingDate: '2017.03.18' },
-      { passingDate: 'date' },
-    )
+    validator = new Validator({ passingDate: '2017.03.18' }, { passingDate: 'date' })
     expect(validator.passes()).toBeTruthy()
 
-    validator = new Validator(
-      { passingDate: '2017-03-31' },
-      { passingDate: 'date' },
-    )
+    validator = new Validator({ passingDate: '2017-03-31' }, { passingDate: 'date' })
     expect(validator.passes()).toBeTruthy()
   })
 
@@ -117,15 +102,9 @@ describe('date rule', () => {
   it('should support alternate date formats', () => {
     let validator
 
-    validator = new Validator(
-      { passingDate: '2020.09.26' },
-      { passingDate: 'date' },
-    )
+    validator = new Validator({ passingDate: '2020.09.26' }, { passingDate: 'date' })
     expect(validator.passes()).toBeTruthy()
-    validator = new Validator(
-      { passingDate: '2020/09/26' },
-      { passingDate: 'date' },
-    )
+    validator = new Validator({ passingDate: '2020/09/26' }, { passingDate: 'date' })
     expect(validator.passes()).toBeTruthy()
   })
 })

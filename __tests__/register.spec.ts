@@ -6,7 +6,7 @@ describe('register a custom validation rule', () => {
       return val.match(/^\d{3}-\d{3}-\d{4}$/)
     })
 
-    const validator = new Validator()
+    const validator = new Validator(null)
     const validate = validator.getRule('telephone').validate
     expect(typeof validate).toBe('function')
   })
@@ -16,28 +16,18 @@ describe('register a custom validation rule', () => {
       return val.match(/^\d{3}-\d{3}-\d{4}$/)
     })
 
-    const validator = new Validator(
-      { phone: '213-454-9988' },
-      { phone: 'telephone' },
-    )
+    const validator = new Validator({ phone: '213-454-9988' }, { phone: 'telephone' })
     expect(validator.passes()).toBeTruthy()
   })
 
   it('should override custom rules', () => {
     Validator.register('string', () => true)
 
-    const validator = new Validator(
-      { field: ['not a string'] },
-      { field: 'string' },
-    )
+    const validator = new Validator({ field: ['not a string'] }, { field: 'string' })
 
     expect(validator.passes()).toBeTruthy()
     expect(validator.fails()).toBeFalsy()
-    Validator.register(
-      'string',
-      (val: string) => typeof val === 'string',
-      'The :attribute must be a string.',
-    )
+    Validator.register('string', (val: string) => typeof val === 'string', 'The :attribute must be a string.')
   })
 
   it('should throw error in case of unknown validator rule', () => {
@@ -61,20 +51,14 @@ describe('register a custom validation rule', () => {
   })
 
   it('should be able to register rule with params', () => {
-    Validator.register(
-      'hello_param',
-      (val: string, req: number[], attribute: string) => {
-        console.warn('value', val)
-        console.warn('req', req)
-        console.warn('attribute', attribute)
-        return true
-      },
-    )
+    Validator.register('hello_param', (val: string, req: number[], attribute: string) => {
+      console.warn('value', val)
+      console.warn('req', req)
+      console.warn('attribute', attribute)
+      return true
+    })
 
-    const validator = new Validator(
-      { field: 'test' },
-      { field: 'hello_param:12,34' },
-    )
+    const validator = new Validator({ field: 'test' }, { field: 'hello_param:12,34' })
 
     expect(validator.passes()).toBeTruthy()
   })

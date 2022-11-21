@@ -16,14 +16,9 @@ describe('async rule tests', () => {
       ':attribute is an invalid username',
     )
 
-    const validator = new Validator(
-      { username: 'admin' },
-      { username: 'username' },
-    )
+    const validator = new Validator({ username: 'admin' }, { username: 'username' })
     validator.fails(() => {
-      expect(validator.errors.first('username')).toEqual(
-        'This username is banned',
-      )
+      expect(validator.errors.first('username')).toEqual('This username is banned')
       done()
     })
   })

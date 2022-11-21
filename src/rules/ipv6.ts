@@ -14,11 +14,7 @@ export const ipv6 = (value: string | number) => {
   // check 2: ipv6 should not be ending or starting with colon
   // edge case: not with consecutive colons
   if (value[0] == ':' && (colons == null || colons.index != 0)) return false
-  if (
-    value[value.length - 1] == ':' &&
-    (colons == null || colons.index != value.length - 2)
-  )
-    return false
+  if (value[value.length - 1] == ':' && (colons == null || colons.index != value.length - 2)) return false
 
   // check 3: ipv6 should contain no less than 3 sector
   // minimum ipv6 address - ::1
@@ -26,10 +22,7 @@ export const ipv6 = (value: string | number) => {
 
   // check 4: ipv6 should contain no more than 8 sectors
   // only 1 edge case: when first or last sector is omitted
-  const isEdgeCase =
-    hextets.length == 9 &&
-    colons != null &&
-    (colons.index == 0 || colons.index == value.length - 2)
+  const isEdgeCase = hextets.length == 9 && colons != null && (colons.index == 0 || colons.index == value.length - 2)
   if (hextets.length > 8 && !isEdgeCase) return false
 
   // check 5: ipv6 should contain exactly one consecutive colons if it has less than 8 sectors

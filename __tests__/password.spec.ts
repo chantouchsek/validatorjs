@@ -12,9 +12,7 @@ describe('password rule', function () {
     )
     expect(validator.fails()).toBeTruthy()
     expect(validator.passes()).not.toBeTruthy()
-    expect(validator.errors.first('password')).toEqual(
-      'The password attribute has errors.',
-    )
+    expect(validator.errors.first('password')).toEqual('The password attribute has errors.')
   })
 
   it('should pass', function () {

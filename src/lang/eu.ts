@@ -2,17 +2,14 @@ const eu = {
   accepted: ':attribute onartua izan behar da.',
   active_url: ':attribute ez da baliozko URL bat.',
   after: ':attribute :date osteko data izan behar da.',
-  after_or_equal:
-    ':attribute :date osteko data edo data berdina izan behar da.',
+  after_or_equal: ':attribute :date osteko data edo data berdina izan behar da.',
   alpha: ':attribute hizkiak besterik ezin ditu izan.',
-  alpha_dash:
-    ':attribute hizkiak, zenbakiak eta marrak besterik ezin ditu izan.',
+  alpha_dash: ':attribute hizkiak, zenbakiak eta marrak besterik ezin ditu izan.',
   alpha_num: ':attribute hizkiak eta zenbakiak besterik ezin ditu izan.',
   attributes: {},
   array: ':attribute bilduma izan behar da.',
   before: ':attribute :date aurreko data izan behar da.',
-  before_or_equal:
-    ':attribute :date aurreko data edo data berdina izan behar da.',
+  before_or_equal: ':attribute :date aurreko data edo data berdina izan behar da.',
   between: {
     numeric: ':attribute :min eta :max artean egon behar da.',
     file: ':attribute-k :min eta :max kilobyte arteko pisua izan behar du.',
@@ -25,8 +22,7 @@ const eu = {
   date_format: ':attribute datak ez du :format formatua.',
   different: ':attribute eta :other ezberdinak izan behar dira.',
   digits: ':attribute-k :digits digitu euki behar ditu.',
-  digits_between:
-    ':attribute-k :min eta :max arteko digitu kantitatea euki behar du.',
+  digits_between: ':attribute-k :min eta :max arteko digitu kantitatea euki behar du.',
   dimensions: ':attribute-k ez ditu irudi neurri aproposak.',
   distinct: ':attribute-k balio bikoiztua dauka.',
   email: ':attribute-k baliozko posta helbidea euki behar du.',
@@ -91,8 +87,7 @@ const eu = {
   required_with: ':attribute derrigorrezkoa da :values bertan dagoenean.',
   required_with_all: ':attribute derrigorrezkoa da :values bertan dagoenean.',
   required_without: ':attribute derrigorrezkoa da :values bertan ez dagoenean.',
-  required_without_all:
-    ':attribute derrigorrezkoa da :values bertan ez dagoenean.',
+  required_without_all: ':attribute derrigorrezkoa da :values bertan ez dagoenean.',
   same: ':attribute eta :other bat etorri behar dira.',
   size: {
     numeric: ':attribute-k :size-eko tamaina izan behar du.',

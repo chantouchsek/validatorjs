@@ -4,8 +4,7 @@ const mk = {
   after: 'Полето :attribute мора да биде датум после :date.',
   after_or_equal: 'The :attribute must be a date after or equal to :date.',
   alpha: 'Полето :attribute може да содржи само букви.',
-  alpha_dash:
-    'Полето :attribute може да содржи само букви, цифри, долна црта и тире.',
+  alpha_dash: 'Полето :attribute може да содржи само букви, цифри, долна црта и тире.',
   alpha_num: 'Полето :attribute може да содржи само букви и цифри.',
   attributes: {},
   array: 'Полето :attribute мора да биде низа.',
@@ -84,15 +83,11 @@ const mk = {
   regex: 'Полето :attribute е во невалиден формат.',
   required: 'Полето :attribute е задолжително.',
   required_if: 'Полето :attribute е задолжително, кога :other е :value.',
-  required_unless:
-    'The :attribute field is required unless :other is in :values.',
+  required_unless: 'The :attribute field is required unless :other is in :values.',
   required_with: 'Полето :attribute е задолжително, кога е внесено :values.',
-  required_with_all:
-    'The :attribute field is required when :values is present.',
-  required_without:
-    'Полето :attribute е задолжително, кога не е внесено :values.',
-  required_without_all:
-    'The :attribute field is required when none of :values are present.',
+  required_with_all: 'The :attribute field is required when :values is present.',
+  required_without: 'Полето :attribute е задолжително, кога не е внесено :values.',
+  required_without_all: 'The :attribute field is required when none of :values are present.',
   same: 'Полињата :attribute и :other треба да совпаѓаат.',
   size: {
     numeric: 'Полето :attribute мора да биде :size.',

@@ -2,21 +2,18 @@ const uk = {
   accepted: 'Ви повинні прийняти :attribute.',
   active_url: 'Поле :attribute не є правильним URL.',
   after: 'Поле :attribute має містити дату не раніше :date.',
-  after_or_equal:
-    'Поле :attribute має містити дату не раніше або дорівнюватися :date.',
+  after_or_equal: 'Поле :attribute має містити дату не раніше або дорівнюватися :date.',
   alpha: 'Поле :attribute має містити лише літери.',
   alpha_dash: 'Поле :attribute має містити лише літери, цифри та підкреслення.',
   alpha_num: 'Поле :attribute має містити лише літери та цифри.',
   attributes: {},
   array: 'Поле :attribute має бути масивом.',
   before: 'Поле :attribute має містити дату не пізніше :date.',
-  before_or_equal:
-    'Поле :attribute має містити дату не пізніше або дорівнюватися :date.',
+  before_or_equal: 'Поле :attribute має містити дату не пізніше або дорівнюватися :date.',
   between: {
     numeric: 'Поле :attribute має бути між :min та :max.',
     file: 'Розмір файлу в полі :attribute має бути не менше :min та не більше :max кілобайт.',
-    string:
-      'Текст в полі :attribute має бути не менше :min та не більше :max символів.',
+    string: 'Текст в полі :attribute має бути не менше :min та не більше :max символів.',
     array: 'Поле :attribute має містити від :min до :max елементів.',
   },
   boolean: 'Поле :attribute повинне містити логічний тип.',
@@ -25,8 +22,7 @@ const uk = {
   date_format: 'Поле :attribute не відповідає формату :format.',
   different: 'Поля :attribute та :other повинні бути різними.',
   digits: 'Довжина цифрового поля :attribute повинна дорівнювати :digits.',
-  digits_between:
-    'Довжина цифрового поля :attribute повинна бути від :min до :max.',
+  digits_between: 'Довжина цифрового поля :attribute повинна бути від :min до :max.',
   dimensions: 'Поле :attribute містіть неприпустимі розміри зображення.',
   distinct: 'Поле :attribute містить значення, яке дублюється.',
   email: 'Поле :attribute повинне містити коректну електронну адресу.',
@@ -86,18 +82,12 @@ const uk = {
   present: 'Поле :attribute повинне бути присутнє.',
   regex: 'Поле :attribute має хибний формат.',
   required: "Поле :attribute є обов'язковим для заповнення.",
-  required_if:
-    "Поле :attribute є обов'язковим для заповнення, коли :other є рівним :value.",
-  required_unless:
-    "Поле :attribute є обов'язковим для заповнення, коли :other відрізняється від :values",
-  required_with:
-    "Поле :attribute є обов'язковим для заповнення, коли :values вказано.",
-  required_with_all:
-    "Поле :attribute є обов'язковим для заповнення, коли :values вказано.",
-  required_without:
-    "Поле :attribute є обов'язковим для заповнення, коли :values не вказано.",
-  required_without_all:
-    "Поле :attribute є обов'язковим для заповнення, коли :values не вказано.",
+  required_if: "Поле :attribute є обов'язковим для заповнення, коли :other є рівним :value.",
+  required_unless: "Поле :attribute є обов'язковим для заповнення, коли :other відрізняється від :values",
+  required_with: "Поле :attribute є обов'язковим для заповнення, коли :values вказано.",
+  required_with_all: "Поле :attribute є обов'язковим для заповнення, коли :values вказано.",
+  required_without: "Поле :attribute є обов'язковим для заповнення, коли :values не вказано.",
+  required_without_all: "Поле :attribute є обов'язковим для заповнення, коли :values не вказано.",
   same: 'Поля :attribute та :other мають співпадати.',
   size: {
     numeric: 'Поле :attribute має бути довжини :size.',

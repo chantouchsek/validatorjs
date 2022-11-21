@@ -47,7 +47,7 @@ describe('Validator constructor', () => {
   })
 
   it('should handle undefined data', () => {
-    const validator = new Validator(undefined, { name: 'required' })
+    const validator = new Validator(null, { name: 'required' })
     expect(validator.fails()).toBeTruthy()
   })
 
@@ -57,11 +57,7 @@ describe('Validator constructor', () => {
   })
 
   it('should get correct lang with exist', () => {
-    const validator = new Validator(
-      undefined,
-      { name: 'required' },
-      { locale: 'km' },
-    )
+    const validator = new Validator(null, { name: 'required' }, { locale: 'km' })
     expect(validator.getDefaultLang()).toEqual('km')
     expect(validator.fails()).toBeTruthy()
     expect(validator.errors.first('name')).toBe('ឈ្មោះ ត្រូវតែបញ្ចូលជាដាច់ខាត។')

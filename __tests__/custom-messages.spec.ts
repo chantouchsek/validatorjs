@@ -30,9 +30,7 @@ describe('Validator custom messages', () => {
     )
     expect(validator.fails()).toBeTruthy()
     expect(validator.errors.get('name').length).toEqual(1)
-    expect(validator.errors.first('name')).toEqual(
-      'name is not long enough. Should be 4.',
-    )
+    expect(validator.errors.first('name')).toEqual('name is not long enough. Should be 4.')
   })
 
   it('override the default message for the validator with several :attribute in message', () => {
@@ -47,9 +45,7 @@ describe('Validator custom messages', () => {
     )
     expect(validator.fails()).toBeTruthy()
     expect(validator.errors.get('name').length).toEqual(1)
-    expect(validator.errors.first('name')).toEqual(
-      "name is required. name can't be empty.",
-    )
+    expect(validator.errors.first('name')).toEqual("name is required. name can't be empty.")
   })
 
   it('override the default message for a type of the validator', () => {
@@ -68,9 +64,7 @@ describe('Validator custom messages', () => {
     )
     expect(validator.fails()).toBeTruthy()
     expect(validator.errors.get('name').length).toEqual(1)
-    expect(validator.errors.first('name')).toEqual(
-      'name is not long enough. Should be 4.',
-    )
+    expect(validator.errors.first('name')).toEqual('name is not long enough. Should be 4.')
   })
 
   it('override the default message for a type of the validator with several :attribute and :min in message', () => {
@@ -117,9 +111,7 @@ describe('Validator custom messages', () => {
     expect(validator.errors.get('name').length).toEqual(1)
     expect(validator.errors.first('name')).toEqual('Name is missing.')
     expect(validator.errors.get('email').length).toEqual(1)
-    expect(validator.errors.first('email')).toEqual(
-      'The email field is required.',
-    )
+    expect(validator.errors.first('email')).toEqual('The email field is required.')
   })
 
   it('can be specified for custom validators', () => {
@@ -171,12 +163,8 @@ describe('Validator custom messages', () => {
     )
     expect(validator.fails()).toBeTruthy()
     expect(validator.errors.get('phone').length).toEqual(1)
-    expect(validator.errors.first('phone')).toEqual(
-      'The phone phone number is not in the format XXX-XXX-XXXX.',
-    )
+    expect(validator.errors.first('phone')).toEqual('The phone phone number is not in the format XXX-XXX-XXXX.')
     expect(validator.errors.get('fax').length).toEqual(1)
-    expect(validator.errors.first('fax')).toEqual(
-      'Why are you even using a fax?',
-    )
+    expect(validator.errors.first('fax')).toEqual('Why are you even using a fax?')
   })
 })

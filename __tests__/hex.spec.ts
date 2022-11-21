@@ -30,10 +30,7 @@ describe('hex validation rule', () => {
   })
 
   it('should pass with an empty value', () => {
-    const validator = new Validator(
-      { olor: '', mongoId: '' },
-      { color: 'hex', mongoId: 'hex' },
-    )
+    const validator = new Validator({ olor: '', mongoId: '' }, { color: 'hex', mongoId: 'hex' })
 
     expect(validator.fails()).toBeFalsy()
     expect(validator.passes()).toBeTruthy()
