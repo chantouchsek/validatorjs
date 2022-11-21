@@ -14,6 +14,8 @@ import {
 import { LangTypes } from './types/lang'
 import { RuleType } from './types/rule'
 
+export { Errors }
+
 export default class Validator {
   readonly input: Record<string, any> = {}
   readonly messages: Messages
