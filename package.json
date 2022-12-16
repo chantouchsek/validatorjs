@@ -75,5 +75,6 @@
     "vite": "^4.0.1",
     "vitest": "^0.25.8"
   },
-  "engineStrict": true
+  "engineStrict": true,
+  "packageManager": "^pnpm@7.18.2"
 }
