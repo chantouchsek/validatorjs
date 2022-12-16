@@ -11,7 +11,7 @@
     "forceConsistentCasingInFileNames": true,
     "outDir": "dist",
     "declarationDir": "typings",
-    "types": ["@types/node", "vitest/globals"]
+    "types": ["@types/node", "vitest/globals", "@rollup/plugin-typescript"]
   },
   "include": ["src"],
   "exclude": ["node_modules", "**/__tests__/*", "coverage"]
