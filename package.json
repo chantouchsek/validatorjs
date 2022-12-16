@@ -11,7 +11,7 @@
     "test": "vitest --run",
     "webstorm-integration": "vitest --watch --reporter=dot --reporter=json --outputFile=.vitest-result.json",
     "test:watch": "pnpm test",
-    "test:cov": "pnpm test --coverage",
+    "test:cov": "vitest run --coverage",
     "release": "standard-version && git push --follow-tags origin main && yarn publish",
     "lint:js": "eslint --ext \".js,.ts\" --ignore-path .gitignore .",
     "lint:prettier": "prettier --check .",

@@ -48,4 +48,4 @@ jobs:
 
       - run: pnpm install --shamefully-hoist=true
       - run: pnpm build
-      - run: pnpm test
+      - run: pnpm test:cov
