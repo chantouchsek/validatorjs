@@ -33,6 +33,12 @@ npm install @chantouchsek/validatorjs
 yarn add @chantouchsek/validatorjs
 ```
 
+### Using pnpm
+
+```bash
+pnpm add @chantouchsek/validatorjs
+```
+
 ### Browser
 
 ```html

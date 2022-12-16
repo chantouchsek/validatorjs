@@ -1,3 +1,3 @@
-export const array = (value: any) => {
+export const array = (value: string | string[] | any[]) => {
   return value instanceof Array
 }

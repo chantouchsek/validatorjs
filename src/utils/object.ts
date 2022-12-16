@@ -8,9 +8,7 @@ export const flattenObject = (obj: Record<string, any> | any = {}) => {
   const flattened: Record<string, any> = {}
 
   function recurse(current: Record<string, any>, property?: string) {
-    if (!property && Object.getOwnPropertyNames(current).length === 0) {
-      return
-    }
+    if (!property && Object.getOwnPropertyNames(current).length === 0) return
     if (Object(current) !== current || isArray(current)) {
       flattened[property as string] = current
     } else {
@@ -25,15 +23,11 @@ export const flattenObject = (obj: Record<string, any> | any = {}) => {
     }
   }
 
-  if (obj) {
-    recurse(obj)
-  }
+  if (obj) recurse(obj)
   return flattened
 }
 export const objectPath = (obj: Record<string, any> | any, path: string) => {
-  if (hasOwnProperty(obj, path)) {
-    return obj[path]
-  }
+  if (hasOwnProperty(obj, path)) return obj[path]
 
   const keys = path
     .replace(/\[(\w+)/g, '.$1')

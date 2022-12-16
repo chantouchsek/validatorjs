@@ -19,11 +19,11 @@ export default class Errors {
     return []
   }
 
-  first(attribute: string): string | boolean {
+  first(attribute: string) {
     if (this.has(attribute)) {
       return this.errors[attribute][0]
     }
-    return false
+    return undefined
   }
 
   all() {
@@ -36,5 +36,9 @@ export default class Errors {
 
   fill(errors: Record<string, string[]>) {
     this.errors = errors
+  }
+
+  flush() {
+    this.errors = {}
   }
 }

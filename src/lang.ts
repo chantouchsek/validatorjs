@@ -34,7 +34,6 @@ export default class Lang {
         rawMessage = require(`./lang/${lang}`)
         this._set(lang, rawMessage.default)
       } catch (e) {
-        console.warn('e', e)
         this._set(lang, {})
       }
     }

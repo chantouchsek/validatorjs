@@ -139,9 +139,7 @@ export default class Messages {
   }
 
   render(rule: Rule) {
-    if (rule.customMessages) {
-      return rule.customMessages
-    }
+    if (rule.customMessages) return rule.customMessages
     const template = this._getTemplate(rule)
     let message: string
     if (Messages.replacements[rule.name]) {

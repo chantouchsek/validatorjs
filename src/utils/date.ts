@@ -12,19 +12,13 @@ export function checkFalsePositiveDates(dateString: string) {
         const d = parseInt(parts[2])
         if (m === 2) {
           if (leapYear(y)) {
-            if (d > 29) {
-              return false
-            }
+            if (d > 29) return false
           } else {
-            if (d > 28) {
-              return false
-            }
+            if (d > 28) return false
           }
         }
         if (m === 4 || m === 6 || m === 9 || m === 11) {
-          if (d > 30) {
-            return false
-          }
+          if (d > 30) return false
         }
       }
     }
@@ -33,15 +27,13 @@ export function checkFalsePositiveDates(dateString: string) {
   return true
 }
 
-export function isValidDate(dateString: any) {
+export function isValidDate(dateString: string | number) {
   let testDate
   if (typeof dateString === 'number') {
     testDate = new Date(dateString)
     return typeof testDate === 'object'
   }
   testDate = new Date(dateString)
-  if (testDate.toString() === 'Invalid Date') {
-    return false
-  }
+  if (testDate.toString() === 'Invalid Date') return false
   return checkFalsePositiveDates(dateString)
 }
