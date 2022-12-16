@@ -1,12 +1,13 @@
-import Lang from './lang'
-import Messages from './messages'
-import Errors from './errors'
-import { Manager, Rule } from './rule'
-import AsyncResolvers from './async-resolvers'
+import type Messages from './messages'
+import type { Rule } from './rule'
+import type { LangTypes } from './types/lang'
+import type { RuleType } from './types/rule'
 import type { ValidatorOptions, VoidFunction } from './types/validator'
+import AsyncResolvers from './async-resolvers'
+import Errors from './errors'
+import Lang from './lang'
+import { Manager } from './rule'
 import { flattenObject, objectPath, formatter, isArray, hasOwnProperty } from './utils'
-import { LangTypes } from './types/lang'
-import { RuleType } from './types/rule'
 
 export { Errors, ValidatorOptions }
 

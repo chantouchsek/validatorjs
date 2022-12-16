@@ -1,4 +1,4 @@
-import { LangTypes } from './lang'
+import type { LangTypes } from './lang'
 
 export interface ValidatorOptions {
   locale?: LangTypes

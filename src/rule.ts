@@ -1,4 +1,4 @@
-import Validator from './main'
+import type Validator from './main'
 import * as rules from './rules'
 import { flattenObject, isEmpty, isValidDate, objectPath } from './utils'
 

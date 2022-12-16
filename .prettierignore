@@ -96,3 +96,4 @@ sw.*
 *.swp
 
 CHANGELOG.md
+pnpm-lock.yaml

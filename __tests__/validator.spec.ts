@@ -56,7 +56,7 @@ describe('Validator constructor', () => {
     expect(validator.fails()).toBeTruthy()
   })
 
-  it('should get correct lang with exist', () => {
+  it('should get correct locales with exist', () => {
     const validator = new Validator(null, { name: 'required' }, { locale: 'km' })
     expect(validator.getDefaultLang()).toEqual('km')
     expect(validator.fails()).toBeTruthy()

@@ -28,4 +28,18 @@ describe('Errors', () => {
     expect(validator.errors.get('name')).toHaveLength(2)
     expect(validator.errors.get('name')[1]).toBe(msg)
   })
+  it('should clear all errors', () => {
+    const validator = new Validator(null, { name: 'required' })
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.passes()).toBeFalsy()
+    validator.errors.flush()
+    expect(validator.errors.all()).toEqual({})
+  })
+  it('errors should be able to fill', () => {
+    const validator = new Validator(null, { name: 'required' })
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.passes()).toBeFalsy()
+    validator.errors.fill({ name: ['The name field is required'] })
+    expect(validator.errors.first('name')).toEqual('The name field is required')
+  })
 })

@@ -1,18 +1,15 @@
+import type { LangTypes } from './types/lang'
+import locales from './locales'
 import Massages from './messages'
-import { LangTypes } from './types/lang'
-
-import ja from './lang/ja'
-import en from './lang/en'
-import km from './lang/km'
 
 export default class Lang {
-  static messages: Record<LangTypes, Record<string, any>> = { en, ja, km }
+  static messages = {} as Record<LangTypes, Record<string, any>>
 
   static _set(lang: LangTypes, rawMessages: Record<string, any>) {
     this.messages[lang] = rawMessages
   }
 
-  static _get(lang: LangTypes): Record<string, string> {
+  static _get(lang: LangTypes) {
     this._load(lang)
     return this.messages[lang]
   }
@@ -28,15 +25,7 @@ export default class Lang {
   }
 
   static _load(lang: LangTypes) {
-    if (!this.messages[lang]) {
-      let rawMessage
-      try {
-        rawMessage = require(`./lang/${lang}`)
-        this._set(lang, rawMessage.default)
-      } catch (e) {
-        this._set(lang, {})
-      }
-    }
+    if (!this.messages[lang]) this._set(lang, locales[lang])
   }
 
   static _make(lang: LangTypes) {

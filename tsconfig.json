@@ -1,15 +1,17 @@
 {
   "compilerOptions": {
-    "target": "ES2019",
-    "module": "CommonJS",
+    "target": "ESNext",
+    "module": "ESNext",
     "lib": ["ES5", "ES6", "ES2015", "ES2016", "ES2017", "ES2018", "ESNext", "DOM"],
     "moduleResolution": "Node",
     "esModuleInterop": true,
     "strict": true,
     "declaration": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
     "outDir": "dist",
     "declarationDir": "typings",
-    "types": ["@types/node", "@types/jest"]
+    "types": ["@types/node", "vitest/globals"]
   },
   "include": ["src"],
   "exclude": ["node_modules", "**/__tests__/*", "coverage"]

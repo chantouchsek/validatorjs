@@ -49,4 +49,3 @@ export type LangTypes =
   | 'vi'
   | 'zh'
   | 'zh_TW'
-  | string
