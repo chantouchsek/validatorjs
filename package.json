@@ -2,12 +2,20 @@
   "name": "@chantouchsek/validatorjs",
   "version": "1.1.5",
   "description": "The validator-js library makes data validation in JavaScript very easy in both the browser and Node.js.",
-  "main": "dist/main.js",
-  "types": "typings/main.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "tsc -w",
     "clean": "rimraf dist",
-    "build": "pnpm clean && tsc",
+    "build": "pnpm clean && tsc && vite build",
     "test": "vitest --run",
     "webstorm-integration": "vitest --watch --reporter=dot --reporter=json --outputFile=.vitest-result.json",
     "test:watch": "pnpm test",
@@ -17,7 +25,8 @@
     "lint:prettier": "prettier --check .",
     "lint": "yarn lint:js && yarn lint:prettier",
     "lintfix": "prettier --write --list-different . && yarn lint:js --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "typecheck": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
@@ -76,5 +85,5 @@
     "vitest": "^0.25.8"
   },
   "engineStrict": true,
-  "packageManager": "^pnpm@7.18.2"
+  "packageManager": "pnpm@7.18.2"
 }

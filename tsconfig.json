@@ -6,11 +6,8 @@
     "moduleResolution": "Node",
     "esModuleInterop": true,
     "strict": true,
-    "declaration": true,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "dist",
-    "declarationDir": "typings",
     "types": ["@types/node", "vitest/globals", "@rollup/plugin-typescript"]
   },
   "include": ["src"],

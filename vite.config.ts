@@ -25,7 +25,7 @@ export default defineConfig({
     reportCompressedSize: true,
     lib: {
       entry: resolve(__dirname, 'src/main.ts'),
-      fileName: 'main',
+      fileName: 'index',
       formats: ['es', 'cjs'],
     },
     rollupOptions: {
