@@ -1,7 +1,7 @@
 {
   "name": "@chantouchsek/validatorjs",
   "version": "1.1.5",
-  "description": "The validator-js library makes data validation in JavaScript very easy in both the browser and Node.js.",
+  "description": "The validatorjs library makes data validation in JavaScript very easy in both the browser and Node.js.",
   "main": "dist/main.js",
   "types": "typings/main.d.ts",
   "scripts": {
@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chantouchsek/validator-js.git"
+    "url": "git+https://github.com/chantouchsek/validatorjs.git"
   },
   "files": [
     "dist",
@@ -28,8 +28,8 @@
   ],
   "keywords": [
     "validator",
-    "validator-js",
-    "node"
+    "validatorjs",
+    "node-validator"
   ],
   "author": {
     "name": "Chantouch Sek",
@@ -45,9 +45,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/chantouchsek/validator-js/issues"
+    "url": "https://github.com/chantouchsek/validatorjs/issues"
   },
-  "homepage": "https://github.com/chantouchsek/validator-js#readme",
+  "homepage": "https://github.com/chantouchsek/validatorjs#readme",
   "devDependencies": {
     "@commitlint/cli": "^17.0.0",
     "@commitlint/config-conventional": "^17.0.0",
