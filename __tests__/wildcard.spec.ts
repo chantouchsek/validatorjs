@@ -91,7 +91,7 @@ describe('Wildcard', () => {
         {
           users: [
             {
-              name: 'Teste',
+              name: 'Tester',
               lastName: '',
               age: '',
               requiredAge: 'true',

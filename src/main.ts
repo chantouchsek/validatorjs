@@ -305,30 +305,21 @@ export default class Validator {
     return rule
   }
 
-  _replaceWildCards(path: string | string[] | any, nums: string[]) {
+  _replaceWildCards(path: string, nums: string[]) {
     if (!nums) return path
 
-    let path2 = path
     for (const num of nums) {
-      if (isArray(path2)) {
-        path2 = path2[0]
-      }
-      const pos = path2.indexOf('*')
-      if (pos === -1) return path2
-      path2 = path2.substring(0, pos) + num + path2.substring(pos + 1)
+      const pos = path.indexOf('*')
+      if (pos === -1) return path
+      path = path.substring(0, pos) + num + path.substring(pos + 1)
     }
-    if (isArray(path)) {
-      path[0] = path2
-      path2 = path
-    }
-    return path2
+    return path
   }
 
   _replaceWildCardsMessages(nums: string[]) {
     const customMessages = this.messages.customMessages
     for (const key of Object.keys(customMessages)) {
-      const path = isArray(key) ? key : [key]
-      const newKey = this._replaceWildCards(path, nums)
+      const newKey = this._replaceWildCards(key, nums)
       customMessages[newKey] = customMessages[key]
     }
 

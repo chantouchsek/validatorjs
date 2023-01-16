@@ -12,11 +12,15 @@ export default class Errors {
     }
   }
 
+  missed(field: string | string[]) {
+    return !this.has(field)
+  }
+
   get(field: string | string[]): string | string[] {
     return get(this.errors, field, [])
   }
 
-  first(attribute: string): string | boolean {
+  first(attribute: string) {
     if (this.has(attribute)) {
       return this.get(attribute)[0]
     }
@@ -42,6 +46,6 @@ export default class Errors {
   }
 
   flush() {
-    this.errors = {}
+    this.fill({})
   }
 }

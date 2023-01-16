@@ -1,7 +1,7 @@
 import Validator from './main'
 import * as rules from './rules'
 import { flattenObject, isEmpty, isValidDate } from './utils'
-import { get, has } from 'lodash'
+import { get } from 'lodash'
 
 let missedRuleValidator: VoidFunction = function (this: Rule) {
   throw new Error('Validator `' + this.name + '` is not defined!')
@@ -151,7 +151,7 @@ export class Rule {
         return true
       },
       required_with(val: Record<string, any>, req: string) {
-        if (has(this.validator.input, req)) {
+        if (get(this.validator.input, req)) {
           return this.validator.getRule('required').validate(val, {})
         }
         return true

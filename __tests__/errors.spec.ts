@@ -28,4 +28,17 @@ describe('Errors', () => {
     expect(validator.errors.get('name')).toHaveLength(2)
     expect(validator.errors.get('name')[1]).toBe(msg)
   })
+  it('should flush all messages, when call clear without argument', () => {
+    const validator = new Validator(null, { name: 'required' })
+    expect(validator.fails()).toBeTruthy()
+    validator.errors.clear()
+    expect(validator.errors.first('name')).toBeFalsy()
+    expect(validator.errors.missed('name')).toBeTruthy()
+  })
+  it('should clear error by provide field', () => {
+    const validator = new Validator(null, { name: 'required' })
+    expect(validator.fails()).toBeTruthy()
+    validator.errors.clear('name')
+    expect(validator.errors.first('name')).toBeFalsy()
+  })
 })
