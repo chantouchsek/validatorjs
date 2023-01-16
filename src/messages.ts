@@ -1,5 +1,6 @@
 import type { Rule } from './rule'
-import { flattenObject, hasOwnProperty, toCamelCase, toSnakeCase } from './utils'
+import { flattenObject, hasOwnProperty, toCamelCase } from './utils'
+import { snakeCase } from 'lodash'
 
 export default class Messages {
   private lang: string
@@ -123,9 +124,9 @@ export default class Messages {
     const attributes = flattenObject(this.messages.attributes)
     const attributeNames = flattenObject(this.attributeNames)
     const camelCase = toCamelCase(attribute)
-    const snakeCase = toSnakeCase(attribute)
-    if (hasOwnProperty(attributeNames, camelCase) || hasOwnProperty(attributeNames, snakeCase)) {
-      return attributeNames[snakeCase] || attributeNames[camelCase]
+    const snakecase = snakeCase(attribute)
+    if (hasOwnProperty(attributeNames, camelCase) || hasOwnProperty(attributeNames, snakecase)) {
+      return attributeNames[snakecase] || attributeNames[camelCase]
     }
     if (hasOwnProperty(attributes, attribute)) {
       name = attributes[attribute]
