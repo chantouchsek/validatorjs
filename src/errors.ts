@@ -37,4 +37,8 @@ export default class Errors {
   fill(errors: Record<string, string[]>) {
     this.errors = errors
   }
+
+  flush() {
+    this.errors = {}
+  }
 }
