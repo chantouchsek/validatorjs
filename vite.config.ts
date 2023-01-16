@@ -4,9 +4,7 @@ import { typescriptPaths } from 'rollup-plugin-typescript-paths'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  test: {
-    globals: true,
-  },
+  test: { globals: true },
   plugins: [],
   resolve: {
     alias: [
@@ -16,9 +14,7 @@ export default defineConfig({
       },
     ],
   },
-  server: {
-    port: 3000,
-  },
+  server: { port: 3000 },
   build: {
     manifest: true,
     minify: true,
@@ -31,9 +27,7 @@ export default defineConfig({
     rollupOptions: {
       external: [],
       plugins: [
-        typescriptPaths({
-          preserveExtensions: true,
-        }),
+        typescriptPaths({ preserveExtensions: true }),
         typescript({
           sourceMap: false,
           declaration: true,
