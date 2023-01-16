@@ -31,6 +31,6 @@ export default class Lang {
   static _make(lang: LangTypes) {
     const messages = Object.create(this.messages)
     this._load(lang)
-    return new Massages(lang, messages[lang])
+    return new Massages(messages[lang])
   }
 }

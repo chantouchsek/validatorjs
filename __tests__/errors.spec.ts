@@ -42,4 +42,17 @@ describe('Errors', () => {
     validator.errors.fill({ name: ['The name field is required'] })
     expect(validator.errors.first('name')).toEqual('The name field is required')
   })
+  it('should flush all messages, when call clear without argument', () => {
+    const validator = new Validator(null, { name: 'required' })
+    expect(validator.fails()).toBeTruthy()
+    validator.errors.clear()
+    expect(validator.errors.first('name')).toBeFalsy()
+    expect(validator.errors.missed('name')).toBeTruthy()
+  })
+  it('should clear error by provide field', () => {
+    const validator = new Validator(null, { name: 'required' })
+    expect(validator.fails()).toBeTruthy()
+    validator.errors.clear('name')
+    expect(validator.errors.first('name')).toBeFalsy()
+  })
 })

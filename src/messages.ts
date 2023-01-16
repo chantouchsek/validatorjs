@@ -1,17 +1,14 @@
 import type { Rule } from './rule'
-import { flattenObject, hasOwnProperty, toCamelCase, toSnakeCase } from './utils'
+import { has, snakeCase } from 'lodash'
+import { flattenObject, toCamelCase } from './utils'
 
 export default class Messages {
-  private lang: string
-  private readonly messages: Record<string, any> = {}
-  customMessages: Record<string, any> = {}
+  public customMessages: Record<string, any> = {}
   private attributeNames: Record<string, any> = {}
   private attributeFormatter: ((arg: any) => any) | undefined
   static replacements: any = {}
 
-  constructor(lang: string, messages: Record<string, any>) {
-    this.lang = lang
-    this.messages = messages
+  constructor(public readonly messages: Record<string, any>) {
     this.customMessages = {}
     this.attributeNames = {}
     Messages._setReplacements()
@@ -120,14 +117,14 @@ export default class Messages {
 
   _getAttributeName(attribute: string): string {
     let name = attribute
-    const attributes = flattenObject(this.messages?.attributes)
+    const attributes = flattenObject(this.messages.attributes)
     const attributeNames = flattenObject(this.attributeNames)
     const camelCase = toCamelCase(attribute)
-    const snakeCase = toSnakeCase(attribute)
-    if (hasOwnProperty(attributeNames, camelCase) || hasOwnProperty(attributeNames, snakeCase)) {
-      return attributeNames[snakeCase] || attributeNames[camelCase]
+    const snakecase = snakeCase(attribute)
+    if (has(attributeNames, camelCase) || has(attributeNames, snakecase)) {
+      return attributeNames[snakecase] || attributeNames[camelCase]
     }
-    if (hasOwnProperty(attributes, attribute)) {
+    if (has(attributes, attribute)) {
       name = attributes[attribute]
     } else if (this.attributeFormatter) {
       name = this.attributeFormatter(name)
@@ -152,14 +149,14 @@ export default class Messages {
 
   _getTemplate(rule: Rule): string {
     const messages = this.messages
-    let template = this.messages?.def
+    let template = messages.def
     const customMessages = this.customMessages
     const formats = [`${rule.name}.${rule.attribute}`, rule.name]
     for (const format of formats) {
-      if (hasOwnProperty(customMessages, format)) {
+      if (has(customMessages, format)) {
         template = customMessages[format]
         break
-      } else if (hasOwnProperty(messages, format) && messages[format]) {
+      } else if (has(messages, format) && messages[format]) {
         template = messages[format]
         break
       }

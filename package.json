@@ -9,9 +9,9 @@
       "import": "./dist/index.mjs"
     }
   },
-  "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "main": "dist/main.js",
   "scripts": {
     "dev": "tsc -w",
     "clean": "rimraf dist",
@@ -38,8 +38,8 @@
   ],
   "keywords": [
     "validator",
-    "validator-js",
-    "node"
+    "validatorjs",
+    "node-validator"
   ],
   "author": {
     "name": "Chantouch Sek",
@@ -76,14 +76,20 @@
     "lint-staged": "^13.1.0",
     "node-notifier": "^10.0.1",
     "prettier": "^2.8.1",
-    "rimraf": "^3.0.2",
     "rollup-plugin-typescript-paths": "^1.4.0",
     "standard-version": "^9.5.0",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.4",
     "vite": "^4.0.1",
-    "vitest": "^0.25.8"
+    "vitest": "^0.25.8",
+    "@types/lodash": "^4.14.191",
+    "jest": "^27.5.1",
+    "rimraf": "^4.0.1",
+    "ts-jest": "^27.1.4"
   },
+  "packageManager": "pnpm@7.18.2",
   "engineStrict": true,
-  "packageManager": "pnpm@7.18.2"
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
 }
