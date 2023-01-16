@@ -1,4 +1,4 @@
-import { hasOwnProperty } from './utils'
+import { cloneDeep, get, has, omit } from 'lodash'
 
 export default class Errors {
   private errors: Record<string, string[]> = {}
@@ -12,16 +12,17 @@ export default class Errors {
     }
   }
 
-  get(attribute: string) {
-    if (this.has(attribute)) {
-      return this.errors[attribute]
-    }
-    return []
+  missed(field: string | string[]) {
+    return !this.has(field)
   }
 
-  first(attribute: string): string | boolean {
+  get(field: string | string[]): string | string[] {
+    return get(this.errors, field, [])
+  }
+
+  first(attribute: string) {
     if (this.has(attribute)) {
-      return this.errors[attribute][0]
+      return this.get(attribute)[0]
     }
     return false
   }
@@ -30,11 +31,21 @@ export default class Errors {
     return this.errors
   }
 
-  has(attribute: string) {
-    return hasOwnProperty(this.errors, attribute)
+  has(field: string | string[]) {
+    return has(this.errors, field)
   }
 
   fill(errors: Record<string, string[]>) {
     this.errors = errors
+  }
+
+  clear(attribute?: string | string[]) {
+    if (!attribute) return this.flush()
+    const errors = omit(cloneDeep(this.errors), attribute)
+    this.fill(errors)
+  }
+
+  flush() {
+    this.fill({})
   }
 }

@@ -52,9 +52,9 @@ describe('register a custom validation rule', () => {
 
   it('should be able to register rule with params', () => {
     Validator.register('hello_param', (val: string, req: number[], attribute: string) => {
-      console.warn('value', val)
-      console.warn('req', req)
-      console.warn('attribute', attribute)
+      console.log('value', val)
+      console.log('req', req)
+      console.log('attribute', attribute)
       return true
     })
 

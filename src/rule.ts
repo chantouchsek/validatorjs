@@ -1,6 +1,7 @@
 import Validator from './main'
 import * as rules from './rules'
-import { flattenObject, isEmpty, isValidDate, objectPath } from './utils'
+import { flattenObject, isEmpty, isValidDate } from './utils'
+import { get } from 'lodash'
 
 let missedRuleValidator: VoidFunction = function (this: Rule) {
   throw new Error('Validator `' + this.name + '` is not defined!')
@@ -135,7 +136,7 @@ export class Rule {
       },
       required_if(val: Record<string, any>, req: string[]) {
         req = this.getParameters()
-        if (objectPath(this.validator.input, req[0]) === req[1]) {
+        if (get(this.validator.input, req[0]) === req[1]) {
           return this.validator.getRule('required').validate(val, {})
         }
 
@@ -143,14 +144,14 @@ export class Rule {
       },
       required_unless(val: Record<string, any>, req: string[]) {
         req = this.getParameters()
-        if (objectPath(this.validator.input, req[0]) !== req[1]) {
+        if (get(this.validator.input, req[0]) !== req[1]) {
           return this.validator.getRule('required').validate(val, {})
         }
 
         return true
       },
       required_with(val: Record<string, any>, req: string) {
-        if (objectPath(this.validator.input, req)) {
+        if (get(this.validator.input, req)) {
           return this.validator.getRule('required').validate(val, {})
         }
         return true
@@ -159,15 +160,13 @@ export class Rule {
         req = this.getParameters()
 
         for (const re of req) {
-          if (!objectPath(this.validator.input, re)) return true
+          if (!get(this.validator.input, re)) return true
         }
 
         return this.validator.getRule('required').validate(val, {})
       },
       required_without(val: Record<string, any>, req: string) {
-        if (objectPath(this.validator.input, req)) {
-          return true
-        }
+        if (get(this.validator.input, req)) return true
 
         return this.validator.getRule('required').validate(val, {})
       },
@@ -175,9 +174,7 @@ export class Rule {
         req = this.getParameters()
 
         for (const re of req) {
-          if (objectPath(this.validator.input, re)) {
-            return true
-          }
+          if (get(this.validator.input, re)) return true
         }
 
         return this.validator.getRule('required').validate(val, {})
@@ -213,26 +210,18 @@ export class Rule {
       },
       in(val: string | string[]) {
         let list: (string | number)[] = []
-        if (!isEmpty(val)) {
-          list = this.getParameters()
-        }
+        if (!isEmpty(val)) list = this.getParameters()
         if (!isEmpty(val) && !(val instanceof Array)) {
           let localValue = val
           for (const li of list) {
-            if (typeof li === 'string') {
-              localValue = String(val)
-            }
-            if (localValue === li) {
-              return true
-            }
+            if (typeof li === 'string') localValue = String(val)
+            if (localValue === li) return true
           }
           return false
         }
         if (val && val instanceof Array) {
           for (const va of val) {
-            if (list.indexOf(va) < 0) {
-              return false
-            }
+            if (list.indexOf(va) < 0) return false
           }
         }
         return true
@@ -244,9 +233,7 @@ export class Rule {
         for (const li of list) {
           let localValue = val
 
-          if (typeof li === 'string') {
-            localValue = String(val)
-          }
+          if (typeof li === 'string') localValue = String(val)
 
           if (localValue === li) {
             returnVal = false
@@ -273,17 +260,13 @@ export class Rule {
       before(val: string, req: string) {
         const val1 = this.validator.input[req]
         const val2 = val
-        if (!isValidDate(val1) || !isValidDate(val2)) {
-          return false
-        }
+        if (!isValidDate(val1) || !isValidDate(val2)) return false
         return new Date(val1).getTime() > new Date(val2).getTime()
       },
       before_or_equal(val: string, req: string) {
         const val1 = this.validator.input[req]
         const val2 = val
-        if (!isValidDate(val1) || !isValidDate(val2)) {
-          return false
-        }
+        if (!isValidDate(val1) || !isValidDate(val2)) return false
         return new Date(val1).getTime() >= new Date(val2).getTime()
       },
       ip(val: string, req: number, attribute: string) {

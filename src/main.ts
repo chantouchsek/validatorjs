@@ -4,9 +4,10 @@ import Errors from './errors'
 import { Manager, Rule } from './rule'
 import AsyncResolvers from './async-resolvers'
 import type { ValidatorOptions, VoidFunction } from './types/validator'
-import { flattenObject, objectPath, formatter, isArray, hasOwnProperty } from './utils'
+import { flattenObject, formatter, hasOwnProperty } from './utils'
 import { LangTypes } from './types/lang'
 import { RuleType } from './types/rule'
+import { get, isArray } from 'lodash'
 
 export { Errors }
 
@@ -43,7 +44,7 @@ export default class Validator {
   check() {
     for (let attribute in this.rules) {
       const attributeRules = this.rules[attribute]
-      const inputValue = objectPath(this.input, attribute)
+      const inputValue = get(this.input, attribute)
       if (this._passesOptionalCheck(attribute)) continue
 
       for (let i = 0, len = attributeRules.length, rule: Rule, ruleOptions, rulePassed; i < len; i++) {
@@ -99,7 +100,7 @@ export default class Validator {
 
     for (const attribute in this.rules) {
       const attributeRules = this.rules[attribute]
-      const inputValue = objectPath(this.input, attribute)
+      const inputValue = get(this.input, attribute)
       if (this._passesOptionalCheck(attribute)) continue
 
       for (let i = 0, len = attributeRules.length, rule, ruleOptions; i < len; i++) {
@@ -233,7 +234,7 @@ export default class Validator {
     wildCardValues: number[] = [],
   ) {
     const parentPath = attribute.substring(0, attribute.indexOf('*') - 1)
-    const propertyValue = objectPath(this.input, parentPath)
+    const propertyValue = get(this.input, parentPath)
 
     if (propertyValue) {
       for (let propertyNumber = 0; propertyNumber < propertyValue.length; propertyNumber++) {
@@ -304,30 +305,21 @@ export default class Validator {
     return rule
   }
 
-  _replaceWildCards(path: string | string[] | any, nums: string[]) {
+  _replaceWildCards(path: string, nums: string[]) {
     if (!nums) return path
 
-    let path2 = path
     for (const num of nums) {
-      if (isArray(path2)) {
-        path2 = path2[0]
-      }
-      const pos = path2.indexOf('*')
-      if (pos === -1) return path2
-      path2 = path2.substring(0, pos) + num + path2.substring(pos + 1)
+      const pos = path.indexOf('*')
+      if (pos === -1) return path
+      path = path.substring(0, pos) + num + path.substring(pos + 1)
     }
-    if (isArray(path)) {
-      path[0] = path2
-      path2 = path
-    }
-    return path2
+    return path
   }
 
   _replaceWildCardsMessages(nums: string[]) {
     const customMessages = this.messages.customMessages
     for (const key of Object.keys(customMessages)) {
-      const path = isArray(key) ? key : [key]
-      const newKey = this._replaceWildCards(path, nums)
+      const newKey = this._replaceWildCards(key, nums)
       customMessages[newKey] = customMessages[key]
     }
 
