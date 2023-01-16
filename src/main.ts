@@ -4,10 +4,10 @@ import Errors from './errors'
 import { Manager, Rule } from './rule'
 import AsyncResolvers from './async-resolvers'
 import type { ValidatorOptions, VoidFunction } from './types/validator'
-import { flattenObject, formatter, isArray, hasOwnProperty } from './utils'
+import { flattenObject, formatter, hasOwnProperty } from './utils'
 import { LangTypes } from './types/lang'
 import { RuleType } from './types/rule'
-import { get } from 'lodash'
+import { get, isArray } from 'lodash'
 
 export { Errors }
 
