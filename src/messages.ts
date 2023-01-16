@@ -1,18 +1,14 @@
 import type { Rule } from './rule'
-import { flattenObject, hasOwnProperty, toCamelCase } from './utils'
-import { snakeCase } from 'lodash'
+import { flattenObject, toCamelCase } from './utils'
+import { has, snakeCase } from 'lodash'
 
 export default class Messages {
-  private lang: string
-  private readonly messages: Record<string, any> = {}
-  customMessages: Record<string, any> = {}
+  public customMessages: Record<string, any> = {}
   private attributeNames: Record<string, any> = {}
   private attributeFormatter: ((arg: any) => any) | undefined
   static replacements: any = {}
 
-  constructor(lang: string, messages: Record<string, any>) {
-    this.lang = lang
-    this.messages = messages
+  constructor(public readonly messages: Record<string, any>) {
     this.customMessages = {}
     this.attributeNames = {}
     Messages._setReplacements()
@@ -125,10 +121,10 @@ export default class Messages {
     const attributeNames = flattenObject(this.attributeNames)
     const camelCase = toCamelCase(attribute)
     const snakecase = snakeCase(attribute)
-    if (hasOwnProperty(attributeNames, camelCase) || hasOwnProperty(attributeNames, snakecase)) {
+    if (has(attributeNames, camelCase) || has(attributeNames, snakecase)) {
       return attributeNames[snakecase] || attributeNames[camelCase]
     }
-    if (hasOwnProperty(attributes, attribute)) {
+    if (has(attributes, attribute)) {
       name = attributes[attribute]
     } else if (this.attributeFormatter) {
       name = this.attributeFormatter(name)
@@ -159,10 +155,10 @@ export default class Messages {
     const customMessages = this.customMessages
     const formats = [`${rule.name}.${rule.attribute}`, rule.name]
     for (const format of formats) {
-      if (hasOwnProperty(customMessages, format)) {
+      if (has(customMessages, format)) {
         template = customMessages[format]
         break
-      } else if (hasOwnProperty(messages, format) && messages[format]) {
+      } else if (has(messages, format) && messages[format]) {
         template = messages[format]
         break
       }
