@@ -4,9 +4,10 @@ import Errors from './errors'
 import { Manager, Rule } from './rule'
 import AsyncResolvers from './async-resolvers'
 import type { ValidatorOptions, VoidFunction } from './types/validator'
-import { flattenObject, objectPath, formatter, isArray, hasOwnProperty } from './utils'
+import { flattenObject, formatter, isArray, hasOwnProperty } from './utils'
 import { LangTypes } from './types/lang'
 import { RuleType } from './types/rule'
+import { get } from 'lodash'
 
 export { Errors }
 
@@ -43,7 +44,7 @@ export default class Validator {
   check() {
     for (let attribute in this.rules) {
       const attributeRules = this.rules[attribute]
-      const inputValue = objectPath(this.input, attribute)
+      const inputValue = get(this.input, attribute)
       if (this._passesOptionalCheck(attribute)) continue
 
       for (let i = 0, len = attributeRules.length, rule: Rule, ruleOptions, rulePassed; i < len; i++) {
@@ -99,7 +100,7 @@ export default class Validator {
 
     for (const attribute in this.rules) {
       const attributeRules = this.rules[attribute]
-      const inputValue = objectPath(this.input, attribute)
+      const inputValue = get(this.input, attribute)
       if (this._passesOptionalCheck(attribute)) continue
 
       for (let i = 0, len = attributeRules.length, rule, ruleOptions; i < len; i++) {
@@ -233,7 +234,7 @@ export default class Validator {
     wildCardValues: number[] = [],
   ) {
     const parentPath = attribute.substring(0, attribute.indexOf('*') - 1)
-    const propertyValue = objectPath(this.input, parentPath)
+    const propertyValue = get(this.input, parentPath)
 
     if (propertyValue) {
       for (let propertyNumber = 0; propertyNumber < propertyValue.length; propertyNumber++) {
