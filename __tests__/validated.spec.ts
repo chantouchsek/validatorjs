@@ -88,29 +88,30 @@ describe('validated()', () => {
     expect(validated).not.toHaveProperty('additional_field2')
   })
 
-  it('should return only attributes defined in the rules (async)', (done) => {
-    const validator = new Validator(
-      {
-        user: 'John Doe',
-        additional_field1: 'lorem_ipsum',
-        additional_field2: 'lorem_ipsum',
-      },
-      { user: 'not_dustin' },
-    )
+  it('should return only attributes defined in the rules (async)', () =>
+    new Promise<void>((done) => {
+      const validator = new Validator(
+        {
+          user: 'John Doe',
+          additional_field1: 'lorem_ipsum',
+          additional_field2: 'lorem_ipsum',
+        },
+        { user: 'not_dustin' },
+      )
 
-    validator.validated(
-      function (validated) {
-        expect(validated).toEqual({ user: 'John Doe' })
-        expect(validated).toHaveProperty('user')
-        expect(validated).not.toHaveProperty('additional_field1')
-        expect(validated).not.toHaveProperty('additional_field2')
-        done()
-      },
-      function () {
-        throw new Error("fails callback shouldn't be called!")
-      },
-    )
-  })
+      validator.validated(
+        function (validated) {
+          expect(validated).toEqual({ user: 'John Doe' })
+          expect(validated).toHaveProperty('user')
+          expect(validated).not.toHaveProperty('additional_field1')
+          expect(validated).not.toHaveProperty('additional_field2')
+          done()
+        },
+        function () {
+          throw new Error("fails callback shouldn't be called!")
+        },
+      )
+    }))
 
   it('should throw an Error when current validation fails (normal)', () => {
     const validator = new Validator({ user: 'John Doe' }, { user: 'min:20' })
@@ -118,17 +119,18 @@ describe('validated()', () => {
     expect(validator.validated.bind(validator)).toThrow('Validation failed!')
   })
 
-  it('should throw an Error when current validation fails (async)', (done) => {
-    const validator = new Validator({ user: 'dustin' }, { user: 'not_dustin' })
+  it('should throw an Error when current validation fails (async)', () =>
+    new Promise<void>((done) => {
+      const validator = new Validator({ user: 'dustin' }, { user: 'not_dustin' })
 
-    validator.validated(
-      function () {
-        throw new Error("passes callback shouldn't be called!")
-      },
-      function () {
-        expect(validator.errors.first('user')).toEqual('The user can not be Dustin.')
-        done()
-      },
-    )
-  })
+      validator.validated(
+        function () {
+          throw new Error("passes callback shouldn't be called!")
+        },
+        function () {
+          expect(validator.errors.first('user')).toEqual('The user can not be Dustin.')
+          done()
+        },
+      )
+    }))
 })

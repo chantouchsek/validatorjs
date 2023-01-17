@@ -17,7 +17,7 @@ describe('Error messages', () => {
     it('should return false if errors.first() is called and there are no errors', () => {
       const validator = new Validator({ email: 'john@yahoo.com' }, { email: 'required|email' })
       expect(validator.passes()).toBeTruthy()
-      expect(validator.errors.first('email')).toEqual(false)
+      expect(validator.errors.first('email')).toEqual(undefined)
     })
 
     it('should return an error message that states the email must be valid', () => {

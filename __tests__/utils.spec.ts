@@ -1,6 +1,6 @@
 import { hasOwnProperty } from '../src/utils'
 
-describe.only('Utils Object', () => {
+describe('Utils Object', () => {
   describe('hasOwnProperty', () => {
     it('should hasOwnProperty must be a function', () => {
       expect(typeof hasOwnProperty).toBe('function')

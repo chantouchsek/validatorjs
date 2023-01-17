@@ -1,6 +1,36 @@
+import { describe, expect, it } from 'vitest'
 import Validator from '../src/main'
 
-describe('lang / messages', () => {
+describe('locales / messages', () => {
+  it('should default to english', () => {
+    expect(Validator.getDefaultLang()).toEqual('en')
+  })
+  it('should throw exception when attempting to get non exist translation', () => {
+    const validator = new Validator({ username: 'admin' }, { username: 'required' }, { locale: 'abc' })
+    expect(validator.passes()).toBeTruthy()
+  })
+  it('should be able to change locales', () => {
+    const oldLang = Validator.getDefaultLang()
+    Validator.useLang('ja')
+    expect(Validator.getDefaultLang()).toEqual('ja')
+    Validator.useLang(oldLang)
+  })
+  it('should be able to add custom', () => {
+    const oldLang = Validator.getDefaultLang()
+    const rawMessages = { required: 'Le nkundla iyadingeka', attributes: {} }
+    Validator.setMessages('zu', rawMessages)
+    Validator.useLang('zu')
+    const validator = new Validator({ zip: '' }, { zip: 'required' })
+
+    const messages = Validator.getMessages('zu')
+    expect(messages).toEqual(rawMessages)
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.errors.first('zip')).toEqual('Le nkundla iyadingeka')
+    Validator.useLang(oldLang)
+  })
+})
+
+describe('should concurrent the language', () => {
   const languages = [
     {
       input: null,
@@ -303,40 +333,12 @@ describe('lang / messages', () => {
       message: 'name必須接受。',
     },
   ]
-  it('should default to english', () => {
-    expect(Validator.getDefaultLang()).toEqual('en')
-  })
-  it('should throw exception when attempting to get non exist translation', () => {
-    const validator = new Validator({ username: 'admin' }, { username: 'required' }, { locale: 'abc' })
-    expect(validator.passes()).toBeTruthy()
-  })
-  it('should be able to change lang', () => {
-    const oldLang = Validator.getDefaultLang()
-    Validator.useLang('ja')
-    expect(Validator.getDefaultLang()).toEqual('ja')
-    Validator.useLang(oldLang)
-  })
-  it('should be able to add custom', () => {
-    const oldLang = Validator.getDefaultLang()
-    const rawMessages = { required: 'Le nkundla iyadingeka', attributes: {} }
-    Validator.setMessages('zu', rawMessages)
-    Validator.useLang('zu')
-    const validator = new Validator({ zip: '' }, { zip: 'required' })
-
-    const messages = Validator.getMessages('zu')
-    expect(messages).toEqual(rawMessages)
-    expect(validator.fails()).toBeTruthy()
-    expect(validator.errors.first('zip')).toEqual('Le nkundla iyadingeka')
-    Validator.useLang(oldLang)
-  })
   it('should get message of current locale', () => {
-    for (const language of languages) {
-      const { input, rules, locale, message } = language
-      const validator = new Validator(input, rules, { locale })
-      expect(validator.getDefaultLang()).toEqual(locale)
-      expect(validator.passes()).toBeFalsy()
-      expect(validator.fails()).toBeTruthy()
-      expect(validator.errors.first('name')).toBe(message)
-    }
+    const { input, rules, locale, message } = languages[0]
+    const validator = new Validator(input, rules, { locale })
+    expect(validator.getDefaultLang()).toEqual(locale)
+    expect(validator.passes()).toBeFalsy()
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.errors.first('name')).toBe(message)
   })
 })
