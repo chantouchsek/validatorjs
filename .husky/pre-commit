@@ -2,5 +2,5 @@
 . "$(dirname "$0")/_/husky.sh"
 . "$(dirname "$0")/common.sh"
 
-yarn lint-staged
-yarn test
+npx lint-staged
+pnpm test

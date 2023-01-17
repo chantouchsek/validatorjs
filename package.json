@@ -7,16 +7,17 @@
   "scripts": {
     "dev": "tsc -w",
     "clean": "rimraf dist",
-    "build": "yarn clean && tsc",
+    "build": "pnpm clean && tsc",
     "test": "jest --passWithNoTests --bail --detectOpenHandles --verbose",
-    "test:watch": "yarn test --watchAll",
-    "test:cov": "yarn test --coverage",
-    "release": "standard-version && git push --follow-tags origin main && yarn publish",
+    "test:watch": "pnpm test --watchAll",
+    "test:cov": "pnpm test --coverage",
+    "release": "standard-version && git push --follow-tags origin main && pnpm publish",
     "lint:js": "eslint --ext \".js,.ts\" --ignore-path .gitignore .",
     "lint:prettier": "prettier --check .",
-    "lint": "yarn lint:js && yarn lint:prettier",
-    "lintfix": "prettier --write --list-different . && yarn lint:js --fix",
-    "prepare": "husky install"
+    "lint": "pnpm lint:js && pnpm lint:prettier",
+    "lintfix": "prettier --write --list-different . && pnpm lint:js --fix",
+    "prepare": "husky install",
+    "typecheck": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
@@ -74,5 +75,6 @@
   },
   "dependencies": {
     "lodash": "^4.17.21"
-  }
+  },
+  "engineStrict": true
 }

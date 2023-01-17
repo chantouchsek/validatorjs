@@ -9,6 +9,8 @@
     "declaration": true,
     "outDir": "dist",
     "declarationDir": "typings",
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
     "types": ["@types/node", "@types/jest"]
   },
   "include": ["src"],
