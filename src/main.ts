@@ -1,36 +1,37 @@
-import Lang from './lang'
-import Messages from './messages'
-import Errors from './errors'
-import { Manager, Rule } from './rule'
-import AsyncResolvers from './async-resolvers'
-import type { ValidatorOptions, VoidFunction } from './types/validator'
-import { flattenObject, formatter, hasOwnProperty } from './utils'
-import { LangTypes } from './types/lang'
-import { RuleType } from './types/rule'
+import type Messages from './messages'
+import type { Rule } from './rule'
+import type { ValidatorOptions, VoidFunction, LangTypes, RuleType } from './types'
 import { get, isArray } from 'lodash'
+import AsyncResolvers from './async-resolvers'
+import Errors from './errors'
+import I18n from './i18n'
+import { Manager } from './rule'
+import { flattenObject, formatter, hasOwnProperty } from './utils'
 
-export { Errors }
+export { Errors, ValidatorOptions, LangTypes, RuleType }
 
 export default class Validator {
-  readonly input: Record<string, any> = {}
   readonly messages: Messages
   readonly errors: Errors
-  errorCount: number
-  hasAsync: boolean
+  public errorCount: number
+  public hasAsync: boolean
   static lang: LangTypes = 'en'
   readonly numericRules = ['integer', 'numeric']
-  public rules: Record<RuleType, any> = {}
+  public rules: Record<RuleType, any>
   stopOnAttributes: Record<string, any> | boolean | string[] | undefined
   static attributeFormatter = formatter
   readonly options!: ValidatorOptions
   static manager = new Manager()
   private readonly confirmedReverse?: boolean
 
-  constructor(input: Record<string, any> | null, rules?: Record<string, any>, options: Partial<ValidatorOptions> = {}) {
+  constructor(
+    public readonly input: Record<string, any> | null,
+    rules?: Record<RuleType, any>,
+    options: Partial<ValidatorOptions> = {},
+  ) {
     const lang = options.locale || Validator.getDefaultLang()
     Validator.useLang(lang)
-    this.input = input || {}
-    this.messages = Lang._make(lang)
+    this.messages = I18n._make(lang)
     this.messages._setCustom(options.customMessages)
     this.setAttributeNames(options.customAttributes)
     this.setAttributeFormatter(Validator.attributeFormatter)
@@ -92,9 +93,7 @@ export default class Validator {
     ) => {
       return () => {
         const resolverIndex = asyncResolvers.add(rule)
-        rule.validate(inputValue, ruleOptions.value, attribute, () => {
-          return asyncResolvers.resolve(resolverIndex)
-        })
+        rule.validate(inputValue, ruleOptions.value, attribute, () => asyncResolvers.resolve(resolverIndex))
       }
     }
 
@@ -127,12 +126,12 @@ export default class Validator {
   }
 
   static setMessages(lang: LangTypes, messages: Record<string, any>) {
-    Lang._set(lang, messages)
+    I18n._set(lang, messages)
     return this
   }
 
   static getMessages(lang: LangTypes) {
-    return Lang._get(lang)
+    return I18n._get(lang)
   }
 
   static useLang(lang: LangTypes) {
@@ -404,25 +403,25 @@ export default class Validator {
   static register(name: string, fn: any, message?: string) {
     const lang = Validator.getDefaultLang()
     this.manager.register(name, fn)
-    Lang._setRuleMessage(lang, name, message)
+    I18n._setRuleMessage(lang, name, message)
   }
 
   static registerImplicit(name: string, fn: any, message?: string) {
     const lang = Validator.getDefaultLang()
     this.manager.registerImplicit(name, fn)
-    Lang._setRuleMessage(lang, name, message)
+    I18n._setRuleMessage(lang, name, message)
   }
 
   static registerAsync(name: string, fn: any, message?: string) {
     const lang = Validator.getDefaultLang()
     this.manager.registerAsync(name, fn)
-    Lang._setRuleMessage(lang, name, message)
+    I18n._setRuleMessage(lang, name, message)
   }
 
   static registerAsyncImplicit(name: string, fn: any, message?: string) {
     const lang = Validator.getDefaultLang()
     this.manager.registerAsyncImplicit(name, fn)
-    Lang._setRuleMessage(lang, name, message)
+    I18n._setRuleMessage(lang, name, message)
   }
 
   static registerMissedRuleValidator(fn: any, message?: string) {

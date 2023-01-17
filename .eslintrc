@@ -19,6 +19,14 @@
     "@typescript-eslint/no-explicit-any": 0,
     "@typescript-eslint/explicit-function-return-type": 0,
     "@typescript-eslint/explicit-module-boundary-types": "off",
-    "no-useless-escape": "off"
+    "no-useless-escape": "off",
+    "@typescript-eslint/consistent-type-imports": ["error", { "disallowTypeAnnotations": false }],
+    "import/order": [
+      "error",
+      {
+        "groups": ["type", "builtin", "external", "internal", "index", "sibling", "parent", "object"],
+        "alphabetize": { "order": "asc" }
+      }
+    ]
   }
 }

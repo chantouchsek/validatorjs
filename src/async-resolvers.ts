@@ -1,4 +1,4 @@
-import { Rule } from './rule'
+import type { Rule } from './rule'
 
 type OnFailedOne = (rule: Rule, message?: string) => any
 type OnResolvedAll = (allPassed: boolean) => any

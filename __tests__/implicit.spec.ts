@@ -30,46 +30,48 @@ describe('implicit rule tests', () => {
     expect(validator.passes()).toBeTruthy()
   })
 
-  it('should fail async implicit rule even when undefined', function (done) {
-    Validator.registerAsyncImplicit(
-      'async_null',
-      (value: string, attribute: string, req: number, passes: any) => {
-        setTimeout(() => {
-          if (value === null) {
-            passes(true)
-          } else {
-            passes(false)
-          }
-        }, 50)
-      },
-      ':attribute already taken',
-    )
+  it('should fail async implicit rule even when undefined', () =>
+    new Promise<void>((done) => {
+      Validator.registerAsyncImplicit(
+        'async_null',
+        (value: string, attribute: string, req: number, passes: any) => {
+          setTimeout(() => {
+            if (value === null) {
+              passes(true)
+            } else {
+              passes(false)
+            }
+          }, 50)
+        },
+        ':attribute already taken',
+      )
 
-    const validator = new Validator(
-      {
-        /* empty */
-      },
-      { value: 'async_null' },
-    )
-    validator.fails(done)
-  })
+      const validator = new Validator(
+        {
+          /* empty */
+        },
+        { value: 'async_null' },
+      )
+      validator.fails(done)
+    }))
 
-  it('should pass async implicit rule even when null', function (done) {
-    Validator.registerAsyncImplicit(
-      'async_null',
-      (value: string, attribute: string, req: number, passes: any) => {
-        setTimeout(() => {
-          if (value === null) {
-            passes(true)
-          } else {
-            passes(false)
-          }
-        }, 50)
-      },
-      ':attribute already taken',
-    )
+  it('should pass async implicit rule even when null', () =>
+    new Promise<void>((done) => {
+      Validator.registerAsyncImplicit(
+        'async_null',
+        (value: string, attribute: string, req: number, passes: any) => {
+          setTimeout(() => {
+            if (value === null) {
+              passes(true)
+            } else {
+              passes(false)
+            }
+          }, 50)
+        },
+        ':attribute already taken',
+      )
 
-    const validator = new Validator({ value: null }, { value: 'async_null' })
-    validator.passes(done)
-  })
+      const validator = new Validator({ value: null }, { value: 'async_null' })
+      validator.passes(done)
+    }))
 })

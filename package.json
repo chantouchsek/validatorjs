@@ -3,28 +3,28 @@
   "version": "1.1.5",
   "description": "The validatorjs library makes data validation in JavaScript very easy in both the browser and Node.js.",
   "main": "dist/main.js",
-  "types": "typings/main.d.ts",
+  "types": "dist/main.d.ts",
   "scripts": {
     "dev": "tsc -w",
     "clean": "rimraf dist",
-    "build": "yarn clean && tsc",
-    "test": "jest --passWithNoTests --bail --detectOpenHandles --verbose",
-    "test:watch": "yarn test --watchAll",
-    "test:cov": "yarn test --coverage",
-    "release": "standard-version && git push --follow-tags origin main && yarn publish",
+    "build": "pnpm clean && tsc",
+    "test": "vitest --run",
+    "test:watch": "pnpm test",
+    "test:cov": "vitest run --coverage",
+    "release": "standard-version && git push --follow-tags origin main && pnpm publish",
     "lint:js": "eslint --ext \".js,.ts\" --ignore-path .gitignore .",
     "lint:prettier": "prettier --check .",
-    "lint": "yarn lint:js && yarn lint:prettier",
-    "lintfix": "prettier --write --list-different . && yarn lint:js --fix",
-    "prepare": "husky install"
+    "lint": "pnpm lint:js && pnpm lint:prettier",
+    "lintfix": "prettier --write --list-different . && pnpm lint:js --fix",
+    "prepare": "husky install",
+    "typecheck": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chantouchsek/validatorjs.git"
   },
   "files": [
-    "dist",
-    "typings"
+    "dist"
   ],
   "keywords": [
     "validator",
@@ -51,28 +51,29 @@
   "devDependencies": {
     "@commitlint/cli": "^17.0.0",
     "@commitlint/config-conventional": "^17.0.0",
-    "@types/jest": "^27.4.0",
     "@types/lodash": "^4.14.191",
     "@types/node": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.48.2",
     "@typescript-eslint/parser": "^5.48.2",
+    "@vitest/coverage-c8": "^0.27.1",
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^6.0.0",
     "husky": "^8.0.1",
-    "jest": "^27.5.1",
     "lint-staged": "^13.0.0",
     "node-notifier": "^10.0.0",
     "prettier": "^2.6.2",
     "rimraf": "^4.0.1",
     "standard-version": "^9.3.2",
-    "ts-jest": "^27.1.4",
     "ts-node": "^10.7.0",
-    "typescript": "^4.5.4"
+    "typescript": "^4.5.4",
+    "vite": "^4.0.4",
+    "vitest": "^0.27.1"
   },
   "dependencies": {
     "lodash": "^4.17.21"
-  }
+  },
+  "engineStrict": true
 }

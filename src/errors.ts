@@ -24,7 +24,7 @@ export default class Errors {
     if (this.has(attribute)) {
       return this.get(attribute)[0]
     }
-    return false
+    return undefined
   }
 
   all() {

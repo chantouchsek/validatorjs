@@ -21,6 +21,12 @@ features.
 
 ## Installation
 
+### Using pnpm
+
+```bash
+pnpm add @chantouchsek/validatorjs
+```
+
 ### Using npm
 
 ```bash

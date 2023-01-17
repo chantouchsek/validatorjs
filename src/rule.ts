@@ -1,7 +1,7 @@
-import Validator from './main'
+import type Validator from './main'
+import { get } from 'lodash'
 import * as rules from './rules'
 import { flattenObject, isEmpty, isValidDate } from './utils'
-import { get } from 'lodash'
 
 let missedRuleValidator: VoidFunction = function (this: Rule) {
   throw new Error('Validator `' + this.name + '` is not defined!')

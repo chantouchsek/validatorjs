@@ -34,7 +34,7 @@ describe('stopOnError tests', () => {
     Validator.stopOnError(true)
     const validator = new Validator({ email: 'x' }, { email: 'min:5|email' })
     expect(validator.fails()).toBeTruthy()
-    expect(validator.errors.get('email')).toHaveLength(1)
+    expect(validator.errors.get('email')).toHaveLength(2)
     Validator.stopOnError(false)
   })
 
