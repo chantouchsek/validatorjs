@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/chantouchsek/validatorjs/compare/v1.1.5...v1.2.0) (2023-01-17)
+
+
+### Features
+
+* :sparkles: add flush method to errors ([3d7829d](https://github.com/chantouchsek/validatorjs/commit/3d7829dd61e712c9cedc2d799517c6b8cc98acf2))
+* :sparkles: added clear function ([40a0707](https://github.com/chantouchsek/validatorjs/commit/40a070719cf6d5ce19af5244aa3975736f860818))
+* :sparkles: change yarn to pnpm ([fb2f1f4](https://github.com/chantouchsek/validatorjs/commit/fb2f1f4562b89336339d02ed15e109f391fb56a3))
+
+
+### Bug Fixes
+
+* :beers: remove unused lang property from message class ([12be796](https://github.com/chantouchsek/validatorjs/commit/12be796a19550c8652be05f5bdc92cee2cf5722b))
+* :bug: correct of tests ([c066ff0](https://github.com/chantouchsek/validatorjs/commit/c066ff0291b94a3065357c2a589e253b663c8c67))
+* :bug: fix test scripts ([1ad7cad](https://github.com/chantouchsek/validatorjs/commit/1ad7cad65b18e256533245a3f5328f84c03ba958))
+* :fire: remove redundant functions ([e7ac7f3](https://github.com/chantouchsek/validatorjs/commit/e7ac7f3506fbe7133f874e53551c7335b0e8fee9))
+* :pencil2: change typo ([d749a03](https://github.com/chantouchsek/validatorjs/commit/d749a03dcaf4d0c9d545dfe109a9e7537faa8b4d))
+* :pencil2: correct  github link ([5175abd](https://github.com/chantouchsek/validatorjs/commit/5175abde4a1d25abfd4f4f635a6cb61c87530d28))
+* **deps:** bump actions/checkout from 3.1.0 to 3.2.0 ([6b9fc3e](https://github.com/chantouchsek/validatorjs/commit/6b9fc3ea0167a331c57f8fe6cb583186cb299559))
+* **deps:** bump actions/checkout from 3.2.0 to 3.3.0 ([a73624c](https://github.com/chantouchsek/validatorjs/commit/a73624c2bff3e49dc7cae1b3557b5a69c3766b96))
+* **deps:** bump actions/setup-node from 3.5.1 to 3.6.0 ([bc269a4](https://github.com/chantouchsek/validatorjs/commit/bc269a486fb0954aaa65db38df18b4bf7fe9e4b1))
+* **deps:** bump actions/stale from 6 to 7 ([acad670](https://github.com/chantouchsek/validatorjs/commit/acad6709ee55a93122f8f8cbe9abd20596c93ae4))
+* **deps:** bump json5 from 1.0.1 to 1.0.2 ([3d49ca3](https://github.com/chantouchsek/validatorjs/commit/3d49ca336ea32ca6dc68d254dbe4ce784f68ee95))
+
 ### [1.1.5](https://github.com/chantouchsek/validator-js/compare/v1.1.4...v1.1.5) (2022-11-21)
 
 
