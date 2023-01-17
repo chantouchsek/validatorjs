@@ -46,6 +46,14 @@ jobs:
           restore-keys: |
             ${{ matrix.os }}-pnpm-store-
 
-      - run: pnpm install --shamefully-hoist=true
-      - run: pnpm build
-      - run: pnpm test:cov
+      - name: Install dependencies 👨🏻‍💻
+        run: pnpm install --shamefully-hoist=true
+
+      - name: Run linter 👀
+        run: pnpm lint
+
+      - name: Run build 👷
+        run: pnpm build
+
+      - name: Run tests 🧪
+        run: pnpm test:cov

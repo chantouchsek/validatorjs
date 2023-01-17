@@ -1,6 +1,6 @@
 import type { Rule } from './rule'
-import { flattenObject, toCamelCase } from './utils'
 import { has, snakeCase } from 'lodash'
+import { flattenObject, toCamelCase } from './utils'
 
 export default class Messages {
   public customMessages: Record<string, any> = {}

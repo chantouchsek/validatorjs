@@ -1,9 +1,8 @@
-import Massages from './messages'
-import { LangTypes } from './types/lang'
-
-import ja from './lang/ja'
+import type { LangTypes } from './types/lang'
 import en from './lang/en'
+import ja from './lang/ja'
 import km from './lang/km'
+import Massages from './messages'
 
 export default class Lang {
   static messages: Record<LangTypes, Record<string, any>> = { en, ja, km }

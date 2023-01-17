@@ -1,22 +1,23 @@
-import Lang from './lang'
-import Messages from './messages'
-import Errors from './errors'
-import { Manager, Rule } from './rule'
-import AsyncResolvers from './async-resolvers'
+import type Messages from './messages'
+import type { Rule } from './rule'
+import type { LangTypes } from './types/lang'
+import type { RuleType } from './types/rule'
 import type { ValidatorOptions, VoidFunction } from './types/validator'
-import { flattenObject, formatter, hasOwnProperty } from './utils'
-import { LangTypes } from './types/lang'
-import { RuleType } from './types/rule'
 import { get, isArray } from 'lodash'
+import AsyncResolvers from './async-resolvers'
+import Errors from './errors'
+import Lang from './lang'
+import { Manager } from './rule'
+import { flattenObject, formatter, hasOwnProperty } from './utils'
 
-export { Errors }
+export { Errors, ValidatorOptions }
 
 export default class Validator {
   readonly input: Record<string, any> = {}
   readonly messages: Messages
   readonly errors: Errors
-  errorCount: number
-  hasAsync: boolean
+  public errorCount: number
+  public hasAsync: boolean
   static lang: LangTypes = 'en'
   readonly numericRules = ['integer', 'numeric']
   public rules: Record<RuleType, any> = {}

@@ -1,4 +1,4 @@
-import { Rule } from '../rule'
+import type { Rule } from '../rule'
 
 export interface Replacement {
   between: (template: string, rule: Rule) => string
