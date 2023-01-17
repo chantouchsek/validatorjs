@@ -1,8 +1,6 @@
 import type Messages from './messages'
 import type { Rule } from './rule'
-import type { LangTypes } from './types/lang'
-import type { RuleType } from './types/rule'
-import type { ValidatorOptions, VoidFunction } from './types/validator'
+import type { ValidatorOptions, VoidFunction, LangTypes, RuleType } from './types'
 import { get, isArray } from 'lodash'
 import AsyncResolvers from './async-resolvers'
 import Errors from './errors'
@@ -10,27 +8,29 @@ import I18n from './i18n'
 import { Manager } from './rule'
 import { flattenObject, formatter, hasOwnProperty } from './utils'
 
-export { Errors, ValidatorOptions }
+export { Errors, ValidatorOptions, LangTypes, RuleType }
 
 export default class Validator {
-  readonly input: Record<string, any> = {}
   readonly messages: Messages
   readonly errors: Errors
   public errorCount: number
   public hasAsync: boolean
   static lang: LangTypes = 'en'
   readonly numericRules = ['integer', 'numeric']
-  public rules: Record<RuleType, any> = {}
+  public rules: Record<RuleType, any>
   stopOnAttributes: Record<string, any> | boolean | string[] | undefined
   static attributeFormatter = formatter
   readonly options!: ValidatorOptions
   static manager = new Manager()
   private readonly confirmedReverse?: boolean
 
-  constructor(input: Record<string, any> | null, rules?: Record<string, any>, options: Partial<ValidatorOptions> = {}) {
+  constructor(
+    public readonly input: Record<string, any> | null,
+    rules?: Record<RuleType, any>,
+    options: Partial<ValidatorOptions> = {},
+  ) {
     const lang = options.locale || Validator.getDefaultLang()
     Validator.useLang(lang)
-    this.input = input || {}
     this.messages = I18n._make(lang)
     this.messages._setCustom(options.customMessages)
     this.setAttributeNames(options.customAttributes)
@@ -93,9 +93,7 @@ export default class Validator {
     ) => {
       return () => {
         const resolverIndex = asyncResolvers.add(rule)
-        rule.validate(inputValue, ruleOptions.value, attribute, () => {
-          return asyncResolvers.resolve(resolverIndex)
-        })
+        rule.validate(inputValue, ruleOptions.value, attribute, () => asyncResolvers.resolve(resolverIndex))
       }
     }
 

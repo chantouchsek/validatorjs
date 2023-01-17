@@ -1,4 +1,4 @@
-import type { LangTypes } from './types/lang'
+import type { LangTypes } from './types'
 import locales from './lang'
 import Massages from './messages'
 

@@ -8,7 +8,6 @@
     "strict": true,
     "declaration": true,
     "outDir": "dist",
-    "declarationDir": "typings",
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "types": ["@types/node", "vitest/globals"]
