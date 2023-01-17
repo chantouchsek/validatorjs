@@ -6,7 +6,7 @@ import type { ValidatorOptions, VoidFunction } from './types/validator'
 import { get, isArray } from 'lodash'
 import AsyncResolvers from './async-resolvers'
 import Errors from './errors'
-import Lang from './lang'
+import I18n from './i18n'
 import { Manager } from './rule'
 import { flattenObject, formatter, hasOwnProperty } from './utils'
 
@@ -31,7 +31,7 @@ export default class Validator {
     const lang = options.locale || Validator.getDefaultLang()
     Validator.useLang(lang)
     this.input = input || {}
-    this.messages = Lang._make(lang)
+    this.messages = I18n._make(lang)
     this.messages._setCustom(options.customMessages)
     this.setAttributeNames(options.customAttributes)
     this.setAttributeFormatter(Validator.attributeFormatter)
@@ -128,12 +128,12 @@ export default class Validator {
   }
 
   static setMessages(lang: LangTypes, messages: Record<string, any>) {
-    Lang._set(lang, messages)
+    I18n._set(lang, messages)
     return this
   }
 
   static getMessages(lang: LangTypes) {
-    return Lang._get(lang)
+    return I18n._get(lang)
   }
 
   static useLang(lang: LangTypes) {
@@ -405,25 +405,25 @@ export default class Validator {
   static register(name: string, fn: any, message?: string) {
     const lang = Validator.getDefaultLang()
     this.manager.register(name, fn)
-    Lang._setRuleMessage(lang, name, message)
+    I18n._setRuleMessage(lang, name, message)
   }
 
   static registerImplicit(name: string, fn: any, message?: string) {
     const lang = Validator.getDefaultLang()
     this.manager.registerImplicit(name, fn)
-    Lang._setRuleMessage(lang, name, message)
+    I18n._setRuleMessage(lang, name, message)
   }
 
   static registerAsync(name: string, fn: any, message?: string) {
     const lang = Validator.getDefaultLang()
     this.manager.registerAsync(name, fn)
-    Lang._setRuleMessage(lang, name, message)
+    I18n._setRuleMessage(lang, name, message)
   }
 
   static registerAsyncImplicit(name: string, fn: any, message?: string) {
     const lang = Validator.getDefaultLang()
     this.manager.registerAsyncImplicit(name, fn)
-    Lang._setRuleMessage(lang, name, message)
+    I18n._setRuleMessage(lang, name, message)
   }
 
   static registerMissedRuleValidator(fn: any, message?: string) {

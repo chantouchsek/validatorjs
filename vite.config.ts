@@ -2,7 +2,12 @@ import { resolve } from 'path'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  test: { globals: true },
+  test: {
+    globals: true,
+    deps: {
+      interopDefault: true,
+    },
+  },
   plugins: [],
   resolve: {
     alias: [
