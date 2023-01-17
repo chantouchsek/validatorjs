@@ -1,8 +1,6 @@
 import Validator from '../src/main'
 
 describe('async rule tests', () => {
-  jest.setTimeout(200)
-
   it('should be able to fail async rules', (done) => {
     Validator.registerAsync(
       'username',

@@ -8,9 +8,9 @@
     "dev": "tsc -w",
     "clean": "rimraf dist",
     "build": "pnpm clean && tsc",
-    "test": "jest --passWithNoTests --bail --detectOpenHandles --verbose",
-    "test:watch": "pnpm test -- --watchAll",
-    "test:cov": "pnpm test -- --coverage",
+    "test": "vitest --run",
+    "test:watch": "pnpm test",
+    "test:cov": "vitest run --coverage",
     "release": "standard-version && git push --follow-tags origin main && pnpm publish",
     "lint:js": "eslint --ext \".js,.ts\" --ignore-path .gitignore .",
     "lint:prettier": "prettier --check .",
@@ -52,7 +52,6 @@
   "devDependencies": {
     "@commitlint/cli": "^17.0.0",
     "@commitlint/config-conventional": "^17.0.0",
-    "@types/jest": "^27.4.0",
     "@types/lodash": "^4.14.191",
     "@types/node": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.48.2",
@@ -63,15 +62,15 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^6.0.0",
     "husky": "^8.0.1",
-    "jest": "^27.5.1",
     "lint-staged": "^13.0.0",
     "node-notifier": "^10.0.0",
     "prettier": "^2.6.2",
     "rimraf": "^4.0.1",
     "standard-version": "^9.3.2",
-    "ts-jest": "^27.1.4",
     "ts-node": "^10.7.0",
-    "typescript": "^4.5.4"
+    "typescript": "^4.5.4",
+    "vite": "^4.0.4",
+    "vitest": "^0.27.1"
   },
   "dependencies": {
     "lodash": "^4.17.21"
