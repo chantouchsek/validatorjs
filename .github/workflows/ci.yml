@@ -47,7 +47,7 @@ jobs:
             ${{ matrix.os }}-pnpm-store-
 
       - name: Install dependencies 👨🏻‍💻
-        run: pnpm install --shamefully-hoist=true
+        run: pnpm install --shamefully-hoist=true --no-frozen-lockfile
 
       - name: Run linter 👀
         run: pnpm lint
