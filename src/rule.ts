@@ -185,11 +185,11 @@ export class Rule {
         const size = this.getSize()
         return size === req
       },
-      min(val: string, req: number | string) {
+      min(val: string, req: number) {
         const size: number = this.getSize(val)
         return size >= req
       },
-      max(val: string, req: number | string) {
+      max(val: string, req: number) {
         const size: number = this.getSize(val)
         return size <= req
       },
@@ -250,7 +250,7 @@ export class Rule {
         const numericRule = this.validator.getRule('numeric')
         return !!(numericRule.validate(val, {}) && String(val).trim().length === parseInt(req))
       },
-      digits_between(val: string | number) {
+      digits_between(val: number) {
         const numericRule = this.validator.getRule('numeric')
         const req = this.getParameters()
         const min = parseFloat(req[0])

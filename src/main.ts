@@ -1,6 +1,7 @@
 import type Messages from './messages'
 import type { Rule } from './rule'
 import type { ValidatorOptions, VoidFunction, LangTypes, RuleType } from './types'
+import type { SimpleObject } from './types'
 import { get, isArray } from 'lodash'
 import AsyncResolvers from './async-resolvers'
 import Errors from './errors'
@@ -18,14 +19,14 @@ export default class Validator {
   static lang: LangTypes = 'en'
   readonly numericRules = ['integer', 'numeric']
   public rules: Record<RuleType, any>
-  stopOnAttributes: Record<string, any> | boolean | string[] | undefined
+  stopOnAttributes: SimpleObject | boolean | string[] | undefined
   static attributeFormatter = formatter
   readonly options!: ValidatorOptions
   static manager = new Manager()
   private readonly confirmedReverse?: boolean
 
   constructor(
-    public readonly input: Record<string, any> | null,
+    public readonly input: SimpleObject | null,
     rules?: Record<RuleType, any>,
     options: Partial<ValidatorOptions> = {},
   ) {
@@ -86,10 +87,10 @@ export default class Validator {
     }
     const asyncResolvers = new AsyncResolvers(failsOne, resolvedAll)
     const validateRule = (
-      inputValue: Record<string, any>,
-      ruleOptions: Record<string, any>,
+      inputValue: SimpleObject,
+      ruleOptions: SimpleObject,
       attribute: string,
-      rule: Record<string, any>,
+      rule: SimpleObject,
     ) => {
       return () => {
         const resolverIndex = asyncResolvers.add(rule)
@@ -125,7 +126,7 @@ export default class Validator {
     return parsedRules
   }
 
-  static setMessages(lang: LangTypes, messages: Record<string, any>) {
+  static setMessages(lang: LangTypes, messages: SimpleObject) {
     I18n._set(lang, messages)
     return this
   }
@@ -168,7 +169,7 @@ export default class Validator {
   }
 
   _suppliedWithData(attribute: string) {
-    function hasNested(obj: undefined | Record<string, any>, key: string, ...args: string[]): boolean {
+    function hasNested(obj: undefined | SimpleObject, key: string, ...args: string[]): boolean {
       if (obj === undefined) return false
 
       if (args.length == 0 && hasOwnProperty(obj, key)) return true
@@ -189,7 +190,7 @@ export default class Validator {
     return Validator.manager.make(name, this)
   }
 
-  _isValidatable(rule: Record<string, any>, value: any): boolean {
+  _isValidatable(rule: SimpleObject, value: any): boolean {
     if (isArray(value) || Validator.manager.isImplicit(rule.name)) return true
 
     return this.getRule('required').validate(value, {})
@@ -215,8 +216,8 @@ export default class Validator {
 
   _parseRulesCheck(
     attribute: string,
-    rulesArray: Record<string, any>[] | any[] | string,
-    parsedRules: Record<string, any>,
+    rulesArray: SimpleObject[] | any[] | string,
+    parsedRules: SimpleObject,
     wildCardValues?: any[],
   ) {
     if (attribute.indexOf('*') > -1) {
@@ -228,8 +229,8 @@ export default class Validator {
 
   _parsedRulesRecurse(
     attribute: string,
-    rulesArray: Record<string, any>[] | any[] | string,
-    parsedRules: Record<string, any>,
+    rulesArray: SimpleObject[] | any[] | string,
+    parsedRules: SimpleObject,
     wildCardValues: number[] = [],
   ) {
     const parentPath = attribute.substring(0, attribute.indexOf('*') - 1)
@@ -246,8 +247,8 @@ export default class Validator {
 
   _parseRulesDefault(
     attribute: string,
-    rulesArray: Record<string, any>[] | any[] | string,
-    parsedRules: Record<string, any> | any,
+    rulesArray: SimpleObject[] | any[] | string,
+    parsedRules: SimpleObject | any,
     wildCardValues?: any,
   ) {
     const attributeRules = []
@@ -272,8 +273,8 @@ export default class Validator {
     parsedRules[attribute] = attributeRules
   }
 
-  _prepareRulesArray(rulesArray: Record<string, any>[] | any[]) {
-    const rules: Record<string, any>[] = []
+  _prepareRulesArray(rulesArray: SimpleObject[] | any[]) {
+    const rules: SimpleObject[] = []
 
     for (const ruleArray of rulesArray) {
       if (typeof ruleArray === 'object') {
@@ -288,9 +289,9 @@ export default class Validator {
     return rules
   }
 
-  _extractRuleAndRuleValue(ruleString: string | Record<string, any>) {
+  _extractRuleAndRuleValue(ruleString: string | SimpleObject) {
     if (typeof ruleString !== 'string') return ruleString
-    const rule: Record<string, any> = {}
+    const rule: SimpleObject = {}
     let ruleArray
 
     rule.name = ruleString
@@ -329,15 +330,15 @@ export default class Validator {
     return this._hasRule(attribute, this.numericRules)
   }
 
-  setAttributeNames(attributes: Record<string, any> = {}) {
+  setAttributeNames(attributes: SimpleObject = {}) {
     this.messages._setAttributeNames(attributes)
   }
 
-  stopOnError(attributes: Record<string, any> | boolean) {
+  stopOnError(attributes: SimpleObject | boolean) {
     this.stopOnAttributes = attributes
   }
 
-  static stopOnError(attributes: Record<string, any> | boolean) {
+  static stopOnError(attributes: SimpleObject | boolean) {
     this.prototype.stopOnAttributes = attributes
   }
 
@@ -383,9 +384,9 @@ export default class Validator {
     }
   }
 
-  _onlyInputWithRules(obj?: Record<string, any>, keyPrefix?: string) {
+  _onlyInputWithRules(obj?: SimpleObject, keyPrefix?: string) {
     const prefix = keyPrefix || ''
-    const values: Record<string, any> = JSON.parse(JSON.stringify(obj === undefined ? this.input : obj))
+    const values: SimpleObject = JSON.parse(JSON.stringify(obj === undefined ? this.input : obj))
 
     for (const key of Object.keys(values)) {
       if (values[key] !== null && typeof values[key] === 'object') {

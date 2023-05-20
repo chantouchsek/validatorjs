@@ -102,3 +102,4 @@ export interface ValidatorOptions {
   customAttributes?: Record<string, any>
 }
 export type VoidFunction = boolean | ((...arg: any) => any)
+export type SimpleObject<T = any> = Record<string, T>

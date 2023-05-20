@@ -1,11 +1,12 @@
 import type { LangTypes } from './types'
+import type { SimpleObject } from './types'
 import locales from './lang'
 import Massages from './messages'
 
 export default class I18n {
   public static messages = {} as Record<LangTypes, Record<string, any>>
 
-  static _set(lang: LangTypes, rawMessages: Record<string, any>) {
+  static _set(lang: LangTypes, rawMessages: SimpleObject) {
     this.messages[lang] = rawMessages
   }
 

@@ -25,35 +25,28 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        id: pnpm-install
-        with:
-          version: 7
-          run_install: false
-
-      - name: Get pnpm store directory
-        id: pnpm-cache
+      - name: Get yarn store directory
+        id: yarn-cache
         shell: bash
         run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+          echo "STORE_PATH=$(yarn store path)" >> $GITHUB_OUTPUT
 
       - uses: actions/cache@v3
-        name: Setup pnpm cache
+        name: Setup yarn cache
         with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ matrix.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          path: ${{ steps.yarn-cache.outputs.STORE_PATH }}
+          key: ${{ matrix.os }}-yarn-store-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ matrix.os }}-pnpm-store-
+            ${{ matrix.os }}-yarn-store-
 
       - name: Install dependencies 👨🏻‍💻
-        run: pnpm install --shamefully-hoist=true --no-frozen-lockfile
+        run: yarn install
 
       - name: Run linter 👀
-        run: pnpm lint
+        run: yarn lint
 
       - name: Run build 👷
-        run: pnpm build
+        run: yarn build
 
       - name: Run tests 🧪
-        run: pnpm test:cov
+        run: yarn test:cov

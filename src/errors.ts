@@ -1,7 +1,8 @@
+import type { SimpleObject } from './types'
 import { cloneDeep, get, has, omit } from 'lodash'
 
 export default class Errors {
-  private errors: Record<string, string[]> = {}
+  private errors: SimpleObject<string[]> = {}
 
   add(attribute: string, message: string) {
     if (!this.has(attribute)) {

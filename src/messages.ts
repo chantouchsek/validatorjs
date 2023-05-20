@@ -1,14 +1,15 @@
 import type { Rule } from './rule'
+import type { SimpleObject } from './types'
 import { has, snakeCase } from 'lodash'
 import { flattenObject, toCamelCase } from './utils'
 
 export default class Messages {
-  public customMessages: Record<string, any> = {}
-  private attributeNames: Record<string, any> = {}
+  public customMessages: SimpleObject = {}
+  private attributeNames: SimpleObject = {}
   private attributeFormatter: ((arg: any) => any) | undefined
   static replacements: any = {}
 
-  constructor(public readonly messages: Record<string, any>) {
+  constructor(public readonly messages: SimpleObject) {
     this.customMessages = {}
     this.attributeNames = {}
     Messages._setReplacements()
@@ -103,11 +104,11 @@ export default class Messages {
     }
   }
 
-  _setCustom(customMessages: Record<string, any> = {}) {
+  _setCustom(customMessages: SimpleObject = {}) {
     this.customMessages = customMessages
   }
 
-  _setAttributeNames(attributes: Record<string, any>) {
+  _setAttributeNames(attributes: SimpleObject) {
     this.attributeNames = attributes
   }
 
@@ -169,7 +170,7 @@ export default class Messages {
     return template
   }
 
-  _replacePlaceholders(rule: Rule, template: string | any, data: Record<string, any>): string {
+  _replacePlaceholders(rule: Rule, template: string | any, data: SimpleObject): string {
     let message = ''
     let attribute
     data.attribute = this._getAttributeName(rule.attribute)
