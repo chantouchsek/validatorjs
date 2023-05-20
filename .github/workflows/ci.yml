@@ -12,48 +12,43 @@ jobs:
   lint-and-test:
     name: Test on node ${{ matrix.node-version }} and ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+
     strategy:
       matrix:
         node-version: [18]
         os: [ubuntu-latest]
 
     steps:
-      - uses: actions/checkout@v3.3.0
-        with:
-          fetch-depth: 1
-      - uses: actions/setup-node@v3.6.0
-        with:
-          node-version: ${{ matrix.node-version }}
+      - name: Checkout 🛎
+        uses: actions/checkout@master
 
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        id: pnpm-install
+      - name: Setup node env 🏗
+        uses: actions/setup-node@v3
         with:
-          version: 7
-          run_install: false
+          node-version: ${{ matrix.node }}
+          check-latest: true
 
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - name: Get yarn cache directory path 🛠
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
+      - name: Cache node_modules 📦
+        uses: actions/cache@v3
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ matrix.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ matrix.os }}-pnpm-store-
+            ${{ runner.os }}-yarn-
 
       - name: Install dependencies 👨🏻‍💻
-        run: pnpm install --shamefully-hoist=true --no-frozen-lockfile
+        run: yarn
 
       - name: Run linter 👀
-        run: pnpm lint
+        run: yarn lint
 
       - name: Run build 👷
-        run: pnpm build
+        run: yarn build
 
       - name: Run tests 🧪
-        run: pnpm test:cov
+        run: yarn test:cov

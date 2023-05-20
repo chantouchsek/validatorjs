@@ -1,4 +1,5 @@
 import type { Rule } from './rule'
+import type { SimpleObject } from './types'
 
 type OnFailedOne = (rule: Rule, message?: string) => any
 type OnResolvedAll = (allPassed: boolean) => any
@@ -6,7 +7,7 @@ type OnResolvedAll = (allPassed: boolean) => any
 export default class AsyncResolvers {
   private readonly onResolvedAll: OnResolvedAll
   private readonly onFailedOne: OnFailedOne
-  private readonly resolvers: Record<string, any> = {}
+  private readonly resolvers: SimpleObject = {}
   private resolversCount: number
   private passed: any[]
   private failed: any[]

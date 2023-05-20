@@ -1,13 +1,14 @@
+import type { SimpleObject } from '../types'
 import { isArray } from 'lodash'
 
-export function hasOwnProperty(object?: Record<string, any> | any, key?: string | number | symbol) {
+export function hasOwnProperty(object?: SimpleObject | any, key?: string | number | symbol) {
   if (!object || !key) return false
   return Object.prototype.hasOwnProperty.call(object, key)
 }
-export const flattenObject = (obj: Record<string, any> | any = {}) => {
-  const flattened: Record<string, any> = {}
+export const flattenObject = (obj: SimpleObject | any = {}) => {
+  const flattened: SimpleObject = {}
 
-  function recurse(current: Record<string, any>, property?: string) {
+  function recurse(current: SimpleObject, property?: string) {
     if (!property && Object.getOwnPropertyNames(current).length === 0) return
     if (Object(current) !== current || isArray(current)) {
       flattened[property as string] = current
