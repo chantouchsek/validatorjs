@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.1](https://github.com/chantouchsek/validatorjs/compare/v1.2.0...v1.2.1) (2023-05-20)
+
+
+### Bug Fixes
+
+* :bug: remove (e) from catch block ([58f755e](https://github.com/chantouchsek/validatorjs/commit/58f755e1bd9585609bf39f16dc5192c0a5a23c9a))
+* :memo: change all pnpm to yarn ([d92c243](https://github.com/chantouchsek/validatorjs/commit/d92c243aa465c9ca57a51fbb2c5669c5cb670986))
+* **deps-dev:** update vittest to latest ([7eeeef4](https://github.com/chantouchsek/validatorjs/commit/7eeeef4f007e4b58901b9d25ad75afda1d1a1675))
+* **deps:** bump actions/stale from 7 to 8 ([6777206](https://github.com/chantouchsek/validatorjs/commit/6777206b9b8e29e65fa617b906bd7b53473c5ba4))
+
 ## [1.2.0](https://github.com/chantouchsek/validatorjs/compare/v1.1.5...v1.2.0) (2023-01-17)
 
 
