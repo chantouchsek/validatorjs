@@ -12,35 +12,37 @@ jobs:
   lint-and-test:
     name: Test on node ${{ matrix.node-version }} and ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+
     strategy:
       matrix:
         node-version: [18]
         os: [ubuntu-latest]
 
     steps:
-      - uses: actions/checkout@v3.3.0
-        with:
-          fetch-depth: 1
-      - uses: actions/setup-node@v3.6.0
-        with:
-          node-version: ${{ matrix.node-version }}
+      - name: Checkout 🛎
+        uses: actions/checkout@master
 
-      - name: Get yarn store directory
-        id: yarn-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(yarn store path)" >> $GITHUB_OUTPUT
-
-      - uses: actions/cache@v3
-        name: Setup yarn cache
+      - name: Setup node env 🏗
+        uses: actions/setup-node@v3
         with:
-          path: ${{ steps.yarn-cache.outputs.STORE_PATH }}
-          key: ${{ matrix.os }}-yarn-store-${{ hashFiles('**/yarn.lock') }}
+          node-version: ${{ matrix.node }}
+          check-latest: true
+
+      - name: Get yarn cache directory path 🛠
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache node_modules 📦
+        uses: actions/cache@v3
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ matrix.os }}-yarn-store-
+            ${{ runner.os }}-yarn-
 
       - name: Install dependencies 👨🏻‍💻
-        run: yarn install
+        run: yarn
 
       - name: Run linter 👀
         run: yarn lint
