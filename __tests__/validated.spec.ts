@@ -1,3 +1,4 @@
+import { beforeAll, describe, expect, it } from 'vitest'
 import Validator from '../src/main'
 
 describe('_onlyInputWithRules()', () => {

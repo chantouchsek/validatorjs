@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import Validator from '../src/main'
 
 describe('locales / messages', () => {

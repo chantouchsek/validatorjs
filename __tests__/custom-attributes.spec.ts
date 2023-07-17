@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest'
 import Validator from '../src/main'
 
 describe('Validator custom attribute', () => {

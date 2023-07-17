@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest'
 import Validator from '../src/main'
 
 describe('required validation pass rules', () => {

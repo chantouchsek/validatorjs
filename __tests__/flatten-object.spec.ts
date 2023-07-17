@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest'
 import { flattenObject, isEmpty } from '../src/utils'
 
 describe('Object', () => {
