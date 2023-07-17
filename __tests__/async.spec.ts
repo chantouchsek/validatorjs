@@ -6,7 +6,7 @@ describe('async rule tests', () => {
     new Promise<void>((resolve) => {
       Validator.registerAsync(
         'username',
-        (desiredUsername: string, ruleValue: string, attribute: string, passes: any) => {
+        (desiredUsername: string, _ruleValue: string, _attribute: string, passes: any) => {
           setTimeout(() => {
             if (desiredUsername === 'test')
               passes()
@@ -32,7 +32,7 @@ describe('async rule tests', () => {
 
       Validator.registerAsync(
         'username1',
-        (input: string, value: string, attribute: string, passes: any) => {
+        (input: string, _value: string, _attribute: string, passes: any) => {
           setTimeout(() => {
             if (input === 'test') {
               passCount++
@@ -45,7 +45,7 @@ describe('async rule tests', () => {
 
       Validator.registerAsync(
         'username2',
-        (input: string, value: string, attribute: string, passes: any) => {
+        (input: string, _value: string, _attribute: string, passes: any) => {
           setTimeout(() => {
             if (input === 'test') {
               passCount++
@@ -70,7 +70,7 @@ describe('async rule tests', () => {
 
       Validator.registerAsync(
         'username1',
-        (input: string, value: string, attribute: string, passes: any) => {
+        (input: string, _value: string, _attribute: string, passes: any) => {
           setTimeout(() => {
             if (input === 'test') {
               passCount++
@@ -83,7 +83,7 @@ describe('async rule tests', () => {
 
       Validator.registerAsync(
         'username2',
-        (input: string, value: string, attribute: string, passes: any) => {
+        (input: string, _value: string, _attribute: string, passes: any) => {
           setTimeout(() => {
             if (input === 'test') {
               failedCount++
@@ -127,7 +127,7 @@ describe('async rule tests', () => {
     new Promise<void>((resolve) => {
       Validator.registerAsync(
         'username',
-        (input: string, value: any, attribute: string, passes: any) => {
+        (input: string, _value: any, _attribute: string, passes: any) => {
           setTimeout(() => {
             if (input === 'test')
               passes()

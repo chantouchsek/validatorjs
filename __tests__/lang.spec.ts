@@ -1,12 +1,21 @@
 import { describe, expect, it } from 'vitest'
+import type { LangTypes, RuleType } from '../src/main'
 import Validator from '../src/main'
+import type { SimpleObject } from '../src/types'
+
+interface Language {
+  input: SimpleObject | null
+  rules: Record<RuleType, any>
+  locale: LangTypes
+  message: string
+}
 
 describe('locales / messages', () => {
   it('should default to english', () => {
     expect(Validator.getDefaultLang()).toEqual('en')
   })
   it('should throw exception when attempting to get non exist translation', () => {
-    const validator = new Validator({ username: 'admin' }, { username: 'required' }, { locale: 'abc' })
+    const validator = new Validator({ username: 'admin' }, { username: 'required' }, { locale: 'abc' as never })
     expect(validator.passes()).toBeTruthy()
   })
   it('should be able to change locales', () => {
@@ -18,11 +27,11 @@ describe('locales / messages', () => {
   it('should be able to add custom', () => {
     const oldLang = Validator.getDefaultLang()
     const rawMessages = { required: 'Le nkundla iyadingeka', attributes: {} }
-    Validator.setMessages('zu', rawMessages)
-    Validator.useLang('zu')
+    Validator.setMessages('zu' as never, rawMessages)
+    Validator.useLang('zu' as never)
     const validator = new Validator({ zip: '' }, { zip: 'required' })
 
-    const messages = Validator.getMessages('zu')
+    const messages = Validator.getMessages('zu' as never)
     expect(messages).toEqual(rawMessages)
     expect(validator.fails()).toBeTruthy()
     expect(validator.errors.first('zip')).toEqual('Le nkundla iyadingeka')
@@ -31,7 +40,7 @@ describe('locales / messages', () => {
 })
 
 describe('should concurrent the language', () => {
-  const languages = [
+  const languages: Language[] = [
     {
       input: null,
       rules: { name: 'accepted' },
