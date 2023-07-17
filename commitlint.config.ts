@@ -1,5 +1,3 @@
-const Configuration = {
+export default {
   extends: ['@commitlint/config-conventional'],
 }
-
-module.exports = Configuration

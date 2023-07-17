@@ -6,7 +6,7 @@ const it = {
   attributes: {},
   between: 'Il campo :attribute deve essere compreso tra :min e :max.',
   confirmed: 'Il campo conferma :attribute non è uguale.',
-  email: "Il formato dell'attributo :attribute non è valido.",
+  email: 'Il formato dell\'attributo :attribute non è valido.',
   def: 'Gli attributi del campo :attribute contengono degli errori.',
   digits: 'Il campo :attribute deve essere di :digits cifre.',
   digits_between: 'Il campo :attribute deve essere tra :min e :max cifre.',

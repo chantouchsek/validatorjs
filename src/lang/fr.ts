@@ -5,7 +5,7 @@ const fr = {
   alpha_num: 'Le champ :attribute ne peut contenir que des caractères alphanumériques.',
   attributes: {},
   between: 'La longueur du champ :attribute doit être comprise entre :min and :max.',
-  confirmed: "Le champ :attribute n'est pas confirmé.",
+  confirmed: 'Le champ :attribute n\'est pas confirmé.',
   email: 'Le champ :attribute contient un format invalide.',
   def: 'Le champ :attribute contient un attribut erroné.',
   digits: 'Le champ :attribute doit être composé de :digits chiffres.',

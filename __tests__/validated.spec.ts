@@ -21,7 +21,7 @@ describe('_onlyInputWithRules()', () => {
         additional_field2: 'lorem_ipsum',
       },
       {
-        email: 'required|string|email',
+        'email': 'required|string|email',
         'addresses.*.line1': 'required|string|max:200',
         'addresses.*.line2': 'nullable|string|max:200',
       },
@@ -58,13 +58,12 @@ describe('validated()', () => {
   beforeAll(() => {
     Validator.registerAsync(
       'not_dustin',
-      function (username: string, attribute: string, req: number, passes: any) {
-        setTimeout(function () {
-          if (username === 'dustin') {
+      (username: string, attribute: string, req: number, passes: any) => {
+        setTimeout(() => {
+          if (username === 'dustin')
             passes(false)
-          } else {
+          else
             passes()
-          }
         }, 1000)
       },
       'The :attribute can not be Dustin.',
@@ -90,7 +89,7 @@ describe('validated()', () => {
   })
 
   it('should return only attributes defined in the rules (async)', () =>
-    new Promise<void>((done) => {
+    new Promise<void>((resolve) => {
       const validator = new Validator(
         {
           user: 'John Doe',
@@ -101,15 +100,15 @@ describe('validated()', () => {
       )
 
       validator.validated(
-        function (validated) {
+        (validated) => {
           expect(validated).toEqual({ user: 'John Doe' })
           expect(validated).toHaveProperty('user')
           expect(validated).not.toHaveProperty('additional_field1')
           expect(validated).not.toHaveProperty('additional_field2')
-          done()
+          resolve()
         },
-        function () {
-          throw new Error("fails callback shouldn't be called!")
+        () => {
+          throw new Error('fails callback shouldn\'t be called!')
         },
       )
     }))
@@ -121,16 +120,16 @@ describe('validated()', () => {
   })
 
   it('should throw an Error when current validation fails (async)', () =>
-    new Promise<void>((done) => {
+    new Promise<void>((resolve) => {
       const validator = new Validator({ user: 'dustin' }, { user: 'not_dustin' })
 
       validator.validated(
-        function () {
-          throw new Error("passes callback shouldn't be called!")
+        () => {
+          throw new Error('passes callback shouldn\'t be called!')
         },
-        function () {
+        () => {
           expect(validator.errors.first('user')).toEqual('The user can not be Dustin.')
-          done()
+          resolve()
         },
       )
     }))

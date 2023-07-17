@@ -40,13 +40,13 @@ describe('Validator custom messages', () => {
       { name: 'required' },
       {
         customMessages: {
-          required: ":attribute is required. :attribute can't be empty.",
+          required: ':attribute is required. :attribute can\'t be empty.',
         },
       },
     )
     expect(validator.fails()).toBeTruthy()
     expect(validator.errors.get('name').length).toEqual(1)
-    expect(validator.errors.first('name')).toEqual("name is required. name can't be empty.")
+    expect(validator.errors.first('name')).toEqual('name is required. name can\'t be empty.')
   })
 
   it('override the default message for a type of the validator', () => {

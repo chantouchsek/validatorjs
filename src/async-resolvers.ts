@@ -34,7 +34,8 @@ export default class AsyncResolvers {
     const rule = this.resolvers[index]
     if (rule.passes) {
       this.passed.push(rule)
-    } else if (!rule.passes) {
+    }
+    else if (!rule.passes) {
       this.failed.push(rule)
       this.onFailedOne(rule)
     }
@@ -46,10 +47,10 @@ export default class AsyncResolvers {
   }
 
   fire() {
-    if (!this.firing) return
-    if (this.isAllResolved()) {
+    if (!this.firing)
+      return
+    if (this.isAllResolved())
       this.onResolvedAll(this.failed.length === 0)
-    }
   }
 
   enableFiring(firing = true) {

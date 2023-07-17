@@ -1,8 +1,7 @@
+import { get, isArray } from 'lodash'
 import type Messages from './messages'
 import type { Rule } from './rule'
-import type { ValidatorOptions, VoidFunction, LangTypes, RuleType } from './types'
-import type { SimpleObject } from './types'
-import { get, isArray } from 'lodash'
+import type { LangTypes, RuleType, SimpleObject, ValidatorOptions, VoidFunction } from './types'
 import AsyncResolvers from './async-resolvers'
 import Errors from './errors'
 import I18n from './i18n'
@@ -47,13 +46,15 @@ export default class Validator {
     for (let attribute in this.rules) {
       const attributeRules = this.rules[attribute]
       const inputValue = get(this.input, attribute)
-      if (this._passesOptionalCheck(attribute)) continue
+      if (this._passesOptionalCheck(attribute))
+        continue
 
       for (let i = 0, len = attributeRules.length, rule: Rule, ruleOptions, rulePassed; i < len; i++) {
         ruleOptions = attributeRules[i]
         const { name, value } = ruleOptions
         rule = this.getRule(name)
-        if (!this._isValidatable(rule, inputValue)) continue
+        if (!this._isValidatable(rule, inputValue))
+          continue
         rulePassed = rule.validate(inputValue, value, attribute)
         if (!rulePassed) {
           if (name === 'confirmed' && this.confirmedReverse) {
@@ -62,7 +63,8 @@ export default class Validator {
           }
           this._addFailure(rule)
         }
-        if (this._shouldStopValidating(attribute, rulePassed)) break
+        if (this._shouldStopValidating(attribute, rulePassed))
+          break
       }
     }
 
@@ -79,11 +81,10 @@ export default class Validator {
       return this._addFailure(rule, message)
     }
     const resolvedAll = (allPassed: boolean) => {
-      if (allPassed && typeof passes === 'function') {
+      if (allPassed && typeof passes === 'function')
         passes()
-      } else {
+      else
         fails()
-      }
     }
     const asyncResolvers = new AsyncResolvers(failsOne, resolvedAll)
     const validateRule = (
@@ -101,14 +102,14 @@ export default class Validator {
     for (const attribute in this.rules) {
       const attributeRules = this.rules[attribute]
       const inputValue = get(this.input, attribute)
-      if (this._passesOptionalCheck(attribute)) continue
+      if (this._passesOptionalCheck(attribute))
+        continue
 
       for (let i = 0, len = attributeRules.length, rule, ruleOptions; i < len; i++) {
         ruleOptions = attributeRules[i]
         rule = this.getRule(ruleOptions.name)
-        if (this._isValidatable(rule, inputValue)) {
+        if (this._isValidatable(rule, inputValue))
           validateRule(inputValue, ruleOptions, attribute, rule)()
-        }
       }
     }
 
@@ -158,8 +159,10 @@ export default class Validator {
   _hasRule(attribute: string, findRules: string[]) {
     const rules = this.rules[attribute]
     for (const { name } of rules) {
-      if (findRules.indexOf(name) > -1) return true
+      if (findRules.includes(name))
+        return true
     }
+
     return false
   }
 
@@ -170,19 +173,21 @@ export default class Validator {
 
   _suppliedWithData(attribute: string) {
     function hasNested(obj: undefined | SimpleObject, key: string, ...args: string[]): boolean {
-      if (obj === undefined) return false
+      if (obj === undefined)
+        return false
 
-      if (args.length == 0 && hasOwnProperty(obj, key)) return true
+      if (args.length === 0 && hasOwnProperty(obj, key))
+        return true
 
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
+      // @ts-expect-error
       return hasNested(obj[key], ...args)
     }
 
     const keys = attribute.split('.')
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
+    // @ts-expect-error
     return hasNested(this.input, ...keys)
   }
 
@@ -191,7 +196,8 @@ export default class Validator {
   }
 
   _isValidatable(rule: SimpleObject, value: any): boolean {
-    if (isArray(value) || Validator.manager.isImplicit(rule.name)) return true
+    if (isArray(value) || Validator.manager.isImplicit(rule.name))
+      return true
 
     return this.getRule('required').validate(value, {})
   }
@@ -205,11 +211,11 @@ export default class Validator {
   _shouldStopValidating(attribute: string, rulePassed: any) {
     const stopOnAttributes = this.stopOnAttributes
     const isUndefined = typeof stopOnAttributes === 'undefined'
-    if (isUndefined || stopOnAttributes === false || rulePassed === true) return false
+    if (isUndefined || stopOnAttributes === false || rulePassed === true)
+      return false
 
-    if (stopOnAttributes instanceof Array) {
-      return stopOnAttributes.indexOf(attribute) > -1
-    }
+    if (Array.isArray(stopOnAttributes))
+      return stopOnAttributes.includes(attribute)
 
     return true
   }
@@ -220,11 +226,10 @@ export default class Validator {
     parsedRules: SimpleObject,
     wildCardValues?: any[],
   ) {
-    if (attribute.indexOf('*') > -1) {
+    if (attribute.includes('*'))
       this._parsedRulesRecurse(attribute, rulesArray, parsedRules, wildCardValues)
-    } else {
+    else
       this._parseRulesDefault(attribute, rulesArray, parsedRules, wildCardValues)
-    }
   }
 
   _parsedRulesRecurse(
@@ -253,20 +258,20 @@ export default class Validator {
   ) {
     const attributeRules = []
 
-    if (rulesArray instanceof Array) {
+    if (Array.isArray(rulesArray))
       rulesArray = this._prepareRulesArray(rulesArray)
-    }
 
-    if (typeof rulesArray === 'string') {
+    if (typeof rulesArray === 'string')
       rulesArray = rulesArray.split('|')
-    }
 
     for (const ruleKey of rulesArray) {
       const rule = this._extractRuleAndRuleValue(ruleKey)
-      if (rule.value) rule.value = this._replaceWildCards(rule.value, wildCardValues)
+      if (rule.value)
+        rule.value = this._replaceWildCards(rule.value, wildCardValues)
       this._replaceWildCardsMessages(wildCardValues)
 
-      if (Validator.manager.isAsync(rule.name)) this.hasAsync = true
+      if (Validator.manager.isAsync(rule.name))
+        this.hasAsync = true
       attributeRules.push(rule)
     }
 
@@ -278,10 +283,10 @@ export default class Validator {
 
     for (const ruleArray of rulesArray) {
       if (typeof ruleArray === 'object') {
-        for (const rule in ruleArray) {
+        for (const rule in ruleArray)
           rules.push({ name: rule, value: ruleArray[rule] })
-        }
-      } else {
+      }
+      else {
         rules.push(ruleArray)
       }
     }
@@ -290,13 +295,14 @@ export default class Validator {
   }
 
   _extractRuleAndRuleValue(ruleString: string | SimpleObject) {
-    if (typeof ruleString !== 'string') return ruleString
+    if (typeof ruleString !== 'string')
+      return ruleString
     const rule: SimpleObject = {}
     let ruleArray
 
     rule.name = ruleString
 
-    if (ruleString.indexOf(':') >= 0) {
+    if (ruleString.includes(':')) {
       ruleArray = ruleString.split(':')
       rule.name = ruleArray[0]
       rule.value = ruleArray.slice(1).join(':')
@@ -306,11 +312,13 @@ export default class Validator {
   }
 
   _replaceWildCards(path: string, nums: string[]) {
-    if (!nums) return path
+    if (!nums)
+      return path
 
     for (const num of nums) {
       const pos = path.indexOf('*')
-      if (pos === -1) return path
+      if (pos === -1)
+        return path
       path = path.substring(0, pos) + num + path.substring(pos + 1)
     }
     return path
@@ -344,21 +352,22 @@ export default class Validator {
 
   passes(passes?: () => void) {
     const async = this._checkAsync('passes', passes)
-    if (async) return this.checkAsync(passes)
+    if (async)
+      return this.checkAsync(passes)
     return this.check()
   }
 
   fails(fails?: VoidFunction) {
     const async = this._checkAsync('fails', fails)
-    if (async) return this.checkAsync(false, fails)
+    if (async)
+      return this.checkAsync(false, fails)
     return !this.check()
   }
 
   _checkAsync(funcName: string, callback?: boolean | (() => void)) {
     const hasCallback = typeof callback === 'function'
-    if (this.hasAsync && !hasCallback) {
-      throw funcName + ' expects a callback when async rules are being tested.'
-    }
+    if (this.hasAsync && !hasCallback)
+      throw new Error(`${funcName} expects a callback when async rules are being tested.`)
 
     return this.hasAsync || hasCallback
   }
@@ -368,19 +377,18 @@ export default class Validator {
     const _this = this
     if (this._checkAsync('passes', passes)) {
       return this.checkAsync(
-        function () {
-          if (passes && typeof passes === 'function') {
+        () => {
+          if (passes && typeof passes === 'function')
             passes(_this._onlyInputWithRules())
-          }
-        }.bind(this),
+        },
         fails,
       )
-    } else {
-      if (this.check()) {
+    }
+    else {
+      if (this.check())
         return this._onlyInputWithRules()
-      } else {
+      else
         throw new Error('Validation failed!')
-      }
     }
   }
 
@@ -390,11 +398,11 @@ export default class Validator {
 
     for (const key of Object.keys(values)) {
       if (values[key] !== null && typeof values[key] === 'object') {
-        values[key] = this._onlyInputWithRules(values[key], prefix + key + '.')
-      } else {
-        if (values[key] === undefined || !Object.keys(this.rules).includes(prefix + key)) {
+        values[key] = this._onlyInputWithRules(values[key], `${prefix + key}.`)
+      }
+      else {
+        if (values[key] === undefined || !Object.keys(this.rules).includes(prefix + key))
           delete values[key]
-        }
       }
     }
 

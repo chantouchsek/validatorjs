@@ -1,6 +1,6 @@
+import { has, snakeCase } from 'lodash'
 import type { Rule } from './rule'
 import type { SimpleObject } from './types'
-import { has, snakeCase } from 'lodash'
 import { flattenObject, toCamelCase } from './utils'
 
 export default class Messages {
@@ -122,31 +122,31 @@ export default class Messages {
     const attributeNames = flattenObject(this.attributeNames)
     const camelCase = toCamelCase(attribute)
     const snakecase = snakeCase(attribute)
-    if (has(attributeNames, camelCase) || has(attributeNames, snakecase)) {
+    if (has(attributeNames, camelCase) || has(attributeNames, snakecase))
       return attributeNames[snakecase] || attributeNames[camelCase]
-    }
-    if (has(attributes, attribute)) {
+
+    if (has(attributes, attribute))
       name = attributes[attribute]
-    } else if (this.attributeFormatter) {
+    else if (this.attributeFormatter)
       name = this.attributeFormatter(name)
-    }
-    while (name.includes('confirmation')) {
-      name = name.replace(new RegExp('\\sconfirmation', 'g'), '')
-    }
+
+    while (name.includes('confirmation'))
+      name = name.replace(/\sconfirmation/g, '')
+
     return name
   }
 
   render(rule: Rule) {
-    if (rule.customMessages) {
+    if (rule.customMessages)
       return rule.customMessages
-    }
+
     const template = this._getTemplate(rule)
     let message: string
-    if (Messages.replacements[rule.name]) {
+    if (Messages.replacements[rule.name])
       message = Messages.replacements[rule.name].apply(this, [template, rule])
-    } else {
+    else
       message = this._replacePlaceholders(rule, template, {})
-    }
+
     return message
   }
 
@@ -159,14 +159,15 @@ export default class Messages {
       if (has(customMessages, format)) {
         template = customMessages[format]
         break
-      } else if (has(messages, format) && messages[format]) {
+      }
+      else if (has(messages, format) && messages[format]) {
         template = messages[format]
         break
       }
     }
-    if (typeof template === 'object') {
+    if (typeof template === 'object')
       template = template[rule._getValueType()]
-    }
+
     return template
   }
 
@@ -177,9 +178,8 @@ export default class Messages {
     data[rule.name] = data[rule.name] || rule.getParameters().join(',')
     if (typeof template === 'string' && typeof data === 'object') {
       message = template
-      for (attribute in data) {
+      for (attribute in data)
         message = message.replace(RegExp(`:${attribute}`, 'g'), data[attribute])
-      }
     }
 
     return message

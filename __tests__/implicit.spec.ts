@@ -32,16 +32,15 @@ describe('implicit rule tests', () => {
   })
 
   it('should fail async implicit rule even when undefined', () =>
-    new Promise<void>((done) => {
+    new Promise<void>((resolve) => {
       Validator.registerAsyncImplicit(
         'async_null',
         (value: string, attribute: string, req: number, passes: any) => {
           setTimeout(() => {
-            if (value === null) {
+            if (value === null)
               passes(true)
-            } else {
+            else
               passes(false)
-            }
           }, 50)
         },
         ':attribute already taken',
@@ -53,26 +52,25 @@ describe('implicit rule tests', () => {
         },
         { value: 'async_null' },
       )
-      validator.fails(done)
+      validator.fails(resolve)
     }))
 
   it('should pass async implicit rule even when null', () =>
-    new Promise<void>((done) => {
+    new Promise<void>((resolve) => {
       Validator.registerAsyncImplicit(
         'async_null',
         (value: string, attribute: string, req: number, passes: any) => {
           setTimeout(() => {
-            if (value === null) {
+            if (value === null)
               passes(true)
-            } else {
+            else
               passes(false)
-            }
           }, 50)
         },
         ':attribute already taken',
       )
 
       const validator = new Validator({ value: null }, { value: 'async_null' })
-      validator.passes(done)
+      validator.passes(resolve)
     }))
 })

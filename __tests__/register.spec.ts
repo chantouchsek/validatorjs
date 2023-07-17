@@ -37,7 +37,8 @@ describe('register a custom validation rule', () => {
     try {
       validator.passes()
       expect(validator.fails).toThrow()
-    } catch (e: any) {
+    }
+    catch (e: any) {
       expect(e.message).toBe('Validator `unknown` is not defined!')
     }
   })

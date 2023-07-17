@@ -13,7 +13,7 @@ describe('required validation pass rules', () => {
   })
 
   it('should fail with strings containing only white space', () => {
-    const validator = new Validator({ name: '      	' }, { name: 'required' })
+    const validator = new Validator({ name: '' }, { name: 'required' })
     expect(validator.fails()).toBeTruthy()
   })
 

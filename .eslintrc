@@ -1,29 +1,9 @@
 {
-  "env": { "es6": true, "node": true },
   "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
+    "@antfu"
   ],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaVersion": 2018,
-    "sourceType": "module"
-    // "project": "./tsconfig.json"
-  },
-  "plugins": ["@typescript-eslint", "promise", "import"],
+  "plugins": ["import"],
   "rules": {
-    "@typescript-eslint/no-explicit-any": 0,
-    "@typescript-eslint/explicit-function-return-type": 0,
-    "@typescript-eslint/explicit-module-boundary-types": "off",
-    "no-useless-escape": "off",
-    "@typescript-eslint/consistent-type-imports": ["error", { "disallowTypeAnnotations": false }],
-    "import/order": [
-      "error",
-      {
-        "groups": ["type", "builtin", "external", "internal", "index", "sibling", "parent", "object"],
-        "alphabetize": { "order": "asc" }
-      }
-    ]
+    //
   }
 }

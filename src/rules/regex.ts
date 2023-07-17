@@ -1,4 +1,4 @@
-export const regex = (value: string, req: string | number | any) => {
+export function regex(value: string, req: string | number | any) {
   const mod = /[g|i|m]{1,3}$/
   let flag = req.match(mod)
   flag = flag ? flag[0] : ''

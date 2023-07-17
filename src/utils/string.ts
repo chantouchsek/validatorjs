@@ -1,4 +1,4 @@
-export const formatter = (attribute: string) => {
+export function formatter(attribute: string) {
   return attribute.replace(/[_.\[]/g, ' ').replace(/]/g, '')
 }
 export function toCamelCase(s: string) {
@@ -8,5 +8,5 @@ export function toCamelCase(s: string) {
 }
 export function onlyDigits(str: string | boolean | number) {
   const num = Number(str)
-  return !isNaN(num) && typeof str !== 'boolean'
+  return !Number.isNaN(num) && typeof str !== 'boolean'
 }

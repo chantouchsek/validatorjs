@@ -9,7 +9,5 @@
     "outDir": "dist",
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true
-  },
-  "include": ["src"],
-  "exclude": ["node_modules", "**/__tests__/*", "coverage"]
+  }
 }

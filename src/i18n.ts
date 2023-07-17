@@ -1,5 +1,4 @@
-import type { LangTypes } from './types'
-import type { SimpleObject } from './types'
+import type { LangTypes, SimpleObject } from './types'
 import locales from './lang'
 import Massages from './messages'
 
@@ -18,15 +17,15 @@ export default class I18n {
   static _setRuleMessage(lang: LangTypes, attribute: string, message?: string) {
     this._load(lang)
     const messages: Record<string, any> = Object.create(this.messages)
-    if (message === undefined) {
+    if (message === undefined)
       message = messages[lang].def
-    }
 
     messages[lang][attribute] = message
   }
 
   static _load(lang: LangTypes) {
-    if (!this.messages[lang]) this._set(lang, locales[lang])
+    if (!this.messages[lang])
+      this._set(lang, locales[lang])
   }
 
   static _make(lang: LangTypes) {

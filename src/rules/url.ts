@@ -1,7 +1,8 @@
-export const url = (value: string) => {
+export function url(value: string) {
   try {
     return Boolean(new URL(value))
-  } catch {
+  }
+  catch {
     return false
   }
 }
