@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.3](https://github.com/chantouchsek/validatorjs/compare/v1.2.2...v1.2.3) (2023-08-26)
+
+
+### Bug Fixes
+
+* **deps:** bump semver from 5.7.1 to 5.7.2 ([3230215](https://github.com/chantouchsek/validatorjs/commit/32302151922768eefff5ebc51df9f54ca7453890))
+* **deps:** bump vite from 4.3.8 to 4.3.9 ([4541a6a](https://github.com/chantouchsek/validatorjs/commit/4541a6a938c1823e2d6792cb404d665f23d4607d))
+
 ### [1.2.2](https://github.com/chantouchsek/validatorjs/compare/v1.2.1...v1.2.2) (2023-05-23)
 
 ### [1.2.1](https://github.com/chantouchsek/validatorjs/compare/v1.2.0...v1.2.1) (2023-05-20)
