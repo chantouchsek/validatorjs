@@ -19,7 +19,7 @@ export class Rule {
   private input: Record<string, any> | string | number | undefined
   private rule: any
   private validator!: Validator
-  static rules: any = rules
+  static rules: any = Object.assign({}, rules)
 
   constructor(name: string, fn: VoidFunction, async: boolean) {
     this.name = name
