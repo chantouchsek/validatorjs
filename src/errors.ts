@@ -30,7 +30,7 @@ export default class Errors {
     return []
   }
 
-  first(field: string | string[]): string | undefined {
+  _first(field: string | string[]): string | undefined {
     if (Array.isArray(field)) {
       const fields = this._getFields(field)
       let fd = ''
@@ -45,6 +45,13 @@ export default class Errors {
     else {
       return this.get(field)[0]
     }
+  }
+
+  first(field: string | string[]): string {
+    const fields = this._getFields(field)
+    const fd = fields.find(f => f in this.errors)
+    const value = this.get(fd ?? field)
+    return Array.isArray(value) ? value[0] : value
   }
 
   all() {
