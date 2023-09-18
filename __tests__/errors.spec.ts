@@ -18,7 +18,7 @@ describe('Errors', () => {
     const validator = new Validator(null, { name: 'required' })
     expect(validator.fails()).toBeTruthy()
     expect(validator.passes()).toBeFalsy()
-    expect(validator.errors.first('name')).toBe('The name field is required.')
+    expect(validator.errors.first(['name'])).toBe('The name field is required.')
   })
   it('should add message by field given', () => {
     const validator = new Validator(null, { name: 'required' })
@@ -27,7 +27,7 @@ describe('Errors', () => {
     const msg = 'The name field must be input as value.'
     validator.errors.add('name', msg)
     expect(validator.errors.get('name')).toHaveLength(2)
-    expect(validator.errors.get('name')[1]).toBe(msg)
+    expect(validator.errors.get('name')[0]).toBe(msg)
   })
   it('should clear all errors', () => {
     const validator = new Validator(null, { name: 'required' })
@@ -69,5 +69,12 @@ describe('Errors', () => {
     validator.errors.fill(errors)
     validator.errors.onKeydown(event)
     expect(validator.errors.has('name')).toBeFalsy()
+  })
+  it('should add new message with forceOption', () => {
+    const validator = new Validator(null, { name: 'required' })
+    const msg = ['The name field must be input as value.']
+    expect(validator.fails()).toBeTruthy()
+    validator.errors.add('name', msg, true)
+    expect(validator.errors.first('name')).toBe(msg[0])
   })
 })
