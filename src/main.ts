@@ -1,4 +1,4 @@
-import { get, isArray, replace } from 'lodash'
+import { get, replace } from 'lodash'
 import type Messages from './messages'
 import type { Rule } from './rule'
 import type { CbFunction, LangTypes, RuleType, SimpleObject, ValidatorOptions } from './types'
@@ -43,8 +43,7 @@ export default class Validator {
   check() {
     for (let attribute in this.rules) {
       const attributeRules = this.rules[attribute]
-      const inputValue = get(this.input, attribute)
-
+      const inputValue = get(this.input ?? {}, attribute)
       if (this._passesOptionalCheck(attribute))
         continue
 
@@ -88,7 +87,7 @@ export default class Validator {
     }
     const asyncResolvers = new AsyncResolvers(failsOne, resolvedAll)
     const validateRule = (
-      inputValue: SimpleObject,
+      inputValue: string | number | SimpleObject,
       ruleOptions: SimpleObject,
       rule: Rule,
       attribute = '',
@@ -100,7 +99,7 @@ export default class Validator {
     }
 
     for (const attribute in this.rules) {
-      const attributeRules = get(this.rules, attribute)
+      const attributeRules = get(this.rules, attribute) as SimpleObject[]
       const inputValue = get(this.input, attribute)
       if (this._passesOptionalCheck(attribute))
         continue
@@ -195,7 +194,7 @@ export default class Validator {
   }
 
   _isValidatable(rule: SimpleObject, value: any): boolean {
-    if (isArray(value) || Validator.manager.isImplicit(rule.name))
+    if (Array.isArray(value) || Validator.manager.isImplicit(rule.name))
       return true
 
     return this.getRule('required').validate(value, {})

@@ -1,4 +1,4 @@
-import { has, snakeCase } from 'lodash'
+import { get, snakeCase } from 'lodash'
 import type { Rule } from './rule'
 import type { CbFunction, SimpleObject } from './types'
 import { flattenObject, toCamelCase } from './utils'
@@ -122,11 +122,11 @@ export default class Messages {
     const attributeNames = flattenObject(this.attributeNames)
     const camelCase = toCamelCase(attribute)
     const _snakeCase = snakeCase(attribute)
-    if (has(attributeNames, camelCase) || has(attributeNames, _snakeCase))
-      return attributeNames[_snakeCase] || attributeNames[camelCase]
+    if (_snakeCase in attributeNames || camelCase in attributeNames)
+      return attributeNames[_snakeCase] ?? attributeNames[camelCase]
 
-    if (has(attributes, attribute))
-      name = attributes[attribute]
+    if (attribute in attributes)
+      name = get(attributes, attribute)
     else if (this.attributeFormatter)
       name = this.attributeFormatter(name)
 
@@ -156,11 +156,11 @@ export default class Messages {
     const customMessages = this.customMessages
     const formats = [`${rule.name}.${rule.attribute}`, rule.name]
     for (const format of formats) {
-      if (has(customMessages, format)) {
+      if (format in customMessages) {
         template = customMessages[format]
         break
       }
-      else if (has(messages, format) && messages[format]) {
+      else if (format in messages && messages[format]) {
         template = messages[format]
         break
       }
