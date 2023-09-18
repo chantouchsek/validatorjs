@@ -13,6 +13,8 @@ describe('Validator constructor', () => {
   })
 
   it('should expose on window if browser', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     if (typeof window !== 'undefined') {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error
@@ -62,5 +64,11 @@ describe('Validator constructor', () => {
     expect(validator.getDefaultLang()).toEqual('km')
     expect(validator.fails()).toBeTruthy()
     expect(validator.errors.first('name')).toBe('ឈ្មោះ ត្រូវតែបញ្ចូលជាដាច់ខាត។')
+  })
+
+  it('get should get message with none attribute name', () => {
+    const validator = new Validator(null, { name: 'required' }, { acceptNoneAttributes: true, locale: 'ja' })
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.errors.first('name')).toBe('は必須です。')
   })
 })

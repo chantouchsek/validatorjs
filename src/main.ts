@@ -18,7 +18,6 @@ export default class Validator {
   readonly errors: Errors
   readonly messages: Messages
   private readonly confirmedReverse?: boolean
-  private readonly acceptNoneAttributes?: boolean
   static lang: LangTypes = 'en'
   static attributeFormatter = formatter
   static manager = new Manager()
@@ -30,7 +29,7 @@ export default class Validator {
   ) {
     const lang = options.locale || Validator.getDefaultLang()
     Validator.useLang(lang)
-    this.messages = I18n._make(lang)
+    this.messages = I18n._make(lang, options.acceptNoneAttributes)
     this.messages._setCustom(options.customMessages)
     this.setAttributeNames(options.customAttributes)
     this.setAttributeFormatter(Validator.attributeFormatter)
@@ -39,7 +38,6 @@ export default class Validator {
     this.hasAsync = false
     this.rules = this._parseRules(rules)
     this.confirmedReverse = options.confirmedReverse
-    this.acceptNoneAttributes = options.acceptNoneAttributes ?? false
   }
 
   check() {

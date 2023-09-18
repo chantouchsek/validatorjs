@@ -1,15 +1,15 @@
 import { has, snakeCase } from 'lodash'
 import type { Rule } from './rule'
-import type { SimpleObject } from './types'
+import type { CbFunction, SimpleObject } from './types'
 import { flattenObject, toCamelCase } from './utils'
 
 export default class Messages {
   public customMessages: SimpleObject = {}
   private attributeNames: SimpleObject = {}
-  private attributeFormatter: ((arg: any) => any) | undefined
-  static replacements: any = {}
+  private attributeFormatter: CbFunction | undefined
+  static replacements: SimpleObject = {}
 
-  constructor(public readonly messages: SimpleObject) {
+  constructor(public readonly messages: SimpleObject, private readonly acceptNoneAttributes = false) {
     this.customMessages = {}
     this.attributeNames = {}
     Messages._setReplacements()
@@ -121,9 +121,9 @@ export default class Messages {
     const attributes = flattenObject(this.messages.attributes)
     const attributeNames = flattenObject(this.attributeNames)
     const camelCase = toCamelCase(attribute)
-    const snakecase = snakeCase(attribute)
-    if (has(attributeNames, camelCase) || has(attributeNames, snakecase))
-      return attributeNames[snakecase] || attributeNames[camelCase]
+    const _snakeCase = snakeCase(attribute)
+    if (has(attributeNames, camelCase) || has(attributeNames, _snakeCase))
+      return attributeNames[_snakeCase] || attributeNames[camelCase]
 
     if (has(attributes, attribute))
       name = attributes[attribute]
@@ -171,17 +171,16 @@ export default class Messages {
     return template
   }
 
-  _replacePlaceholders(rule: Rule, template: string | any, data: SimpleObject): string {
-    let message = ''
-    let attribute
-    data.attribute = this._getAttributeName(rule.attribute)
-    data[rule.name] = data[rule.name] || rule.getParameters().join(',')
-    if (typeof template === 'string' && typeof data === 'object') {
-      message = template
-      for (attribute in data)
-        message = message.replace(RegExp(`:${attribute}`, 'g'), data[attribute])
+  _replacePlaceholders(rule: Rule, template: string, data: SimpleObject) {
+    const updatedData = Object.assign(data, {
+      attribute: this._getAttributeName(rule.attribute),
+      [rule.name]: data[rule.name] || rule.getParameters().join(','),
+    })
+    if (this.acceptNoneAttributes) {
+      const newTemplate = template.trim().replace(/(.*)(:attribute)/g, '').replace(/^\s+/, '')
+      return newTemplate.replace(/:(\w+)/g, (_, key) => updatedData[key])
     }
 
-    return message
+    return template.trim().replace(/:(\w+)/g, (_, key) => updatedData[key])
   }
 }
