@@ -2,28 +2,36 @@ import { get } from 'lodash'
 import type Validator from './main'
 import * as rules from './rules'
 import { flattenObject, isEmpty, isValidDate } from './utils'
-import type { SimpleObject } from './types'
+import type { CbFunction, SimpleObject } from './types'
 
-let missedRuleValidator: VoidFunction = function (this: Rule) {
+let missedRuleValidator: CbFunction = function (this: Rule) {
   throw new Error(`Validator \`${this.name}\` is not defined!`)
 }
 let missedRuleMessage: string | undefined = ''
 
 export class Rule {
+  attribute = ''
+  readonly name: string
   private _customMessage: string | undefined = undefined
   private passes = false
-  private callback: any
-  attribute = ''
   private input: SimpleObject | string | number | undefined
   private rule: any
   private validator!: Validator
   static rules = Object.assign({}, rules) as SimpleObject
+  private callback!: CbFunction<void>
+  private readonly fn: CbFunction
+  private readonly async: boolean
 
-  constructor(readonly name: string, private readonly fn: VoidFunction, private readonly async: boolean) {
+  constructor(name: string, fn: CbFunction, async: boolean) {
+    this.name = name
+    this.fn = fn
+    this.passes = false
+    this._customMessage = undefined
+    this.async = async
     Rule._setRules()
   }
 
-  validate(input: SimpleObject | string | number, rule: SimpleObject, attribute = '', callback = null) {
+  validate(input: SimpleObject | string | number, rule: SimpleObject, attribute = '', callback?: CbFunction) {
     this._setValidatingData(attribute, input, rule)
     if (typeof callback === 'function') {
       this.callback = callback
@@ -31,7 +39,7 @@ export class Rule {
         return this.response(passes, message)
       }
       if (this.async)
-        return this._apply(input, rule, attribute, handleResponse as unknown as null)
+        return this._apply(input, rule, attribute, handleResponse)
       else
         return handleResponse(this._apply(input, rule, attribute))
     }
@@ -42,7 +50,7 @@ export class Rule {
     input: SimpleObject | string | number,
     rule: SimpleObject,
     attribute: string | null,
-    callback = null,
+    callback?: CbFunction,
   ): any {
     const fn = this.isMissed() ? missedRuleValidator : this.fn
     return fn.apply(this, [input, rule, attribute, callback] as any)
@@ -311,26 +319,26 @@ export class Manager {
     return this.implicitRules.includes(name)
   }
 
-  register(name: string, fn: VoidFunction) {
+  register(name: string, fn: CbFunction) {
     Rule.rules[name] = fn
   }
 
-  registerImplicit(name: string, fn: VoidFunction) {
+  registerImplicit(name: string, fn: CbFunction) {
     this.register(name, fn)
     this.implicitRules.push(name)
   }
 
-  registerAsync(name: string, fn: VoidFunction) {
+  registerAsync(name: string, fn: CbFunction) {
     this.register(name, fn)
     this.asyncRules.push(name)
   }
 
-  registerAsyncImplicit(name: string, fn: VoidFunction) {
+  registerAsyncImplicit(name: string, fn: CbFunction) {
     this.registerImplicit(name, fn)
     this.asyncRules.push(name)
   }
 
-  registerMissedRuleValidator(fn: VoidFunction, message?: string) {
+  registerMissedRuleValidator(fn: CbFunction, message?: string) {
     missedRuleValidator = fn
     missedRuleMessage = message
   }

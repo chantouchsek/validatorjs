@@ -1,7 +1,7 @@
 import { get, isArray, replace } from 'lodash'
 import type Messages from './messages'
 import type { Rule } from './rule'
-import type { LangTypes, RuleType, SimpleObject, ValidatorOptions, VoidFunction } from './types'
+import type { CbFunction, LangTypes, RuleType, SimpleObject, ValidatorOptions } from './types'
 import AsyncResolvers from './async-resolvers'
 import Errors from './errors'
 import I18n from './i18n'
@@ -18,6 +18,7 @@ export default class Validator {
   readonly errors: Errors
   readonly messages: Messages
   private readonly confirmedReverse?: boolean
+  private readonly acceptNoneAttributes?: boolean
   static lang: LangTypes = 'en'
   static attributeFormatter = formatter
   static manager = new Manager()
@@ -38,6 +39,7 @@ export default class Validator {
     this.hasAsync = false
     this.rules = this._parseRules(rules)
     this.confirmedReverse = options.confirmedReverse
+    this.acceptNoneAttributes = options.acceptNoneAttributes ?? false
   }
 
   check() {
@@ -51,12 +53,10 @@ export default class Validator {
       for (let i = 0, len = attributeRules.length; i < len; i++) {
         const { name, value } = attributeRules[i]
         const rule = this.getRule(name)
-
         if (!this._isValidatable(rule, inputValue))
           continue
 
         const rulePassed = rule.validate(inputValue, value, attribute)
-
         if (!rulePassed) {
           if (name === 'confirmed' && this.confirmedReverse) {
             attribute = `${attribute}_confirmation`
@@ -92,8 +92,8 @@ export default class Validator {
     const validateRule = (
       inputValue: SimpleObject,
       ruleOptions: SimpleObject,
-      attribute: string,
-      rule: SimpleObject,
+      rule: Rule,
+      attribute = '',
     ) => {
       return () => {
         const resolverIndex = asyncResolvers.add(rule)
@@ -107,11 +107,10 @@ export default class Validator {
       if (this._passesOptionalCheck(attribute))
         continue
 
-      for (let i = 0, len = attributeRules.length, rule, ruleOptions; i < len; i++) {
-        ruleOptions = attributeRules[i]
-        rule = this.getRule(ruleOptions.name)
+      for (const ruleOptions of attributeRules) {
+        const rule = this.getRule(ruleOptions.name)
         if (this._isValidatable(rule, inputValue))
-          validateRule(inputValue, ruleOptions, attribute, rule)()
+          validateRule(inputValue, ruleOptions, rule, attribute)()
       }
     }
 
@@ -356,16 +355,12 @@ export default class Validator {
 
   passes(passes?: () => void) {
     const async = this._checkAsync('passes', passes)
-    if (async)
-      return this.checkAsync(passes)
-    return this.check()
+    return async ? this.checkAsync(passes) : this.check()
   }
 
-  fails(fails?: VoidFunction) {
+  fails(fails?: CbFunction) {
     const async = this._checkAsync('fails', fails)
-    if (async)
-      return this.checkAsync(false, fails)
-    return !this.check()
+    return async ? this.checkAsync(false, fails) : !this.check()
   }
 
   _checkAsync(funcName: string, callback?: boolean | (() => void)) {
@@ -376,7 +371,7 @@ export default class Validator {
     return this.hasAsync || hasCallback
   }
 
-  validated(passes?: VoidFunction, fails?: VoidFunction) {
+  validated(passes?: CbFunction, fails?: CbFunction) {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const _this = this
     if (this._checkAsync('passes', passes)) {
