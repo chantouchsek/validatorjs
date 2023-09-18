@@ -2,8 +2,33 @@
   "name": "@chantouchsek/validatorjs",
   "version": "1.2.3",
   "description": "The validatorjs library makes data validation in JavaScript very easy in both the browser and Node.js.",
+  "author": {
+    "name": "Chantouch Sek",
+    "email": "chantouchsek.cs83@gmail.com",
+    "url": "https://chantouch.me"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/chantouchsek/validatorjs#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chantouchsek/validatorjs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/chantouchsek/validatorjs/issues"
+  },
+  "keywords": [
+    "validator",
+    "validatorjs",
+    "node-validator"
+  ],
   "main": "dist/main.js",
   "types": "dist/main.d.ts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": "^12.20.0 || >=14.13.0"
+  },
   "scripts": {
     "dev": "tsc -w",
     "clean": "rimraf dist",
@@ -12,43 +37,16 @@
     "test:watch": "yarn test",
     "test:cov": "vitest run --coverage",
     "release": "standard-version && git push --follow-tags origin main && yarn publish",
-    "lint:js": "eslint --ext \".js,.ts\" --ignore-path .gitignore .",
-    "lint:prettier": "prettier --check .",
-    "lint": "yarn lint:js && yarn lint:prettier",
-    "lintfix": "prettier --write --list-different . && yarn lint:js --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "prepare": "husky install",
     "typecheck": "tsc --noEmit"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/chantouchsek/validatorjs.git"
+  "dependencies": {
+    "lodash": "^4.17.21"
   },
-  "files": [
-    "dist"
-  ],
-  "keywords": [
-    "validator",
-    "validatorjs",
-    "node-validator"
-  ],
-  "author": {
-    "name": "Chantouch Sek",
-    "email": "chantouchsek.cs83@gmail.com",
-    "url": "https://chantouch.me"
-  },
-  "engines": {
-    "node": "^12.20.0 || >=14.13.0"
-  },
-  "lint-staged": {
-    "*.{js,ts}": "eslint --cache",
-    "*.**": "prettier --check --ignore-unknown"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/chantouchsek/validatorjs/issues"
-  },
-  "homepage": "https://github.com/chantouchsek/validatorjs#readme",
   "devDependencies": {
+    "@antfu/eslint-config": "^0.39.8",
     "@commitlint/cli": "^17.6.6",
     "@commitlint/config-conventional": "^17.6.6",
     "@types/lodash": "^4.14.195",
@@ -59,20 +57,18 @@
     "eslint": "^8.45.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.1.1",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.0",
     "node-notifier": "^10.0.1",
-    "prettier": "^2.8.8",
     "rimraf": "^5.0.1",
     "standard-version": "^9.5.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6",
     "vitest": "^0.34.1"
   },
-  "dependencies": {
-    "lodash": "^4.17.21"
+  "lint-staged": {
+    "*.{js,ts}": "eslint --fix"
   },
   "engineStrict": true
 }

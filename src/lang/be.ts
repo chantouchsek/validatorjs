@@ -18,7 +18,7 @@ const be = {
   },
   boolean: 'Поле :attribute павінна мець значэнне лагічнага тыпу.',
   confirmed: 'Поле :attribute не супадае з пацвярджэннем.',
-  date: "Поле :attribute не з'яўляецца датай.",
+  date: 'Поле :attribute не з\'яўляецца датай.',
   date_format: 'Поле :attribute не адпавядае фармату :format.',
   different: 'Палі :attribute і :other павінны адрознівацца.',
   digits: 'Даўжыня лічбавага поля :attribute павінна быць :digits.',

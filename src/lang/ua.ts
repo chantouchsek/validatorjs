@@ -25,7 +25,7 @@ const ua = {
   not_in: 'Обране значення для :attribute помилкове.',
   numeric: 'Значення поля :attribute повинно бути числом.',
   present: 'Поле :attribute повинно бути присутнім (але може бути пустим).',
-  required: "Поле :attribute обов'язкове для заповнення.",
+  required: 'Поле :attribute обов\'язкове для заповнення.',
   required_if: 'Поле :attribute потрібне у випадку коли значення поля :other рівне :value.',
   same: 'Значеня поля :attribute повинно співпадати з :same.',
   size: {

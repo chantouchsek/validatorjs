@@ -1,3 +1,4 @@
+import { beforeEach, describe, expect, it } from 'vitest'
 import Validator from '../src/main'
 
 describe('Validator constructor', () => {
@@ -7,14 +8,14 @@ describe('Validator constructor', () => {
     validator = new Validator(
       { name: 'David', email: 'johndoe@gmail.com' },
       { name: 'required', email: 'required' },
-      { customMessages: { required: "You're missing :required" } },
+      { customMessages: { required: 'You\'re missing :required' } },
     )
   })
 
   it('should expose on window if browser', () => {
     if (typeof window !== 'undefined') {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
+      // @ts-expect-error
       expect(window.Validator).toBeDefined()
     }
   })

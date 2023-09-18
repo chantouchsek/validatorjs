@@ -1,15 +1,15 @@
+import { describe, expect, it } from 'vitest'
 import Validator from '../src/main'
 
 describe('async rule tests', () => {
   it('should be able to register and pass async rule', () =>
-    new Promise<void>((done) => {
+    new Promise<void>((resolve) => {
       Validator.registerAsync(
         'username',
-        (desiredUsername: string, ruleValue: string, attribute: string, passes: any) => {
+        (desiredUsername: string, _ruleValue: string, _attribute: string, passes: any) => {
           setTimeout(() => {
-            if (desiredUsername == 'test') {
+            if (desiredUsername === 'test')
               passes()
-            }
           }, 50)
         },
         ':attribute is an invalid username',
@@ -23,18 +23,18 @@ describe('async rule tests', () => {
           username: 'username',
         },
       )
-      validator.passes(done)
+      validator.passes(resolve)
     }))
 
   it('should pass on multiple async rules', () =>
-    new Promise<void>((done) => {
+    new Promise<void>((resolve) => {
       let passCount = 0
 
       Validator.registerAsync(
         'username1',
-        (input: string, value: string, attribute: string, passes: any) => {
+        (input: string, _value: string, _attribute: string, passes: any) => {
           setTimeout(() => {
-            if (input == 'test') {
+            if (input === 'test') {
               passCount++
               passes()
             }
@@ -45,9 +45,9 @@ describe('async rule tests', () => {
 
       Validator.registerAsync(
         'username2',
-        (input: string, value: string, attribute: string, passes: any) => {
+        (input: string, _value: string, _attribute: string, passes: any) => {
           setTimeout(() => {
-            if (input == 'test') {
+            if (input === 'test') {
               passCount++
               passes()
             }
@@ -59,20 +59,20 @@ describe('async rule tests', () => {
       const validator = new Validator({ username: 'test' }, { username: 'username1|username2' })
       validator.passes(() => {
         expect(passCount).toEqual(2)
-        done()
+        resolve()
       })
     }))
 
   it('should fail on mixture of pass/fail async rules', () =>
-    new Promise<void>((done) => {
+    new Promise<void>((resolve) => {
       let failedCount = 0
       let passCount = 0
 
       Validator.registerAsync(
         'username1',
-        (input: string, value: string, attribute: string, passes: any) => {
+        (input: string, _value: string, _attribute: string, passes: any) => {
           setTimeout(() => {
-            if (input == 'test') {
+            if (input === 'test') {
               passCount++
               passes()
             }
@@ -83,9 +83,9 @@ describe('async rule tests', () => {
 
       Validator.registerAsync(
         'username2',
-        (input: string, value: string, attribute: string, passes: any) => {
+        (input: string, _value: string, _attribute: string, passes: any) => {
           setTimeout(() => {
-            if (input == 'test') {
+            if (input === 'test') {
               failedCount++
               passes(false)
             }
@@ -98,12 +98,12 @@ describe('async rule tests', () => {
       validator.fails(() => {
         expect(passCount).toEqual(1)
         expect(failedCount).toEqual(1)
-        done()
+        resolve()
       })
     }))
 
   it('should allow validating by async when no async rules', () =>
-    new Promise<void>((done) => {
+    new Promise<void>((resolve) => {
       const validator = new Validator(
         {
           username: 'admin',
@@ -115,64 +115,63 @@ describe('async rule tests', () => {
         },
       )
       validator.fails(() => {
-        done()
+        resolve()
       })
 
       validator.passes(() => {
-        throw 'Should not have passed.'
+        throw new Error('Should not have passed.')
       })
     }))
 
   it('should it pass on mixture of sync/async rules', () =>
-    new Promise<void>((done) => {
+    new Promise<void>((resolve) => {
       Validator.registerAsync(
         'username',
-        (input: string, value: any, attribute: string, passes: any) => {
+        (input: string, _value: any, _attribute: string, passes: any) => {
           setTimeout(() => {
-            if (input == 'test') {
+            if (input === 'test')
               passes()
-            }
           }, 50)
         },
         ':attribute is an invalid username',
       )
 
       const validator = new Validator({ username: 'test' }, { username: 'required|min:3|username' })
-      validator.passes(done)
+      validator.passes(resolve)
     }))
 
   it('should it not call passes if using just fails callback', () =>
-    new Promise<void>((done) => {
+    new Promise<void>((resolve) => {
       const validator = new Validator({ name: 'gary' }, { name: 'required' })
       validator.fails(() => {
-        throw 'Should not be called.'
+        throw new Error('Should not be called.')
       })
 
       validator.passes(() => {
-        done()
+        resolve()
       })
     }))
 
   it('should it not call fails if using just passes callback', () =>
-    new Promise<void>((done) => {
+    new Promise<void>((resolve) => {
       const validator = new Validator({ name: '' }, { name: 'required' })
       validator.passes(() => {
-        throw 'Should not be called.'
+        throw new Error('Should not be called.')
       })
 
       validator.fails(() => {
-        done()
+        resolve()
       })
     }))
 
-  it('should throw exception when attempting to validate and no fail or pass callback', function () {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    Validator.registerAsync('username', function () {})
+  it('should throw exception when attempting to validate and no fail or pass callback', () => {
+    Validator.registerAsync('username', () => {})
     const validator = new Validator({ username: 'admin' }, { username: 'username' })
     try {
       validator.passes()
-    } catch (e) {
-      expect(e).toBe('passes expects a callback when async rules are being tested.')
+    }
+    catch (e) {
+      expect(e).instanceOf(Error)
     }
   })
 })

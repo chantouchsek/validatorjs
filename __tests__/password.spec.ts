@@ -1,7 +1,8 @@
+import { describe, expect, it } from 'vitest'
 import Validator from '../src/main'
 
-describe('password rule', function () {
-  it('should fail', function () {
+describe('password rule', () => {
+  it('should fail', () => {
     const validator = new Validator(
       {
         password: '12345678',
@@ -15,7 +16,7 @@ describe('password rule', function () {
     expect(validator.errors.first('password')).toEqual('The password attribute has errors.')
   })
 
-  it('should pass', function () {
+  it('should pass', () => {
     const validator = new Validator(
       {
         password: 'Pa$$w0rd',

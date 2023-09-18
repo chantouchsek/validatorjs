@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest'
 import Validator from '../src/main'
 
 describe('in validation rule', () => {
@@ -51,7 +52,7 @@ describe('in validation rule', () => {
     expect(validator.passes()).toBeFalsy()
   })
 
-  it('should fail when 0 (zero) is not in giving array', function () {
+  it('should fail when 0 (zero) is not in giving array', () => {
     const validator = new Validator({ quantity: 0 }, { quantity: 'in:1,2' })
     expect(validator.passes()).toBeFalsy()
     expect(validator.fails()).toBeTruthy()

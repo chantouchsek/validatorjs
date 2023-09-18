@@ -7,24 +7,22 @@ export function checkFalsePositiveDates(dateString: string) {
     const parts = normalizedDate.split('-')
     if (parts.length === 3) {
       if (parts[0].length === 4) {
-        const y = parseInt(parts[0])
-        const m = parseInt(parts[1])
-        const d = parseInt(parts[2])
+        const y = Number.parseInt(parts[0])
+        const m = Number.parseInt(parts[1])
+        const d = Number.parseInt(parts[2])
         if (m === 2) {
           if (leapYear(y)) {
-            if (d > 29) {
+            if (d > 29)
               return false
-            }
-          } else {
-            if (d > 28) {
+          }
+          else {
+            if (d > 28)
               return false
-            }
           }
         }
         if (m === 4 || m === 6 || m === 9 || m === 11) {
-          if (d > 30) {
+          if (d > 30)
             return false
-          }
         }
       }
     }
@@ -40,8 +38,8 @@ export function isValidDate(dateString: any) {
     return typeof testDate === 'object'
   }
   testDate = new Date(dateString)
-  if (testDate.toString() === 'Invalid Date') {
+  if (testDate.toString() === 'Invalid Date')
     return false
-  }
+
   return checkFalsePositiveDates(dateString)
 }

@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest'
 import Validator from '../src/main'
 
 describe('confirmed validation rule', () => {
@@ -20,7 +21,7 @@ describe('confirmed validation rule', () => {
     expect(validator.fails()).toBeFalsy()
   })
 
-  it('should reverse message from confirm to _confirmation', function () {
+  it('should reverse message from confirm to _confirmation', () => {
     const validator = new Validator(
       {
         password: 'abc-1',
@@ -34,7 +35,7 @@ describe('confirmed validation rule', () => {
     expect(validator.errors.first('password_confirmation')).toEqual('The password confirmation does not match.')
   })
 
-  it('use camelCase of passwordConfirmation property', function () {
+  it('use camelCase of passwordConfirmation property', () => {
     const validator = new Validator(
       {
         form: {

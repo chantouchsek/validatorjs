@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest'
 import Validator from '../src/main'
 
 describe('Error messages', () => {
@@ -99,7 +100,7 @@ describe('Error messages', () => {
 
     it('should fail with a url only containing http://', () => {
       const link = 'http://'
-      const validator = new Validator({ link: link }, { link: 'url' })
+      const validator = new Validator({ link }, { link: 'url' })
       expect(validator.passes()).toBeFalsy()
       expect(validator.errors.first('link')).toEqual('The link format is invalid.')
     })

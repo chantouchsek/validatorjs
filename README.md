@@ -5,6 +5,7 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 [![npm](https://img.shields.io/npm/dt/@chantouchsek/validatorjs.svg?style=flat-square)](https://npmjs.com/package/@chantouchsek/validatorjs)
 [![npm](https://img.shields.io/npm/dm/@chantouchsek/validatorjs.svg?style=flat-square)](https://npmjs.com/package/@chantouchsek/validatorjs)
+[![code style](https://antfu.me/badge-code-style.svg)](https://github.com/antfu/eslint-config)
 
 The ValidatorJs library makes data validation in JavaScript very easy in both the browser and Node.js. This library was
 forked from [ValidatorJs](https://github.com/mikeerickson/validatorjs) to re-write in typescript to add more rules and
@@ -49,7 +50,7 @@ yarn add @chantouchsek/validatorjs
 
 ```js
 // ES5
-let Validator = require('@chantouchsek/validatorjs')
+const Validator = require('@chantouchsek/validatorjs')
 ```
 
 ```js
@@ -78,19 +79,19 @@ const validation = new Validator(data, rules, options)
 #### Example 1 - Passing Validation
 
 ```js
-let data = {
+const data = {
   name: 'John',
   email: 'johndoe@gmail.com',
   age: 28,
 }
 
-let rules = {
+const rules = {
   name: 'required',
   email: 'required|email',
   age: 'min:18',
 }
 
-let validation = new Validator(data, rules)
+const validation = new Validator(data, rules)
 
 validation.passes() // true
 validation.fails() // false
@@ -101,7 +102,7 @@ To apply validation rules to the _data_ object, use the same object key names fo
 #### Example 2 - Failing Validation
 
 ```js
-let validation = new Validator(
+const validation = new Validator(
   {
     name: 'D',
     email: 'not an email address.com',
@@ -127,7 +128,7 @@ is to declare the validation rules with a corresponding nested object structure 
 is to declare validation rules with flattened key names. For example, to validate the following data:
 
 ```js
-let data = {
+const data = {
   name: 'John',
   bio: {
     age: 28,
@@ -142,7 +143,7 @@ let data = {
 We could declare our validation rules as follows:
 
 ```js
-let nested = {
+const nested = {
   name: 'required',
   bio: {
     age: 'min:18',
@@ -155,8 +156,8 @@ let nested = {
 
 // OR
 
-let flattened = {
-  name: 'required',
+const flattened = {
+  'name': 'required',
   'bio.age': 'min:18',
   'bio.education.primary': 'string',
   'bio.education.secondary': 'string',
@@ -168,7 +169,7 @@ let flattened = {
 WildCards can also be validated.
 
 ```js
-let data = {
+const data = {
   users: [
     {
       name: 'John',
@@ -187,7 +188,7 @@ let data = {
 We could declare our validation rules as follows:
 
 ```js
-let rules = {
+const rules = {
   'users.*.name': 'required',
   'users.*.bio.age': 'min:18',
   'users.*.bio.education.primary': 'string',
@@ -293,10 +294,10 @@ _Note: Maximum checks are inclusive._
 #### Example 1 - Max validation
 
 ```js
-let rules = {
+const rules = {
   phone: 'required|digits|max:11',
 }
-let input = {
+const input = {
   phone: '01234567890',
 }
 // passes: true
@@ -305,10 +306,10 @@ let input = {
 #### Example 2 - Max validation
 
 ```js
-let rules = {
+const rules = {
   phone: 'integer|max:16',
 }
-let input = {
+const input = {
   phone: '18',
 }
 // passes: false
@@ -323,10 +324,10 @@ _Note: Minimum checks are inclusive._
 #### Example 1 - Min validation
 
 ```js
-let rules = {
+const rules = {
   phone: 'required|digits|min:11',
 }
-let input = {
+const input = {
   phone: '01234567890',
 }
 // passes: true
@@ -335,10 +336,10 @@ let input = {
 #### Example 2 - Min validation
 
 ```js
-let rules = {
+const rules = {
   phone: 'integer|min:11',
 }
-let input = {
+const input = {
   phone: '18',
 }
 // passes: false
@@ -353,7 +354,7 @@ The field under validation must not be included in the given list of values.
 Validate that an attribute is numeric. The string representation of a number will pass.
 
 ```js
-let rules = {
+const rules = {
   amount: 'numeric|digits:5',
 }
 ```
@@ -395,7 +396,7 @@ The field under validation must be present and not empty only when all the other
 In some situations, you may wish to run validation checks against a field only if that field is present in the data being validated. To quickly accomplish this, add the sometimes rule to your rule list:
 
 ```js
-let rules = {
+const rules = {
   email: 'sometimes|required|email',
 }
 ```
@@ -430,7 +431,7 @@ your regex pattern, you must escape each one with another backward slash.
 #### Example 3 - Regex validation
 
 ```js
-let validation = new Validator(
+const validation = new Validator(
   {
     name: 'Doe',
     salary: '10,000.00',
@@ -450,7 +451,7 @@ validation.passes() // true
 #### Example 4 - Type Checking Validation
 
 ```js
-let validation = new Validator(
+const validation = new Validator(
   {
     age: 30,
     name: '',
@@ -481,7 +482,7 @@ errorMessage will be replaced with the attribute name.
 ```js
 Validator.register(
   'telephone',
-  function (value, requirement, attribute) {
+  (value, requirement, attribute) => {
     // requirement parameter defaults to null
     return value.match(/^\d{3}-\d{3}-\d{4}$/)
   },
@@ -494,7 +495,7 @@ Validator.register(
 Register an asynchronous rule which accepts a `passes` callback:
 
 ```js
-Validator.registerAsync('username_available', function (username, attribute, req, passes) {
+Validator.registerAsync('username_available', (username, attribute, req, passes) => {
   // do your database/api checks here etc
   // then call the `passes` method where appropriate:
   passes() // if username is available
@@ -505,7 +506,7 @@ Validator.registerAsync('username_available', function (username, attribute, req
 Then call your validator using `checkAsync` passing `fails` and `passes` callbacks like so:
 
 ```js
-let validator = new Validator(
+const validator = new Validator(
   {
     username: 'test123',
   },
@@ -530,7 +531,7 @@ validator.checkAsync(passes, fails)
 Use `validated()` method to retrieve only the validated data and to filter out attributes not found on rules provided.
 
 ```js
-let validation = new Validator(
+const validation = new Validator(
   {
     name: 'John',
     email: 'johndoe@gmail.com',
@@ -548,7 +549,7 @@ validation.validated() // will return `{ "name": "John", "age": 28 }`
 `validated()` method will throw an error when current validation is failing.
 
 ```js
-let validation = new Validator(
+const validation = new Validator(
   {
     name: 'John',
     email: 'johndoe@gmail.com',
@@ -568,7 +569,7 @@ validation.validated() // will throw `Error('Validation failed!')`
 attributes not found on rules provided) as the first argument.
 
 ```js
-let validation = new Validator(
+const validation = new Validator(
   {
     name: 'John',
     email: 'johndoe@gmail.com',
@@ -617,7 +618,7 @@ returns true if error messages exist for an attribute, false otherwise
 the number of validation errors
 
 ```js
-let validation = new Validator(input, rules)
+const validation = new Validator(input, rules)
 validation.errors.first('email') // returns first error message for email attribute
 validator.errors.get('email') // returns an array of error messages for the email attribute
 ```
@@ -629,15 +630,15 @@ third argument to the Validator object, just like
 with [Laravel](http://laravel.com/docs/validation#custom-error-messages).
 
 ```js
-let input = {
+const input = {
   name: '',
 }
 
-let rules = {
+const rules = {
   name: 'required',
 }
 
-let validation = new Validator(input, rules, {
+const validation = new Validator(input, rules, {
   required: 'You forgot to give a :attribute',
 })
 validation.passes()
@@ -647,15 +648,15 @@ validation.errors.first('name') // returns 'You forgot to give a name'
 Some validators have string and numeric versions. You can change them too.
 
 ```js
-let input = {
+const input = {
   username: 'myusernameistoolong',
 }
 
-let rules = {
+const rules = {
   username: 'max:16',
 }
 
-let validation = new Validator(input, rules, {
+const validation = new Validator(input, rules, {
   max: {
     string: 'The :attribute is too long. Max length is :max.',
   },
@@ -667,11 +668,11 @@ validation.errors.first('username') // returns 'The username is too long. Max le
 You can even provide error messages on a per-attribute basis! Just set the message's key to 'validator.attribute'
 
 ```js
-let input = { name: '', email: '' }
-let rules = { name: 'required', email: 'required' }
+const input = { name: '', email: '' }
+const rules = { name: 'required', email: 'required' }
 
-let validation = new Validator(input, rules, {
-  'required.email': "Without an :attribute we can't reach you!",
+const validation = new Validator(input, rules, {
+  'required.email': 'Without an :attribute we can\'t reach you!',
 })
 
 validation.passes()
@@ -694,19 +695,17 @@ const validator = new Validator(
     },
   },
 )
-if (validator.fails()) {
+if (validator.fails())
   validator.errors.first('form.name') // "The Userame need to be filled."
-}
 ```
 
 To display a custom "friendly" attribute name in error messages, use `.setAttributeNames()`
 
 ```js
-let validator = new Validator({ name: '' }, { name: 'required' })
+const validator = new Validator({ name: '' }, { name: 'required' })
 validator.setAttributeNames({ name: 'custom_name' })
-if (validator.fails()) {
+if (validator.fails())
   validator.errors.first('name') // "The custom_name field is required."
-}
 ```
 
 Alternatively you can supply global custom attribute names in your lang with the `attributes` property.
@@ -715,18 +714,17 @@ You can also configure a custom attribute formatter:
 
 ```js
 // Configure global formatter.
-Validator.setAttributeFormatter(function (attribute) {
+Validator.setAttributeFormatter((attribute) => {
   return attribute.replace(/_/g, ' ')
 })
 
 // Or configure formatter for particular instance.
-let validator = new Validator({ first_name: '' }, { first_name: 'required' })
-validator.setAttributeFormatter(function (attribute) {
+const validator = new Validator({ first_name: '' }, { first_name: 'required' })
+validator.setAttributeFormatter((attribute) => {
   return attribute.replace(/_/g, ' ')
 })
-if (validator.fails()) {
+if (validator.fails())
   console.log(validator.errors.first('first_name')) // The first name field is required.
-}
 ```
 
 Note: by default all \_ characters will be replaced with spaces.
@@ -747,7 +745,8 @@ script tag and call `Validator.useLang('lang_code')`.
 In Node, it will automatically pick up on the language source files.
 
 ```js
-let Validator = require('validatorjs')
+const Validator = require('validatorjs')
+
 Validator.useLang('km')
 ```
 
@@ -782,7 +781,7 @@ Validator.getDefaultLang() // returns e.g. 'en'
 Override default messages for language:
 
 ```js
-let messages = Validator.getMessages('en')
+const messages = Validator.getMessages('en')
 messages.required = 'Whoops, :attribute field is required.'
 Validator.setMessages('en', messages)
 ```

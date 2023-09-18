@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest'
 import Validator from '../src/main'
 
 describe('stopOnError tests', () => {
@@ -7,20 +8,6 @@ describe('stopOnError tests', () => {
     expect(validator.fails()).toBeTruthy()
     expect(validator.errors.get('email')).toHaveLength(1)
   })
-
-  // it('asynchronous', function(done) {
-
-  // 	Validator.registerAsync('username_available', function(val, ruleValue, attribute, passes) {
-  // 		throw 'Should not have been called.';
-  // 	});
-  // 	const validator = new Validator({ email: 'x' }, { email: 'email|username_available' });
-  // 	validator.stopOnError(true);
-  // 	validator.fails(function() {
-  // 		expect(validator.errors.get('email')).to.have.length(1);
-  // 		done();
-  // 	});
-
-  // });
 
   it('only certain fields', () => {
     const validator = new Validator({ email1: 'x', email2: 'x' }, { email1: 'min:5|email', email2: 'min:5|email' })

@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest'
 import { flattenObject, isEmpty } from '../src/utils'
 
 describe('Object', () => {
@@ -16,7 +17,7 @@ describe('Object', () => {
       [{ foo: { bar: { fizz: ['buzz'] } } }, { 'foo.bar.fizz': ['buzz'] }],
     ]
 
-    asserts.forEach(function (assert) {
+    asserts.forEach((assert) => {
       expect(flattenObject(assert[0])).toEqual(assert[1])
     })
   })

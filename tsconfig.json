@@ -9,8 +9,7 @@
     "declaration": true,
     "outDir": "dist",
     "strictNullChecks": true,
-    "forceConsistentCasingInFileNames": true,
-    "types": ["@types/node", "vitest/globals"]
+    "forceConsistentCasingInFileNames": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "**/__tests__/*", "coverage"]

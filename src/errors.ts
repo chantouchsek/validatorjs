@@ -1,16 +1,15 @@
-import type { SimpleObject } from './types'
 import { cloneDeep, get, has, omit } from 'lodash'
+import type { SimpleObject } from './types'
 
 export default class Errors {
   private errors: SimpleObject<string[]> = {}
 
   add(attribute: string, message: string) {
-    if (!this.has(attribute)) {
+    if (!this.has(attribute))
       this.errors[attribute] = []
-    }
-    if (this.errors[attribute].indexOf(message) === -1) {
+
+    if (!this.errors[attribute].includes(message))
       this.errors[attribute].push(message)
-    }
   }
 
   missed(field: string | string[]) {
@@ -22,9 +21,9 @@ export default class Errors {
   }
 
   first(attribute: string) {
-    if (this.has(attribute)) {
+    if (this.has(attribute))
       return this.get(attribute)[0]
-    }
+
     return undefined
   }
 
@@ -41,7 +40,8 @@ export default class Errors {
   }
 
   clear(attribute?: string | string[]) {
-    if (!attribute) return this.flush()
+    if (!attribute)
+      return this.flush()
     const errors = omit(cloneDeep(this.errors), attribute)
     this.fill(errors)
   }

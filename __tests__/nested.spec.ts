@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest'
 import Validator from '../src/main'
 
 describe('nested validation rules', () => {
@@ -12,7 +13,7 @@ describe('nested validation rules', () => {
   }
 
   const nestedFlatten: Record<string, string> = {
-    name: 'required',
+    'name': 'required',
     'data.weight': 'required',
     'data.hair.color': 'required',
   }
@@ -31,7 +32,7 @@ describe('nested validation rules', () => {
     [
       {},
       {
-        name: 'The name field is required.',
+        'name': 'The name field is required.',
         'data.weight': 'The data weight field is required.',
         'data.hair.color': 'The data hair color field is required.',
       },
@@ -46,14 +47,14 @@ describe('nested validation rules', () => {
     [
       { data: { weight: 70 } },
       {
-        name: 'The name field is required.',
+        'name': 'The name field is required.',
         'data.hair.color': 'The data hair color field is required.',
       },
     ],
     [
       { data: { hair: { color: 'black' } } },
       {
-        name: 'The name field is required.',
+        'name': 'The name field is required.',
         'data.weight': 'The data weight field is required.',
       },
     ],
@@ -70,7 +71,7 @@ describe('nested validation rules', () => {
       const validator = new Validator(assert[0], nestedObject)
       expect(validator.passes()).toBeFalsy()
       expect(validator.fails()).toBeTruthy()
-      Object.keys(assert[1]).forEach(function (key) {
+      Object.keys(assert[1]).forEach((key) => {
         expect(validator.errors.first(key)).toEqual(assert[1][key])
       })
     }
@@ -87,7 +88,7 @@ describe('nested validation rules', () => {
       const validator = new Validator(assert[0], nestedFlatten)
       expect(validator.passes()).toBeFalsy()
       expect(validator.fails()).toBeTruthy()
-      Object.keys(assert[1]).forEach(function (key) {
+      Object.keys(assert[1]).forEach((key) => {
         const obj = assert[1][key]
         expect(validator.errors.first(key)).toEqual(obj)
       })

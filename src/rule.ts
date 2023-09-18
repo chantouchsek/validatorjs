@@ -1,10 +1,10 @@
-import type Validator from './main'
 import { get } from 'lodash'
+import type Validator from './main'
 import * as rules from './rules'
 import { flattenObject, isEmpty, isValidDate } from './utils'
 
 let missedRuleValidator: VoidFunction = function (this: Rule) {
-  throw new Error('Validator `' + this.name + '` is not defined!')
+  throw new Error(`Validator \`${this.name}\` is not defined!`)
 }
 let missedRuleMessage: string | undefined = ''
 
@@ -38,11 +38,10 @@ export class Rule {
       const handleResponse = (passes?: boolean, message?: string) => {
         return this.response(passes, message)
       }
-      if (this.async) {
+      if (this.async)
         return this._apply(input, rule, attribute, handleResponse as unknown as null)
-      } else {
+      else
         return handleResponse(this._apply(input, rule, attribute))
-      }
     }
     return this._apply(input, rule, attribute)
   }
@@ -65,37 +64,37 @@ export class Rule {
 
   getParameters() {
     let value = []
-    if (!isNaN(parseFloat(this.rule)) && isFinite(this.rule)) {
-      this.rule = parseFloat(this.rule)
+    if (!Number.isNaN(Number.parseFloat(this.rule)) && Number.isFinite(this.rule)) {
+      this.rule = Number.parseFloat(this.rule)
       value.push(this.rule)
     }
-    if (typeof this.rule === 'string') {
+    if (typeof this.rule === 'string')
       value = this.rule.split(',')
-    }
-    if (this.rule instanceof Array) {
+
+    if (Array.isArray(this.rule))
       value = this.rule
-    }
+
     return value
   }
 
   getSize(value?: string | number | Array<string | number>): string | number {
     const input = value || this.input
-    if (input instanceof Array) {
+    if (Array.isArray(input))
       return input.length
-    }
-    if (typeof input === 'number') {
+
+    if (typeof input === 'number')
       return input
-    }
-    if (this.validator._hasNumericRule(this.attribute)) {
-      return parseFloat(input as string)
-    }
+
+    if (this.validator._hasNumericRule(this.attribute))
+      return Number.parseFloat(input as string)
+
     return (input as string).length
   }
 
   _getValueType() {
-    if (typeof this.input === 'number' || this.validator._hasNumericRule(this.attribute as string)) {
+    if (typeof this.input === 'number' || this.validator._hasNumericRule(this.attribute as string))
       return 'numeric'
-    }
+
     return 'string'
   }
 
@@ -123,50 +122,51 @@ export class Rule {
       after(value: string, req: string) {
         const val1 = this.validator.input[req]
         const val2 = value
-        if (!isValidDate(val1) || !isValidDate(val2)) {
+        if (!isValidDate(val1) || !isValidDate(val2))
           return false
-        }
+
         return new Date(val1).getTime() < new Date(val2).getTime()
       },
       after_or_equal(val: string, req: string) {
         const val1 = this.validator.input[req]
         const val2 = val
-        if (!isValidDate(val1) || !isValidDate(val2)) return false
+        if (!isValidDate(val1) || !isValidDate(val2))
+          return false
         return new Date(val1).getTime() <= new Date(val2).getTime()
       },
       required_if(val: Record<string, any>, req: string[]) {
         req = this.getParameters()
-        if (get(this.validator.input, req[0]) === req[1]) {
+        if (get(this.validator.input, req[0]) === req[1])
           return this.validator.getRule('required').validate(val, {})
-        }
 
         return true
       },
       required_unless(val: Record<string, any>, req: string[]) {
         req = this.getParameters()
-        if (get(this.validator.input, req[0]) !== req[1]) {
+        if (get(this.validator.input, req[0]) !== req[1])
           return this.validator.getRule('required').validate(val, {})
-        }
 
         return true
       },
       required_with(val: Record<string, any>, req: string) {
-        if (get(this.validator.input, req)) {
+        if (get(this.validator.input, req))
           return this.validator.getRule('required').validate(val, {})
-        }
+
         return true
       },
       required_with_all(val: Record<string, any>, req: string[]) {
         req = this.getParameters()
 
         for (const re of req) {
-          if (!get(this.validator.input, re)) return true
+          if (!get(this.validator.input, re))
+            return true
         }
 
         return this.validator.getRule('required').validate(val, {})
       },
       required_without(val: Record<string, any>, req: string) {
-        if (get(this.validator.input, req)) return true
+        if (get(this.validator.input, req))
+          return true
 
         return this.validator.getRule('required').validate(val, {})
       },
@@ -174,14 +174,16 @@ export class Rule {
         req = this.getParameters()
 
         for (const re of req) {
-          if (get(this.validator.input, re)) return true
+          if (get(this.validator.input, re))
+            return true
         }
 
         return this.validator.getRule('required').validate(val, {})
       },
       size(val: string, req: number | string) {
-        if (!val) return false
-        req = parseFloat(String(req))
+        if (!val)
+          return false
+        req = Number.parseFloat(String(req))
         const size = this.getSize()
         return size === req
       },
@@ -196,8 +198,8 @@ export class Rule {
       between(val: string, req: string[]) {
         req = this.getParameters()
         const size = this.getSize()
-        const min = parseFloat(req[0])
-        const max = parseFloat(req[1])
+        const min = Number.parseFloat(req[0])
+        const max = Number.parseFloat(req[1])
         return size >= min && size <= max
       },
       same(val: string, req: string) {
@@ -210,18 +212,22 @@ export class Rule {
       },
       in(val: string | string[]) {
         let list: (string | number)[] = []
-        if (!isEmpty(val)) list = this.getParameters()
-        if (!isEmpty(val) && !(val instanceof Array)) {
+        if (!isEmpty(val))
+          list = this.getParameters()
+        if (!isEmpty(val) && !(Array.isArray(val))) {
           let localValue = val
           for (const li of list) {
-            if (typeof li === 'string') localValue = String(val)
-            if (localValue === li) return true
+            if (typeof li === 'string')
+              localValue = String(val)
+            if (localValue === li)
+              return true
           }
           return false
         }
-        if (val && val instanceof Array) {
+        if (val && Array.isArray(val)) {
           for (const va of val) {
-            if (list.indexOf(va) < 0) return false
+            if (!list.includes(va))
+              return false
           }
         }
         return true
@@ -233,7 +239,8 @@ export class Rule {
         for (const li of list) {
           let localValue = val
 
-          if (typeof li === 'string') localValue = String(val)
+          if (typeof li === 'string')
+            localValue = String(val)
 
           if (localValue === li) {
             returnVal = false
@@ -243,34 +250,36 @@ export class Rule {
         return returnVal
       },
       confirmed(val: string, req: string, attribute: string) {
-        const confirmedKey = attribute + '_confirmation'
+        const confirmedKey = `${attribute}_confirmation`
         return this.validator.input[confirmedKey] === val
       },
       digits(val: Record<string, any>, req: string) {
         const numericRule = this.validator.getRule('numeric')
-        return !!(numericRule.validate(val, {}) && String(val).trim().length === parseInt(req))
+        return !!(numericRule.validate(val, {}) && String(val).trim().length === Number.parseInt(req))
       },
       digits_between(val: number) {
         const numericRule = this.validator.getRule('numeric')
         const req = this.getParameters()
-        const min = parseFloat(req[0])
-        const max = parseFloat(req[1])
+        const min = Number.parseFloat(req[0])
+        const max = Number.parseFloat(req[1])
         return numericRule.validate(val, {}) && val >= min && val <= max
       },
       before(val: string, req: string) {
         const val1 = this.validator.input[req]
         const val2 = val
-        if (!isValidDate(val1) || !isValidDate(val2)) return false
+        if (!isValidDate(val1) || !isValidDate(val2))
+          return false
         return new Date(val1).getTime() > new Date(val2).getTime()
       },
       before_or_equal(val: string, req: string) {
         const val1 = this.validator.input[req]
         const val2 = val
-        if (!isValidDate(val1) || !isValidDate(val2)) return false
+        if (!isValidDate(val1) || !isValidDate(val2))
+          return false
         return new Date(val1).getTime() >= new Date(val2).getTime()
       },
       ip(val: string, req: number, attribute: string) {
-        return Rule.rules['ipv4'](val, req, attribute) || Rule.rules['ipv6'](val, req, attribute)
+        return Rule.rules.ipv4(val, req, attribute) || Rule.rules.ipv6(val, req, attribute)
       },
     }
   }
@@ -300,15 +309,14 @@ export class Manager {
 
   isAsync(name: string) {
     for (const rule of this.asyncRules) {
-      if (rule === name) {
+      if (rule === name)
         return true
-      }
     }
     return false
   }
 
   isImplicit(name: string) {
-    return this.implicitRules.indexOf(name) > -1
+    return this.implicitRules.includes(name)
   }
 
   register(name: string, fn: VoidFunction) {

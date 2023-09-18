@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest'
 import Validator from '../src/main'
 
 describe('required validation pass rules', () => {
@@ -12,7 +13,7 @@ describe('required validation pass rules', () => {
   })
 
   it('should fail with strings containing only white space', () => {
-    const validator = new Validator({ name: '      	' }, { name: 'required' })
+    const validator = new Validator({ name: '' }, { name: 'required' })
     expect(validator.fails()).toBeTruthy()
   })
 

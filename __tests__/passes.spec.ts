@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest'
 import Validator from '../src/main'
 
 describe('passes()', () => {
@@ -12,7 +13,7 @@ describe('passes()', () => {
     })
   })
 
-  it("should work if the input doesn't extend Object", () => {
+  it('should work if the input doesn\'t extend Object', () => {
     // This happens in Express's req.body, for example.
     const body = Object.create(null)
     body.a = 2

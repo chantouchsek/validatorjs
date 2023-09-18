@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest'
 import Validator from '../src/main'
 
 describe('sometimes validation pass rules', () => {
@@ -15,14 +16,13 @@ describe('sometimes validation pass rules', () => {
   })
 
   it('should be able to register and pass async rule when the property is passed with data', () =>
-    new Promise<void>((done) => {
+    new Promise<void>((resolve) => {
       Validator.registerAsync(
         'username',
         (desiredUsername: string, ruleValue: string, attribute: string, passes: any) => {
           setTimeout(() => {
-            if (desiredUsername == 'test') {
+            if (desiredUsername === 'test')
               passes()
-            }
           }, 50)
         },
         ':attribute is an invalid username',
@@ -32,25 +32,24 @@ describe('sometimes validation pass rules', () => {
         { username: 'test', email: 'test@example.com' },
         { username: 'username', email: 'email|sometimes' },
       )
-      validator.passes(done)
+      validator.passes(resolve)
     }))
 
   it('should be able to register and pass async rule when the property is not passed with data', () =>
-    new Promise<void>((done) => {
+    new Promise<void>((resolve) => {
       Validator.registerAsync(
         'username',
         (desiredUsername: string, ruleValue: string, attribute: string, passes: any) => {
           setTimeout(() => {
-            if (desiredUsername == 'test') {
+            if (desiredUsername === 'test')
               passes()
-            }
           }, 50)
         },
         ':attribute is an invalid username',
       )
 
       const validator = new Validator({ username: 'test' }, { username: 'username', email: 'email|sometimes' })
-      validator.passes(done)
+      validator.passes(resolve)
     }))
 
   it('should pass when the nested property is passed with data', () => {

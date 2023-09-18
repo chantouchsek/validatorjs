@@ -46,8 +46,8 @@ const km = {
   regex: ':attribute ទ្រង់ទ្រាយមិនត្រឹមត្រូវ។',
   attributes: {
     'form.age': 'អាយុ',
-    name: 'ឈ្មោះ',
-    form: {
+    'name': 'ឈ្មោះ',
+    'form': {
       name: 'ឈ្មោះ',
     },
   },
