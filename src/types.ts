@@ -101,5 +101,6 @@ export interface ValidatorOptions {
   confirmedReverse?: boolean
   customMessages?: SimpleObject
   customAttributes?: SimpleObject
+  acceptNoneAttributes?: boolean
 }
 export type VoidFunction = boolean | ((...arg: any) => any)

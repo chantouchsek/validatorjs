@@ -11,23 +11,21 @@ import { flattenObject, formatter, hasOwnProperty } from './utils'
 export { Errors, ValidatorOptions, LangTypes, RuleType }
 
 export default class Validator {
-  readonly messages: Messages
-  readonly errors: Errors
-  public errorCount: number
-  public hasAsync: boolean
-  static lang: LangTypes = 'en'
-  readonly numericRules = ['integer', 'numeric']
-  public rules: Record<RuleType, any>
+  errorCount: number
+  hasAsync: boolean
   stopOnAttributes: SimpleObject | boolean | string[] | undefined
-  static attributeFormatter = formatter
-  readonly options!: ValidatorOptions
-  static manager = new Manager()
+  readonly numericRules = ['integer', 'numeric']
+  readonly errors: Errors
+  readonly messages: Messages
   private readonly confirmedReverse?: boolean
+  static lang: LangTypes = 'en'
+  static attributeFormatter = formatter
+  static manager = new Manager()
 
   constructor(
-    public readonly input: SimpleObject | null,
-    rules?: Record<RuleType, any>,
-    options: Partial<ValidatorOptions> = {},
+    readonly input: SimpleObject | null,
+    readonly rules: SimpleObject = {},
+    readonly options: Partial<ValidatorOptions> = {},
   ) {
     const lang = options.locale || Validator.getDefaultLang()
     Validator.useLang(lang)
@@ -104,7 +102,7 @@ export default class Validator {
     }
 
     for (const attribute in this.rules) {
-      const attributeRules = this.rules[attribute]
+      const attributeRules = get(this.rules, attribute)
       const inputValue = get(this.input, attribute)
       if (this._passesOptionalCheck(attribute))
         continue
@@ -121,8 +119,8 @@ export default class Validator {
     asyncResolvers.fire()
   }
 
-  _parseRules(rules: Record<RuleType, any> = {}) {
-    const parsedRules: Record<RuleType, any> = {}
+  _parseRules(rules: SimpleObject = {}) {
+    const parsedRules: SimpleObject = {}
     rules = flattenObject(rules)
     for (const attribute in rules) {
       const rulesArray = rules[attribute] as (SimpleObject | any | string)[]

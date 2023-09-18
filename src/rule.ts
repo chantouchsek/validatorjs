@@ -187,7 +187,7 @@ export class Rule {
         const size: number = this.getSize(val)
         return size <= req
       },
-      between(val: string, req: string[]) {
+      between(_val: string, req: string[]) {
         req = this.getParameters()
         const size = this.getSize()
         const min = Number.parseFloat(req[0])
@@ -241,7 +241,7 @@ export class Rule {
         }
         return returnVal
       },
-      confirmed(val: string, req: string, attribute: string) {
+      confirmed(val: string, _req: string, attribute: string) {
         const confirmedKey = `${attribute}_confirmation`
         return this.validator.input[confirmedKey] === val
       },
