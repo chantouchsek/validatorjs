@@ -1,4 +1,4 @@
-import { get, isArray } from 'lodash'
+import { get, isArray, replace } from 'lodash'
 import type Messages from './messages'
 import type { Rule } from './rule'
 import type { LangTypes, RuleType, SimpleObject, ValidatorOptions, VoidFunction } from './types'
@@ -248,7 +248,7 @@ export default class Validator {
     for (let propertyNumber = 0, len = parentValue.length; propertyNumber < len; propertyNumber++) {
       const workingValues = [...wildCardValues, propertyNumber]
       this._parseRulesCheck(
-        attribute.replace('*', String(propertyNumber)),
+        replace(attribute, '*', String(propertyNumber)),
         rulesArray,
         parsedRules,
         workingValues,
