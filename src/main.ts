@@ -243,14 +243,11 @@ export default class Validator {
     wildCardValues: number[] = [],
   ) {
     const parentPath = attribute.substring(0, attribute.indexOf('*') - 1)
-    const parentValue = get(this.input, parentPath)
-
-    if (parentValue) {
-      for (let propertyNumber = 0; propertyNumber < parentValue.length; propertyNumber++) {
-        const workingValues = wildCardValues ? wildCardValues.slice() : []
-        workingValues.push(propertyNumber)
-        this._parseRulesCheck(attribute.replace('*', String(propertyNumber)), rulesArray, parsedRules, workingValues)
-      }
+    const parentValue = get(this.input, parentPath) as SimpleObject[]
+    for (let propertyNumber = 0; propertyNumber < parentValue.length; propertyNumber++) {
+      const workingValues = wildCardValues ? wildCardValues.slice() : []
+      workingValues.push(propertyNumber)
+      this._parseRulesCheck(attribute.replace('*', String(propertyNumber)), rulesArray, parsedRules, workingValues)
     }
   }
 
@@ -258,7 +255,7 @@ export default class Validator {
     attribute: string,
     rulesArray: SimpleObject[] | any[] | string,
     parsedRules: SimpleObject | any,
-    wildCardValues?: any,
+    wildCardValues?: (string | number)[],
   ) {
     const attributeRules = []
 
@@ -315,7 +312,7 @@ export default class Validator {
     return rule
   }
 
-  _replaceWildCards(path: string, nums: string[]) {
+  _replaceWildCards(path: string, nums: (string | number)[] | undefined) {
     if (!nums)
       return path
 
@@ -328,7 +325,7 @@ export default class Validator {
     return path
   }
 
-  _replaceWildCardsMessages(nums: string[]) {
+  _replaceWildCardsMessages(nums: (string | number)[] | undefined) {
     const customMessages = this.messages.customMessages
     for (const key of Object.keys(customMessages)) {
       const newKey = this._replaceWildCards(key, nums)
