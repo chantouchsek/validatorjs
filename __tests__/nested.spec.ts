@@ -96,18 +96,17 @@ describe('nested validation rules', () => {
   })
   it('validate on nested array object', () => {
     const testVal = 'mainAccountName'
-    const validator = new Validator(
-      {
-        filters: [
-          { values: [''], key: testVal },
-          { values: [''], key: testVal },
-        ],
-      }, {
-        'filters.*.key': ['required', { in: [testVal] }],
-        'filters.*.values': ['array', 'required'],
-        'filters.*.values.*': `required_if:filters.*.key,${testVal}|string`,
-      },
-    )
+    const validator = new Validator({
+      filters: [
+        { values: [''], key: testVal },
+        { values: [''], key: testVal },
+      ],
+    },
+    {
+      'filters.*.key': ['required', { in: [testVal] }],
+      'filters.*.values': ['array', 'required'],
+      'filters.*.values.*': `required_if:filters.*.key,${testVal}|string`,
+    })
     expect(validator.passes()).toBeFalsy()
     expect(validator.fails()).toBeTruthy()
     expect(validator.errors.first('filters.1.values.0')).toBe('The filters 1 values 0 field is required when filters 1 key is mainAccountName.')
