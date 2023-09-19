@@ -128,7 +128,6 @@ export default class Validator {
       const rulesArray = rules[attribute]
       this._parseRulesCheck(attribute, rulesArray, parsedRules)
     }
-    console.warn('parsedRules', parsedRules)
     return parsedRules
   }
 

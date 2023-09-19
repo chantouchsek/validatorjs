@@ -95,11 +95,11 @@ export type RuleType =
   | 'ip'
   | string
 
+export type SimpleObject<T = any> = Record<string, T>
 export interface ValidatorOptions {
   locale?: LangTypes
   confirmedReverse?: boolean
-  customMessages?: Record<string, any>
-  customAttributes?: Record<string, any>
+  customMessages?: SimpleObject
+  customAttributes?: SimpleObject
 }
 export type VoidFunction = boolean | ((...arg: any) => any)
-export type SimpleObject<T = any> = Record<string, T>
