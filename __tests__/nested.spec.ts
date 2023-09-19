@@ -3,9 +3,6 @@ import Validator from '../src/main'
 
 const PANE_KEY = {
   MAIN_ACCOUNT_NAME: 'mainAccountName',
-  ACCOUNT_NAME: 'accountName',
-  SUB_ACCOUNT_NAME: 'subAccountName',
-  DEPARTMENT: 'department',
 } as const
 
 describe('nested validation rules', () => {
