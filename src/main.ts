@@ -125,7 +125,7 @@ export default class Validator {
     const parsedRules: Record<RuleType, any> = {}
     rules = flattenObject(rules)
     for (const attribute in rules) {
-      const rulesArray = rules[attribute]
+      const rulesArray = rules[attribute] as (SimpleObject | any | string)[]
       this._parseRulesCheck(attribute, rulesArray, parsedRules)
     }
     return parsedRules
@@ -226,7 +226,7 @@ export default class Validator {
 
   _parseRulesCheck(
     attribute: string,
-    rulesArray: SimpleObject[] | any[] | string,
+    rulesArray: (SimpleObject | any | string)[],
     parsedRules: SimpleObject,
     wildCardValues?: number[],
   ) {
@@ -238,16 +238,21 @@ export default class Validator {
 
   _parsedRulesRecurse(
     attribute: string,
-    rulesArray: SimpleObject[] | any[] | string,
+    rulesArray: (SimpleObject | any | string)[],
     parsedRules: SimpleObject,
     wildCardValues: number[] = [],
   ) {
     const parentPath = attribute.substring(0, attribute.indexOf('*') - 1)
     const parentValue = get(this.input, parentPath) as SimpleObject[]
-    for (let propertyNumber = 0; propertyNumber < parentValue.length; propertyNumber++) {
-      const workingValues = wildCardValues ? wildCardValues.slice() : []
-      workingValues.push(propertyNumber)
-      this._parseRulesCheck(attribute.replace('*', String(propertyNumber)), rulesArray, parsedRules, workingValues)
+
+    for (let propertyNumber = 0, len = parentValue.length; propertyNumber < len; propertyNumber++) {
+      const workingValues = [...wildCardValues, propertyNumber]
+      this._parseRulesCheck(
+        attribute.replace('*', String(propertyNumber)),
+        rulesArray,
+        parsedRules,
+        workingValues,
+      )
     }
   }
 
