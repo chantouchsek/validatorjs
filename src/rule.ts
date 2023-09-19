@@ -2,6 +2,7 @@ import { get } from 'lodash'
 import type Validator from './main'
 import * as rules from './rules'
 import { flattenObject, isEmpty, isValidDate } from './utils'
+import type { SimpleObject } from './types'
 
 let missedRuleValidator: VoidFunction = function (this: Rule) {
   throw new Error(`Validator \`${this.name}\` is not defined!`)
@@ -19,7 +20,7 @@ export class Rule {
   private input: Record<string, any> | string | number | undefined
   private rule: any
   private validator!: Validator
-  static rules: any = Object.assign({}, rules)
+  static rules = Object.assign({}, rules) as SimpleObject
 
   constructor(name: string, fn: VoidFunction, async: boolean) {
     this.name = name

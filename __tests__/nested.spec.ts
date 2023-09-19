@@ -1,6 +1,13 @@
 import { describe, expect, it } from 'vitest'
 import Validator from '../src/main'
 
+const PANE_KEY = {
+  MAIN_ACCOUNT_NAME: 'mainAccountName',
+  ACCOUNT_NAME: 'accountName',
+  SUB_ACCOUNT_NAME: 'subAccountName',
+  DEPARTMENT: 'department',
+} as const
+
 describe('nested validation rules', () => {
   const nestedObject: any = {
     name: 'required',
@@ -94,4 +101,21 @@ describe('nested validation rules', () => {
       })
     }
   })
-}) // Page constructor
+  it('validate on nested array object', () => {
+    const validator = new Validator(
+      {
+        filters: [
+          { values: [''], key: PANE_KEY.MAIN_ACCOUNT_NAME },
+          { values: [''], key: PANE_KEY.MAIN_ACCOUNT_NAME },
+        ],
+      }, {
+        'filters.*.key': ['required', { in: Object.values(PANE_KEY) }],
+        'filters.*.values': ['array', 'required'],
+        'filters.*.values.*': `required_if:filters.*.key,${PANE_KEY.MAIN_ACCOUNT_NAME}|string`,
+      },
+    )
+    expect(validator.passes()).toBeFalsy()
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.errors.first('filters.1.values.0')).toBe('The filters 1 values 0 field is required when filters 1 key is mainAccountName.')
+  })
+})

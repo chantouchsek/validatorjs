@@ -46,16 +46,19 @@ export default class Validator {
     for (let attribute in this.rules) {
       const attributeRules = this.rules[attribute]
       const inputValue = get(this.input, attribute)
+
       if (this._passesOptionalCheck(attribute))
         continue
 
-      for (let i = 0, len = attributeRules.length, rule: Rule, ruleOptions, rulePassed; i < len; i++) {
-        ruleOptions = attributeRules[i]
-        const { name, value } = ruleOptions
-        rule = this.getRule(name)
+      for (let i = 0, len = attributeRules.length; i < len; i++) {
+        const { name, value } = attributeRules[i]
+        const rule = this.getRule(name)
+
         if (!this._isValidatable(rule, inputValue))
           continue
-        rulePassed = rule.validate(inputValue, value, attribute)
+
+        const rulePassed = rule.validate(inputValue, value, attribute)
+
         if (!rulePassed) {
           if (name === 'confirmed' && this.confirmedReverse) {
             attribute = `${attribute}_confirmation`
@@ -63,6 +66,7 @@ export default class Validator {
           }
           this._addFailure(rule)
         }
+
         if (this._shouldStopValidating(attribute, rulePassed))
           break
       }
@@ -124,6 +128,7 @@ export default class Validator {
       const rulesArray = rules[attribute]
       this._parseRulesCheck(attribute, rulesArray, parsedRules)
     }
+    console.warn('parsedRules', parsedRules)
     return parsedRules
   }
 
@@ -224,7 +229,7 @@ export default class Validator {
     attribute: string,
     rulesArray: SimpleObject[] | any[] | string,
     parsedRules: SimpleObject,
-    wildCardValues?: any[],
+    wildCardValues?: number[],
   ) {
     if (attribute.includes('*'))
       this._parsedRulesRecurse(attribute, rulesArray, parsedRules, wildCardValues)
@@ -239,13 +244,13 @@ export default class Validator {
     wildCardValues: number[] = [],
   ) {
     const parentPath = attribute.substring(0, attribute.indexOf('*') - 1)
-    const propertyValue = get(this.input, parentPath)
+    const parentValue = get(this.input, parentPath)
 
-    if (propertyValue) {
-      for (let propertyNumber = 0; propertyNumber < propertyValue.length; propertyNumber++) {
-        const workingValues = wildCardValues.slice()
+    if (parentValue) {
+      for (let propertyNumber = 0; propertyNumber < parentValue.length; propertyNumber++) {
+        const workingValues = wildCardValues ? wildCardValues.slice() : []
         workingValues.push(propertyNumber)
-        this._parseRulesCheck(attribute.replace(/\*/g, String(propertyNumber)), rulesArray, parsedRules, workingValues)
+        this._parseRulesCheck(attribute.replace('*', String(propertyNumber)), rulesArray, parsedRules, workingValues)
       }
     }
   }
