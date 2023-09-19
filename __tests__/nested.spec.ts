@@ -1,10 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import Validator from '../src/main'
 
-const PANE_KEY = {
-  MAIN_ACCOUNT_NAME: 'mainAccountName',
-} as const
-
 describe('nested validation rules', () => {
   const nestedObject: any = {
     name: 'required',
@@ -99,16 +95,17 @@ describe('nested validation rules', () => {
     }
   })
   it('validate on nested array object', () => {
+    const testVal = 'mainAccountName'
     const validator = new Validator(
       {
         filters: [
-          { values: [''], key: PANE_KEY.MAIN_ACCOUNT_NAME },
-          { values: [''], key: PANE_KEY.MAIN_ACCOUNT_NAME },
+          { values: [''], key: testVal },
+          { values: [''], key: testVal },
         ],
       }, {
-        'filters.*.key': ['required', { in: Object.values(PANE_KEY) }],
+        'filters.*.key': ['required', { in: [testVal] }],
         'filters.*.values': ['array', 'required'],
-        'filters.*.values.*': `required_if:filters.*.key,${PANE_KEY.MAIN_ACCOUNT_NAME}|string`,
+        'filters.*.values.*': `required_if:filters.*.key,${testVal}|string`,
       },
     )
     expect(validator.passes()).toBeFalsy()
