@@ -1,15 +1,15 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "ESNext",
     "lib": ["ES5", "ES6", "ES2015", "ES2016", "ES2017", "ES2018", "ESNext", "DOM"],
+    "module": "ESNext",
     "moduleResolution": "Node",
-    "esModuleInterop": true,
-    "strict": true,
     "declaration": true,
     "outDir": "dist",
-    "strictNullChecks": true,
-    "forceConsistentCasingInFileNames": true
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "strictNullChecks": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "**/__tests__/*", "coverage"]
