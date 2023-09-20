@@ -1,4 +1,4 @@
-import { get, isArray } from 'lodash'
+import { get, isArray, replace } from 'lodash'
 import type Messages from './messages'
 import type { Rule } from './rule'
 import type { LangTypes, RuleType, SimpleObject, ValidatorOptions, VoidFunction } from './types'
@@ -46,16 +46,19 @@ export default class Validator {
     for (let attribute in this.rules) {
       const attributeRules = this.rules[attribute]
       const inputValue = get(this.input, attribute)
+
       if (this._passesOptionalCheck(attribute))
         continue
 
-      for (let i = 0, len = attributeRules.length, rule: Rule, ruleOptions, rulePassed; i < len; i++) {
-        ruleOptions = attributeRules[i]
-        const { name, value } = ruleOptions
-        rule = this.getRule(name)
+      for (let i = 0, len = attributeRules.length; i < len; i++) {
+        const { name, value } = attributeRules[i]
+        const rule = this.getRule(name)
+
         if (!this._isValidatable(rule, inputValue))
           continue
-        rulePassed = rule.validate(inputValue, value, attribute)
+
+        const rulePassed = rule.validate(inputValue, value, attribute)
+
         if (!rulePassed) {
           if (name === 'confirmed' && this.confirmedReverse) {
             attribute = `${attribute}_confirmation`
@@ -63,6 +66,7 @@ export default class Validator {
           }
           this._addFailure(rule)
         }
+
         if (this._shouldStopValidating(attribute, rulePassed))
           break
       }
@@ -121,7 +125,7 @@ export default class Validator {
     const parsedRules: Record<RuleType, any> = {}
     rules = flattenObject(rules)
     for (const attribute in rules) {
-      const rulesArray = rules[attribute]
+      const rulesArray = rules[attribute] as (SimpleObject | any | string)[]
       this._parseRulesCheck(attribute, rulesArray, parsedRules)
     }
     return parsedRules
@@ -222,9 +226,9 @@ export default class Validator {
 
   _parseRulesCheck(
     attribute: string,
-    rulesArray: SimpleObject[] | any[] | string,
+    rulesArray: (SimpleObject | any | string)[],
     parsedRules: SimpleObject,
-    wildCardValues?: any[],
+    wildCardValues?: number[],
   ) {
     if (attribute.includes('*'))
       this._parsedRulesRecurse(attribute, rulesArray, parsedRules, wildCardValues)
@@ -234,19 +238,21 @@ export default class Validator {
 
   _parsedRulesRecurse(
     attribute: string,
-    rulesArray: SimpleObject[] | any[] | string,
+    rulesArray: (SimpleObject | any | string)[],
     parsedRules: SimpleObject,
     wildCardValues: number[] = [],
   ) {
     const parentPath = attribute.substring(0, attribute.indexOf('*') - 1)
-    const propertyValue = get(this.input, parentPath)
+    const parentValue = get(this.input, parentPath) as SimpleObject[]
 
-    if (propertyValue) {
-      for (let propertyNumber = 0; propertyNumber < propertyValue.length; propertyNumber++) {
-        const workingValues = wildCardValues.slice()
-        workingValues.push(propertyNumber)
-        this._parseRulesCheck(attribute.replace(/\*/g, String(propertyNumber)), rulesArray, parsedRules, workingValues)
-      }
+    for (let propertyNumber = 0, len = parentValue.length; propertyNumber < len; propertyNumber++) {
+      const workingValues = [...wildCardValues, propertyNumber]
+      this._parseRulesCheck(
+        replace(attribute, '*', String(propertyNumber)),
+        rulesArray,
+        parsedRules,
+        workingValues,
+      )
     }
   }
 
@@ -254,7 +260,7 @@ export default class Validator {
     attribute: string,
     rulesArray: SimpleObject[] | any[] | string,
     parsedRules: SimpleObject | any,
-    wildCardValues?: any,
+    wildCardValues?: (string | number)[],
   ) {
     const attributeRules = []
 
@@ -311,7 +317,7 @@ export default class Validator {
     return rule
   }
 
-  _replaceWildCards(path: string, nums: string[]) {
+  _replaceWildCards(path: string, nums: (string | number)[] | undefined) {
     if (!nums)
       return path
 
@@ -324,7 +330,7 @@ export default class Validator {
     return path
   }
 
-  _replaceWildCardsMessages(nums: string[]) {
+  _replaceWildCardsMessages(nums: (string | number)[] | undefined) {
     const customMessages = this.messages.customMessages
     for (const key of Object.keys(customMessages)) {
       const newKey = this._replaceWildCards(key, nums)

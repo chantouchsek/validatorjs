@@ -54,6 +54,20 @@ describe('Errors', () => {
     const validator = new Validator(null, { name: 'required' })
     expect(validator.fails()).toBeTruthy()
     validator.errors.clear('name')
-    expect(validator.errors.first('name')).toBeFalsy()
+    expect(validator.errors.has(['name'])).toBeFalsy()
+    expect(validator.errors.first(['name'])).toBeUndefined()
+  })
+  it('onkeydown event', () => {
+    const validator = new Validator(null, { name: 'required' })
+    const event = {
+      target: { name: 'name' },
+    }
+    const errors = {
+      name: ['The name field is required.'],
+      email: ['The email field is required.'],
+    }
+    validator.errors.fill(errors)
+    validator.errors.onKeydown(event)
+    expect(validator.errors.has('name')).toBeFalsy()
   })
 })

@@ -34,7 +34,7 @@
     "clean": "rimraf dist",
     "build": "yarn clean && tsc",
     "test": "vitest --run",
-    "test:watch": "yarn test",
+    "test:watch": "vitest watch",
     "test:cov": "vitest run --coverage",
     "release": "standard-version && git push --follow-tags origin main && yarn publish",
     "lint": "eslint .",

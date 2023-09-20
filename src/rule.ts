@@ -2,6 +2,7 @@ import { get } from 'lodash'
 import type Validator from './main'
 import * as rules from './rules'
 import { flattenObject, isEmpty, isValidDate } from './utils'
+import type { SimpleObject } from './types'
 
 let missedRuleValidator: VoidFunction = function (this: Rule) {
   throw new Error(`Validator \`${this.name}\` is not defined!`)
@@ -9,29 +10,20 @@ let missedRuleValidator: VoidFunction = function (this: Rule) {
 let missedRuleMessage: string | undefined = ''
 
 export class Rule {
-  private readonly async: boolean
-  private _customMessage: string | undefined
-  private passes: boolean
-  private readonly fn: VoidFunction
-  readonly name: string
+  private _customMessage: string | undefined = undefined
+  private passes = false
   private callback: any
-  attribute: string
-  private input: Record<string, any> | string | number | undefined
+  attribute = ''
+  private input: SimpleObject | string | number | undefined
   private rule: any
   private validator!: Validator
-  static rules: any = Object.assign({}, rules)
+  static rules = Object.assign({}, rules) as SimpleObject
 
-  constructor(name: string, fn: VoidFunction, async: boolean) {
-    this.name = name
-    this.fn = fn
-    this.passes = false
-    this._customMessage = undefined
-    this.async = async
+  constructor(readonly name: string, private readonly fn: VoidFunction, private readonly async: boolean) {
     Rule._setRules()
-    this.attribute = ''
   }
 
-  validate(input: Record<string, any> | string | number, rule: Record<string, any>, attribute = '', callback = null) {
+  validate(input: SimpleObject | string | number, rule: SimpleObject, attribute = '', callback = null) {
     this._setValidatingData(attribute, input, rule)
     if (typeof callback === 'function') {
       this.callback = callback
@@ -47,8 +39,8 @@ export class Rule {
   }
 
   _apply(
-    input: Record<string, any> | string | number,
-    rule: Record<string, any>,
+    input: SimpleObject | string | number,
+    rule: SimpleObject,
     attribute: string | null,
     callback = null,
   ): any {
@@ -56,7 +48,7 @@ export class Rule {
     return fn.apply(this, [input, rule, attribute, callback] as any)
   }
 
-  _setValidatingData(attribute: string, input: Record<string, any> | string | number, rule: any) {
+  _setValidatingData(attribute: string, input: SimpleObject | string | number, rule: any) {
     this.attribute = attribute
     this.input = input
     this.rule = rule
@@ -134,27 +126,27 @@ export class Rule {
           return false
         return new Date(val1).getTime() <= new Date(val2).getTime()
       },
-      required_if(val: Record<string, any>, req: string[]) {
+      required_if(val: SimpleObject, req: string[]) {
         req = this.getParameters()
         if (get(this.validator.input, req[0]) === req[1])
           return this.validator.getRule('required').validate(val, {})
 
         return true
       },
-      required_unless(val: Record<string, any>, req: string[]) {
+      required_unless(val: SimpleObject, req: string[]) {
         req = this.getParameters()
         if (get(this.validator.input, req[0]) !== req[1])
           return this.validator.getRule('required').validate(val, {})
 
         return true
       },
-      required_with(val: Record<string, any>, req: string) {
+      required_with(val: SimpleObject, req: string) {
         if (get(this.validator.input, req))
           return this.validator.getRule('required').validate(val, {})
 
         return true
       },
-      required_with_all(val: Record<string, any>, req: string[]) {
+      required_with_all(val: SimpleObject, req: string[]) {
         req = this.getParameters()
 
         for (const re of req) {
@@ -164,13 +156,13 @@ export class Rule {
 
         return this.validator.getRule('required').validate(val, {})
       },
-      required_without(val: Record<string, any>, req: string) {
+      required_without(val: SimpleObject, req: string) {
         if (get(this.validator.input, req))
           return true
 
         return this.validator.getRule('required').validate(val, {})
       },
-      required_without_all(val: Record<string, any>, req: string) {
+      required_without_all(val: SimpleObject, req: string) {
         req = this.getParameters()
 
         for (const re of req) {
@@ -253,7 +245,7 @@ export class Rule {
         const confirmedKey = `${attribute}_confirmation`
         return this.validator.input[confirmedKey] === val
       },
-      digits(val: Record<string, any>, req: string) {
+      digits(val: SimpleObject, req: string) {
         const numericRule = this.validator.getRule('numeric')
         return !!(numericRule.validate(val, {}) && String(val).trim().length === Number.parseInt(req))
       },

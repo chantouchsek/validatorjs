@@ -6,6 +6,9 @@ export function toCamelCase(s: string) {
     return $1.toUpperCase().replace('-', '').replace('_', '')
   })
 }
+export function toSnakeCase(e: string) {
+  return (e.match(/([A-Z])/g) ? e.replace(/[A-Z]/g, l => `_${l.toLowerCase()}`) : e)
+}
 export function onlyDigits(str: string | boolean | number) {
   const num = Number(str)
   return !Number.isNaN(num) && typeof str !== 'boolean'
