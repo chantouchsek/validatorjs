@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/chantouchsek/validatorjs/compare/v1.2.3...v1.3.0) (2023-09-20)
+
+
+### Features
+
+* :sparkles: added new option to accept none attribute of the message ([cec017c](https://github.com/chantouchsek/validatorjs/commit/cec017cdf0b787693672dc78f905077e708c0bc1))
+* :sparkles: added nullable rule ([9ee951a](https://github.com/chantouchsek/validatorjs/commit/9ee951ae83669f2cc1c9952f2e5331314d5cf82f))
+
+
+### Bug Fixes
+
+* :art: fix styling by (eslint) ([9a5ff3a](https://github.com/chantouchsek/validatorjs/commit/9a5ff3a53f832759e3d1d7cfb4e3ffc92fda54bc))
+* :art: style commit self ([8ec1525](https://github.com/chantouchsek/validatorjs/commit/8ec15254444e59b0888be67cb7d46f23b62a481d))
+* :beers: make test import from vite directly ([24d4869](https://github.com/chantouchsek/validatorjs/commit/24d4869f5d34b0f310044c474c2c9806630f4e4a))
+* :bug: correct index of message with nested array object ([04383af](https://github.com/chantouchsek/validatorjs/commit/04383affdb53852d2d640f291b2c6464747c2d4c))
+* :bug: correct test:watch ([44464ea](https://github.com/chantouchsek/validatorjs/commit/44464ea31d609e6a4e293d753b4b20af4090e78d))
+* :bug: remove the private from functions ([0833d7a](https://github.com/chantouchsek/validatorjs/commit/0833d7ad95a945ca9a9d95e998ba7a7008fa9696))
+* :bug: remove unused packages ([d4a55e7](https://github.com/chantouchsek/validatorjs/commit/d4a55e7083372eb1b616f0e32f511baa50566ae9))
+* :bug: remove warn log ([9195487](https://github.com/chantouchsek/validatorjs/commit/919548775722eaf095e57c0254cc403fd5f4400f))
+* :fire: completely remove prettier ([1ae36cd](https://github.com/chantouchsek/validatorjs/commit/1ae36cd81aefa86b06f56a5b19f089eb6034745a))
+* :penicl2: remove unused const properties ([4d86528](https://github.com/chantouchsek/validatorjs/commit/4d865282d272659147be7f3411d681d60ac4fb3d))
+* :rocket: use antfu/eslint-config ([3fc8d3d](https://github.com/chantouchsek/validatorjs/commit/3fc8d3d0df6ba006e0a1f94b33a9988a7f5e891a))
+* **deps:** bump actions/checkout from 3 to 4 ([90b04f3](https://github.com/chantouchsek/validatorjs/commit/90b04f3a52960c4e1e62c7e586cbd027fd65687c))
+
 ### [1.2.3](https://github.com/chantouchsek/validatorjs/compare/v1.2.2...v1.2.3) (2023-08-26)
 
 
