@@ -164,12 +164,12 @@ export default class Validator {
     return false
   }
 
-  private _passesOptionalCheck(attribute: string) {
+  _passesOptionalCheck(attribute: string) {
     const findRules = ['sometimes', 'nullable']
     return this._hasRule(attribute, findRules) && !this._suppliedWithData(attribute)
   }
 
-  private _suppliedWithData(attribute: string) {
+  _suppliedWithData(attribute: string) {
     function hasNested(obj: undefined | SimpleObject, key: string, ...args: string[]): boolean {
       if (obj === undefined)
         return false
@@ -193,20 +193,20 @@ export default class Validator {
     return Validator.manager.make(name, this)
   }
 
-  private _isValidatable(rule: SimpleObject, value: any): boolean {
+  _isValidatable(rule: SimpleObject, value: any): boolean {
     if (Array.isArray(value) || Validator.manager.isImplicit(rule.name))
       return true
 
     return this.getRule('required').validate(value, {})
   }
 
-  private _addFailure(rule: Rule, message = '') {
+  _addFailure(rule: Rule, message = '') {
     const msg = message || this.messages.render(rule)
     this.errors.add(rule.attribute, msg)
     this.errorCount++
   }
 
-  private _shouldStopValidating(attribute: string, rulePassed: any) {
+  _shouldStopValidating(attribute: string, rulePassed: any) {
     const stopOnAttributes = this.stopOnAttributes
     const isUndefined = typeof stopOnAttributes === 'undefined'
     if (isUndefined || stopOnAttributes === false || rulePassed === true)
@@ -218,7 +218,7 @@ export default class Validator {
     return true
   }
 
-  private _parseRulesCheck(
+  _parseRulesCheck(
     attribute: string,
     rulesArray: (SimpleObject | any | string)[],
     parsedRules: SimpleObject,
@@ -230,7 +230,7 @@ export default class Validator {
       this._parseRulesDefault(attribute, rulesArray, parsedRules, wildCardValues)
   }
 
-  private _parsedRulesRecurse(
+  _parsedRulesRecurse(
     attribute: string,
     rulesArray: (SimpleObject | any | string)[],
     parsedRules: SimpleObject,
@@ -250,7 +250,7 @@ export default class Validator {
     }
   }
 
-  private _parseRulesDefault(
+  _parseRulesDefault(
     attribute: string,
     rulesArray: SimpleObject[] | any[] | string,
     parsedRules: SimpleObject | any,
@@ -278,7 +278,7 @@ export default class Validator {
     parsedRules[attribute] = attributeRules
   }
 
-  private _prepareRulesArray(rulesArray: SimpleObject[] | any[]) {
+  _prepareRulesArray(rulesArray: SimpleObject[] | any[]) {
     const rules: SimpleObject[] = []
 
     for (const ruleArray of rulesArray) {
@@ -294,7 +294,7 @@ export default class Validator {
     return rules
   }
 
-  private _extractRuleAndRuleValue(ruleString: string | SimpleObject) {
+  _extractRuleAndRuleValue(ruleString: string | SimpleObject) {
     if (typeof ruleString !== 'string')
       return ruleString
     const rule: SimpleObject = {}
@@ -311,7 +311,7 @@ export default class Validator {
     return rule
   }
 
-  private _replaceWildCards(path: string, nums: (string | number)[] | undefined) {
+  _replaceWildCards(path: string, nums: (string | number)[] | undefined) {
     if (!nums)
       return path
 
@@ -324,7 +324,7 @@ export default class Validator {
     return path
   }
 
-  private _replaceWildCardsMessages(nums: (string | number)[] | undefined) {
+  _replaceWildCardsMessages(nums: (string | number)[] | undefined) {
     const customMessages = this.messages.customMessages
     for (const key of Object.keys(customMessages)) {
       const newKey = this._replaceWildCards(key, nums)
@@ -334,7 +334,7 @@ export default class Validator {
     this.messages._setCustom(customMessages)
   }
 
-  private _hasNumericRule(attribute: string) {
+  _hasNumericRule(attribute: string) {
     return this._hasRule(attribute, this.numericRules)
   }
 
@@ -360,7 +360,7 @@ export default class Validator {
     return async ? this.checkAsync(false, fails) : !this.check()
   }
 
-  private _checkAsync(funcName: string, callback?: boolean | (() => void)) {
+  _checkAsync(funcName: string, callback?: boolean | (() => void)) {
     const hasCallback = typeof callback === 'function'
     if (this.hasAsync && !hasCallback)
       throw new Error(`${funcName} expects a callback when async rules are being tested.`)
@@ -386,7 +386,7 @@ export default class Validator {
     }
   }
 
-  private _onlyInputWithRules(obj?: SimpleObject, keyPrefix?: string) {
+  _onlyInputWithRules(obj?: SimpleObject, keyPrefix?: string) {
     const prefix = keyPrefix || ''
     const values: SimpleObject = JSON.parse(JSON.stringify(obj === undefined ? this.input : obj))
 

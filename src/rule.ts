@@ -11,7 +11,6 @@ let missedRuleMessage: string | undefined = ''
 
 export class Rule {
   attribute = ''
-  readonly name: string
   private _customMessage: string | undefined = undefined
   private passes = false
   private input: SimpleObject | string | number | undefined
@@ -19,15 +18,8 @@ export class Rule {
   private validator!: Validator
   static rules = Object.assign({}, rules) as SimpleObject
   private callback!: CbFunction<void>
-  private readonly fn: CbFunction
-  private readonly async: boolean
 
-  constructor(name: string, fn: CbFunction, async: boolean) {
-    this.name = name
-    this.fn = fn
-    this.passes = false
-    this._customMessage = undefined
-    this.async = async
+  constructor(readonly name: string, private readonly fn: VoidFunction, private readonly async: boolean) {
     Rule._setRules()
   }
 
