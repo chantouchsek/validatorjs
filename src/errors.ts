@@ -20,7 +20,6 @@ export default class Errors {
   get(field: string | string[]) {
     const fields = Array.isArray(field) ? field : [field]
     for (const f of fields) {
-      console.warn('f', this.has(f), f)
       if (this.has(f))
         return get(this.errors, f, [])
     }
