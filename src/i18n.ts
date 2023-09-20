@@ -3,7 +3,7 @@ import locales from './lang'
 import Massages from './messages'
 
 export default class I18n {
-  public static messages = {} as Record<LangTypes, Record<string, any>>
+  public static messages = {} as Record<LangTypes, SimpleObject>
 
   static _set(lang: LangTypes, rawMessages: SimpleObject) {
     this.messages[lang] = rawMessages
@@ -16,7 +16,7 @@ export default class I18n {
 
   static _setRuleMessage(lang: LangTypes, attribute: string, message?: string) {
     this._load(lang)
-    const messages: Record<string, any> = Object.create(this.messages)
+    const messages: SimpleObject = Object.create(this.messages)
     if (message === undefined)
       message = messages[lang].def
 
@@ -29,8 +29,8 @@ export default class I18n {
   }
 
   static _make(lang: LangTypes) {
-    const messages: SimpleObject = Object.create(this.messages)
     this._load(lang)
-    return new Massages(messages[lang])
+    const messages: SimpleObject = Object.create(this.messages)
+    return new Massages(messages[lang] ?? {})
   }
 }

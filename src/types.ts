@@ -99,7 +99,7 @@ export type SimpleObject<T = any> = Record<string, T>
 export interface ValidatorOptions {
   locale?: LangTypes
   confirmedReverse?: boolean
-  customMessages?: SimpleObject
-  customAttributes?: SimpleObject
+  customMessages?: SimpleObject<string | SimpleObject>
+  customAttributes?: SimpleObject<SimpleObject>
 }
-export type VoidFunction = boolean | ((...arg: any) => any)
+export type CbFunction<R = any> = ((...arg: any) => R)

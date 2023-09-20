@@ -1,17 +1,15 @@
-import { has, snakeCase } from 'lodash'
+import { get, snakeCase } from 'lodash'
 import type { Rule } from './rule'
-import type { SimpleObject } from './types'
+import type { CbFunction, SimpleObject } from './types'
 import { flattenObject, toCamelCase } from './utils'
 
 export default class Messages {
   public customMessages: SimpleObject = {}
   private attributeNames: SimpleObject = {}
-  private attributeFormatter: ((arg: any) => any) | undefined
-  static replacements: any = {}
+  private attributeFormatter: CbFunction | undefined
+  static replacements: SimpleObject = {}
 
   constructor(public readonly messages: SimpleObject) {
-    this.customMessages = {}
-    this.attributeNames = {}
     Messages._setReplacements()
   }
 
@@ -121,12 +119,12 @@ export default class Messages {
     const attributes = flattenObject(this.messages.attributes)
     const attributeNames = flattenObject(this.attributeNames)
     const camelCase = toCamelCase(attribute)
-    const snakecase = snakeCase(attribute)
-    if (has(attributeNames, camelCase) || has(attributeNames, snakecase))
-      return attributeNames[snakecase] || attributeNames[camelCase]
+    const _snakeCase = snakeCase(attribute)
+    if (_snakeCase in attributeNames || camelCase in attributeNames)
+      return attributeNames[_snakeCase] ?? attributeNames[camelCase]
 
-    if (has(attributes, attribute))
-      name = attributes[attribute]
+    if (attribute in attributes)
+      name = get(attributes, attribute)
     else if (this.attributeFormatter)
       name = this.attributeFormatter(name)
 
@@ -156,11 +154,11 @@ export default class Messages {
     const customMessages = this.customMessages
     const formats = [`${rule.name}.${rule.attribute}`, rule.name]
     for (const format of formats) {
-      if (has(customMessages, format)) {
+      if (format in customMessages) {
         template = customMessages[format]
         break
       }
-      else if (has(messages, format) && messages[format]) {
+      else if (format in messages && messages[format]) {
         template = messages[format]
         break
       }
@@ -171,17 +169,12 @@ export default class Messages {
     return template
   }
 
-  _replacePlaceholders(rule: Rule, template: string | any, data: SimpleObject): string {
-    let message = ''
-    let attribute
-    data.attribute = this._getAttributeName(rule.attribute)
-    data[rule.name] = data[rule.name] || rule.getParameters().join(',')
-    if (typeof template === 'string' && typeof data === 'object') {
-      message = template
-      for (attribute in data)
-        message = message.replace(RegExp(`:${attribute}`, 'g'), data[attribute])
-    }
+  _replacePlaceholders(rule: Rule, template: string, data: SimpleObject) {
+    const updatedData = Object.assign(data, {
+      attribute: this._getAttributeName(rule.attribute),
+      [rule.name]: data[rule.name] || rule.getParameters().join(','),
+    })
 
-    return message
+    return template.trim().replace(/:(\w+)/g, (_, key) => updatedData[key])
   }
 }

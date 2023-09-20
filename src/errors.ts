@@ -5,12 +5,16 @@ import { is, toCamelCase, toSnakeCase } from './utils'
 export default class Errors {
   private errors: SimpleObject<string[]> = {}
 
-  add(attribute: string, message: string) {
-    if (!this.has(attribute))
-      this.errors[attribute] = []
-
-    if (!this.errors[attribute].includes(message))
-      this.errors[attribute].push(message)
+  add(field: string, message: string | string[], forceUpdate?: boolean) {
+    const messages = Array.isArray(message) ? message : [message]
+    if (this.missed(field))
+      this.errors[field] = []
+    if (this.errors[field].every(s => !messages.includes(s)))
+      this.errors[field].unshift(...messages)
+    if (forceUpdate) {
+      this.errors[field] = []
+      this.errors[field].push(...messages)
+    }
   }
 
   missed(field: string | string[]) {
@@ -26,21 +30,11 @@ export default class Errors {
     return []
   }
 
-  first(field: string | string[]): string | undefined {
-    if (Array.isArray(field)) {
-      const fields = this._getFields(field)
-      let fd = ''
-      for (const f of fields) {
-        if (this.has(f)) {
-          fd = f
-          break
-        }
-      }
-      return this.first(fd)
-    }
-    else {
-      return this.get(field)[0]
-    }
+  first(field: string | string[]) {
+    const fields = this._getFields(field)
+    const fd = fields.find(f => f in this.errors)
+    const value = this.get(fd ?? field)
+    return value[0]
   }
 
   all() {

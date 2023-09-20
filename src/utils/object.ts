@@ -1,4 +1,3 @@
-import { isArray } from 'lodash'
 import type { SimpleObject } from '../types'
 
 export function hasOwnProperty(object?: SimpleObject | any, key?: string | number | symbol) {
@@ -12,7 +11,7 @@ export function flattenObject(obj: SimpleObject | any = {}) {
   function recurse(current: SimpleObject, property?: string) {
     if (!property && Object.getOwnPropertyNames(current).length === 0)
       return
-    if (Object(current) !== current || isArray(current)) {
+    if (Object(current) !== current || Array.isArray(current)) {
       flattened[property as string] = current
     }
     else {
@@ -36,7 +35,7 @@ export function isEmpty(obj: any) {
     return false
   else if (typeof obj === 'string')
     return obj.length === 0
-  else if (isArray(obj))
+  else if (Array.isArray(obj))
     return obj.length === 0
   else if (typeof obj === 'object')
     return obj === null || Object.keys(obj).length === 0

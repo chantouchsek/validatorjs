@@ -1,7 +1,7 @@
-import { get, isArray, replace } from 'lodash'
+import { get, replace } from 'lodash'
 import type Messages from './messages'
 import type { Rule } from './rule'
-import type { LangTypes, RuleType, SimpleObject, ValidatorOptions, VoidFunction } from './types'
+import type { CbFunction, LangTypes, RuleType, SimpleObject, ValidatorOptions } from './types'
 import AsyncResolvers from './async-resolvers'
 import Errors from './errors'
 import I18n from './i18n'
@@ -11,23 +11,21 @@ import { flattenObject, formatter, hasOwnProperty } from './utils'
 export { Errors, ValidatorOptions, LangTypes, RuleType }
 
 export default class Validator {
-  readonly messages: Messages
-  readonly errors: Errors
-  public errorCount: number
-  public hasAsync: boolean
-  static lang: LangTypes = 'en'
-  readonly numericRules = ['integer', 'numeric']
-  public rules: Record<RuleType, any>
+  errorCount: number
+  hasAsync: boolean
   stopOnAttributes: SimpleObject | boolean | string[] | undefined
-  static attributeFormatter = formatter
-  readonly options!: ValidatorOptions
-  static manager = new Manager()
+  readonly numericRules = ['integer', 'numeric']
+  readonly errors: Errors
+  readonly messages: Messages
   private readonly confirmedReverse?: boolean
+  static lang: LangTypes = 'en'
+  static attributeFormatter = formatter
+  static manager = new Manager()
 
   constructor(
-    public readonly input: SimpleObject | null,
-    rules?: Record<RuleType, any>,
-    options: Partial<ValidatorOptions> = {},
+    readonly input: SimpleObject | null,
+    readonly rules: SimpleObject = {},
+    readonly options: Partial<ValidatorOptions> = {},
   ) {
     const lang = options.locale || Validator.getDefaultLang()
     Validator.useLang(lang)
@@ -45,20 +43,17 @@ export default class Validator {
   check() {
     for (let attribute in this.rules) {
       const attributeRules = this.rules[attribute]
-      const inputValue = get(this.input, attribute)
-
+      const inputValue = get(this.input ?? {}, attribute)
       if (this._passesOptionalCheck(attribute))
         continue
 
       for (let i = 0, len = attributeRules.length; i < len; i++) {
         const { name, value } = attributeRules[i]
         const rule = this.getRule(name)
-
         if (!this._isValidatable(rule, inputValue))
           continue
 
         const rulePassed = rule.validate(inputValue, value, attribute)
-
         if (!rulePassed) {
           if (name === 'confirmed' && this.confirmedReverse) {
             attribute = `${attribute}_confirmation`
@@ -92,10 +87,10 @@ export default class Validator {
     }
     const asyncResolvers = new AsyncResolvers(failsOne, resolvedAll)
     const validateRule = (
-      inputValue: SimpleObject,
+      inputValue: string | number | SimpleObject,
       ruleOptions: SimpleObject,
-      attribute: string,
-      rule: SimpleObject,
+      rule: Rule,
+      attribute = '',
     ) => {
       return () => {
         const resolverIndex = asyncResolvers.add(rule)
@@ -104,16 +99,15 @@ export default class Validator {
     }
 
     for (const attribute in this.rules) {
-      const attributeRules = this.rules[attribute]
+      const attributeRules = get(this.rules, attribute) as SimpleObject[]
       const inputValue = get(this.input, attribute)
       if (this._passesOptionalCheck(attribute))
         continue
 
-      for (let i = 0, len = attributeRules.length, rule, ruleOptions; i < len; i++) {
-        ruleOptions = attributeRules[i]
-        rule = this.getRule(ruleOptions.name)
+      for (const ruleOptions of attributeRules) {
+        const rule = this.getRule(ruleOptions.name)
         if (this._isValidatable(rule, inputValue))
-          validateRule(inputValue, ruleOptions, attribute, rule)()
+          validateRule(inputValue, ruleOptions, rule, attribute)()
       }
     }
 
@@ -121,8 +115,8 @@ export default class Validator {
     asyncResolvers.fire()
   }
 
-  _parseRules(rules: Record<RuleType, any> = {}) {
-    const parsedRules: Record<RuleType, any> = {}
+  _parseRules(rules: SimpleObject = {}) {
+    const parsedRules: SimpleObject = {}
     rules = flattenObject(rules)
     for (const attribute in rules) {
       const rulesArray = rules[attribute] as (SimpleObject | any | string)[]
@@ -171,8 +165,8 @@ export default class Validator {
   }
 
   _passesOptionalCheck(attribute: string) {
-    const find = ['sometimes']
-    return this._hasRule(attribute, find) && !this._suppliedWithData(attribute)
+    const findRules = ['sometimes', 'nullable']
+    return this._hasRule(attribute, findRules) && !this._suppliedWithData(attribute)
   }
 
   _suppliedWithData(attribute: string) {
@@ -200,7 +194,7 @@ export default class Validator {
   }
 
   _isValidatable(rule: SimpleObject, value: any): boolean {
-    if (isArray(value) || Validator.manager.isImplicit(rule.name))
+    if (Array.isArray(value) || Validator.manager.isImplicit(rule.name))
       return true
 
     return this.getRule('required').validate(value, {})
@@ -358,16 +352,12 @@ export default class Validator {
 
   passes(passes?: () => void) {
     const async = this._checkAsync('passes', passes)
-    if (async)
-      return this.checkAsync(passes)
-    return this.check()
+    return async ? this.checkAsync(passes) : this.check()
   }
 
-  fails(fails?: VoidFunction) {
+  fails(fails?: CbFunction) {
     const async = this._checkAsync('fails', fails)
-    if (async)
-      return this.checkAsync(false, fails)
-    return !this.check()
+    return async ? this.checkAsync(false, fails) : !this.check()
   }
 
   _checkAsync(funcName: string, callback?: boolean | (() => void)) {
@@ -378,14 +368,12 @@ export default class Validator {
     return this.hasAsync || hasCallback
   }
 
-  validated(passes?: VoidFunction, fails?: VoidFunction) {
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const _this = this
+  validated(passes?: CbFunction, fails?: CbFunction) {
     if (this._checkAsync('passes', passes)) {
       return this.checkAsync(
         () => {
           if (passes && typeof passes === 'function')
-            passes(_this._onlyInputWithRules())
+            passes(this._onlyInputWithRules())
         },
         fails,
       )
