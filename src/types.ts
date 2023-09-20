@@ -101,6 +101,5 @@ export interface ValidatorOptions {
   confirmedReverse?: boolean
   customMessages?: SimpleObject<string | SimpleObject>
   customAttributes?: SimpleObject<SimpleObject>
-  acceptNoneAttribute?: boolean
 }
 export type CbFunction<R = any> = ((...arg: any) => R)

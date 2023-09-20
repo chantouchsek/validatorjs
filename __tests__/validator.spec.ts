@@ -65,10 +65,4 @@ describe('Validator constructor', () => {
     expect(validator.fails()).toBeTruthy()
     expect(validator.errors.first('name')).toBe('ឈ្មោះ ត្រូវតែបញ្ចូលជាដាច់ខាត។')
   })
-
-  it('get should get message with none attribute name', () => {
-    const validator = new Validator(null, { name: 'required' }, { acceptNoneAttribute: true, locale: 'ja' })
-    expect(validator.fails()).toBeTruthy()
-    expect(validator.errors.first('name')).toBe('は必須です。')
-  })
 })
