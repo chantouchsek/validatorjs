@@ -8,8 +8,8 @@
     "outDir": "dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "strictNullChecks": true,
-    "strict": true
+    "strict": true,
+    "strictNullChecks": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "**/__tests__/*", "coverage"]
