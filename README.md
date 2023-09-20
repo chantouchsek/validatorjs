@@ -75,7 +75,7 @@ const validation = new Validator(data, rules, options)
   - confirmedReverse?: boolean | Optional showing error message on confirmation field instead of password
   - customMessages?: Record<string, any> | Optional custom error messages to return
   - customAttributes?: Record<string, any> | Optional custom attribute name to return
-  - acceptNoneAttributes?: boolean | Optional for message without attribute name
+  - acceptNoneAttribute?: boolean | Optional for message without attribute name
 
 #### Example 1 - Passing Validation
 
@@ -122,9 +122,9 @@ validation.errors.first('email') // 'The email format is invalid.'
 validation.errors.get('email') // returns an array of all email error messages
 ```
 
-To apply validation with _acceptNoneAttributes_ property
+To apply validation with _acceptNoneAttribute_ property
 
-#### Example 3 - AcceptNoneAttributes
+#### Example 3 - acceptNoneAttribute
 
 ```ts
 const validation = new Validator(
@@ -137,7 +137,7 @@ const validation = new Validator(
     email: 'required|email',
   },
   {
-    acceptNoneAttributes: true,
+    acceptNoneAttribute: true,
   }
 )
 

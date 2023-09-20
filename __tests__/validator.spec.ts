@@ -67,7 +67,7 @@ describe('Validator constructor', () => {
   })
 
   it('get should get message with none attribute name', () => {
-    const validator = new Validator(null, { name: 'required' }, { acceptNoneAttributes: true, locale: 'ja' })
+    const validator = new Validator(null, { name: 'required' }, { acceptNoneAttribute: true, locale: 'ja' })
     expect(validator.fails()).toBeTruthy()
     expect(validator.errors.first('name')).toBe('は必須です。')
   })

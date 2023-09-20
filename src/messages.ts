@@ -9,7 +9,7 @@ export default class Messages {
   private attributeFormatter: CbFunction | undefined
   static replacements: SimpleObject = {}
 
-  constructor(public readonly messages: SimpleObject, private readonly acceptNoneAttributes = false) {
+  constructor(public readonly messages: SimpleObject, private readonly acceptNoneAttribute = false) {
     this.customMessages = {}
     this.attributeNames = {}
     Messages._setReplacements()
@@ -176,7 +176,7 @@ export default class Messages {
       attribute: this._getAttributeName(rule.attribute),
       [rule.name]: data[rule.name] || rule.getParameters().join(','),
     })
-    if (this.acceptNoneAttributes) {
+    if (this.acceptNoneAttribute) {
       const newTemplate = template.trim().replace(/(.*)(:attribute)/g, '').replace(/^\s+/, '')
       return newTemplate.replace(/:(\w+)/g, (_, key) => updatedData[key])
     }

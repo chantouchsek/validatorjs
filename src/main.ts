@@ -29,7 +29,7 @@ export default class Validator {
   ) {
     const lang = options.locale || Validator.getDefaultLang()
     Validator.useLang(lang)
-    this.messages = I18n._make(lang, options.acceptNoneAttributes)
+    this.messages = I18n._make(lang, options.acceptNoneAttribute)
     this.messages._setCustom(options.customMessages)
     this.setAttributeNames(options.customAttributes)
     this.setAttributeFormatter(Validator.attributeFormatter)
