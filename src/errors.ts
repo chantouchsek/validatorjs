@@ -1,5 +1,6 @@
-import { cloneDeep, get, has, omit } from 'lodash'
+import { cloneDeep, get, omit } from 'lodash'
 import type { SimpleObject } from './types'
+import { is, toCamelCase, toSnakeCase } from './utils'
 
 export default class Errors {
   private errors: SimpleObject<string[]> = {}
@@ -16,15 +17,31 @@ export default class Errors {
     return !this.has(field)
   }
 
-  get(field: string | string[]): string | string[] {
-    return get(this.errors, field, [])
+  get(field: string | string[]) {
+    const fields = Array.isArray(field) ? field : [field]
+    for (const f of fields) {
+      console.warn('f', this.has(f), f)
+      if (this.has(f))
+        return get(this.errors, f, [])
+    }
+    return []
   }
 
-  first(attribute: string) {
-    if (this.has(attribute))
-      return this.get(attribute)[0]
-
-    return undefined
+  first(field: string | string[]): string | undefined {
+    if (Array.isArray(field)) {
+      const fields = this._getFields(field)
+      let fd = ''
+      for (const f of fields) {
+        if (this.has(f)) {
+          fd = f
+          break
+        }
+      }
+      return this.first(fd)
+    }
+    else {
+      return this.get(field)[0]
+    }
   }
 
   all() {
@@ -32,11 +49,12 @@ export default class Errors {
   }
 
   has(field: string | string[]) {
-    return has(this.errors, field)
+    const fields = this._getFields(field)
+    return is(Object.keys(this.errors), fields)
   }
 
-  fill(errors: Record<string, string[]>) {
-    this.errors = errors
+  fill(errors: SimpleObject<string[]>) {
+    this.errors = Object.assign({}, errors)
   }
 
   clear(attribute?: string | string[]) {
@@ -48,5 +66,22 @@ export default class Errors {
 
   flush() {
     this.fill({})
+  }
+
+  onKeydown(event: KeyboardEvent) {
+    const { name } = event.target as HTMLInputElement
+    if (!name)
+      return
+
+    this.clear(name)
+  }
+
+  private _getFields(field: string | string[]): string[] {
+    const fields: string[] = []
+    const attributes = Array.isArray(field) ? field : [field]
+    for (const f of attributes)
+      fields.push(toCamelCase(f), toSnakeCase(f))
+
+    return [...new Set(fields)].filter(Boolean)
   }
 }
