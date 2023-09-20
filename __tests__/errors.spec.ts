@@ -70,6 +70,19 @@ describe('Errors', () => {
     validator.errors.onKeydown(event)
     expect(validator.errors.has('name')).toBeFalsy()
   })
+  it('onkeydown event -> name undefined', () => {
+    const validator = new Validator(null, { name: 'required' })
+    const event = {
+      target: { name: undefined },
+    }
+    const errors = {
+      name: ['The name field is required.'],
+      email: ['The email field is required.'],
+    }
+    validator.errors.fill(errors)
+    validator.errors.onKeydown(event)
+    expect(validator.errors.has('name')).toBeTruthy()
+  })
   it('should add new message with forceOption', () => {
     const validator = new Validator(null, { name: 'required' })
     const msg = ['The name field must be input as value.']

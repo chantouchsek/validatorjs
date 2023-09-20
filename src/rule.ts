@@ -1,4 +1,4 @@
-import { get } from 'lodash'
+import { get, isString } from 'lodash'
 import type Validator from './main'
 import * as rules from './rules'
 import { flattenObject, isEmpty, isValidDate } from './utils'
@@ -15,7 +15,7 @@ export class Rule {
   private _customMessage: string | undefined = undefined
   private passes = false
   private input: SimpleObject | string | number | undefined
-  private rule: any
+  private rule: string | number | (string | number)[] | undefined
   private validator!: Validator
   static rules = Object.assign({}, rules) as SimpleObject
   private callback!: CbFunction<void>
@@ -63,16 +63,20 @@ export class Rule {
   }
 
   getParameters() {
-    let value = []
-    if (!Number.isNaN(Number.parseFloat(this.rule)) && Number.isFinite(this.rule)) {
-      this.rule = Number.parseFloat(this.rule)
-      value.push(this.rule)
-    }
-    if (typeof this.rule === 'string')
+    let value: (string | number)[] = []
+    if (!this.rule) 
+      return value
+
+    if (isString(this.rule))
       value = this.rule.split(',')
 
     if (Array.isArray(this.rule))
       value = this.rule
+
+    if (!Number.isNaN(Number.parseFloat(this.rule as string)) && Number.isFinite(this.rule)) {
+      this.rule = Number.parseFloat(this.rule as string)
+      value.push(this.rule)
+    }
 
     return value
   }

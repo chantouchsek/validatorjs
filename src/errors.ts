@@ -30,28 +30,11 @@ export default class Errors {
     return []
   }
 
-  _first(field: string | string[]): string | undefined {
-    if (Array.isArray(field)) {
-      const fields = this._getFields(field)
-      let fd = ''
-      for (const f of fields) {
-        if (this.has(f)) {
-          fd = f
-          break
-        }
-      }
-      return this.first(fd)
-    }
-    else {
-      return this.get(field)[0]
-    }
-  }
-
-  first(field: string | string[]): string {
+  first(field: string | string[]) {
     const fields = this._getFields(field)
     const fd = fields.find(f => f in this.errors)
     const value = this.get(fd ?? field)
-    return Array.isArray(value) ? value[0] : value
+    return value[0]
   }
 
   all() {
