@@ -29,7 +29,7 @@ export default class I18n {
   }
 
   static _make(lang: LangTypes) {
-    const messages = Object.create(this.messages)
+    const messages: SimpleObject = Object.create(this.messages)
     this._load(lang)
     return new Massages(messages[lang])
   }
