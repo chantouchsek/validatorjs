@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import Validator from '../src/main'
+import type { SimpleObject } from '../src/types'
 
 describe('nested validation rules', () => {
   const nestedObject: any = {
@@ -12,13 +13,13 @@ describe('nested validation rules', () => {
     },
   }
 
-  const nestedFlatten: Record<string, string> = {
+  const nestedFlatten: SimpleObject<string> = {
     'name': 'required',
     'data.weight': 'required',
     'data.hair.color': 'required',
   }
 
-  const dataPass: Record<string, any> = {
+  const dataPass: SimpleObject = {
     name: 'David',
     data: {
       weight: 70,
@@ -28,7 +29,7 @@ describe('nested validation rules', () => {
     },
   }
 
-  const failAsserts: Record<string, any>[] = [
+  const failAsserts: SimpleObject[] = [
     [
       {},
       {
