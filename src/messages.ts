@@ -175,10 +175,9 @@ export default class Messages {
       [rule.name]: data[rule.name] || rule.getParameters().join(','),
     })
     let placeholder = template
-    if (this.defaultAttributeName !== undefined) {
-      const attributeName = this.defaultAttributeName ?? ''
-      placeholder = template.replace(/(:attribute)/g, attributeName).replace(/\s+/g, ' ')
-    }
+    if (this.defaultAttributeName !== undefined) 
+      placeholder = template.replace(/(:attribute)/g, this.defaultAttributeName).replace(/\s+/g, ' ')
+    
 
     return placeholder.trim().replace(/:(\w+)/g, (_, key) => updatedData[key])
   }
