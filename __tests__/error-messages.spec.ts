@@ -6,13 +6,13 @@ describe('Error messages', () => {
     it('should return an error message that states the email is required', () => {
       const validator = new Validator({ email: '' }, { email: 'required|email' })
       expect(validator.passes()).toBeFalsy()
-      expect(validator.errors.first('email')).toEqual('The email is required.')
+      expect(validator.errors.first('email')).toEqual('The email field is required.')
     })
 
     it('should have a method on the errors object to retrieve the first error message for an attribute', () => {
       const validator = new Validator({ email: '' }, { email: 'required|email' })
       expect(validator.passes()).toBeFalsy()
-      expect(validator.errors.first('email')).toEqual('The email is required.')
+      expect(validator.errors.first('email')).toEqual('The email field is required.')
     })
 
     it('should return false if errors.first() is called and there are no errors', () => {
@@ -58,7 +58,7 @@ describe('Error messages', () => {
       expect(validator.passes()).toBeFalsy()
       expect(validator.errors.first('age')).toEqual('The age must be at least 18.') // min numeric
       expect(validator.errors.first('description')).toEqual('The description must be at least 5 characters.') // min string
-      expect(validator.errors.first('info')).toEqual('The info is required.')
+      expect(validator.errors.first('info')).toEqual('The info field is required.')
       expect(validator.errors.first('hours')).toEqual('The hours must be 5.') // size numeric
       expect(validator.errors.first('pin')).toEqual('The pin must be 4 characters.') // size string
       expect(validator.errors.first('range')).toEqual('The range may not be greater than 10.') // max numeric
@@ -75,14 +75,14 @@ describe('Error messages', () => {
         },
       )
       expect(validator.passes()).toBeFalsy()
-      expect(validator.errors.first('name')).toEqual('The name must contain only alphabetic characters.')
+      expect(validator.errors.first('name')).toEqual('The name field must contain only alphabetic characters.')
     })
 
     it('should fail with non alpha dash characters', () => {
       const validator = new Validator({ name: 'David *' }, { name: 'alpha_dash' })
       expect(validator.passes()).toBeFalsy()
       expect(validator.errors.first('name')).toEqual(
-        'The name may only contain alpha-numeric characters, as well as dashes and underscores.',
+        'The name field may only contain alpha-numeric characters, as well as dashes and underscores.',
       )
     })
 
@@ -179,7 +179,7 @@ describe('Error messages', () => {
 
       const expected = JSON.stringify({
         name: ['The name must be at least 2 characters.'],
-        email: ['The email is required.'],
+        email: ['The email field is required.'],
       })
 
       expect(validation.passes()).toBeFalsy()

@@ -6,7 +6,7 @@ describe('required if', () => {
     const validator = new Validator({ desert: 'ice-cream', flavour: '' }, { flavour: 'required_if:desert,ice-cream' })
     expect(validator.fails()).toBeTruthy()
     expect(validator.passes()).toBeFalsy()
-    expect(validator.errors.first('flavour')).toEqual('The flavour is required when desert is ice-cream.')
+    expect(validator.errors.first('flavour')).toEqual('The flavour field is required when desert is ice-cream.')
   })
 
   it('should pass', () => {

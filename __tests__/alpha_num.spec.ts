@@ -6,7 +6,7 @@ describe('alpha_num validation rule', () => {
     const validator = new Validator({ age: '$' }, { age: 'alpha_num' })
     expect(validator.fails()).toBeTruthy()
     expect(validator.passes()).toBeFalsy()
-    expect(validator.errors.first('age')).toEqual('The age must be alphanumeric.')
+    expect(validator.errors.first('age')).toEqual('The age field must be alphanumeric.')
   })
 
   it('should pass with only alphanumeric characters', () => {

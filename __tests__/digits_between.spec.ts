@@ -56,7 +56,7 @@ describe('digits between rule', () => {
   it('should generate proper error message', () => {
     const validator = new Validator({ num: 14 }, { num: 'digits_between:16,23' })
     expect(validator.fails()).toBeTruthy()
-    expect(validator.errors.first('num')).toEqual('The num must be between 16 and 23 digits.')
+    expect(validator.errors.first('num')).toEqual('The num field must be between 16 and 23 digits.')
   })
 
   it('should fail when passed invalid values', () => {
