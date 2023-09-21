@@ -75,6 +75,7 @@ const validation = new Validator(data, rules, options)
   - confirmedReverse?: boolean | Optional showing error message on confirmation field instead of password
   - customMessages?: Record<string, any> | Optional custom error messages to return
   - customAttributes?: Record<string, any> | Optional custom attribute name to return
+  - defaultAttributeName?: Record<LangTypes, string> | Optional replace all :attribute property with languages provided
 
 #### Example 1 - Passing Validation
 
@@ -118,6 +119,35 @@ validation.passes() // false
 
 // Error messages
 validation.errors.first('email') // 'The email format is invalid.'
+validation.errors.get('email') // returns an array of all email error messages
+```
+
+#### Example 3 - With Default Attribute Name
+
+```ts
+const validation = new Validator(
+  {
+    name: 'D',
+    email: 'not an email address.com',
+  },
+  {
+    name: 'size:3',
+    email: 'required|email',
+  },
+  {
+    defaultAttributeName: {
+      ja: 'この項目',
+      en: 'This field',
+    },
+  }
+)
+
+validation.fails() // true
+validation.passes() // false
+
+// Error messages
+validation.errors.first('email') // 'This field format is invalid.'
+validation.errors.first('email') // 'この項目は正しいメールアドレスを入力してください。'
 validation.errors.get('email') // returns an array of all email error messages
 ```
 
