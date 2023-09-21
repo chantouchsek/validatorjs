@@ -28,7 +28,7 @@ export default class I18n {
       this._set(lang, locales[lang])
   }
 
-  static _make(lang: LangTypes, defaultAttributeName = '') {
+  static _make(lang: LangTypes, defaultAttributeName?: string) {
     this._load(lang)
     const messages: SimpleObject = Object.create(this.messages)
     return new Massages(messages[lang] ?? {}, defaultAttributeName)

@@ -9,7 +9,7 @@ export default class Messages {
   private attributeFormatter: CbFunction | undefined
   static replacements: SimpleObject = {}
 
-  constructor(public readonly messages: SimpleObject, public defaultAttributeName = '') {
+  constructor(public readonly messages: SimpleObject, public defaultAttributeName?: string) {
     Messages._setReplacements()
   }
 
@@ -175,11 +175,11 @@ export default class Messages {
       [rule.name]: data[rule.name] || rule.getParameters().join(','),
     })
     let placeholder = template
-    if (this.defaultAttributeName) {
+    if (this.defaultAttributeName !== undefined) {
       const attributeName = this.defaultAttributeName ?? ''
-      placeholder = template.trim().replace(/(.*)(:attribute)/g, attributeName).replace(/^\s+/, '')
+      placeholder = template.replace(/(:attribute)/g, attributeName).replace(/\s+/g, ' ')
     }
 
-    return placeholder.replace(/:(\w+)/g, (_, key) => updatedData[key])
+    return placeholder.trim().replace(/:(\w+)/g, (_, key) => updatedData[key])
   }
 }

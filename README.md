@@ -137,7 +137,7 @@ const validation = new Validator(
   {
     defaultAttributeName: {
       ja: 'この項目',
-      en: 'This field',
+      en: '',
     },
   }
 )
