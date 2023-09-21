@@ -32,30 +32,30 @@ describe('nested validation rules', () => {
     [
       {},
       {
-        'name': 'The name field is required.',
-        'data.weight': 'The data weight field is required.',
-        'data.hair.color': 'The data hair color field is required.',
+        'name': 'The name is required.',
+        'data.weight': 'The data weight is required.',
+        'data.hair.color': 'The data hair color is required.',
       },
     ],
     [
       { name: 'David' },
       {
-        'data.weight': 'The data weight field is required.',
-        'data.hair.color': 'The data hair color field is required.',
+        'data.weight': 'The data weight is required.',
+        'data.hair.color': 'The data hair color is required.',
       },
     ],
     [
       { data: { weight: 70 } },
       {
-        'name': 'The name field is required.',
-        'data.hair.color': 'The data hair color field is required.',
+        'name': 'The name is required.',
+        'data.hair.color': 'The data hair color is required.',
       },
     ],
     [
       { data: { hair: { color: 'black' } } },
       {
-        'name': 'The name field is required.',
-        'data.weight': 'The data weight field is required.',
+        'name': 'The name is required.',
+        'data.weight': 'The data weight is required.',
       },
     ],
   ]
@@ -109,6 +109,6 @@ describe('nested validation rules', () => {
     })
     expect(validator.passes()).toBeFalsy()
     expect(validator.fails()).toBeTruthy()
-    expect(validator.errors.first('filters.1.values.0')).toBe('The filters 1 values 0 field is required when filters 1 key is mainAccountName.')
+    expect(validator.errors.first('filters.1.values.0')).toBe('The filters 1 values 0 is required when filters 1 key is mainAccountName.')
   })
 })

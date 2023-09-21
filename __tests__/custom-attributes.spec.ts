@@ -21,8 +21,8 @@ describe('Validator custom attribute', () => {
     const validator = new Validator({ form: { name: null } }, { form: { name: 'required', age: 'required' } })
     expect(validator.fails()).toBeTruthy()
     expect(validator.passes()).not.toBeTruthy()
-    expect(validator.errors.first('form.name')).toEqual('The form name field is required.')
-    expect(validator.errors.first('form.age')).toEqual('The form age field is required.')
+    expect(validator.errors.first('form.name')).toEqual('The form name is required.')
+    expect(validator.errors.first('form.age')).toEqual('The form age is required.')
   })
   it('should be able get custom attribute', () => {
     const validator = new Validator(
@@ -32,7 +32,7 @@ describe('Validator custom attribute', () => {
     )
     expect(validator.fails()).toBeTruthy()
     expect(validator.passes()).not.toBeTruthy()
-    expect(validator.errors.first('form.name')).toEqual('The name field is required.')
-    expect(validator.errors.first('form.age')).toEqual('The age field is required.')
+    expect(validator.errors.first('form.name')).toEqual('The name is required.')
+    expect(validator.errors.first('form.age')).toEqual('The age is required.')
   })
 })

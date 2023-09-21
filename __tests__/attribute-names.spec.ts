@@ -6,7 +6,7 @@ describe('custom attribute names', () => {
     const validator = new Validator({ name: '' }, { name: 'required' })
     validator.setAttributeNames({ name: 'custom_name' })
     expect(validator.fails()).toBeTruthy()
-    expect(validator.errors.first('name')).toEqual('The custom_name field is required.')
+    expect(validator.errors.first('name')).toEqual('The custom_name is required.')
   })
 
   it('should use custom attribute names for replacements in required_if rule', () => {
@@ -16,7 +16,7 @@ describe('custom attribute names', () => {
       req: 'other_field',
     })
     expect(validator.fails()).toBeTruthy()
-    expect(validator.errors.first('name')).toEqual('The custom_name field is required when other_field is is_required.')
+    expect(validator.errors.first('name')).toEqual('The custom_name is required when other_field is is_required.')
   })
 
   it('should use custom attribute names for replacements in required_unless rule', () => {
@@ -27,7 +27,7 @@ describe('custom attribute names', () => {
     })
     expect(validator.fails()).toBeTruthy()
     expect(validator.errors.first('name')).toEqual(
-      'The custom_name field is required when other_field is not is_required.',
+      'The custom_name is required when other_field is not is_required.',
     )
   })
 
@@ -38,7 +38,7 @@ describe('custom attribute names', () => {
       req: 'other_field',
     })
     expect(validator.fails()).toBeTruthy()
-    expect(validator.errors.first('name')).toEqual('The custom_name field is required when other_field is not empty.')
+    expect(validator.errors.first('name')).toEqual('The custom_name is required when other_field is not empty.')
   })
 
   it('should use custom attribute names for replacements in required_with_all rule', () => {
@@ -50,7 +50,7 @@ describe('custom attribute names', () => {
     })
     expect(validator.fails()).toBeTruthy()
     expect(validator.errors.first('name')).toEqual(
-      'The custom_name field is required when other_field_1, other_field_2 are not empty.',
+      'The custom_name is required when other_field_1, other_field_2 are not empty.',
     )
   })
 
@@ -61,7 +61,7 @@ describe('custom attribute names', () => {
       req: 'other_field',
     })
     expect(validator.fails()).toBeTruthy()
-    expect(validator.errors.first('name')).toEqual('The custom_name field is required when other_field is empty.')
+    expect(validator.errors.first('name')).toEqual('The custom_name is required when other_field is empty.')
   })
 
   it('should use custom attribute names for replacements in required_without_all rule', () => {
@@ -73,7 +73,7 @@ describe('custom attribute names', () => {
     })
     expect(validator.fails()).toBeTruthy()
     expect(validator.errors.first('name')).toEqual(
-      'The custom_name field is required when other_field_1, other_field_2 are empty.',
+      'The custom_name is required when other_field_1, other_field_2 are empty.',
     )
   })
 

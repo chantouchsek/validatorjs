@@ -112,7 +112,7 @@ describe('Validator custom messages', () => {
     expect(validator.errors.get('name').length).toEqual(1)
     expect(validator.errors.first('name')).toEqual('Name is missing.')
     expect(validator.errors.get('email').length).toEqual(1)
-    expect(validator.errors.first('email')).toEqual('The email field is required.')
+    expect(validator.errors.first('email')).toEqual('The email is required.')
   })
 
   it('can be specified for custom validators', () => {

@@ -9,7 +9,7 @@ describe('passes()', () => {
     validator.passes()
 
     expect(validator.errors.all()).toEqual({
-      login: ['The login field is required.'],
+      login: ['The login is required.'],
     })
   })
 
