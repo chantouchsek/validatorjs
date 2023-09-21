@@ -1,6 +1,6 @@
 {
   "name": "@chantouchsek/validatorjs",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "The validatorjs library makes data validation in JavaScript very easy in both the browser and Node.js.",
   "author": {
     "name": "Chantouch Sek",

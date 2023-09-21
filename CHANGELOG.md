@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/chantouchsek/validatorjs/compare/v1.4.0...v1.4.1) (2023-09-21)
+
+
+### Bug Fixes
+
+* :bug: assign the simpleobject to type ([a147c3b](https://github.com/chantouchsek/validatorjs/commit/a147c3b694388d0a575bcf31ef10375ea91d22c1))
+
 ## [1.4.0](https://github.com/chantouchsek/validatorjs/compare/v1.3.0...v1.4.0) (2023-09-21)
 
 
