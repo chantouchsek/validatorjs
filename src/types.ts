@@ -64,6 +64,7 @@ export type RuleType =
   | 'ipv4'
   | 'ipv6'
   | 'numeric'
+  | 'nullable'
   | 'password'
   | 'present'
   | 'required'
@@ -99,7 +100,8 @@ export type SimpleObject<T = any> = Record<string, T>
 export interface ValidatorOptions {
   locale?: LangTypes
   confirmedReverse?: boolean
-  customMessages?: SimpleObject<string | SimpleObject>
-  customAttributes?: SimpleObject<SimpleObject>
+  customMessages?: SimpleObject
+  customAttributes?: SimpleObject
+  defaultAttributeName?: Partial<Record<LangTypes, string>>
 }
 export type CbFunction<R = any> = ((...arg: any) => R)
