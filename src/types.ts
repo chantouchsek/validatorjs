@@ -102,6 +102,6 @@ export interface ValidatorOptions {
   confirmedReverse?: boolean
   customMessages?: SimpleObject
   customAttributes?: SimpleObject
-  defaultAttributeName?: Record<LangTypes, string>
+  defaultAttributeName?: Partial<Record<LangTypes, string>>
 }
 export type CbFunction<R = any> = ((...arg: any) => R)
