@@ -64,6 +64,7 @@ export type RuleType =
   | 'ipv4'
   | 'ipv6'
   | 'numeric'
+  | 'nullable'
   | 'password'
   | 'present'
   | 'required'
@@ -101,5 +102,6 @@ export interface ValidatorOptions {
   confirmedReverse?: boolean
   customMessages?: SimpleObject<string | SimpleObject>
   customAttributes?: SimpleObject<SimpleObject>
+  defaultAttributeName?: SimpleObject<string>
 }
 export type CbFunction<R = any> = ((...arg: any) => R)

@@ -11,13 +11,13 @@ import { flattenObject, formatter, hasOwnProperty } from './utils'
 export { Errors, ValidatorOptions, LangTypes, RuleType }
 
 export default class Validator {
-  errorCount: number
-  hasAsync: boolean
+  errorCount = 0
+  hasAsync = false
   stopOnAttributes: SimpleObject | boolean | string[] | undefined
   readonly numericRules = ['integer', 'numeric']
-  readonly errors: Errors
+  readonly errors = new Errors()
   readonly messages: Messages
-  private readonly confirmedReverse?: boolean
+  private readonly confirmedReverse: boolean
   static lang: LangTypes = 'en'
   static attributeFormatter = formatter
   static manager = new Manager()
@@ -25,19 +25,16 @@ export default class Validator {
   constructor(
     readonly input: SimpleObject | null,
     readonly rules: SimpleObject = {},
-    readonly options: Partial<ValidatorOptions> = {},
+    readonly options: ValidatorOptions = {},
   ) {
     const lang = options.locale || Validator.getDefaultLang()
     Validator.useLang(lang)
-    this.messages = I18n._make(lang)
+    this.messages = I18n._make(lang, get(options.defaultAttributeName, lang, ''))
     this.messages._setCustom(options.customMessages)
-    this.setAttributeNames(options.customAttributes)
-    this.setAttributeFormatter(Validator.attributeFormatter)
-    this.errors = new Errors()
-    this.errorCount = 0
-    this.hasAsync = false
+    this.messages._setAttributeNames(options.customAttributes ?? {})
+    this.messages._setAttributeFormatter(Validator.attributeFormatter)
     this.rules = this._parseRules(rules)
-    this.confirmedReverse = options.confirmedReverse
+    this.confirmedReverse = options.confirmedReverse ?? false
   }
 
   check() {
