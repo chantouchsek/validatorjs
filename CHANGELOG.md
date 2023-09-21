@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/chantouchsek/validatorjs/compare/v1.3.0...v1.4.0) (2023-09-21)
+
+
+### Features
+
+* :sparkles: added new defaultAttributeName to option ([c4e4013](https://github.com/chantouchsek/validatorjs/commit/c4e40137651c750e6ed6e9750b08d617d5838e64))
+
 ## [1.3.0](https://github.com/chantouchsek/validatorjs/compare/v1.2.3...v1.3.0) (2023-09-20)
 
 
