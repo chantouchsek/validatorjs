@@ -100,8 +100,8 @@ export type SimpleObject<T = any> = Record<string, T>
 export interface ValidatorOptions {
   locale?: LangTypes
   confirmedReverse?: boolean
-  customMessages?: SimpleObject<string | SimpleObject>
-  customAttributes?: SimpleObject<SimpleObject>
+  customMessages?: SimpleObject
+  customAttributes?: SimpleObject
   defaultAttributeName?: SimpleObject<string>
 }
 export type CbFunction<R = any> = ((...arg: any) => R)

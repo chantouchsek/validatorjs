@@ -146,7 +146,7 @@ validation.fails() // true
 validation.passes() // false
 
 // Error messages
-validation.errors.first('email') // 'This field format is invalid.'
+validation.errors.first('email') // 'The field format is invalid.'
 validation.errors.first('email') // 'この項目は正しいメールアドレスを入力してください。'
 validation.errors.get('email') // returns an array of all email error messages
 ```

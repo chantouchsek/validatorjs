@@ -69,14 +69,12 @@ describe('Validator constructor', () => {
   it('should get the default attribute name from config -> ja', () => {
     const validator = new Validator({}, { name: 'required|string' }, { locale: 'ja', defaultAttributeName: { ja: 'この項目', en: 'This field' } })
     expect(validator.fails()).toBeTruthy()
-    console.warn(validator.errors.first('name'))
-    // expect(validator.errors.first('name')).toBe('ឈ្មោះ ត្រូវតែបញ្ចូលជាដាច់ខាត។')
+    expect(validator.errors.first('name')).toBe('この項目は必須です。')
   })
 
   it('should get the default attribute name from  -> en', () => {
     const validator = new Validator({}, { name: 'required|string' }, { locale: 'en', defaultAttributeName: { ja: 'この項目', en: 'This field' } })
     expect(validator.fails()).toBeTruthy()
-    console.warn(validator.errors.first('name'))
-    // expect(validator.errors.first('name')).toBe('ឈ្មោះ ត្រូវតែបញ្ចូលជាដាច់ខាត។')
+    expect(validator.errors.first('name')).toBe('This field is required.')
   })
 })
