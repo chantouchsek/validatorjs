@@ -52,7 +52,6 @@ jobs:
         with:
           commit_message: 'fix: :art: fix styling by (eslint)'
 
-
       - name: Run build 👷
         run: yarn build
 

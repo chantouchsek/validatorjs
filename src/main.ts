@@ -234,7 +234,7 @@ export default class Validator {
     wildCardValues: number[] = [],
   ) {
     const parentPath = attribute.substring(0, attribute.indexOf('*') - 1)
-    const parentValue = get(this.input, parentPath) as SimpleObject[]
+    const parentValue = get(this.input, parentPath, []) as SimpleObject[]
 
     for (let propertyNumber = 0, len = parentValue.length; propertyNumber < len; propertyNumber++) {
       const workingValues = [...wildCardValues, propertyNumber]

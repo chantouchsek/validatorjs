@@ -56,7 +56,7 @@ export class Rule {
 
   getParameters() {
     let value: (string | number)[] = []
-    if (!this.rule) 
+    if (!this.rule)
       return value
 
     if (isString(this.rule))
