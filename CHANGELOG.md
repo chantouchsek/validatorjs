@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.3](https://github.com/chantouchsek/validatorjs/compare/v1.4.2...v1.4.3) (2023-10-04)
+
+
+### Bug Fixes
+
+* :bug: patch missing count of null ([4dfe7ac](https://github.com/chantouchsek/validatorjs/commit/4dfe7ac95cb3979091b8ef06ccd891685fa0cb52))
+
 ### [1.4.2](https://github.com/chantouchsek/validatorjs/compare/v1.4.1...v1.4.2) (2023-10-04)
 
 
