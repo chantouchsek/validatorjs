@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.2](https://github.com/chantouchsek/validatorjs/compare/v1.4.1...v1.4.2) (2023-10-04)
+
+
+### Bug Fixes
+
+* :rocket: set the default value for parent and bump all outdated ([c7d5e30](https://github.com/chantouchsek/validatorjs/commit/c7d5e30186f0ce8e4a6a3380d397b331546ae7ea))
+* **deps:** bump get-func-name from 2.0.0 to 2.0.2 ([36973ba](https://github.com/chantouchsek/validatorjs/commit/36973ba4e3c456a89ed25399ab8760a9024c5c78))
+* **deps:** bump postcss from 8.4.29 to 8.4.31 ([b8b7626](https://github.com/chantouchsek/validatorjs/commit/b8b7626e8f4fb2dd6d32b4812aa25176ed6abff7))
+
 ### [1.4.1](https://github.com/chantouchsek/validatorjs/compare/v1.4.0...v1.4.1) (2023-09-21)
 
 
