@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.4](https://github.com/chantouchsek/validatorjs/compare/v1.4.3...v1.4.4) (2023-11-01)
+
+
+### Bug Fixes
+
+* :art: format code ([75c12c7](https://github.com/chantouchsek/validatorjs/commit/75c12c7629faac2c97b5fc5e5b560da5b11402a1))
+* **deps:** bump actions/setup-node from 3 to 4 ([ba4a431](https://github.com/chantouchsek/validatorjs/commit/ba4a431d2bdb7277e07afbc5b076618a0ace19d5))
+* **deps:** bump stefanzweifel/git-auto-commit-action from 4 to 5 ([dc2c6a7](https://github.com/chantouchsek/validatorjs/commit/dc2c6a79a304cd1e530ea70bc0d98ff7356811a2))
+
 ### [1.4.3](https://github.com/chantouchsek/validatorjs/compare/v1.4.2...v1.4.3) (2023-10-04)
 
 
