@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { flattenObject, isEmpty } from '../src/utils'
 
-describe('Object', () => {
+describe('object', () => {
   it('should correctly flatten nested object', () => {
     const asserts = [
       [undefined, {}],

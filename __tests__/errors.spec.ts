@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import Validator from '../src/main'
 
-describe('Errors', () => {
+describe('errors', () => {
   it('should get all errors message', () => {
     const validator = new Validator(null, { name: 'required' })
     expect(validator.fails()).toBeTruthy()

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import Validator from '../src/main'
 
-describe('Error messages', () => {
+describe('error messages', () => {
   describe('first()', () => {
     it('should return an error message that states the email is required', () => {
       const validator = new Validator({ email: '' }, { email: 'required|email' })
@@ -170,7 +170,7 @@ describe('Error messages', () => {
     })
   })
 
-  describe('ValidatorErrors.prototype.all()', () => {
+  describe('validatorErrors.prototype.all()', () => {
     it('should return an array of all email error messages', () => {
       const validation = new Validator(
         { name: 'd', email: '', age: 28 },
@@ -187,7 +187,7 @@ describe('Error messages', () => {
     })
   })
 
-  describe('ValidatorErrors.prototype.has()', () => {
+  describe('validatorErrors.prototype.has()', () => {
     it('should return an array of all email error messages', () => {
       const validation = new Validator(
         { name: 'd', email: '', age: 28 },

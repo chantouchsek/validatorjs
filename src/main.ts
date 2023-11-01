@@ -174,14 +174,14 @@ export default class Validator {
       if (args.length === 0 && hasOwnProperty(obj, key))
         return true
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // eslint-disable-next-line ts/ban-ts-comment
       // @ts-expect-error
       return hasNested(obj[key], ...args)
     }
 
     const keys = attribute.split('.')
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // eslint-disable-next-line ts/ban-ts-comment
     // @ts-expect-error
     return hasNested(this.input, ...keys)
   }

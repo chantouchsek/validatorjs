@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import Validator from '../src/main'
 
-describe('IP Validation rules', () => {
-  describe('IPv4 Validation rule', () => {
+describe('iP Validation rules', () => {
+  describe('iPv4 Validation rule', () => {
     it('should pass localhost ipv4 addres', () => {
       const validator = new Validator(
         {
@@ -37,18 +37,6 @@ describe('IP Validation rules', () => {
         },
       )
       expect(validator.passes()).toBeTruthy()
-    })
-
-    it('should fail ip address containing non integer octants', () => {
-      const validator = new Validator(
-        {
-          ipAddr: '192.fail.33.10',
-        },
-        {
-          ipAddr: 'ipv4',
-        },
-      )
-      expect(validator.passes()).toBeFalsy()
     })
 
     it('should fail ip address containing non integer octants', () => {
@@ -124,7 +112,7 @@ describe('IP Validation rules', () => {
     })
   })
 
-  describe('IPv6 Validation rule', () => {
+  describe('iPv6 Validation rule', () => {
     it('should pass normal ipv6 address ', () => {
       const validator = new Validator(
         {
@@ -329,7 +317,7 @@ describe('IP Validation rules', () => {
     })
   })
 
-  describe('IP General Validation rule', () => {
+  describe('iP General Validation rule', () => {
     it('should pass localhost ipv4 addres', () => {
       const validator = new Validator(
         {

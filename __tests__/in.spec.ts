@@ -9,7 +9,7 @@ describe('in validation rule', () => {
     expect(validator.errors.first('state')).toEqual('The selected state is invalid.')
   })
 
-  it('should pass when the value is in the set of comma separated values', () => {
+  it('should pass when the string value is in the set of comma separated values', () => {
     const validator = new Validator({ state: 'CA' }, { state: 'in:CA,TX,FL' })
     expect(validator.passes()).toBeTruthy()
     expect(validator.fails()).toBeFalsy()

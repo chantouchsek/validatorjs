@@ -8,7 +8,7 @@ describe('alpha validation rule', () => {
     expect(validator.passes()).toBeFalsy()
   })
 
-  it('should fail with non-alphabetic characters', () => {
+  it('should fail with non alphabetic characters', () => {
     const validator = new Validator({ name: 12 }, { name: 'alpha' })
     expect(validator.fails()).toBeTruthy()
     expect(validator.passes()).toBeFalsy()

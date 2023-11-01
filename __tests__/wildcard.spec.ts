@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import Validator from '../src/main'
 
-describe('Wildcard', () => {
-  describe('Simple Rules ', () => {
+describe('wildcard', () => {
+  describe('simple Rules ', () => {
     it('should have validation a deep level fails', () => {
       const validator = new Validator(
         {
@@ -86,7 +86,7 @@ describe('Wildcard', () => {
       expect(validator.passes()).toBeTruthy()
     })
   })
-  describe('Rules with dependent of another field', () => {
+  describe('rules with dependent of another field', () => {
     it('should have validation fail with required_* and show customMessage', () => {
       const validator = new Validator(
         {

@@ -102,8 +102,7 @@ describe('nested validation rules', () => {
         { values: [''], key: testVal },
         { values: [''], key: testVal },
       ],
-    },
-    {
+    }, {
       'filters.*.key': ['required', { in: [testVal] }],
       'filters.*.values': ['array', 'required'],
       'filters.*.values.*': `required_if:filters.*.key,${testVal}|string`,

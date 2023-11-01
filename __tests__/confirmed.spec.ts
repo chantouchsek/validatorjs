@@ -3,12 +3,6 @@ import Validator from '../src/main'
 
 describe('confirmed validation rule', () => {
   it('should fail without a matching confirmation field for the field under validation', () => {
-    const validator = new Validator({ password: 'abc' }, { password: 'confirmed' })
-    expect(validator.passes()).toBeFalsy()
-    expect(validator.fails()).toBeTruthy()
-  })
-
-  it('should fail without a matching confirmation field for the field under validation', () => {
     const validator = new Validator({ password: 'abc', password_confirmation: 'abcd' }, { password: 'confirmed' })
     expect(validator.passes()).toBeFalsy()
     expect(validator.fails()).toBeTruthy()

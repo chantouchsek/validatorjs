@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import Validator from '../src/main'
 
-describe('Validator constructor', () => {
+describe('validator constructor', () => {
   let validator: Validator
 
   beforeEach(() => {
@@ -13,10 +13,10 @@ describe('Validator constructor', () => {
   })
 
   it('should expose on window if browser', () => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // eslint-disable-next-line ts/ban-ts-comment
     // @ts-expect-error
     if (typeof window !== 'undefined') {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // eslint-disable-next-line ts/ban-ts-comment
       // @ts-expect-error
       expect(window.Validator).toBeDefined()
     }
