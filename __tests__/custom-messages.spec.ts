@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import Validator from '../src/main'
 
-describe('Validator custom messages', () => {
+describe('validator custom messages', () => {
   it('override the default message for the validator', () => {
     const validator = new Validator(
       { name: '' },
@@ -15,23 +15,6 @@ describe('Validator custom messages', () => {
     expect(validator.fails()).toBeTruthy()
     expect(validator.errors.get('name').length).toEqual(1)
     expect(validator.errors.first('name')).toEqual('Name is missing.')
-  })
-
-  it('override the default message for a type of the validator', () => {
-    const validator = new Validator(
-      { name: 'A' },
-      { name: 'min:4' },
-      {
-        customMessages: {
-          min: {
-            string: ':attribute is not long enough. Should be :min.',
-          },
-        },
-      },
-    )
-    expect(validator.fails()).toBeTruthy()
-    expect(validator.errors.get('name').length).toEqual(1)
-    expect(validator.errors.first('name')).toEqual('name is not long enough. Should be 4.')
   })
 
   it('override the default message for the validator with several :attribute in message', () => {
@@ -52,9 +35,7 @@ describe('Validator custom messages', () => {
   it('override the default message for a type of the validator', () => {
     const validator = new Validator(
       { name: 'A' },
-      {
-        name: 'min:4',
-      },
+      { name: 'min:4' },
       {
         customMessages: {
           min: {

@@ -9,7 +9,7 @@ describe('not_in validation rule', () => {
     expect(validator.errors.first('username')).toEqual('The selected username is invalid.')
   })
 
-  it('should pass when the value is not in the set of comma separated values', () => {
+  it('should pass when the string value is not in the set of comma separated values', () => {
     const validator = new Validator({ username: 'skatedav85' }, { username: 'not_in:user1,user2,user3' })
     expect(validator.passes()).toBeTruthy()
     expect(validator.fails()).toBeFalsy()

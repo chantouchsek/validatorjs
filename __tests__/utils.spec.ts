@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { hasOwnProperty } from '../src/utils'
 
-describe('Utils Object', () => {
+describe('utils Object', () => {
   describe('hasOwnProperty', () => {
     it('should hasOwnProperty must be a function', () => {
       expect(typeof hasOwnProperty).toBe('function')

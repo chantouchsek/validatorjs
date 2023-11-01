@@ -1,9 +1,0 @@
-{
-  "extends": [
-    "@antfu"
-  ],
-  "plugins": ["import"],
-  "rules": {
-    //
-  }
-}
