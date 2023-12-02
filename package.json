@@ -2,6 +2,7 @@
   "name": "@chantouchsek/validatorjs",
   "type": "module",
   "version": "1.4.4",
+  "packageManager": "yarn@1.22.21",
   "description": "The validatorjs library makes data validation in JavaScript very easy in both the browser and Node.js.",
   "author": {
     "name": "Chantouch Sek",
@@ -66,6 +67,5 @@
   "lint-staged": {
     "*.{js,ts}": "eslint --fix"
   },
-  "engineStrict": true,
-  "packageManager": "yarn@1.22.21"
+  "engineStrict": true
 }
