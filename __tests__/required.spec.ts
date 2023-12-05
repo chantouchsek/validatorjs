@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import Validator from '../src/main'
+import { Validator } from '../src/main'
 
 describe('required validation pass rules', () => {
   it('should pass with non-empty strings', () => {

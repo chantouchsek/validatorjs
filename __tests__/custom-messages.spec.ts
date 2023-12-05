@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import Validator from '../src/main'
+import { Validator } from '../src/main'
 
 describe('validator custom messages', () => {
   it('override the default message for the validator', () => {

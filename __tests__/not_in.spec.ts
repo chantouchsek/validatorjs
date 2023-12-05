@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import Validator from '../src/main'
+import { Validator } from '../src/main'
 
 describe('not_in validation rule', () => {
   it('should fail the value is in the set of comma separated values', () => {

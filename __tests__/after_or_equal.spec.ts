@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import Validator from '../src/main'
+import { Validator } from '../src/main'
 
 describe('after or equal rule', () => {
   it('should fail when the comparing attribute are greather', () => {

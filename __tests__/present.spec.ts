@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import Validator from '../src/main'
+import { Validator } from '../src/main'
 
 describe('present validation rule', () => {
   it('should pass with attribute present', () => {

@@ -10,7 +10,7 @@ import { flattenObject, formatter, hasOwnProperty } from './utils'
 
 export { Errors, ValidatorOptions, LangTypes, RuleType }
 
-export default class Validator {
+export class Validator {
   errorCount = 0
   hasAsync = false
   stopOnAttributes: SimpleObject | boolean | string[] | undefined
@@ -231,7 +231,7 @@ export default class Validator {
     attribute: string,
     rulesArray: (SimpleObject | any | string)[],
     parsedRules: SimpleObject,
-    wildCardValues: number[] = [],
+      wildCardValues: number[] = [],
   ) {
     const parentPath = attribute.substring(0, attribute.indexOf('*') - 1)
     const parentValue = (get(this.input, parentPath, []) ?? []) as SimpleObject[]

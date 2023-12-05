@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import Validator from '../src/main'
+import { Validator } from '../src/main'
 
 describe('email validation rule', () => {
   it('should pass with the email address: johndoe@gmail.com', () => {

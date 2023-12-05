@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import Validator from '../src/main'
+import { Validator } from '../src/main'
 
 describe('same validation rule', () => {
   it('should fail when the 2 attributes are different', () => {

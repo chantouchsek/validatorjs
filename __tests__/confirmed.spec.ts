@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import Validator from '../src/main'
+import { Validator } from '../src/main'
 
 describe('confirmed validation rule', () => {
   it('should fail without a matching confirmation field for the field under validation', () => {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import Validator from '../src/main'
+import { Validator } from '../src/main'
 
 describe('implicit rule tests', () => {
   it('should fail implicit rule even when undefined', () => {

@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import Validator from '../src/main'
+import { Validator } from '../src/main'
 
 describe('validator constructor', () => {
   let validator: Validator

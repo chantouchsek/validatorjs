@@ -1,5 +1,5 @@
 import { get, isString } from 'lodash-es'
-import type Validator from './main'
+import type { Validator } from './main'
 import * as rules from './rules'
 import { flattenObject, isEmpty, isValidDate } from './utils'
 import type { CbFunction, SimpleObject } from './types'
@@ -88,7 +88,7 @@ export class Rule {
   }
 
   _getValueType() {
-    if (typeof this.input === 'number' || this.validator._hasNumericRule(this.attribute as string))
+    if (typeof this.input === 'number' || this.validator._hasNumericRule(this.attribute))
       return 'numeric'
 
     return 'string'

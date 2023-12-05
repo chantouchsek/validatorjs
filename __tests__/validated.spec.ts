@@ -1,5 +1,5 @@
 import { beforeAll, describe, expect, it } from 'vitest'
-import Validator from '../src/main'
+import { Validator } from '../src/main'
 
 describe('_onlyInputWithRules()', () => {
   it('should return only attributes defined in the rules', () => {

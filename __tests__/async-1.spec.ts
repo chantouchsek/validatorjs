@@ -1,5 +1,5 @@
 import { describe, it } from 'vitest'
-import Validator from '../src/main'
+import { Validator } from '../src/main'
 
 describe('async rule tests', () => {
   it('should be able to fail async rules', () =>

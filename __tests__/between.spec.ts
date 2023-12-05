@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import Validator from '../src/main'
+import { Validator } from '../src/main'
 
 describe('between rule', () => {
   it('should pass between rule when 25 and between 18 - 30', () => {

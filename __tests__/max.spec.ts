@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import Validator from '../src/main'
+import { Validator } from '../src/main'
 
 describe('max validation rule', () => {
   it('should fail with the name "David". Maximum size is 3 letters.', () => {
