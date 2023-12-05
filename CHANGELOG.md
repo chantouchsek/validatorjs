@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.5](https://github.com/chantouchsek/validatorjs/compare/v1.4.4...v1.4.5) (2023-12-05)
+
+
+### Bug Fixes
+
+* :art: fix styling by (eslint) ([4335131](https://github.com/chantouchsek/validatorjs/commit/4335131532a837ba18fff555b5a259cf07351108))
+* :bug: consistency of lock file ([0d2c017](https://github.com/chantouchsek/validatorjs/commit/0d2c0175017212604436277838cf4655c4f8fd95))
+
 ### [1.4.4](https://github.com/chantouchsek/validatorjs/compare/v1.4.3...v1.4.4) (2023-11-01)
 
 
