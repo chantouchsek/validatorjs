@@ -1,4 +1,4 @@
-export function ipv6(value: string | number) {
+export function ipv6(value: number | string) {
   if (typeof value !== 'string')
     return false
 

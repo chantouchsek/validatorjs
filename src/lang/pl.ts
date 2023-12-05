@@ -13,26 +13,27 @@ const pl = {
     string: 'Pole :attribute musi zawierać się pomiędzy :min i :max znaków.',
   },
   confirmed: 'Pole :attribute nie zostało potwierdzone.',
-  email: 'Pole :attribute nie jest prawidłowym formatem adresu e-mail.',
   date: 'Pole :attribute nie jest prawidłowym formatem daty.',
   def: 'Pole :attribute zawiera błędy.',
+  different: 'Pola :attribute i :different muszą się różnić.',
   digits: 'Pole :attribute musi zawierać następującą ilość cyfr :digits.',
   digits_between: 'Pole :attribute musi zawierać się pomiędzy :min i :max cyfr.',
-  different: 'Pola :attribute i :different muszą się różnić.',
+  email: 'Pole :attribute nie jest prawidłowym formatem adresu e-mail.',
+  hex: 'Pole :attribute musi być w systemie szesnastkowym.',
   in: 'Wybrane pole :attribute nie jest prawidłowe.',
   integer: 'Pole :attribute musi być liczbą całkowitą.',
-  hex: 'Pole :attribute musi być w systemie szesnastkowym.',
-  min: {
-    numeric: 'Pole :attribute musi wynosić co najmniej :min.',
-    string: 'Pole :attribute musi zawierać co najmniej :min znaków.',
-  },
   max: {
     numeric: 'Pole :attribute nie może wynosić więcej niż :max.',
     string: 'Pole :attribute nie może zawierać więcej niż :max znaków.',
   },
+  min: {
+    numeric: 'Pole :attribute musi wynosić co najmniej :min.',
+    string: 'Pole :attribute musi zawierać co najmniej :min znaków.',
+  },
   not_in: 'Wybrane pole :attribute nie jest prawidłowe.',
   numeric: 'Pole :attribute musi być liczbą.',
   present: 'Pole :attribute musi być obecne (ale może być puste).',
+  regex: 'Pole :attribute nie spełnia warunku.',
   required: 'Pole :attribute jest wymagane.',
   required_if: 'Pole :attribute jest wymagane, jeśli pole :other jest równe :value.',
   required_unless: 'Pole :attribute jest wymagane, jeśli pole :other nie jest równe :value.',
@@ -47,7 +48,6 @@ const pl = {
   },
   string: 'Pole :attribute musi być ciągiem znaków.',
   url: 'Pole :attribute musi być prawidłowym adresem URL.',
-  regex: 'Pole :attribute nie spełnia warunku.',
 }
 
 export default pl

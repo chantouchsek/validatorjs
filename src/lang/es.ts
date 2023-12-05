@@ -11,9 +11,9 @@ const es = {
   digits: 'El campo :attribute debe tener :digits dígitos.',
   digits_between: 'El campo :attribute debe tener entre :min y :max dígitos.',
   email: 'El campo :attribute no es un correo válido.',
+  hex: 'El campo :attribute debe tener formato hexadecimal.',
   in: 'El campo :attribute es inválido.',
   integer: 'El campo :attribute debe ser un número entero.',
-  hex: 'El campo :attribute debe tener formato hexadecimal.',
   max: {
     numeric: 'El campo :attribute no debe ser mayor a :max.',
     string: 'El campo :attribute no debe ser mayor que :max caracteres.',

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import Validator from '../src/main'
+import { Validator } from '../src/main'
 
 describe('register a custom validation rule', () => {
   it('should be able to get validation rule', () => {

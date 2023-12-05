@@ -50,6 +50,7 @@ import zh from './zh'
 import zh_TW from './zh_TW'
 
 export default {
+  id,
   ar,
   az,
   be,
@@ -70,7 +71,6 @@ export default {
   fr,
   hr,
   hu,
-  id,
   it,
   ja,
   ka,

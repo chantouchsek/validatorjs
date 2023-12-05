@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import Validator from '../src/main'
+import { Validator } from '../src/main'
 
 describe('digits rule', () => {
   it('should be numeric and must have an exact length of 5', () => {

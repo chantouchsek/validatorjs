@@ -5,13 +5,13 @@ type OnFailedOne = (rule: Rule, message?: string) => any
 type OnResolvedAll = (allPassed: boolean) => any
 
 export default class AsyncResolvers {
-  private readonly onResolvedAll: OnResolvedAll
-  private readonly onFailedOne: OnFailedOne
-  private readonly resolvers: SimpleObject = {}
-  private resolversCount: number
-  private passed: any[]
   private failed: any[]
   private firing: boolean
+  private readonly onFailedOne: OnFailedOne
+  private readonly onResolvedAll: OnResolvedAll
+  private passed: any[]
+  private readonly resolvers: SimpleObject = {}
+  private resolversCount: number
 
   constructor(onFailedOne: OnFailedOne, onResolvedAll: OnResolvedAll) {
     this.onResolvedAll = onResolvedAll
@@ -30,6 +30,21 @@ export default class AsyncResolvers {
     return index
   }
 
+  enableFiring(firing = true) {
+    this.firing = firing
+  }
+
+  fire() {
+    if (!this.firing)
+      return
+    if (this.isAllResolved())
+      this.onResolvedAll(this.failed.length === 0)
+  }
+
+  isAllResolved() {
+    return this.passed.length + this.failed.length === this.resolversCount
+  }
+
   resolve(index: number) {
     const rule = this.resolvers[index]
     if (rule.passes) {
@@ -40,20 +55,5 @@ export default class AsyncResolvers {
       this.onFailedOne(rule)
     }
     this.fire()
-  }
-
-  isAllResolved() {
-    return this.passed.length + this.failed.length === this.resolversCount
-  }
-
-  fire() {
-    if (!this.firing)
-      return
-    if (this.isAllResolved())
-      this.onResolvedAll(this.failed.length === 0)
-  }
-
-  enableFiring(firing = true) {
-    this.firing = firing
   }
 }

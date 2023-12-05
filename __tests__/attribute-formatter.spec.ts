@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import Validator from '../src/main'
+import { Validator } from '../src/main'
 
 describe('attribute formatter tests', () => {
   it('should replace _[] with spaces by default', () => {

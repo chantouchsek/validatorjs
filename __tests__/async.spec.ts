@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import Validator from '../src/main'
+import { Validator } from '../src/main'
 
 describe('async rule tests', () => {
   it('should be able to register and pass async rule', () =>
@@ -106,12 +106,12 @@ describe('async rule tests', () => {
     new Promise<void>((resolve) => {
       const validator = new Validator(
         {
-          username: 'admin',
           email: 'blah',
+          username: 'admin',
         },
         {
-          username: 'required|min:3',
           email: 'required|email',
+          username: 'required|min:3',
         },
       )
       validator.fails(() => {

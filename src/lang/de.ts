@@ -10,26 +10,27 @@ const de = {
   before_or_equal: 'Das :attribute Datum muss größer oder gleich dem :before_or_equal sein.',
   between: 'Das :attribute Feld muss zwischen :min und :max liegen.',
   confirmed: 'Das :attribute Feld stimmt nicht mit der Bestätigung überein.',
-  email: 'Das :attribute Format ist ungültig.',
   date: 'Das :attribute Feld muss ein gültiges Datum sein.',
   def: 'Das :attribute Feld hat Fehler.',
+  different: 'Die Felder :attribute und :different müssen sich unterscheiden.',
   digits: 'Das :attribute Feld muss :digits Stellen haben.',
   digits_between: 'Das :attribute Feld muss zwischen :min und :max Stellen haben.',
-  different: 'Die Felder :attribute und :different müssen sich unterscheiden.',
+  email: 'Das :attribute Format ist ungültig.',
+  hex: 'Das :attribute Feld sollte hexadezimal sein',
   in: 'Der gewählte Wert für :attribute ist ungültig.',
   integer: 'Das :attribute Feld muss eine ganze Zahl sein.',
-  hex: 'Das :attribute Feld sollte hexadezimal sein',
-  min: {
-    numeric: 'Das :attribute Feld muss mindestens :min sein.',
-    string: 'Das :attribute Feld muss mindestens :min Zeichen lang sein.',
-  },
   max: {
     numeric: 'Das :attribute Feld darf maximal :max sein.',
     string: 'Das :attribute Feld darf maximal :max Zeichen haben.',
   },
+  min: {
+    numeric: 'Das :attribute Feld muss mindestens :min sein.',
+    string: 'Das :attribute Feld muss mindestens :min Zeichen lang sein.',
+  },
   not_in: 'Der gewählte Wert für :attribute ist ungültig.',
   numeric: 'Das :attribute Feld muss eine Zahl sein.',
   present: 'Das Feld :attribute muss vorhanden sein (kann aber leer sein).',
+  regex: 'Das :attribute Format ist ungültig.',
   required: 'Das :attribute Feld muss ausgefüllt sein.',
   required_if: 'Das :attribute Feld muss ausgefüllt sein, wenn :other :value ist.',
   same: 'Die Felder :attribute und :same müssen übereinstimmen.',
@@ -39,7 +40,6 @@ const de = {
   },
   string: 'Das :attribute Feld muss ein Satz sein.',
   url: 'Das Format von :attribute ist ungültig.',
-  regex: 'Das :attribute Format ist ungültig.',
 }
 
 export default de

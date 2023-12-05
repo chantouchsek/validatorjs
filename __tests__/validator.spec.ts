@@ -1,13 +1,13 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import Validator from '../src/main'
+import { Validator } from '../src/main'
 
 describe('validator constructor', () => {
   let validator: Validator
 
   beforeEach(() => {
     validator = new Validator(
-      { name: 'David', email: 'johndoe@gmail.com' },
-      { name: 'required', email: 'required' },
+      { email: 'johndoe@gmail.com', name: 'David' },
+      { email: 'required', name: 'required' },
       { customMessages: { required: 'You\'re missing :required' } },
     )
   })
@@ -67,13 +67,13 @@ describe('validator constructor', () => {
   })
 
   it('should get the default attribute name from config -> ja', () => {
-    const validator = new Validator({}, { name: 'required|string' }, { locale: 'ja', defaultAttributeName: { ja: 'この項目', en: 'This field' } })
+    const validator = new Validator({}, { name: 'required|string' }, { defaultAttributeName: { en: 'This field', ja: 'この項目' }, locale: 'ja' })
     expect(validator.fails()).toBeTruthy()
     expect(validator.errors.first('name')).toBe('この項目は必須です。')
   })
 
   it('should get the default attribute name from  -> en', () => {
-    const validator = new Validator({}, { name: 'required|string' }, { locale: 'en', defaultAttributeName: { ja: 'この項目', en: '' } })
+    const validator = new Validator({}, { name: 'required|string' }, { defaultAttributeName: { en: '', ja: 'この項目' }, locale: 'en' })
     expect(validator.fails()).toBeTruthy()
     expect(validator.errors.first('name')).toBe('The field is required.')
   })

@@ -6,26 +6,27 @@ const nb_No = {
   attributes: {},
   between: ':attribute feltet må være mellom :min og :max.',
   confirmed: ':attribute feltet stemmer ikke overens med bekreftelsen.',
-  email: ':attribute formatet er ugyldig.',
   date: ':attribute er et ugyldig datoformat.',
   def: ':attribute attributtet har feil.',
+  different: ':attribute og :different må være forskjellige.',
   digits: ':attribute må være på :digits siffer.',
   digits_between: ':attribute må være mellom :min og :max siffer.',
-  different: ':attribute og :different må være forskjellige.',
+  email: ':attribute formatet er ugyldig.',
+  hex: 'The :attribute should have hexadecimal format',
   in: 'Den oppgitte verdien for :attribute er ugyldig.',
   integer: ':attribute må være et heltall.',
-  hex: 'The :attribute should have hexadecimal format',
-  min: {
-    numeric: ':attribute må minst være :min.',
-    string: ':attribute må være på minst :min tegn.',
-  },
   max: {
     numeric: ':attribute kan ikke være større enn :max.',
     string: ':attribute kan maks ha :max tegn.',
   },
+  min: {
+    numeric: ':attribute må minst være :min.',
+    string: ':attribute må være på minst :min tegn.',
+  },
   not_in: 'Den oppgitte verdien for :attribute er ugyldig.',
   numeric: ':attribute må være et tall.',
   present: 'The :attribute field must be present (but can be empty).',
+  regex: ':attribute formatet er ugyldig.',
   required: ':attribute feltet er påkrevd.',
   required_if: ':attribute er påkrevd når :other er :value.',
   same: ':attribute og :same må være like.',
@@ -35,7 +36,6 @@ const nb_No = {
   },
   string: ':attribute må være tekst.',
   url: ':attribute formatet er ugyldig.',
-  regex: ':attribute formatet er ugyldig.',
 }
 
 export default nb_No

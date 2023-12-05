@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import Validator from '../src/main'
+import { Validator } from '../src/main'
 
 describe('min validation rule', () => {
   it('should fail with the name "D". Minimum size is 2 letters.', () => {

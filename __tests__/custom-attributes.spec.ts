@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest'
-import Validator from '../src/main'
+import { Validator } from '../src/main'
 
 describe('validator custom attribute', () => {
   it('should be able set custom attributes', () => {
     const validator = new Validator(
       { form: { name: null } },
-      { form: { name: 'required', age: 'required' } },
+      { form: { age: 'required', name: 'required' } },
       {
         customAttributes: { form: { name: 'Username' } },
         customMessages: {
@@ -21,8 +21,8 @@ describe('validator custom attribute', () => {
   it('should be able get custom attribute', () => {
     const validator = new Validator(
       { form: { name: null } },
-      { form: { name: 'required', age: 'required' } },
-      { customAttributes: { form: { name: 'name', age: 'age' } } },
+      { form: { age: 'required', name: 'required' } },
+      { customAttributes: { form: { age: 'age', name: 'name' } } },
     )
     expect(validator.fails()).toBeTruthy()
     expect(validator.passes()).not.toBeTruthy()

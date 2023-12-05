@@ -1,62 +1,62 @@
 import { describe, expect, it } from 'vitest'
-import Validator from '../src/main'
+import { Validator } from '../src/main'
 import type { SimpleObject } from '../src/types'
 
 describe('nested validation rules', () => {
   const nestedObject: any = {
-    name: 'required',
     data: {
-      weight: 'required',
       hair: {
         color: 'required',
       },
+      weight: 'required',
     },
+    name: 'required',
   }
 
   const nestedFlatten: SimpleObject<string> = {
-    'name': 'required',
-    'data.weight': 'required',
     'data.hair.color': 'required',
+    'data.weight': 'required',
+    'name': 'required',
   }
 
   const dataPass: SimpleObject = {
-    name: 'David',
     data: {
-      weight: 70,
       hair: {
         color: 'black',
       },
+      weight: 70,
     },
+    name: 'David',
   }
 
   const failAsserts: SimpleObject[] = [
     [
       {},
       {
-        'name': 'The name field is required.',
-        'data.weight': 'The data weight field is required.',
         'data.hair.color': 'The data hair color field is required.',
+        'data.weight': 'The data weight field is required.',
+        'name': 'The name field is required.',
       },
     ],
     [
       { name: 'David' },
       {
-        'data.weight': 'The data weight field is required.',
         'data.hair.color': 'The data hair color field is required.',
+        'data.weight': 'The data weight field is required.',
       },
     ],
     [
       { data: { weight: 70 } },
       {
-        'name': 'The name field is required.',
         'data.hair.color': 'The data hair color field is required.',
+        'name': 'The name field is required.',
       },
     ],
     [
       { data: { hair: { color: 'black' } } },
       {
-        'name': 'The name field is required.',
         'data.weight': 'The data weight field is required.',
+        'name': 'The name field is required.',
       },
     ],
   ]
@@ -99,8 +99,8 @@ describe('nested validation rules', () => {
     const testVal = 'mainAccountName'
     const validator = new Validator({
       filters: [
-        { values: [''], key: testVal },
-        { values: [''], key: testVal },
+        { key: testVal, values: [''] },
+        { key: testVal, values: [''] },
       ],
     }, {
       'filters.*.key': ['required', { in: [testVal] }],

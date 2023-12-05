@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import Validator from '../src/main'
+import { Validator } from '../src/main'
 
 describe('regex validation rule for most common regular expressions', () => {
   it('should pass with the currency pattern: 12,500.00', () => {

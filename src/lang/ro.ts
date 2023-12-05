@@ -10,26 +10,27 @@ const ro = {
   before_or_equal: ':attribute trebuie să fie egal sau înainte :before_or_equal.',
   between: ':attribute trebuie să fie între :min și :max.',
   confirmed: 'Confirmarea :attribute nu se potrivește.',
-  email: 'Formatul :attribute nu este valid.',
   date: ':attribute nu este un format de dată valid.',
   def: 'Atributul :attribute are erori.',
+  different: ':attribute și :different trebuie sa fie diferite.',
   digits: ':attribute trebuie să aibă  :digits cifre.',
   digits_between: 'Câmpul :attribute trebuie să aibă între :min și :max cifre.',
-  different: ':attribute și :different trebuie sa fie diferite.',
+  email: 'Formatul :attribute nu este valid.',
+  hex: 'Câmpul :attribute trebuie să aibă format hexazecimal.',
   in: 'Atributul selectat :attribute nu este valid.',
   integer: ':attribute trebuie să fie un număr întreg.',
-  hex: 'Câmpul :attribute trebuie să aibă format hexazecimal.',
-  min: {
-    numeric: ':attribute trebuie să fie mai mare de :min.',
-    string: ':attribute trebuie să contină cel puțin :min caractere.',
-  },
   max: {
     numeric: ':attribute nu trebuie să fie mai mare de :max.',
     string: ':attribute poate să contină maxim :max caractere.',
   },
+  min: {
+    numeric: ':attribute trebuie să fie mai mare de :min.',
+    string: ':attribute trebuie să contină cel puțin :min caractere.',
+  },
   not_in: ':attribute selectat nu este valid.',
   numeric: ':attribute trebuie sa fie un număr.',
   present: ':attribute trebuie sa fie prezent(dar poate fi gol).',
+  regex: 'Formatul :attribute nu este valid.',
   required: ' Câmpul :attribute este obligatoriu.',
   required_if: 'Câmpul :attribute este obligatoriu cănd :other este :value.',
   required_unless: 'Câmpul :attribute este obligatoriu cănd :other nu este :value.',
@@ -44,7 +45,6 @@ const ro = {
   },
   string: ':attribute trebuie să fie un contina doar caractere alfabetice.',
   url: 'Formatul :attribute nu este valid.',
-  regex: 'Formatul :attribute nu este valid.',
 }
 
 export default ro

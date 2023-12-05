@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import Validator from '../src/main'
+import { Validator } from '../src/main'
 
 describe('digits between rule', () => {
   it('should pass between rule when 25 and between 18 - 30', () => {
@@ -62,18 +62,18 @@ describe('digits between rule', () => {
   it('should fail when passed invalid values', () => {
     const validator = new Validator(
       {
-        numNull: null,
-        numUndefined: undefined,
         numEmpty: '',
+        numNull: null,
         numOutOfBounds: 24,
         numOutOfBoundsUnsigned: -34,
+        numUndefined: undefined,
       },
       {
-        numNull: 'digits_between:25,30',
-        numUndefined: 'digits_between:25,30',
         numEmpty: 'digits_between:25,30',
+        numNull: 'digits_between:25,30',
         numOutOfBounds: 'digits_between:25,30',
         numOutOfBoundsUnsigned: 'digits_between:-35,150',
+        numUndefined: 'digits_between:25,30',
       },
     )
     expect(validator.fails()).toBeTruthy()

@@ -6,25 +6,26 @@ const fr = {
   attributes: {},
   between: 'La longueur du champ :attribute doit être comprise entre :min and :max.',
   confirmed: 'Le champ :attribute n\'est pas confirmé.',
-  email: 'Le champ :attribute contient un format invalide.',
   def: 'Le champ :attribute contient un attribut erroné.',
+  different: 'Les champs :attribute et :different doivent être différents.',
   digits: 'Le champ :attribute doit être composé de :digits chiffres.',
   digits_between: 'Le champ :attribute doit contenir entre :min et :max chiffres.',
-  different: 'Les champs :attribute et :different doivent être différents.',
+  email: 'Le champ :attribute contient un format invalide.',
+  hex: 'Le champ :attribute doit être au format hexadécimal.',
   in: 'Le champ :attribute est invalide.',
   integer: 'Le champ :attribute doit être un entier.',
-  hex: 'Le champ :attribute doit être au format hexadécimal.',
-  min: {
-    numeric: 'Le champ :attribute doit être supérieur à :min.',
-    string: 'Le champ :attribute doit contenir plus de :min caractères.',
-  },
   max: {
     numeric: 'Le champ :attribute doit être inférieur à :max.',
     string: 'Le champ :attribute doit contenir moins de :max caractères.',
   },
+  min: {
+    numeric: 'Le champ :attribute doit être supérieur à :min.',
+    string: 'Le champ :attribute doit contenir plus de :min caractères.',
+  },
   not_in: 'Le champ :attribute est invalide.',
   numeric: 'Le champ :attribute doit être un chiffre.',
   present: 'Le champ :attribute doit être présent (mais peut être vide).',
+  regex: 'Le format du champ :attribute est invalide.',
   required: 'Le champ :attribute est requis.',
   required_if: 'Le champ :attribute est requis quand :other est :value.',
   same: 'Les champs :attribute et :same doivent correspondre.',
@@ -33,7 +34,6 @@ const fr = {
     string: 'Le champ :attribute doit contenir :size caractères.',
   },
   url: 'Le format du champ :attribute est invalide.',
-  regex: 'Le format du champ :attribute est invalide.',
 }
 
 export default fr

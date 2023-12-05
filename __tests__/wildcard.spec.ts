@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import Validator from '../src/main'
+import { Validator } from '../src/main'
 
 describe('wildcard', () => {
   describe('simple Rules ', () => {
@@ -12,32 +12,32 @@ describe('wildcard', () => {
                 {
                   people: [
                     {
-                      name: '',
                       age: 'aa',
-                      term: false,
                       isActive: 'not',
+                      name: '',
+                      term: false,
                     },
                     {
-                      name: '',
                       age: 'aa',
-                      term: false,
                       isActive: 'not',
+                      name: '',
+                      term: false,
                     },
                   ],
                 },
                 {
                   people: [
                     {
-                      name: '',
                       age: 'aa',
-                      term: false,
                       isActive: 'not',
+                      name: '',
+                      term: false,
                     },
                     {
-                      name: '',
                       age: 'aa',
-                      term: false,
                       isActive: 'not',
+                      name: '',
+                      term: false,
                     },
                   ],
                 },
@@ -46,10 +46,10 @@ describe('wildcard', () => {
           ],
         },
         {
-          'foo.*.bar.*.people.*.name': 'required',
           'foo.*.bar.*.people.*.age': 'numeric',
-          'foo.*.bar.*.people.*.term': 'accepted',
           'foo.*.bar.*.people.*.isActive': 'boolean',
+          'foo.*.bar.*.people.*.name': 'required',
+          'foo.*.bar.*.people.*.term': 'accepted',
         },
       )
       expect(validator.fails()).toBeTruthy()
@@ -64,10 +64,10 @@ describe('wildcard', () => {
                 {
                   people: [
                     {
-                      name: 'Test',
                       age: '100',
-                      term: true,
                       isActive: '0',
+                      name: 'Test',
+                      term: true,
                     },
                   ],
                 },
@@ -76,10 +76,10 @@ describe('wildcard', () => {
           ],
         },
         {
-          'foo.*.bar.*.people.*.name': 'required',
           'foo.*.bar.*.people.*.age': 'numeric',
-          'foo.*.bar.*.people.*.term': 'accepted',
           'foo.*.bar.*.people.*.isActive': 'boolean',
+          'foo.*.bar.*.people.*.name': 'required',
+          'foo.*.bar.*.people.*.term': 'accepted',
         },
       )
       expect(validator.fails()).toBeFalsy()
@@ -92,9 +92,9 @@ describe('wildcard', () => {
         {
           users: [
             {
-              name: 'Tester',
-              lastName: '',
               age: '',
+              lastName: '',
+              name: 'Tester',
               requiredAge: 'true',
             },
           ],
@@ -119,7 +119,7 @@ describe('wildcard', () => {
   })
   it('should it take the custom message if provide', () => {
     const validator = new Validator(
-      { conditions: [{ values: null, age: null }] },
+      { conditions: [{ age: null, values: null }] },
       { 'conditions.*.values': 'required' },
       { customMessages: { 'required.conditions.*.values': 'Required' } },
     )

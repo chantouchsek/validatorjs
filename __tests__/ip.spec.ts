@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import Validator from '../src/main'
+import { Validator } from '../src/main'
 
 describe('iP Validation rules', () => {
   describe('iPv4 Validation rule', () => {

@@ -4,29 +4,118 @@ import type { CbFunction, SimpleObject } from './types'
 import { flattenObject, toCamelCase } from './utils'
 
 export default class Messages {
-  public customMessages: SimpleObject = {}
-  private attributeNames: SimpleObject = {}
-  private attributeFormatter: CbFunction | undefined
   static replacements: SimpleObject = {}
+  private attributeFormatter: CbFunction | undefined
+  private attributeNames: SimpleObject = {}
+  public customMessages: SimpleObject = {}
 
   constructor(public readonly messages: SimpleObject, public defaultAttributeName?: string) {
     Messages._setReplacements()
   }
 
+  _getAttributeName(attribute: string): string {
+    let name = attribute
+    const attributes = flattenObject(this.messages.attributes)
+    const attributeNames = flattenObject(this.attributeNames)
+    const camelCase = toCamelCase(attribute)
+    const _snakeCase = snakeCase(attribute)
+    if (_snakeCase in attributeNames || camelCase in attributeNames)
+      return attributeNames[_snakeCase] ?? attributeNames[camelCase]
+
+    if (attribute in attributes)
+      name = get(attributes, attribute)
+    else if (this.attributeFormatter)
+      name = this.attributeFormatter(name)
+
+    while (name.includes('confirmation'))
+      name = name.replace(/\sconfirmation/g, '')
+
+    return name
+  }
+
+  _getTemplate(rule: Rule): string {
+    const messages = this.messages
+    let template = messages.def
+    const customMessages = this.customMessages
+    const formats = [`${rule.name}.${rule.attribute}`, rule.name]
+    for (const format of formats) {
+      if (format in customMessages) {
+        template = customMessages[format]
+        break
+      }
+      else if (format in messages && messages[format]) {
+        template = messages[format]
+        break
+      }
+    }
+    if (typeof template === 'object')
+      template = template[rule._getValueType()]
+
+    return template
+  }
+
+  _replacePlaceholders(rule: Rule, template: string, data: SimpleObject) {
+    const updatedData = Object.assign(data, {
+      attribute: this._getAttributeName(rule.attribute),
+      [rule.name]: data[rule.name] || rule.getParameters().join(','),
+    })
+    let placeholder = template.trim()
+    if (this.defaultAttributeName !== undefined)
+      placeholder = template.replace(/(:attribute)/g, this.defaultAttributeName).replace(/\s+/g, ' ')
+
+    return placeholder.replace(/:(\w+)/g, (_, key) => updatedData[key])
+  }
+
+  _setAttributeFormatter(func: any) {
+    this.attributeFormatter = func
+  }
+
+  _setAttributeNames(attributes: SimpleObject) {
+    this.attributeNames = attributes
+  }
+
+  _setCustom(customMessages: SimpleObject = {}) {
+    this.customMessages = customMessages
+  }
+
   static _setReplacements() {
     this.replacements = {
+      after(template: string, rule: Rule): string {
+        const parameters = rule.getParameters()
+        return this._replacePlaceholders(rule, template, {
+          after: this._getAttributeName(parameters[0]),
+        })
+      },
+      after_or_equal(template: string, rule: Rule): string {
+        const parameters = rule.getParameters()
+        return this._replacePlaceholders(rule, template, {
+          after_or_equal: this._getAttributeName(parameters[0]),
+        })
+      },
+      before(template: string, rule: Rule): string {
+        const parameters = rule.getParameters()
+        return this._replacePlaceholders(rule, template, {
+          before: this._getAttributeName(parameters[0]),
+        })
+      },
+      before_or_equal(template: string, rule: Rule): string {
+        const parameters = rule.getParameters()
+        return this._replacePlaceholders(rule, template, {
+          before_or_equal: this._getAttributeName(parameters[0]),
+        })
+      },
       between(template: string, rule: Rule): string {
         const parameters = rule.getParameters()
         return this._replacePlaceholders(rule, template, {
-          min: parameters[0],
           max: parameters[1],
+          min: parameters[0],
         })
       },
       digits_between(template: string, rule: Rule): string {
         const parameters = rule.getParameters()
         return this._replacePlaceholders(rule, template, {
-          min: parameters[0],
           max: parameters[1],
+          min: parameters[0],
         })
       },
       required_if(template: string, rule: Rule): string {
@@ -69,30 +158,6 @@ export default class Messages {
           fields: parameters.map(getAttributeName).join(', '),
         })
       },
-      after(template: string, rule: Rule): string {
-        const parameters = rule.getParameters()
-        return this._replacePlaceholders(rule, template, {
-          after: this._getAttributeName(parameters[0]),
-        })
-      },
-      before(template: string, rule: Rule): string {
-        const parameters = rule.getParameters()
-        return this._replacePlaceholders(rule, template, {
-          before: this._getAttributeName(parameters[0]),
-        })
-      },
-      after_or_equal(template: string, rule: Rule): string {
-        const parameters = rule.getParameters()
-        return this._replacePlaceholders(rule, template, {
-          after_or_equal: this._getAttributeName(parameters[0]),
-        })
-      },
-      before_or_equal(template: string, rule: Rule): string {
-        const parameters = rule.getParameters()
-        return this._replacePlaceholders(rule, template, {
-          before_or_equal: this._getAttributeName(parameters[0]),
-        })
-      },
       same(template: string, rule: Rule): string {
         const parameters = rule.getParameters()
         return this._replacePlaceholders(rule, template, {
@@ -100,38 +165,6 @@ export default class Messages {
         })
       },
     }
-  }
-
-  _setCustom(customMessages: SimpleObject = {}) {
-    this.customMessages = customMessages
-  }
-
-  _setAttributeNames(attributes: SimpleObject) {
-    this.attributeNames = attributes
-  }
-
-  _setAttributeFormatter(func: any) {
-    this.attributeFormatter = func
-  }
-
-  _getAttributeName(attribute: string): string {
-    let name = attribute
-    const attributes = flattenObject(this.messages.attributes)
-    const attributeNames = flattenObject(this.attributeNames)
-    const camelCase = toCamelCase(attribute)
-    const _snakeCase = snakeCase(attribute)
-    if (_snakeCase in attributeNames || camelCase in attributeNames)
-      return attributeNames[_snakeCase] ?? attributeNames[camelCase]
-
-    if (attribute in attributes)
-      name = get(attributes, attribute)
-    else if (this.attributeFormatter)
-      name = this.attributeFormatter(name)
-
-    while (name.includes('confirmation'))
-      name = name.replace(/\sconfirmation/g, '')
-
-    return name
   }
 
   render(rule: Rule) {
@@ -146,38 +179,5 @@ export default class Messages {
       message = this._replacePlaceholders(rule, template, {})
 
     return message
-  }
-
-  _getTemplate(rule: Rule): string {
-    const messages = this.messages
-    let template = messages.def
-    const customMessages = this.customMessages
-    const formats = [`${rule.name}.${rule.attribute}`, rule.name]
-    for (const format of formats) {
-      if (format in customMessages) {
-        template = customMessages[format]
-        break
-      }
-      else if (format in messages && messages[format]) {
-        template = messages[format]
-        break
-      }
-    }
-    if (typeof template === 'object')
-      template = template[rule._getValueType()]
-
-    return template
-  }
-
-  _replacePlaceholders(rule: Rule, template: string, data: SimpleObject) {
-    const updatedData = Object.assign(data, {
-      attribute: this._getAttributeName(rule.attribute),
-      [rule.name]: data[rule.name] || rule.getParameters().join(','),
-    })
-    let placeholder = template.trim()
-    if (this.defaultAttributeName !== undefined)
-      placeholder = template.replace(/(:attribute)/g, this.defaultAttributeName).replace(/\s+/g, ' ')
-
-    return placeholder.replace(/:(\w+)/g, (_, key) => updatedData[key])
   }
 }

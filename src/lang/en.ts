@@ -13,26 +13,27 @@ const en = {
     string: 'The :attribute field must be between :min and :max characters.',
   },
   confirmed: 'The :attribute confirmation does not match.',
-  email: 'The :attribute format is invalid.',
   date: 'The :attribute is not a valid date format.',
   def: 'The :attribute attribute has errors.',
+  different: 'The :attribute and :different must be different.',
   digits: 'The :attribute must be :digits digits.',
   digits_between: 'The :attribute field must be between :min and :max digits.',
-  different: 'The :attribute and :different must be different.',
+  email: 'The :attribute format is invalid.',
+  hex: 'The :attribute field should have hexadecimal format',
   in: 'The selected :attribute is invalid.',
   integer: 'The :attribute must be an integer.',
-  hex: 'The :attribute field should have hexadecimal format',
-  min: {
-    numeric: 'The :attribute must be at least :min.',
-    string: 'The :attribute must be at least :min characters.',
-  },
   max: {
     numeric: 'The :attribute may not be greater than :max.',
     string: 'The :attribute may not be greater than :max characters.',
   },
+  min: {
+    numeric: 'The :attribute must be at least :min.',
+    string: 'The :attribute must be at least :min characters.',
+  },
   not_in: 'The selected :attribute is invalid.',
   numeric: 'The :attribute must be a number.',
   present: 'The :attribute field must be present (but can be empty).',
+  regex: 'The :attribute format is invalid.',
   required: 'The :attribute field is required.',
   required_if: 'The :attribute field is required when :other is :value.',
   required_unless: 'The :attribute field is required when :other is not :value.',
@@ -47,7 +48,6 @@ const en = {
   },
   string: 'The :attribute must be a string.',
   url: 'The :attribute format is invalid.',
-  regex: 'The :attribute format is invalid.',
 }
 
 export default en

@@ -10,26 +10,27 @@ const fi = {
   before_or_equal: ':attribute on oltava sama tai ennen kuin :before_or_equal.',
   between: ':attribute on oltava :min ja :max väliltä.',
   confirmed: ':attribute vahvistus ei täsmää.',
-  email: ':attribute on väärässä muodossa.',
   date: ':attribute ei ole päivämäärä.',
   def: ':attribute sisältää virheitä.',
+  different: ':attribute ei saa olla yhtä kuin :different.',
   digits: ':attribute on oltava :digits numeroa pitkä.',
   digits_between: 'Kentän :attribute arvon tulee olla :min - :max numeroa.',
-  different: ':attribute ei saa olla yhtä kuin :different.',
+  email: ':attribute on väärässä muodossa.',
+  hex: ':attribute on oltava heksadesimaali.',
   in: 'Valittu :attribute ei kelpaa.',
   integer: ':attribute ei ole numero.',
-  hex: ':attribute on oltava heksadesimaali.',
-  min: {
-    numeric: ':attribute on oltava vähintään :min.',
-    string: ':attribute on oltava vähintään :min merkkiä pitkä.',
-  },
   max: {
     numeric: ':attribute on oltava enintään :max.',
     string: ':attribute on oltava enintään :max merkkiä pitkä.',
   },
+  min: {
+    numeric: ':attribute on oltava vähintään :min.',
+    string: ':attribute on oltava vähintään :min merkkiä pitkä.',
+  },
   not_in: 'Valittu :attribute ei kelpaa.',
   numeric: ':attribute on oltava numero.',
   present: ':attribute kenttä on oltava (mutta saa olla tyhjä).',
+  regex: ':attribute on väärässä muodossa.',
   required: ':attribute kenttä on pakollinen.',
   required_if: ':attribute kenttä on pakollinen, jos kenttä :other on :value.',
   required_unless: ':attribute kenttä on pakollinen, jos kenttä :other ei ole :value.',
@@ -44,7 +45,6 @@ const fi = {
   },
   string: ':attribute on oltava merkkijono.',
   url: ':attribute on väärässä muodossa.',
-  regex: ':attribute on väärässä muodossa.',
 }
 
 export default fi

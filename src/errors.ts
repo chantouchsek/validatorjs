@@ -5,6 +5,15 @@ import { is, toCamelCase, toSnakeCase } from './utils'
 export default class Errors {
   private errors: SimpleObject<string[]> = {}
 
+  private _getFields(field: string | string[]): string[] {
+    const fields: string[] = []
+    const attributes = Array.isArray(field) ? field : [field]
+    for (const f of attributes)
+      fields.push(toCamelCase(f), toSnakeCase(f))
+
+    return [...new Set(fields)].filter(Boolean)
+  }
+
   add(field: string, message: string | string[], forceUpdate?: boolean) {
     const messages = Array.isArray(message) ? message : [message]
     if (this.missed(field))
@@ -17,8 +26,30 @@ export default class Errors {
     }
   }
 
-  missed(field: string | string[]) {
-    return !this.has(field)
+  all() {
+    return this.errors
+  }
+
+  clear(attribute?: string | string[]) {
+    if (!attribute)
+      return this.flush()
+    const errors = omit(cloneDeep(this.errors), attribute)
+    this.fill(errors)
+  }
+
+  fill(errors: SimpleObject<string[]>) {
+    this.errors = Object.assign({}, errors)
+  }
+
+  first(field: string | string[]) {
+    const fields = this._getFields(field)
+    const fd = fields.find(f => f in this.errors)
+    const value = this.get(fd ?? field)
+    return value[0]
+  }
+
+  flush() {
+    this.fill({})
   }
 
   get(field: string | string[]) {
@@ -30,35 +61,13 @@ export default class Errors {
     return []
   }
 
-  first(field: string | string[]) {
-    const fields = this._getFields(field)
-    const fd = fields.find(f => f in this.errors)
-    const value = this.get(fd ?? field)
-    return value[0]
-  }
-
-  all() {
-    return this.errors
-  }
-
   has(field: string | string[]) {
     const fields = this._getFields(field)
     return is(Object.keys(this.errors), fields)
   }
 
-  fill(errors: SimpleObject<string[]>) {
-    this.errors = Object.assign({}, errors)
-  }
-
-  clear(attribute?: string | string[]) {
-    if (!attribute)
-      return this.flush()
-    const errors = omit(cloneDeep(this.errors), attribute)
-    this.fill(errors)
-  }
-
-  flush() {
-    this.fill({})
+  missed(field: string | string[]) {
+    return !this.has(field)
   }
 
   onKeydown(event: KeyboardEvent) {
@@ -67,14 +76,5 @@ export default class Errors {
       return
 
     this.clear(name)
-  }
-
-  private _getFields(field: string | string[]): string[] {
-    const fields: string[] = []
-    const attributes = Array.isArray(field) ? field : [field]
-    for (const f of attributes)
-      fields.push(toCamelCase(f), toSnakeCase(f))
-
-    return [...new Set(fields)].filter(Boolean)
   }
 }
