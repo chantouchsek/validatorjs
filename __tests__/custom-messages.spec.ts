@@ -76,12 +76,12 @@ describe('validator custom messages', () => {
   it('can be specified on a per attribute basis for a validator', () => {
     const validator = new Validator(
       {
-        name: '',
         email: '',
+        name: '',
       },
       {
-        name: 'required',
         email: 'required',
+        name: 'required',
       },
       {
         customMessages: {
@@ -130,12 +130,12 @@ describe('validator custom messages', () => {
 
     const validator = new Validator(
       {
-        phone: '1234567890',
         fax: '1234567890',
+        phone: '1234567890',
       },
       {
-        phone: 'telephone',
         fax: 'telephone',
+        phone: 'telephone',
       },
       {
         customMessages: {

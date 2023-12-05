@@ -29,8 +29,8 @@ describe('sometimes validation pass rules', () => {
       )
 
       const validator = new Validator(
-        { username: 'test', email: 'test@example.com' },
-        { username: 'username', email: 'email|sometimes' },
+        { email: 'test@example.com', username: 'test' },
+        { email: 'email|sometimes', username: 'username' },
       )
       validator.passes(resolve)
     }))
@@ -48,7 +48,7 @@ describe('sometimes validation pass rules', () => {
         ':attribute is an invalid username',
       )
 
-      const validator = new Validator({ username: 'test' }, { username: 'username', email: 'email|sometimes' })
+      const validator = new Validator({ username: 'test' }, { email: 'email|sometimes', username: 'username' })
       validator.passes(resolve)
     }))
 

@@ -1,6 +1,6 @@
 import type { SimpleObject } from '../types'
 
-export function hasOwnProperty(object?: SimpleObject | any, key?: string | number | symbol) {
+export function hasOwnProperty(object?: SimpleObject | any, key?: number | string | symbol) {
   if (!object || !key)
     return false
   return Object.prototype.hasOwnProperty.call(object, key)
@@ -43,6 +43,6 @@ export function isEmpty(obj: any) {
     return false
   else return !obj
 }
-export function is(errors: string[], errorsToCheck: string[] | string): boolean {
+export function is(errors: string[], errorsToCheck: string | string[]): boolean {
   return Array.isArray(errorsToCheck) ? errorsToCheck.some(w => is(errors, w)) : errors.includes(errorsToCheck)
 }

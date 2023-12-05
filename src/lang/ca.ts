@@ -11,9 +11,9 @@ const ca = {
   digits: 'El camp :attribute pot tindre :digits dígitos.',
   digits_between: 'El camp  :attribute ha de tenir entre :min i :max dígits.',
   email: 'El camp :attribute no es un correu válido.',
+  hex: 'El camp :attribute hauria de tenir format hexadecimal',
   in: 'El camp :attribute es invàlid.',
   integer: 'El camp :attribute pot ser un nombre enter.',
-  hex: 'El camp :attribute hauria de tenir format hexadecimal',
   max: {
     numeric: 'El camp :attribute no pot ser mayor a :max.',
     string: 'El camp :attribute no pot ser mayor que :max caràcters.',

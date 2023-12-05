@@ -63,8 +63,8 @@ describe('errors', () => {
       target: { name: 'name' },
     }
     const errors = {
-      name: ['The name field is required.'],
       email: ['The email field is required.'],
+      name: ['The name field is required.'],
     }
     validator.errors.fill(errors)
     validator.errors.onKeydown(event)
@@ -76,8 +76,8 @@ describe('errors', () => {
       target: { name: undefined },
     }
     const errors = {
-      name: ['The name field is required.'],
       email: ['The email field is required.'],
+      name: ['The name field is required.'],
     }
     validator.errors.fill(errors)
     validator.errors.onKeydown(event)

@@ -5,7 +5,8 @@ describe('_onlyInputWithRules()', () => {
   it('should return only attributes defined in the rules', () => {
     const validator = new Validator(
       {
-        email: 'test1@example.com',
+        additional_field1: 'lorem_ipsum',
+        additional_field2: 'lorem_ipsum',
         addresses: [
           {
             line1: '934 High Noon St. Ronkonkoma, NY 1177',
@@ -17,20 +18,18 @@ describe('_onlyInputWithRules()', () => {
             zip: 48035,
           },
         ],
-        additional_field1: 'lorem_ipsum',
-        additional_field2: 'lorem_ipsum',
+        email: 'test1@example.com',
       },
       {
-        'email': 'required|string|email',
         'addresses.*.line1': 'required|string|max:200',
         'addresses.*.line2': 'nullable|string|max:200',
+        'email': 'required|string|email',
       },
     )
 
     const validated = validator._onlyInputWithRules()
 
     expect(validated).toEqual({
-      email: 'test1@example.com',
       addresses: [
         {
           line1: '934 High Noon St. Ronkonkoma, NY 1177',
@@ -40,6 +39,7 @@ describe('_onlyInputWithRules()', () => {
           line2: 'MI 48035',
         },
       ],
+      email: 'test1@example.com',
     })
     expect(validated).toHaveProperty('email')
     expect(validated).toHaveProperty('addresses')
@@ -73,9 +73,9 @@ describe('validated()', () => {
   it('should return only attributes defined in the rules (normal)', () => {
     const validator = new Validator(
       {
-        user: 'John Doe',
         additional_field1: 'lorem_ipsum',
         additional_field2: 'lorem_ipsum',
+        user: 'John Doe',
       },
       { user: 'string' },
     )
@@ -92,9 +92,9 @@ describe('validated()', () => {
     new Promise<void>((resolve) => {
       const validator = new Validator(
         {
-          user: 'John Doe',
           additional_field1: 'lorem_ipsum',
           additional_field2: 'lorem_ipsum',
+          user: 'John Doe',
         },
         { user: 'not_dustin' },
       )

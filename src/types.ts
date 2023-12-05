@@ -52,56 +52,56 @@ export type LangTypes =
 
 export type RuleType =
   | 'accepted'
+  | 'after'
+  | 'after_or_equal'
   | 'alpha'
   | 'alpha_dash'
   | 'alpha_num'
   | 'array'
+  | 'before'
+  | 'before_or_equal'
+  | 'between'
   | 'boolean'
+  | 'confirmed'
   | 'date'
+  | 'different'
+  | 'digits'
+  | 'digits_between'
   | 'email'
   | 'hex'
+  | 'in'
   | 'integer'
+  | 'ip'
   | 'ipv4'
   | 'ipv6'
-  | 'numeric'
+  | 'max'
+  | 'min'
+  | 'not_in'
   | 'nullable'
+  | 'numeric'
   | 'password'
   | 'present'
-  | 'required'
   | 'regex'
-  | 'sometimes'
-  | 'string'
-  | 'url'
-  | 'after'
-  | 'after_or_equal'
+  | 'required'
   | 'required_if'
   | 'required_unless'
   | 'required_with'
   | 'required_with_all'
   | 'required_without'
   | 'required_without_all'
-  | 'size'
-  | 'min'
-  | 'max'
-  | 'between'
   | 'same'
-  | 'different'
-  | 'in'
-  | 'not_in'
-  | 'confirmed'
-  | 'digits'
-  | 'digits_between'
-  | 'before'
-  | 'before_or_equal'
-  | 'ip'
+  | 'size'
+  | 'sometimes'
+  | 'string'
+  | 'url'
   | string
 
 export type SimpleObject<T = any> = Record<string, T>
 export interface ValidatorOptions {
-  locale?: LangTypes
   confirmedReverse?: boolean
-  customMessages?: SimpleObject
   customAttributes?: SimpleObject
+  customMessages?: SimpleObject
   defaultAttributeName?: Partial<Record<LangTypes, string>>
+  locale?: LangTypes
 }
 export type CbFunction<R = any> = ((...arg: any) => R)

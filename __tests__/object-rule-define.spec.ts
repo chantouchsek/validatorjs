@@ -3,7 +3,7 @@ import { Validator } from '../src/main'
 
 describe('object rule define', () => {
   it('mixed rule definition', () => {
-    const validator = new Validator({ age: 30, name: 'Joe' }, { name: [{ required_if: ['age', 30], min: 2 }, 'max:3'] })
+    const validator = new Validator({ age: 30, name: 'Joe' }, { name: [{ min: 2, required_if: ['age', 30] }, 'max:3'] })
     expect(validator.passes()).toBeTruthy()
     expect(validator.fails()).toBeFalsy()
   })

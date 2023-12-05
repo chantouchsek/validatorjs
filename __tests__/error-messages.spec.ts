@@ -38,8 +38,8 @@ describe('error messages', () => {
         {
           age: 17,
           description: 'a',
-          info: '',
           hours: 3,
+          info: '',
           pin: '123',
           range: 20,
           tweet: 'some tweet',
@@ -47,8 +47,8 @@ describe('error messages', () => {
         {
           age: 'min:18',
           description: 'required|min:5',
-          info: 'required|min:3',
           hours: 'size:5',
+          info: 'required|min:3',
           pin: 'size:4',
           range: 'max:10',
           tweet: 'max:5',
@@ -173,13 +173,13 @@ describe('error messages', () => {
   describe('validatorErrors.prototype.all()', () => {
     it('should return an array of all email error messages', () => {
       const validation = new Validator(
-        { name: 'd', email: '', age: 28 },
-        { name: 'required|min:2', email: 'required|email', age: 'min:18' },
+        { age: 28, email: '', name: 'd' },
+        { age: 'min:18', email: 'required|email', name: 'required|min:2' },
       )
 
       const expected = JSON.stringify({
-        name: ['The name must be at least 2 characters.'],
         email: ['The email field is required.'],
+        name: ['The name must be at least 2 characters.'],
       })
 
       expect(validation.passes()).toBeFalsy()
@@ -190,8 +190,8 @@ describe('error messages', () => {
   describe('validatorErrors.prototype.has()', () => {
     it('should return an array of all email error messages', () => {
       const validation = new Validator(
-        { name: 'd', email: '', age: 28 },
-        { name: 'required|min:2', email: 'required|email', age: 'min:18' },
+        { age: 28, email: '', name: 'd' },
+        { age: 'min:18', email: 'required|email', name: 'required|min:2' },
       )
 
       expect(validation.passes()).toBeFalsy()

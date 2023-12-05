@@ -81,15 +81,15 @@ const validation = new Validator(data, rules, options)
 
 ```js
 const data = {
-  name: 'John',
-  email: 'johndoe@gmail.com',
   age: 28,
+  email: 'johndoe@gmail.com',
+  name: 'John',
 }
 
 const rules = {
-  name: 'required',
-  email: 'required|email',
   age: 'min:18',
+  email: 'required|email',
+  name: 'required',
 }
 
 const validation = new Validator(data, rules)
@@ -105,12 +105,12 @@ To apply validation rules to the _data_ object, use the same object key names fo
 ```js
 const validation = new Validator(
   {
-    name: 'D',
     email: 'not an email address.com',
+    name: 'D',
   },
   {
-    name: 'size:3',
     email: 'required|email',
+    name: 'size:3',
   },
 )
 
@@ -127,17 +127,17 @@ validation.errors.get('email') // returns an array of all email error messages
 ```ts
 const validation = new Validator(
   {
-    name: 'D',
     email: 'not an email address.com',
+    name: 'D',
   },
   {
-    name: 'size:3',
     email: 'required|email',
+    name: 'size:3',
   },
   {
     defaultAttributeName: {
-      ja: 'この項目',
       en: '',
+      ja: 'この項目',
     },
   }
 )
@@ -159,7 +159,6 @@ is to declare validation rules with flattened key names. For example, to validat
 
 ```js
 const data = {
-  name: 'John',
   bio: {
     age: 28,
     education: {
@@ -167,6 +166,7 @@ const data = {
       secondary: 'Secondary School',
     },
   },
+  name: 'John',
 }
 ```
 
@@ -174,7 +174,6 @@ We could declare our validation rules as follows:
 
 ```js
 const nested = {
-  name: 'required',
   bio: {
     age: 'min:18',
     education: {
@@ -182,15 +181,16 @@ const nested = {
       secondary: 'string',
     },
   },
+  name: 'required',
 }
 
 // OR
 
 const flattened = {
-  'name': 'required',
   'bio.age': 'min:18',
   'bio.education.primary': 'string',
   'bio.education.secondary': 'string',
+  'name': 'required',
 }
 ```
 
@@ -202,7 +202,6 @@ WildCards can also be validated.
 const data = {
   users: [
     {
-      name: 'John',
       bio: {
         age: 28,
         education: {
@@ -210,6 +209,7 @@ const data = {
           secondary: 'Secondary School',
         },
       },
+      name: 'John',
     },
   ],
 }
@@ -219,10 +219,10 @@ We could declare our validation rules as follows:
 
 ```js
 const rules = {
-  'users.*.name': 'required',
   'users.*.bio.age': 'min:18',
   'users.*.bio.education.primary': 'string',
   'users.*.bio.education.secondary': 'string',
+  'users.*.name': 'required',
 }
 ```
 
@@ -563,14 +563,14 @@ Use `validated()` method to retrieve only the validated data and to filter out a
 ```js
 const validation = new Validator(
   {
-    name: 'John',
-    email: 'johndoe@gmail.com',
     age: 28,
+    email: 'johndoe@gmail.com',
     gender: 'male',
+    name: 'John',
   },
   {
-    name: 'required',
     age: 'min:18',
+    name: 'required',
   },
 )
 validation.validated() // will return `{ "name": "John", "age": 28 }`
@@ -581,14 +581,14 @@ validation.validated() // will return `{ "name": "John", "age": 28 }`
 ```js
 const validation = new Validator(
   {
-    name: 'John',
-    email: 'johndoe@gmail.com',
     age: 28,
+    email: 'johndoe@gmail.com',
     gender: 'male',
+    name: 'John',
   },
   {
-    name: 'required',
     age: 'min:40',
+    name: 'required',
   },
 )
 validation.validated() // will throw `Error('Validation failed!')`
@@ -601,14 +601,14 @@ attributes not found on rules provided) as the first argument.
 ```js
 const validation = new Validator(
   {
-    name: 'John',
-    email: 'johndoe@gmail.com',
     age: 28,
+    email: 'johndoe@gmail.com',
     gender: 'male',
+    name: 'John',
   },
   {
-    name: 'required|some_async_rule',
     age: 'min:18',
+    name: 'required|some_async_rule',
   },
 )
 function passes(validated) {
@@ -698,8 +698,8 @@ validation.errors.first('username') // returns 'The username is too long. Max le
 You can even provide error messages on a per-attribute basis! Just set the message's key to 'validator.attribute'
 
 ```js
-const input = { name: '', email: '' }
-const rules = { name: 'required', email: 'required' }
+const input = { email: '', name: '' }
+const rules = { email: 'required', name: 'required' }
 
 const validation = new Validator(input, rules, {
   'required.email': 'Without an :attribute we can\'t reach you!',
@@ -717,7 +717,7 @@ validation.errors.first('email') // returns 'Without an email we can\'t reach yo
 ```js
 const validator = new Validator(
   { form: { name: null } },
-  { form: { name: 'required', age: 'required' } },
+  { form: { age: 'required', name: 'required' } },
   {
     customAttributes: { form: { name: 'Username' } },
     customMessages: {

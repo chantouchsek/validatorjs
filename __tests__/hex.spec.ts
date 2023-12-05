@@ -13,16 +13,16 @@ describe('hex validation rule', () => {
     const validator = new Validator(
       {
         mongoId: '54759eb3c090d83494e2d804',
-        symbolStr: '0',
-        symbolNum: 0,
         str: 'a',
+        symbolNum: 0,
+        symbolStr: '0',
       },
       {
         color: 'hex',
         mongoId: 'hex',
-        symbolStr: 'hex',
-        symbolNum: 'hex',
         str: 'hex',
+        symbolNum: 'hex',
+        symbolStr: 'hex',
       },
     )
 
@@ -31,7 +31,7 @@ describe('hex validation rule', () => {
   })
 
   it('should pass with an empty value', () => {
-    const validator = new Validator({ olor: '', mongoId: '' }, { color: 'hex', mongoId: 'hex' })
+    const validator = new Validator({ mongoId: '', olor: '' }, { color: 'hex', mongoId: 'hex' })
 
     expect(validator.fails()).toBeFalsy()
     expect(validator.passes()).toBeTruthy()

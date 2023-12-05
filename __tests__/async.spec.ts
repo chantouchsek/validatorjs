@@ -106,12 +106,12 @@ describe('async rule tests', () => {
     new Promise<void>((resolve) => {
       const validator = new Validator(
         {
-          username: 'admin',
           email: 'blah',
+          username: 'admin',
         },
         {
-          username: 'required|min:3',
           email: 'required|email',
+          username: 'required|min:3',
         },
       )
       validator.fails(() => {

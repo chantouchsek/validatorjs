@@ -1,4 +1,4 @@
-export function boolean(value: string | number | boolean) {
+export function boolean(value: boolean | number | string) {
   return (
     value === true
     || value === false

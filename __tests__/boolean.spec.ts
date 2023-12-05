@@ -14,12 +14,12 @@ describe('boolean validation rule', () => {
 
   it('should pass with a string boolean value', () => {
     const validator = new Validator(
-      { firstOne: 'true', secondOne: 'false', thirdOne: '0', fourthOne: '1' },
+      { firstOne: 'true', fourthOne: '1', secondOne: 'false', thirdOne: '0' },
       {
         firstOne: 'boolean',
+        fourthOne: 'boolean',
         secondOne: 'boolean',
         thirdOne: 'boolean',
-        fourthOne: 'boolean',
       },
     )
     expect(validator.passes()).toBeTruthy()

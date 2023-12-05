@@ -10,26 +10,27 @@ const nl = {
   before_or_equal: ':attribute moet vòòr of op :before_or_equal zijn.',
   between: 'Het :attribute veld moet tussen :min en :max liggen.',
   confirmed: 'Het :attribute veld komt niet met de bevestiging overeen.',
-  email: 'Het :attribute formaat is ongeldig.',
   date: 'Het :attribute veld moet een geldige datum zijn.',
   def: 'Het :attribute veld bevat fouten.',
+  different: 'Het :attribute en :different veld moeten verschillend zijn.',
   digits: 'Het :attribute veld moet :digits cijfers hebben.',
   digits_between: ':attribute moet bestaan uit minimaal :min en maximaal :max cijfers.',
-  different: 'Het :attribute en :different veld moeten verschillend zijn.',
+  email: 'Het :attribute formaat is ongeldig.',
+  hex: 'Het :attribute veld moet hexadecimaal zijn',
   in: 'De gekozen waarde voor :attribute is ongeldig.',
   integer: 'Het :attribute veld moet een geheel getal zijn.',
-  hex: 'Het :attribute veld moet hexadecimaal zijn',
-  min: {
-    numeric: 'Het :attribute veld moet minstens :min zijn.',
-    string: 'Het :attribute veld moet minstens :min karakters bevatten.',
-  },
   max: {
     numeric: 'Het :attribute veld mag maximaal :max zijn.',
     string: 'Het :attribute veld mag niet meer dan :max karakters bevatten.',
   },
+  min: {
+    numeric: 'Het :attribute veld moet minstens :min zijn.',
+    string: 'Het :attribute veld moet minstens :min karakters bevatten.',
+  },
   not_in: 'De gekozen waarde voor :attribute is ongeldig.',
   numeric: 'Het :attribute veld moet een getal zijn.',
   present: 'Het :attribute veld moet aanwezig zijn (maar mag leeg zijn).',
+  regex: 'Het :attribute veld heeft een ongeldig formaat.',
   required: 'Het :attribute veld moet ingevuld zijn.',
   required_if: 'Het :attribute veld moet ingevuld zijn, wanneer :other :value is.',
   required_unless: 'Het :attribute veld moet ingevuld zijn, wanneer :other niet :value is.',
@@ -44,7 +45,6 @@ const nl = {
   },
   string: 'Het :attribute veld moet een woord of zin zijn.',
   url: 'Het :attribute veld heeft een ongeldig formaat.',
-  regex: 'Het :attribute veld heeft een ongeldig formaat.',
 }
 
 export default nl

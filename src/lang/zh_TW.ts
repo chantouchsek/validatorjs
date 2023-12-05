@@ -6,26 +6,27 @@ const zh_TW = {
   attributes: {},
   between: ':attribute的值只能在:min和:max之間。',
   confirmed: ':attribute與確認輸入不一致。',
-  email: ':attribute的格式錯誤。',
   date: ':attribute的日期格式錯誤。',
   def: ':attribute屬性錯誤。',
+  different: ':attribute和:different必須不同。',
   digits: ':attribute必須是:digits位小數。',
   digits_between: ':attribute 必須介於 :min 至 :max 位數字。',
-  different: ':attribute和:different必須不同。',
+  email: ':attribute的格式錯誤。',
+  hex: ':attribute 必須是十六進位格式',
   in: '選擇的:attribute無效',
   integer: ':attribute必須是一個整數。',
-  hex: ':attribute 必須是十六進位格式',
-  min: {
-    numeric: ':attribute不能小於:min。',
-    string: ':attribute的長度不能小於:min.',
-  },
   max: {
     numeric: ':attribute不能大於:max。',
     string: ':attribute的長度不能大於:max.',
   },
+  min: {
+    numeric: ':attribute不能小於:min。',
+    string: ':attribute的長度不能小於:min.',
+  },
   not_in: '所選的:attribute無效。',
   numeric: ':attribute必須是一個數字。',
   present: ':attribute 一定要有值 (可以是空值)。',
+  regex: ':attribute格式不正確。',
   required: ':attribute不能空白。',
   required_if: '當:other是:value時,:attribute不能空白。',
   same: ':attribute和:same必須一致。',
@@ -35,7 +36,6 @@ const zh_TW = {
   },
   string: ':attribute必須是一個字串。',
   url: ':attribute格式不正確。',
-  regex: ':attribute格式不正確。',
 }
 
 export default zh_TW

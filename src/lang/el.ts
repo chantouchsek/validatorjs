@@ -7,26 +7,27 @@ const el = {
   attributes: {},
   between: 'Το πεδίο :attribute πρέπει να είναι μεταξύ :min και :max.',
   confirmed: 'Η επιβεβαίωση του :attribute δεν ταιριάζει.',
-  email: 'Το πεδίο :attribute πρέπει να είναι μία έγκυρη διεύθυνση email.',
   date: 'Το πεδίο :attribute δεν είναι έγκυρη ημερομηνία.',
   def: 'Το πεδίο :attribute περιέχει σφάλματα.',
+  different: 'Το πεδίο :attribute  και :different πρέπει να είναι διαφορετικά.',
   digits: 'Το πεδίο :attribute πρέπει να είναι :digits ψηφία.',
   digits_between: 'Το πεδίο :attribute πρέπει να είναι μεταξύ :min και :max ψηφία.',
-  different: 'Το πεδίο :attribute  και :different πρέπει να είναι διαφορετικά.',
+  email: 'Το πεδίο :attribute πρέπει να είναι μία έγκυρη διεύθυνση email.',
+  hex: 'Το πεδίο :attribute πρέπει να είναι σε δεκαεξαδική μορφή.',
   in: 'Το επιλεγμένο :attribute δεν είναι έγκυρο.',
   integer: 'Το πεδίο :attribute πρέπει να είναι ακέραιος.',
-  hex: 'Το πεδίο :attribute πρέπει να είναι σε δεκαεξαδική μορφή.',
-  min: {
-    numeric: 'Το πεδίο :attribute πρέπει να είναι τουλάχιστον :min.',
-    string: 'Το πεδίο :attribute πρέπει να έχει τουλάχιστον :min χαρακτήρες.',
-  },
   max: {
     numeric: 'Το πεδίο :attribute δεν μπορεί να είναι μεγαλύτερο από :max.',
     string: 'Το πεδίο :attribute δεν μπορεί να έχει περισσότερους από :max χαρακτήρες.',
   },
+  min: {
+    numeric: 'Το πεδίο :attribute πρέπει να είναι τουλάχιστον :min.',
+    string: 'Το πεδίο :attribute πρέπει να έχει τουλάχιστον :min χαρακτήρες.',
+  },
   not_in: 'Το επιλεγμένο :attribute δεν είναι αποδεκτό.',
   numeric: 'Το πεδίο :attribute πρέπει να είναι αριθμός.',
   present: 'The :attribute field must be present (but can be empty).',
+  regex: 'Η μορφή του :attribute δεν είναι αποδεκτή.',
   required: 'Το πεδίο :attribute είναι απαραίτητο.',
   required_if: 'Το πεδίο :attribute είναι απαραίτητο όταν το πεδίο :other είναι :value.',
   same: 'Τα πεδία :attribute και :same πρέπει να είναι ίδια.',
@@ -36,7 +37,6 @@ const el = {
   },
   string: 'Το πεδίο :attribute πρέπει να είναι αλφαριθμητικό.',
   url: 'Το πεδίο :attribute δεν είναι έγκυρη διεύθυνση URL.',
-  regex: 'Η μορφή του :attribute δεν είναι αποδεκτή.',
 }
 
 export default el

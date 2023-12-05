@@ -10,26 +10,27 @@ const da = {
   before_or_equal: ':attribute skal være en dato før eller lig med :before_or_equal.',
   between: ':attribute skal være mellem :min og :max.',
   confirmed: ':attribute er ikke det samme som bekræftelsesfeltet.',
-  email: ':attribute skal være en gyldig email.',
   date: ':attribute er ikke en gyldig dato.',
   def: ':attribute attributen har fejl.',
+  different: ':attribute og :different skal være forskellige.',
   digits: ':attribute skal have :digits cifre.',
   digits_between: ':attribute skal have mellem :min og :max cifre.',
-  different: ':attribute og :different skal være forskellige.',
+  email: ':attribute skal være en gyldig email.',
+  hex: ':attribute skal have hexadecimalt format',
   in: 'Det valgte :attribute er ugyldigt.',
   integer: ':attribute skal være et heltal.',
-  hex: ':attribute skal have hexadecimalt format',
-  min: {
-    numeric: ':attribute skal være mindst :min.',
-    string: ':attribute skal være mindst :min tegn.',
-  },
   max: {
     numeric: ':attribute skal være højest :max.',
     string: ':attribute skal være højest :max tegn.',
   },
+  min: {
+    numeric: ':attribute skal være mindst :min.',
+    string: ':attribute skal være mindst :min tegn.',
+  },
   not_in: 'Den valgte :attribute er ugyldig',
   numeric: ':attribute skal være et tal.',
   present: ':attribute skal være tilstede.',
+  regex: ':attribute formatet er ugyldigt.',
   required: ':attribute skal udfyldes.',
   required_if: ':attribute skal udfyldes når :other er :value.',
   required_unless: ':attribute er påkrævet medmindre :other findes i :values.',
@@ -44,7 +45,6 @@ const da = {
   },
   string: ':attribute skal være en streng.',
   url: ':attribute formatet er ugyldigt.',
-  regex: ':attribute formatet er ugyldigt.',
 }
 
 export default da

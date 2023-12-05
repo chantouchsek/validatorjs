@@ -10,26 +10,27 @@ const id = {
   before_or_equal: ':attribute harus sama dengan atau sebelum :before_or_equal.',
   between: ':attribute harus berisi antara :min dan :max.',
   confirmed: ':attribute konfirmasi tidak sama.',
-  email: ':attribute harus berupa email.',
   date: ':attribute format tanggal tidak benar.',
   def: ':attribute attribute has errors.',
+  different: ':attribute dan :different harus berbeda.',
   digits: ':attribute harus :digits digit.',
   digits_between: 'Isian :attribute harus antara angka :min dan :max.',
-  different: ':attribute dan :different harus berbeda.',
+  email: ':attribute harus berupa email.',
+  hex: ':attribute harus berformat heksadesimal',
   in: ':attribute tidak benar.',
   integer: ':attribute harus berupa angka.',
-  hex: ':attribute harus berformat heksadesimal',
-  min: {
-    numeric: ':attribute minimal :min.',
-    string: ':attribute minimal :min karakter.',
-  },
   max: {
     numeric: ':attribute harus lebih kecil :max.',
     string: ':attribute maksimal :max karakter.',
   },
+  min: {
+    numeric: ':attribute minimal :min.',
+    string: ':attribute minimal :min karakter.',
+  },
   not_in: ':attribute tidak benar.',
   numeric: ':attribute harus berupa angka.',
   present: ':attribute harus ada (tapi boleh kosong).',
+  regex: ':attribute format tidak benar.',
   required: ':attribute tidak boleh kosong.',
   required_if: ':attribute harus di isi jika :other berisi :value.',
   required_unless: ':attribute harus di isi jika :other tidak berisi :value.',
@@ -44,7 +45,6 @@ const id = {
   },
   string: ':attribute harus berupa string.',
   url: ':attribute harus berupa format url.',
-  regex: ':attribute format tidak benar.',
 }
 
 export default id
