@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/chantouchsek/validatorjs/compare/v1.4.5...v2.0.0) (2023-12-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* :art: adjust the eslint config
+* using unbuild and make support ems/cjs
+
+### Features
+
+* :art: adjust the eslint config ([f07741a](https://github.com/chantouchsek/validatorjs/commit/f07741af285dfc36dd4988cadc5fe097e30db07c))
+
+
+* using unbuild and make support ems/cjs ([38d3837](https://github.com/chantouchsek/validatorjs/commit/38d3837dad1ebdad4cd8236858daf167f3ef918b))
+
 ### [1.4.5](https://github.com/chantouchsek/validatorjs/compare/v1.4.4...v1.4.5) (2023-12-05)
 
 
