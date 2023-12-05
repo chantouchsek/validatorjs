@@ -40,27 +40,11 @@ npm install @chantouchsek/validatorjs
 yarn add @chantouchsek/validatorjs
 ```
 
-### Browser
-
-```html
-<script src="@chantouchsek/validatorjs.js"></script>
-```
-
-### Node.js / Browserify
-
-```js
-// ES5
-const Validator = require('@chantouchsek/validatorjs')
-```
-
-```js
-// ES6
-import Validator from '@chantouchsek/validatorjs'
-```
-
 ### Basic Usage
 
 ```js
+import { Validator } from '@chantouchsek/validatorjs'
+
 const validation = new Validator(data, rules, options)
 ```
 
