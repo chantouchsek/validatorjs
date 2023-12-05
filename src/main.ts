@@ -1,4 +1,4 @@
-import { get, replace } from 'lodash'
+import { get, replace } from 'lodash-es'
 import type Messages from './messages'
 import type { Rule } from './rule'
 import type { CbFunction, LangTypes, RuleType, SimpleObject, ValidatorOptions } from './types'
