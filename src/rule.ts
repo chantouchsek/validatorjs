@@ -1,4 +1,4 @@
-import { get, isString } from 'lodash'
+import { get, isString } from 'lodash-es'
 import type Validator from './main'
 import * as rules from './rules'
 import { flattenObject, isEmpty, isValidDate } from './utils'

@@ -1,4 +1,4 @@
-import { cloneDeep, get, omit } from 'lodash'
+import { cloneDeep, get, omit } from 'lodash-es'
 import type { SimpleObject } from './types'
 import { is, toCamelCase, toSnakeCase } from './utils'
 

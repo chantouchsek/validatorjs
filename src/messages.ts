@@ -1,4 +1,4 @@
-import { get, snakeCase } from 'lodash'
+import { get, snakeCase } from 'lodash-es'
 import type { Rule } from './rule'
 import type { CbFunction, SimpleObject } from './types'
 import { flattenObject, toCamelCase } from './utils'

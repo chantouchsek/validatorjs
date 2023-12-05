@@ -6,6 +6,10 @@ export default defineConfig({
     deps: {
       interopDefault: true,
     },
+    includeSource: ['src/**/*.{js,ts}'],
+    coverage: {
+      exclude: ['src/types.ts', '*.config.?(c|m)[jt]s?(x)'],
+    },
   },
   resolve: {
     alias: [
