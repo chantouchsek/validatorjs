@@ -26,7 +26,6 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "types": "./dist/main.d.ts",
       "import": "./dist/main.mjs",
       "require": "./dist/main.cjs"
     }
@@ -55,7 +54,7 @@
     "lodash-es": "^4.17.21"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.3.3",
+    "@antfu/eslint-config": "^2.3.4",
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^18.4.3",
     "@types/lodash-es": "^4.17.12",
