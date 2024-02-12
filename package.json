@@ -61,7 +61,7 @@
     "@types/node": "^20.10.3",
     "@vitest/coverage-v8": "^1.0.1",
     "eslint": "^8.55.0",
-    "husky": "^8.0.3",
+    "husky": "^9.0.10",
     "lint-staged": "^15.2.0",
     "node-notifier": "^10.0.1",
     "standard-version": "^9.5.0",
