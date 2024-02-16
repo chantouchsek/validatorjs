@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.2](https://github.com/chantouchsek/validatorjs/compare/v2.0.1...v2.0.2) (2024-02-16)
+
+
+### Bug Fixes
+
+* **deps:** bump actions/cache from 3 to 4 ([5f902e6](https://github.com/chantouchsek/validatorjs/commit/5f902e6f2e2f5ecd0b4cd538964e2eb7512dc1a2))
+* **deps:** bump actions/stale from 8 to 9 ([f6aa104](https://github.com/chantouchsek/validatorjs/commit/f6aa104a2e9a7f26bcaeed98fc14c42da679e056))
+* **deps:** bump github/codeql-action from 2 to 3 ([b1d5e01](https://github.com/chantouchsek/validatorjs/commit/b1d5e0105175046f1fef25c2b5143c6db2aafea6))
+* **deps:** bump pnpm/action-setup from 2 to 3 ([6c5802e](https://github.com/chantouchsek/validatorjs/commit/6c5802eb43ed9a3d772f60c7c6373bc36992cfe8))
+
 ### [2.0.1](https://github.com/chantouchsek/validatorjs/compare/v2.0.0...v2.0.1) (2023-12-06)
 
 
