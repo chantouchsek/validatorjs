@@ -18,7 +18,7 @@ devDependencies:
     version: 19.0.3(@types/node@20.11.24)(typescript@5.3.3)
   '@commitlint/config-conventional':
     specifier: ^19.0.3
-    version: 19.0.3
+    version: 19.1.0
   '@types/lodash-es':
     specifier: ^4.17.12
     version: 4.17.12
@@ -384,8 +384,8 @@ packages:
       - typescript
     dev: true
 
-  /@commitlint/config-conventional@19.0.3:
-    resolution: {integrity: sha512-vh0L8XeLaEzTe8VCxSd0gAFvfTK0RFolrzw4o431bIuWJfi/yRCHJlsDwus7wW2eJaFFDR0VFXJyjGyDQhi4vA==}
+  /@commitlint/config-conventional@19.1.0:
+    resolution: {integrity: sha512-KIKD2xrp6Uuk+dcZVj3++MlzIr/Su6zLE8crEDQCZNvWHNQSeeGbzOlNtsR32TUy6H3JbP7nWgduAHCaiGQ6EA==}
     engines: {node: '>=v18'}
     dependencies:
       '@commitlint/types': 19.0.3
