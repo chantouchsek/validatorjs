@@ -124,11 +124,17 @@ export class Rule {
         return Rule.rules.ipv4(val, req, attribute) || Rule.rules.ipv6(val, req, attribute)
       },
       max(val: string, req: number) {
-        const size: number = this.getSize(val)
+        const isEmailRule = this.validator._hasRule(this.attribute, ['email'])
+        const value = isEmailRule && val.includes('@') ? val.split('@')[0] : val
+        const size: number = this.getSize(value)
+
         return size <= req
       },
       min(val: string, req: number) {
-        const size: number = this.getSize(val)
+        const isEmailRule = this.validator._hasRule(this.attribute, ['email'])
+        const value = isEmailRule && val.includes('@') ? val.split('@')[0] : val
+        const size: number = this.getSize(value)
+
         return size >= req
       },
       not_in(val: string) {

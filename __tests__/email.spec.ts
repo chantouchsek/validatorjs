@@ -95,4 +95,22 @@ describe('email validation rule', () => {
     expect(validator.fails()).toBeFalsy()
     expect(validator.passes()).toBeTruthy()
   })
+
+  it('should pass when min:6 and max:30', () => {
+    const validator = new Validator({ email: 'john.1@gmail.com' }, { email: 'email|min:6|max:30' })
+    expect(validator.fails()).toBeFalsy()
+    expect(validator.passes()).toBeTruthy()
+  })
+
+  it('should failed when email less then 6 chars', () => {
+    const validator = new Validator({ email: 'john@gmail.com' }, { email: 'email|min:6|max:30' })
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.passes()).toBeFalsy()
+  })
+
+  it('should failed when email more then 10 chars', () => {
+    const validator = new Validator({ email: 'johnxxxxxxxxxxxxxxxxxxxxxx@gmail.com' }, { email: 'email|min:6|max:10' })
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.passes()).toBeFalsy()
+  })
 })
