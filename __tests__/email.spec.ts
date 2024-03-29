@@ -55,8 +55,44 @@ describe('email validation rule', () => {
     expect(validator.passes()).toBeTruthy()
   })
 
-  it('should pass with the email addresses at domain 3-n level', () => {
-    const validator = new Validator({ email: 'chantouchsek.cs83@gmail.com.km' }, { email: 'email' })
+  it('should pass with the email addresses containing country designation (kh)', () => {
+    const validator = new Validator({ email: 'johndoe@gmail.com.kh' }, { email: 'email' })
+    expect(validator.passes()).toBeTruthy()
+  })
+
+  it('should failed with double dots in email', () => {
+    const validator = new Validator({ email: 'john..doe@gmail.com' }, { email: 'email' })
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.passes()).toBeFalsy()
+  })
+
+  it('should failed with _ in email', () => {
+    const validator = new Validator({ email: 'john_doe@gmail.com' }, { email: 'email' })
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.passes()).toBeFalsy()
+  })
+
+  it('should failed when email contain _ and dots', () => {
+    const validator = new Validator({ email: 'john_.doe@gmail.com' }, { email: 'email' })
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.passes()).toBeFalsy()
+  })
+
+  it('should failed when first character contain ascii letter', () => {
+    const validator = new Validator({ email: '.john.doe@gmail.com' }, { email: 'email' })
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.passes()).toBeFalsy()
+  })
+
+  it('should failed when first character contain _', () => {
+    const validator = new Validator({ email: '_john.doe@gmail.com' }, { email: 'email' })
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.passes()).toBeFalsy()
+  })
+
+  it('should pass when number is the first letter of email', () => {
+    const validator = new Validator({ email: '09john.doe@gmail.com' }, { email: 'email' })
+    expect(validator.fails()).toBeFalsy()
     expect(validator.passes()).toBeTruthy()
   })
 })

@@ -3,11 +3,11 @@
   "type": "module",
   "version": "2.0.3",
   "packageManager": "pnpm@8.15.5",
-  "description": "The validatorjs library makes data validation in JavaScript very easy in both the browser and Node.js.",
+  "description": "The validator.js library makes data validation in JavaScript very easy in both the browser and Node.js.",
   "author": {
     "name": "Chantouch Sek",
     "email": "chantouchsek.cs83@gmail.com",
-    "url": "https://chantouch.me"
+    "url": "https://chantouchsek.me"
   },
   "license": "MIT",
   "homepage": "https://github.com/chantouchsek/validatorjs#readme",
