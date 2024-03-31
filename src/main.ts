@@ -126,13 +126,9 @@ export class Validator {
   }
 
   _hasRule(attribute: string, findRules: string[]) {
-    const rules = this.rules[attribute]
-    for (const { name } of rules) {
-      if (findRules.includes(name))
-        return true
-    }
-
-    return false
+    // eslint-disable-next-line ts/ban-ts-comment
+    // @ts-expect-error
+    return this.rules[attribute].some(({ name }) => findRules.includes(name))
   }
 
   _isValidatable(rule: SimpleObject, value: any): boolean {
@@ -274,35 +270,23 @@ export class Validator {
   }
 
   _shouldStopValidating(attribute: string, rulePassed: any) {
-    const stopOnAttributes = this.stopOnAttributes
-    const isUndefined = typeof stopOnAttributes === 'undefined'
-    if (isUndefined || stopOnAttributes === false || rulePassed === true)
+    if (!this.stopOnAttributes || rulePassed)
       return false
-
-    if (Array.isArray(stopOnAttributes))
-      return stopOnAttributes.includes(attribute)
-
-    return true
+    return Array.isArray(this.stopOnAttributes) ? this.stopOnAttributes.includes(attribute) : true
   }
 
   _suppliedWithData(attribute: string) {
-    function hasNested(obj: SimpleObject | undefined, key: string, ...args: string[]): boolean {
-      if (obj === undefined)
+    const keys = attribute.split('.')
+    let obj = this.input
+
+    for (const key of keys) {
+      if (!obj || !hasOwnProperty(obj, key))
         return false
 
-      if (args.length === 0 && hasOwnProperty(obj, key))
-        return true
-
-      // eslint-disable-next-line ts/ban-ts-comment
-      // @ts-expect-error
-      return hasNested(obj[key], ...args)
+      obj = obj[key]
     }
 
-    const keys = attribute.split('.')
-
-    // eslint-disable-next-line ts/ban-ts-comment
-    // @ts-expect-error
-    return hasNested(this.input, ...keys)
+    return true
   }
 
   check() {
