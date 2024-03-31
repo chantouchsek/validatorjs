@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/chantouchsek/validatorjs/compare/v2.0.3...v2.1.0) (2024-03-31)
+
+
+### Features
+
+* :beers: validate min/max of email username ([b052352](https://github.com/chantouchsek/validatorjs/commit/b052352afbb552b77fc86901f88b7daf4938965b))
+* :sparkles: make email validate more strict and add test ([d12ce51](https://github.com/chantouchsek/validatorjs/commit/d12ce517daa6ca871a7d152d9c1f147f9fae2136))
+
 ### [2.0.3](https://github.com/chantouchsek/validatorjs/compare/v2.0.2...v2.0.3) (2024-03-28)
 
 ### [2.0.2](https://github.com/chantouchsek/validatorjs/compare/v2.0.1...v2.0.2) (2024-02-16)
