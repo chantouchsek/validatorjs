@@ -55,7 +55,7 @@ describe('email validation rule', () => {
     expect(validator.passes()).toBeTruthy()
   })
 
-  it('should pass with the email addresses at domain 3-n level', () => {
+  it('should pass with the email addresses at domain 3-n levels', () => {
     const validator = new Validator({ email: 'johndoe@gmail.com.kh' }, { email: 'email' })
     expect(validator.passes()).toBeTruthy()
   })

@@ -36,11 +36,13 @@ const ar = {
   integer: 'الصفة :attribute يجب أن تكون عدد صحيح',
   max: {
     array: 'الصفة :attribute يجب أن لا تحتوي أكثر من :max عنصر.',
+    file: 'الصفة :attribute يجب أن لا تكون أكبر من :max كيلوبايت.',
     numeric: 'الصفة :attribute لا يمكن أن تكون أكبر من  :max.',
     string: 'الصفة :attribute يجب أن لا تكون أكثر من :max حرف.',
   },
   min: {
     array: 'الصفة :attribute يجب أن تحتوي على الأقل :min عنصر.',
+    file: 'الصفة :attribute يجب أن تكون على الأقل :min كيلوبايت.',
     numeric: 'الصفة :attribute يجب أن تكون :min على الأقل',
     string: 'الصفة :attribute يجب أن تكون :min حرف على الأقل.',
   },
