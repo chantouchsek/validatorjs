@@ -22,13 +22,10 @@ export default class Messages {
     if (_snakeCase in attributeNames || camelCase in attributeNames)
       return attributeNames[_snakeCase] ?? attributeNames[camelCase]
 
-    if (attribute in attributes)
-      name = get(attributes, attribute)
-    else if (this.attributeFormatter)
-      name = this.attributeFormatter(name)
+    if (attribute in attributes) name = get(attributes, attribute)
+    else if (this.attributeFormatter) name = this.attributeFormatter(name)
 
-    while (name.includes('confirmation'))
-      name = name.replace(/\sconfirmation/g, '')
+    while (name.includes('confirmation')) name = name.replace(/\sconfirmation/g, '')
 
     return name
   }
@@ -48,8 +45,7 @@ export default class Messages {
         break
       }
     }
-    if (typeof template === 'object')
-      template = template[rule._getValueType()]
+    if (typeof template === 'object') template = template[rule._getValueType()]
 
     return template
   }
@@ -168,15 +164,12 @@ export default class Messages {
   }
 
   render(rule: Rule) {
-    if (rule.customMessages)
-      return rule.customMessages
+    if (rule.customMessages) return rule.customMessages
 
     const template = this._getTemplate(rule)
     let message: string
-    if (Messages.replacements[rule.name])
-      message = Messages.replacements[rule.name].apply(this, [template, rule])
-    else
-      message = this._replacePlaceholders(rule, template, {})
+    if (Messages.replacements[rule.name]) message = Messages.replacements[rule.name].apply(this, [template, rule])
+    else message = this._replacePlaceholders(rule, template, {})
 
     return message
   }

@@ -7,15 +7,11 @@ type OnResolvedAll = (allPassed: boolean) => any
 export default class AsyncResolvers {
   private failed: any[]
   private firing: boolean
-  private readonly onFailedOne: OnFailedOne
-  private readonly onResolvedAll: OnResolvedAll
   private passed: any[]
   private readonly resolvers: SimpleObject = {}
   private resolversCount: number
 
-  constructor(onFailedOne: OnFailedOne, onResolvedAll: OnResolvedAll) {
-    this.onResolvedAll = onResolvedAll
-    this.onFailedOne = onFailedOne
+  constructor(private readonly onFailedOne: OnFailedOne, private readonly onResolvedAll: OnResolvedAll) {
     this.resolvers = {}
     this.resolversCount = 0
     this.passed = []
