@@ -65,7 +65,7 @@ describe('email validation rule', () => {
     expect(validator.passes()).toBeFalsy()
   })
 
-  it('validate the all valid emails', () => {
+  it('validate all the valid emails', () => {
     const emails = [
       'john.doe@gmail.com',
       'john_doe@gmail.com',
@@ -86,7 +86,7 @@ describe('email validation rule', () => {
     })
   })
 
-  it('validate the all invalid emails', () => {
+  it('validate all the invalid emails', () => {
     const emails = [
       '.john.doe@gmail.com',
       '.john_doe@gmail.com',
