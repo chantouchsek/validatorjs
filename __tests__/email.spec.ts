@@ -55,7 +55,7 @@ describe('email validation rule', () => {
     expect(validator.passes()).toBeTruthy()
   })
 
-  it('should pass with the email addresses containing country designation (kh)', () => {
+  it('should pass with the email addresses at domain 3-n level', () => {
     const validator = new Validator({ email: 'johndoe@gmail.com.kh' }, { email: 'email' })
     expect(validator.passes()).toBeTruthy()
   })

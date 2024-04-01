@@ -20,10 +20,14 @@ const da = {
   in: 'Det valgte :attribute er ugyldigt.',
   integer: ':attribute skal være et heltal.',
   max: {
+    array: ':attribute må ikke have mere end :max elementer.',
+    file: ':attribute må ikke være større end :max kilobytes.',
     numeric: ':attribute skal være højest :max.',
     string: ':attribute skal være højest :max tegn.',
   },
   min: {
+    array: ':attribute skal have mindst :min elementer.',
+    file: ':attribute skal være mindst :min kilobytes.',
     numeric: ':attribute skal være mindst :min.',
     string: ':attribute skal være mindst :min tegn.',
   },

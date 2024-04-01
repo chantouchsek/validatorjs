@@ -35,10 +35,12 @@ const ar = {
   in: 'الصفة :attribute المختارة، غير صحيحة.',
   integer: 'الصفة :attribute يجب أن تكون عدد صحيح',
   max: {
+    array: 'الصفة :attribute يجب أن لا تحتوي أكثر من :max عنصر.',
     numeric: 'الصفة :attribute لا يمكن أن تكون أكبر من  :max.',
     string: 'الصفة :attribute يجب أن لا تكون أكثر من :max حرف.',
   },
   min: {
+    array: 'الصفة :attribute يجب أن تحتوي على الأقل :min عنصر.',
     numeric: 'الصفة :attribute يجب أن تكون :min على الأقل',
     string: 'الصفة :attribute يجب أن تكون :min حرف على الأقل.',
   },

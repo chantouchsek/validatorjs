@@ -26,10 +26,14 @@ const km = {
   in: ':attribute ដែលបានជ្រើសរើសមិនត្រឹមត្រូវទេ។',
   integer: ':attribute ត្រូវតែជាចំនួនគត់។',
   max: {
+    array: ':attribute មិនអាចមានច្រើនជាង :max ធាតុ។',
+    file: ':attribute មិនអាចធំជាង :max គីឡូបៃ។',
     numeric: ':attribute មិនអាចធំជាង :max។',
     string: ':attribute មិនអាចធំជាង :max តួរអក្សរ។',
   },
   min: {
+    array: ':attribute ត្រូវតែមានយ៉ាងហោច :min ធាតុ។',
+    file: ':attribute ត្រូវតែមានយ៉ាងហោច :min គីឡូបៃ។',
     numeric: ':attribute ត្រូវតែយ៉ាងហោចណាស់ :min។',
     string: ':attribute ត្រូវតែយ៉ាងហោចណាស់ :min តួរអក្សរ។',
   },

@@ -36,7 +36,8 @@ export class Rule {
   _getValueType() {
     if (typeof this.input === 'number' || this.validator._hasNumericRule(this.attribute))
       return 'numeric'
-
+    else if (Array.isArray(this.input))
+      return 'array'
     return 'string'
   }
 

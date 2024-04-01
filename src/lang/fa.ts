@@ -16,10 +16,14 @@ const fa = {
   in: 'فیلد :attribute انتخاب شده صحیح نمی باشد',
   integer: 'فیلد :attribute می بایست عددی باشد',
   max: {
+    array: 'فیلد :attribute نباید بیشتر از :max آیتم داشته باشد',
+    file: 'فیلد :attribute نباید بیشتر از :max کیلوبایت باشد',
     numeric: 'فیلد :attribute می بایست از :max کوچکتر باشد',
     string: 'فیلد :attribute نباید بیشتر از :max کاراکتر طول داشته باشد',
   },
   min: {
+    array: 'فیلد :attribute می بایست حداقل شامل :min آیتم باشد',
+    file: 'فیلد :attribute می بایست حداقل :min کیلوبایت باشد',
     numeric: 'فیلد :attribute می بایست از :min بزرگتر باشد',
     string: 'فیلد :attribute بایستی حداقل :min کاراکتر طول داشته باشد',
   },

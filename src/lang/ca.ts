@@ -15,10 +15,14 @@ const ca = {
   in: 'El camp :attribute es invàlid.',
   integer: 'El camp :attribute pot ser un nombre enter.',
   max: {
+    array: 'El camp :attribute no pot tenir més de :max ítems.',
+    file: 'El camp :attribute no pot ser major a :max kilobytes.',
     numeric: 'El camp :attribute no pot ser mayor a :max.',
     string: 'El camp :attribute no pot ser mayor que :max caràcters.',
   },
   min: {
+    array: 'El camp :attribute pot contenir al menys :min ítems.',
+    file: 'El camp :attribute pot ser de al menys :min kilobytes.',
     numeric: 'La mida del camp :attribute pot ser de al menys :min.',
     string: 'El camp :attribute pot contenir al menys :min caràcters.',
   },

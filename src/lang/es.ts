@@ -15,10 +15,14 @@ const es = {
   in: 'El campo :attribute es inválido.',
   integer: 'El campo :attribute debe ser un número entero.',
   max: {
+    array: 'El campo :attribute no puede tener más de :max ítems.',
+    file: 'El campo :attribute no puede ser mayor a :max kilobytes.',
     numeric: 'El campo :attribute no debe ser mayor a :max.',
     string: 'El campo :attribute no debe ser mayor que :max caracteres.',
   },
   min: {
+    array: 'El campo :attribute puede contener al menos :min ítems.',
+    file: 'El campo :attribute puede ser de al menos :min kilobytes.',
     numeric: 'El tamaño del campo :attribute debe ser de al menos :min.',
     string: 'El campo :attribute debe contener al menos :min caracteres.',
   },
