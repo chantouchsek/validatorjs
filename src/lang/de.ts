@@ -20,10 +20,14 @@ const de = {
   in: 'Der gewählte Wert für :attribute ist ungültig.',
   integer: 'Das :attribute Feld muss eine ganze Zahl sein.',
   max: {
+    array: 'Das :attribute Feld darf maximal :max Elemente haben.',
+    file: 'Das :attribute Feld darf maximal :max Kilobytes haben.',
     numeric: 'Das :attribute Feld darf maximal :max sein.',
     string: 'Das :attribute Feld darf maximal :max Zeichen haben.',
   },
   min: {
+    array: 'Das :attribute Feld muss mindestens :min Elemente haben.',
+    file: 'Das :attribute Feld muss mindestens :min Kilobytes haben.',
     numeric: 'Das :attribute Feld muss mindestens :min sein.',
     string: 'Das :attribute Feld muss mindestens :min Zeichen lang sein.',
   },

@@ -16,14 +16,10 @@ export default class Errors {
 
   add(field: string, message: string | string[], forceUpdate?: boolean) {
     const messages = Array.isArray(message) ? message : [message]
-    if (this.missed(field))
-      this.errors[field] = []
-    if (this.errors[field].every(s => !messages.includes(s)))
-      this.errors[field].unshift(...messages)
-    if (forceUpdate) {
-      this.errors[field] = []
-      this.errors[field].push(...messages)
-    }
+    this.errors[field] = this.errors[field] || []
+
+    if (forceUpdate || this.errors[field].every(s => !messages.includes(s)))
+      this.errors[field] = [...messages, ...this.errors[field]]
   }
 
   all() {
@@ -43,9 +39,8 @@ export default class Errors {
 
   first(field: string | string[]) {
     const fields = this._getFields(field)
-    const fd = fields.find(f => f in this.errors)
-    const value = this.get(fd ?? field)
-    return value[0]
+    const errorField = fields.find(f => f in this.errors) ?? field
+    return this.get(errorField)[0]
   }
 
   flush() {
@@ -54,11 +49,7 @@ export default class Errors {
 
   get(field: string | string[]) {
     const fields = Array.isArray(field) ? field : [field]
-    for (const f of fields) {
-      if (this.has(f))
-        return get(this.errors, f, [])
-    }
-    return []
+    return fields.find(f => this.has(f)) ? get(this.errors, fields.find(f => this.has(f)) || '', []) : []
   }
 
   has(field: string | string[]) {

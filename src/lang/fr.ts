@@ -15,10 +15,14 @@ const fr = {
   in: 'Le champ :attribute est invalide.',
   integer: 'Le champ :attribute doit être un entier.',
   max: {
+    array: 'Le champ :attribute ne peut pas contenir plus de :max éléments.',
+    file: 'Le champ :attribute ne peut pas être supérieur à :max kilo-octets.',
     numeric: 'Le champ :attribute doit être inférieur à :max.',
     string: 'Le champ :attribute doit contenir moins de :max caractères.',
   },
   min: {
+    array: 'Le champ :attribute doit contenir au moins :min éléments.',
+    file: 'Le champ :attribute doit être supérieur à :min kilo-octets.',
     numeric: 'Le champ :attribute doit être supérieur à :min.',
     string: 'Le champ :attribute doit contenir plus de :min caractères.',
   },

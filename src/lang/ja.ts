@@ -20,10 +20,14 @@ const ja = {
   in: '選択された:attributeは無効です。',
   integer: ':attributeは整数で入力してください。',
   max: {
+    array: ':attributeは:max以下で入力してください。',
+    file: ':attributeは:maxKB以下で入力してください。',
     numeric: ':attributeは:max以下で入力してください。',
     string: ':attributeは:max文字以下で入力してください。',
   },
   min: {
+    array: ':attributeは:min以上で入力してください。',
+    file: ':attributeは:minKB以上で入力してください。',
     numeric: ':attributeは:min以上で入力してください。',
     string: ':attributeは:min文字以上で入力してください。',
   },

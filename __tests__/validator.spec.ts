@@ -13,8 +13,6 @@ describe('validator constructor', () => {
   })
 
   it('should expose on window if browser', () => {
-    // eslint-disable-next-line ts/ban-ts-comment
-    // @ts-expect-error
     if (typeof window !== 'undefined') {
       // eslint-disable-next-line ts/ban-ts-comment
       // @ts-expect-error

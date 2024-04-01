@@ -23,10 +23,14 @@ const en = {
   in: 'The selected :attribute is invalid.',
   integer: 'The :attribute must be an integer.',
   max: {
+    array: 'The :attribute must be at least :max items.',
+    file: 'The :attribute may not be greater than :max kilobytes.',
     numeric: 'The :attribute may not be greater than :max.',
     string: 'The :attribute may not be greater than :max characters.',
   },
   min: {
+    array: 'The :attribute may not be greater than :min items.',
+    file: 'The :attribute must be at least :min kilobytes.',
     numeric: 'The :attribute must be at least :min.',
     string: 'The :attribute must be at least :min characters.',
   },

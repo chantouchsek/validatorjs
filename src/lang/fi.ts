@@ -20,10 +20,14 @@ const fi = {
   in: 'Valittu :attribute ei kelpaa.',
   integer: ':attribute ei ole numero.',
   max: {
+    array: ':attribute ei saa olla yli :max kohdetta.',
+    file: ':attribute ei saa olla yli :max kilotavua.',
     numeric: ':attribute on oltava enintään :max.',
     string: ':attribute on oltava enintään :max merkkiä pitkä.',
   },
   min: {
+    array: ':attribute on oltava vähintään :min kohdetta.',
+    file: ':attribute on oltava vähintään :min kilotavua.',
     numeric: ':attribute on oltava vähintään :min.',
     string: ':attribute on oltava vähintään :min merkkiä pitkä.',
   },

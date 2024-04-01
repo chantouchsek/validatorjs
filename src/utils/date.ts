@@ -12,18 +12,14 @@ export function checkFalsePositiveDates(dateString: string) {
         const d = Number.parseInt(parts[2])
         if (m === 2) {
           if (leapYear(y)) {
-            if (d > 29)
-              return false
+            if (d > 29) return false
           }
           else {
-            if (d > 28)
-              return false
+            if (d > 28) return false
           }
         }
-        if (m === 4 || m === 6 || m === 9 || m === 11) {
-          if (d > 30)
-            return false
-        }
+        if (m === 4 || m === 6 || m === 9 || m === 11)
+          if (d > 30) return false
       }
     }
     return true

@@ -20,10 +20,14 @@ const tr = {
   in: 'Seçilen :attribute geçerli değil.',
   integer: ':attribute tam sayı olmalı.',
   max: {
+    array: ':attribute en fazla :max olabilir.',
+    file: ':attribute en fazla :max kilobayt olabilir.',
     numeric: ':attribute en çok :max olabilir.',
     string: ':attribute uzunluğu en çok :max karakter uzunluğunda olabilir.',
   },
   min: {
+    array: ':attribute en az :min olmalı.',
+    file: ':attribute en az :min kilobayt olmalı.',
     numeric: ':attribute en az :min olmalı.',
     string: ':attribute en az :min karakter uzunluğunda olmalı.',
   },

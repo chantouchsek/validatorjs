@@ -33,67 +33,18 @@ describe('email validation rule', () => {
     expect(validator.fails()).toBeFalsy()
   })
 
-  it('should pass with first.last@example.com', () => {
-    const validator = new Validator({ email: 'first.last@example.com' }, { email: 'email' })
+  it('should pass with the email addresses at domain 3-n levels', () => {
+    const emails = [
+      'john.doe@jänt.de', // containing umlauts
+      'johndoe@gmail.com.uk', // containing country designation (uk)
+      'johndoe@gmail.com.au', // containing country designation (au)
+      'johndoe@gmail.com.kh', // containing country designation (kh)
+    ]
 
-    expect(validator.passes()).toBeTruthy()
-    expect(validator.fails()).toBeFalsy()
-  })
-
-  it('should pass with the email addresses containing umlauts: john.doe@jänt.de', () => {
-    const validator = new Validator({ email: 'john.doe@jänt.de' }, { email: 'email' })
-    expect(validator.passes()).toBeTruthy()
-  })
-
-  it('should pass with the email addresses containing country designation (uk)', () => {
-    const validator = new Validator({ email: 'johndoe@gmail.com.uk' }, { email: 'email' })
-    expect(validator.passes()).toBeTruthy()
-  })
-
-  it('should pass with the email addresses containing country designation (au)', () => {
-    const validator = new Validator({ email: 'johndoe@gmail.com.au' }, { email: 'email' })
-    expect(validator.passes()).toBeTruthy()
-  })
-
-  it('should pass with the email addresses containing country designation (kh)', () => {
-    const validator = new Validator({ email: 'johndoe@gmail.com.kh' }, { email: 'email' })
-    expect(validator.passes()).toBeTruthy()
-  })
-
-  it('should failed with double dots in email', () => {
-    const validator = new Validator({ email: 'john..doe@gmail.com' }, { email: 'email' })
-    expect(validator.fails()).toBeTruthy()
-    expect(validator.passes()).toBeFalsy()
-  })
-
-  it('should failed with _ in email', () => {
-    const validator = new Validator({ email: 'john_doe@gmail.com' }, { email: 'email' })
-    expect(validator.fails()).toBeTruthy()
-    expect(validator.passes()).toBeFalsy()
-  })
-
-  it('should failed when email contain _ and dots', () => {
-    const validator = new Validator({ email: 'john_.doe@gmail.com' }, { email: 'email' })
-    expect(validator.fails()).toBeTruthy()
-    expect(validator.passes()).toBeFalsy()
-  })
-
-  it('should failed when first character contain ascii letter', () => {
-    const validator = new Validator({ email: '.john.doe@gmail.com' }, { email: 'email' })
-    expect(validator.fails()).toBeTruthy()
-    expect(validator.passes()).toBeFalsy()
-  })
-
-  it('should failed when first character contain _', () => {
-    const validator = new Validator({ email: '_john.doe@gmail.com' }, { email: 'email' })
-    expect(validator.fails()).toBeTruthy()
-    expect(validator.passes()).toBeFalsy()
-  })
-
-  it('should pass when number is the first letter of email', () => {
-    const validator = new Validator({ email: '09john.doe@gmail.com' }, { email: 'email' })
-    expect(validator.fails()).toBeFalsy()
-    expect(validator.passes()).toBeTruthy()
+    emails.forEach((email) => {
+      const validator = new Validator({ email }, { email: 'email' })
+      expect(validator.passes()).toBeTruthy()
+    })
   })
 
   it('should pass when min:6 and max:30', () => {
@@ -112,5 +63,40 @@ describe('email validation rule', () => {
     const validator = new Validator({ email: 'johnxxxxxxxxxxxxxxxxxxxxxx@gmail.com' }, { email: 'email|min:6|max:10' })
     expect(validator.fails()).toBeTruthy()
     expect(validator.passes()).toBeFalsy()
+  })
+
+  it('validate all the valid emails', () => {
+    const emails = [
+      'john.doe@gmail.com',
+      'john_doe@gmail.com',
+      'john_.doe@gmail.com',
+      'john._doe@gmail.com',
+      '9john_doe@gmail.com',
+      'john._.doe@gmail.com',
+      '0john.doe@gmail.com',
+      'john.__doe@gmail.com',
+      'john.__.doe@gmail.com',
+      'john_.doe@gmail.com',
+      '_john.doe@gmail.com',
+    ]
+
+    emails.forEach((email) => {
+      const validator = new Validator({ email }, { email: 'email' })
+      expect(validator.passes()).toBeTruthy()
+    })
+  })
+
+  it('validate all the invalid emails', () => {
+    const emails = [
+      '.john.doe@gmail.com',
+      '.john_doe@gmail.com',
+      'john..doe@gmail.com',
+      'john.doe@gmail..com',
+      'john.doe@gmail._com',
+    ]
+    emails.forEach((email) => {
+      const validator = new Validator({ email }, { email: 'email' })
+      expect(validator.fails()).toBeTruthy()
+    })
   })
 })
