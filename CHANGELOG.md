@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.1](https://github.com/chantouchsek/validatorjs/compare/v2.1.0...v2.1.1) (2024-04-01)
+
+
+### Bug Fixes
+
+* correct test name ([884def0](https://github.com/chantouchsek/validatorjs/commit/884def08fad38c072201e192f2b714d96fe38114))
+* remove underscores check from email rule and update tests ([c9b2ba6](https://github.com/chantouchsek/validatorjs/commit/c9b2ba64cea7041af53ca8ac9b1ca620d807841c))
+
 ## [2.1.0](https://github.com/chantouchsek/validatorjs/compare/v2.0.3...v2.1.0) (2024-03-31)
 
 
