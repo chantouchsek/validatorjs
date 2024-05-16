@@ -1,3 +1,3 @@
 export function alpha_num(value: string) {
-  return /^[a-zA-Z0-9]+$/.test(value)
+  return /^[a-z0-9]+$/i.test(value)
 }
