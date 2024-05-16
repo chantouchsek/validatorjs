@@ -3,7 +3,7 @@ export function ipv4(value: number | string) {
     return false
 
   // regex to check that each octet is valid
-  const er = /^[0-9]+$/
+  const er = /^\d+$/
   // ipv4 octets are delimited by dot
   const octets = value.split('.')
   // check 1: ipv4 address should contain 4 octets

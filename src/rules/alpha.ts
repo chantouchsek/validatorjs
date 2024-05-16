@@ -1,3 +1,3 @@
 export function alpha(value: string) {
-  return /^[a-zA-Z]+$/.test(value)
+  return /^[a-z]+$/i.test(value)
 }
