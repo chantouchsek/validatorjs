@@ -35,6 +35,7 @@ const fa = {
   required_if: 'در صورت دادن :value به :other تکمیل فیلد :attribute الزامی است',
   same: 'فیلد :attribute می بایست با فیلد :same یکی باشد',
   size: {
+    array: 'فیلد :attribute می بایست شامل :size آیتم باشد',
     numeric: 'فیلد :attribute می بایست :size باشد',
     string: 'فیلد :attribute می بایست :size کاراکتر طول داشته باشد',
   },

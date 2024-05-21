@@ -44,6 +44,7 @@ const fi = {
   required_without_all: ':attribute kenttä on pakollinen, jos kentät :fields ovat tyhjiä.',
   same: ':attribute ja :same on oltava samat.',
   size: {
+    array: ':attribute on oltava :size kohdetta.',
     numeric: ':attribute on oltava :size.',
     string: ':attribute on oltava :size merkkiä pitkä.',
   },

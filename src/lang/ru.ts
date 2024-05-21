@@ -30,6 +30,7 @@ const ru = {
   required_if: 'Поле :attribute требуется когда значения поля :other равно :value.',
   same: 'Значение :attribute должно совпадать с :same.',
   size: {
+    array: 'Количество элементов в поле :attribute должно быть равно :size.',
     numeric: 'Значение поля :attribute должно быть равным :size.',
     string: 'Количество символов в поле :attribute должно быть равно :size.',
   },

@@ -59,6 +59,8 @@ const ar = {
   required_without_all: 'حقل الصفة :attribute مطلوب حين تكون الحقول :fields فارغة.',
   same: 'حقل الصفة :attribute و حقل الصفة :same يجب أن يتطابقا.',
   size: {
+    array: 'الصفة :attribute يجب أن تحتوي على :size عنصر.',
+    file: 'الصفة :attribute يجب أن تكون :size كيلوبايت.',
     numeric: 'الصفة :attribute يجب أن تكون :size.',
     string: 'الصفة :attribute يجب أن تكون :size حرفا.',
   },

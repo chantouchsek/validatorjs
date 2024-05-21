@@ -24,12 +24,15 @@ describe('array rule', () => {
     const validator = new Validator(
       {
         names: [],
+        roles: [],
       },
       {
         names: 'array|min:1',
+        roles: 'required|array|size:1',
       },
     )
     expect(validator.fails()).toBeTruthy()
     expect(validator.passes()).toBeFalsy()
+    expect(validator.errors.first('roles')).toEqual('The roles must contain 1 items.')
   })
 })

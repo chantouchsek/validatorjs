@@ -34,6 +34,8 @@ const fr = {
   required_if: 'Le champ :attribute est requis quand :other est :value.',
   same: 'Les champs :attribute et :same doivent correspondre.',
   size: {
+    array: 'Le champ :attribute doit contenir :size éléments.',
+    file: 'Le champ :attribute doit être de :size kilo-octets.',
     numeric: 'Le champ :attribute doit être égal à :size.',
     string: 'Le champ :attribute doit contenir :size caractères.',
   },
