@@ -31,6 +31,8 @@ const vi = {
   required_if: ':attribute là bắt buộc khi :other có giá trị :value.',
   same: 'Giá trị của :attribute và :same phải như nhau.',
   size: {
+    array: ':attribute phải chứa :size phần tử.',
+    file: ':attribute phải có kích thước :size kilobytes.',
     numeric: ':attribute phải có chiều dài của bằng :size.',
     string: 'Số ký tự của :attribute phải là :size ký tự.',
   },

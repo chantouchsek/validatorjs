@@ -30,6 +30,8 @@ const it = {
   required_if: 'Il campo :attribute è richiesto quando il campo :other è uguale a :value.',
   same: 'I campi :attribute e :same devono essere uguali.',
   size: {
+    array: 'Il campo :attribute deve contenere :size elementi.',
+    file: 'Il campo :attribute deve essere grande :size kilobytes.',
     numeric: 'La dimensione del campo :attribute deve essere uguale a :size.',
     string: 'Il campo :attribute deve essere di :size caratteri.',
   },

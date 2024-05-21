@@ -47,6 +47,8 @@ const en = {
   required_without_all: 'The :attribute field is required when :fields are empty.',
   same: 'The :attribute and :same fields must match.',
   size: {
+    array: 'The :attribute must contain :size items.',
+    file: 'The :attribute must be :size kilobytes.',
     numeric: 'The :attribute must be :size.',
     string: 'The :attribute must be :size characters.',
   },

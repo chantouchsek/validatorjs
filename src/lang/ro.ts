@@ -40,6 +40,8 @@ const ro = {
   required_without_all: 'Câmpul :attribute este obligatoriu cănd :fields nu sunt completate.',
   same: 'Câmpurile :attribute și :same trebuie să fie egale.',
   size: {
+    array: ':attribute trebuie să conțină :size elemente.',
+    file: ':attribute trebuie să aibă :size kilobytes.',
     numeric: ':attribute trebuie să fie :size.',
     string: ':attribute trebuie să contina :size caractere.',
   },

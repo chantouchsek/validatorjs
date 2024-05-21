@@ -45,6 +45,8 @@ const ja = {
   required_without_all: ':fieldsが空欄なら:attributeは必須です。',
   same: ':attributeと:sameは同じでなければなりません。',
   size: {
+    array: ':attributeは:size個選択してください。',
+    file: ':attributeは:sizeKBで入力してください。',
     numeric: ':attributeは:sizeを入力してください。',
     string: ':attributeは:size文字で入力してください。',
   },

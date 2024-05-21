@@ -50,6 +50,8 @@ const km = {
   required_without_all: ':attribute ត្រូវបានទាមទារពេលណា :fields គឺទទេរ។',
   same: ':attribute និង :same ត្រូវតែដូចគ្នា។',
   size: {
+    array: ':attribute ត្រូវតែមាន :size ធាតុ។',
+    file: ':attribute ត្រូវតែមាន :size គីឡូបៃ។',
     numeric: ':attribute ត្រូវតែជា :size។',
     string: ':attribute ត្រូវតែជា :size តួរអក្សរ។',
   },

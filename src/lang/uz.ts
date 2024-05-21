@@ -31,6 +31,8 @@ const uz = {
     'Поле :attribute требуется когда значения поля :other равно :value. :attribute maydoni :other maydonining qiymati :value bo`lganida talab qilinadi.',
   same: ':atribute qiymati :same bilan mos kelishi kerak.',
   size: {
+    array: ':attribute maydoni :size elementdan iborat bo`lishi kerak.',
+    file: ':attribute maydoni :size kilobaytdan iborat bo`lishi kerak.',
     numeric: ':attribute maydonining qiymati :size o`lchamiga teng bo`lishi kerak.',
     string: ':attribute maydonidagi belgilar soni :size ta bo`lishi kerak.',
   },

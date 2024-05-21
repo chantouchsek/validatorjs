@@ -44,6 +44,8 @@ const da = {
   required_without_all: ':attribute skal udfyldes når ingen af :fields er udfyldt.',
   same: ':attribute og :same skal være ens.',
   size: {
+    array: ':attribute skal indeholde :size elementer.',
+    file: ':attribute skal være :size kilobytes.',
     numeric: ':attribute skal være :size.',
     string: ':attribute skal være :size tegn lang.',
   },

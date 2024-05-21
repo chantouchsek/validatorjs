@@ -39,6 +39,8 @@ const se = {
   required_without_all: ':attribute måste vara ifyllt när ingen av :fields är ifyllda.',
   same: ':attribute och :same måste matcha.',
   size: {
+    array: ':attribute måste innehålla :size objekt.',
+    file: ':attribute måste vara :size kilobytes stor.',
     numeric: ':attribute måste vara :size.',
     string: ':attribute måste vara :size tecken lång.',
   },

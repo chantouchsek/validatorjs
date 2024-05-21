@@ -44,6 +44,8 @@ const tr = {
   required_without_all: ':attribute alanı :fields alanları boşsa gereklidir.',
   same: ':attribute ve :same aynı olmalı.',
   size: {
+    array: ':attribute :size eleman içermelidir.',
+    file: ':attribute :size kilobayt olmalıdır.',
     numeric: ':attribute :size olmalı.',
     string: ':attribute :size karakter uzunluğunda olmalı.',
   },

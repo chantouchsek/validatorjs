@@ -31,6 +31,8 @@ const nb_No = {
   required_if: ':attribute er påkrevd når :other er :value.',
   same: ':attribute og :same må være like.',
   size: {
+    array: ':attribute må inneholde :size elementer.',
+    file: ':attribute må være på :size kilobytes.',
     numeric: ':attribute må ha størrelsen :size.',
     string: ':attribute må ha :size tegn.',
   },

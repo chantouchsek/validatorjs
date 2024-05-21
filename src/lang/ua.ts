@@ -34,6 +34,8 @@ const ua = {
   required_if: 'Поле :attribute потрібне у випадку коли значення поля :other рівне :value.',
   same: 'Значеня поля :attribute повинно співпадати з :same.',
   size: {
+    array: 'Кількість елементів в полі :attribute повинно бути рівною :size.',
+    file: 'Розмір файлу в полі :attribute повинно бути рівним :size кілобайт.',
     numeric: 'Значення поля :attribute повинно бути рівним :size.',
     string: 'Кількість символів в полі :attribute повинна бути рівною :size.',
   },
