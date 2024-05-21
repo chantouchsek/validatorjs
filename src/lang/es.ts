@@ -34,6 +34,8 @@ const es = {
   required_if: 'El campo :attribute es obligatorio cuando :other es :value.',
   same: 'El campo :attribute y :same deben coincidir.',
   size: {
+    array: 'El campo :attribute debe contener :size ítems.',
+    file: 'El campo :attribute debe ser de :size kilobytes.',
     numeric: 'El tamaño del campo :attribute debe ser :size.',
     string: 'El campo :attribute debe contener :size caracteres.',
   },

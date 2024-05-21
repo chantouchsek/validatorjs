@@ -45,6 +45,7 @@ const fi = {
   same: ':attribute ja :same on oltava samat.',
   size: {
     array: ':attribute on oltava :size kohdetta.',
+    file: ':attribute on oltava :size kilotavua.',
     numeric: ':attribute on oltava :size.',
     string: ':attribute on oltava :size merkkiä pitkä.',
   },

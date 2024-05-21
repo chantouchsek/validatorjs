@@ -31,6 +31,8 @@ const zh = {
   required_if: '当:other是:value时,:attribute不能为空.',
   same: ':attribute和:same必须一致.',
   size: {
+    array: ':attribute必须包含:size个元素.',
+    file: ':attribute的大小必须为:sizeKB.',
     numeric: ':attribute必须等于:size.',
     string: ':attribute的长度必须等于:size.',
   },

@@ -34,6 +34,8 @@ const ca = {
   required_if: 'El camp :attribute es obligatori quan :other es :value.',
   same: 'El camp :attribute y :other poden coincidir.',
   size: {
+    array: 'El camp :attribute pot contenir :size ítems.',
+    file: 'El camp :attribute pot ser de :size kilobytes.',
     numeric: 'La mida del camp :attribute pot ser :size.',
     string: 'El camp :attribute pot contenir :size caràcters.',
   },

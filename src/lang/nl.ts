@@ -41,6 +41,7 @@ const nl = {
   same: 'De :attribute en :same velden moeten overeenkomen.',
   size: {
     array: 'Het :attribute veld moet :size items bevatten.',
+    file: 'Het :attribute veld moet :size kilobytes zijn.',
     numeric: 'Het :attribute veld moet :size zijn.',
     string: 'Het :attribute veld moet :size karakters bevatten.',
   },

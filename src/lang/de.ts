@@ -39,6 +39,8 @@ const de = {
   required_if: 'Das :attribute Feld muss ausgefüllt sein, wenn :other :value ist.',
   same: 'Die Felder :attribute und :same müssen übereinstimmen.',
   size: {
+    array: 'Das :attribute Feld muss :size Elemente haben.',
+    file: 'Das :attribute Feld muss :size Kilobytes haben.',
     numeric: 'Das :attribute Feld muss gleich :size sein.',
     string: 'Das :attribute Feld muss :size Zeichen lang sein.',
   },

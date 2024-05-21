@@ -40,6 +40,8 @@ const id = {
   required_without_all: ':attribute harus di isi jika :fields kosong.',
   same: ':attribute dan :same harus sama.',
   size: {
+    array: ':attribute harus berisi :size item.',
+    file: ':attribute harus berisi :size kilobytes.',
     numeric: ':attribute harus berisi :size.',
     string: ':attribute harus berisi :size karakter.',
   },

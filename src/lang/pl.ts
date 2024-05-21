@@ -43,6 +43,8 @@ const pl = {
   required_without_all: 'Pole :attribute jest wymagane, jeśli pola :fields są puste.',
   same: 'Pola :attribute i :same muszą być takie same.',
   size: {
+    array: 'Pole :attribute musi zawierać :size elementów.',
+    file: 'Pole :attribute musi mieć :size kilobajtów.',
     numeric: 'Pole :attribute musi być równe :size.',
     string: 'Pole :attribute musi zawierać :size znaków.',
   },

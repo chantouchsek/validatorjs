@@ -36,6 +36,8 @@ const el = {
   required_if: 'Το πεδίο :attribute είναι απαραίτητο όταν το πεδίο :other είναι :value.',
   same: 'Τα πεδία :attribute και :same πρέπει να είναι ίδια.',
   size: {
+    array: 'Το πεδίο :attribute πρέπει να περιέχει :size αντικείμενα.',
+    file: 'Το πεδίο :attribute πρέπει να έχει μέγεθος :size kilobytes.',
     numeric: 'Το πεδίο :attribute πρέπει να είναι :size.',
     string: 'Το πεδίο :attribute πρέπει να είναι :size χαρακτήρες.',
   },
