@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/chantouchsek/validatorjs/compare/v2.1.4...v2.2.0) (2024-05-31)
+
+
+### Features
+
+* add support wildcard attribtes ([6b48b10](https://github.com/chantouchsek/validatorjs/commit/6b48b10263ec37c2bd55f73c2edf9c95390f759b))
+
 ### [2.1.4](https://github.com/chantouchsek/validatorjs/compare/v2.1.3...v2.1.4) (2024-05-21)
 
 ### [2.1.3](https://github.com/chantouchsek/validatorjs/compare/v2.1.2...v2.1.3) (2024-05-21)
