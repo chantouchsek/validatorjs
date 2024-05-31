@@ -1,4 +1,4 @@
-import { get, snakeCase } from 'lodash-es'
+import { snakeCase } from 'lodash-es'
 import type { Rule } from './rule'
 import type { CbFunction, SimpleObject } from './types'
 import { flattenObject, toCamelCase } from './utils'
@@ -19,13 +19,19 @@ export default class Messages {
     const keys = new Set<string>([toCamelCase(attribute), snakeCase(attribute)])
 
     for (const [key, value] of Object.entries(attributes)) {
-      if (key.includes('*') && new RegExp(key).test(attribute)) name = value
+      if (key.includes('*') && new RegExp(`^${key.replace('*', '.*')}$`).test(attribute)) {
+        name = value
+      }
     }
 
-    if (attributes[attribute]) name = get(attributes, attribute)
-    else if (this.attributeFormatter) name = this.attributeFormatter(name)
+    if (this.attributeFormatter) {
+      name = this.attributeFormatter(name)
+    }
+
     keys.forEach((key) => {
-      if (key in attributes) name = attributes[key]
+      if (key in attributes) {
+        name = attributes[key]
+      }
     })
 
     return name
