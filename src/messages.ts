@@ -19,7 +19,7 @@ export default class Messages {
     const keys = new Set<string>([toCamelCase(attribute), snakeCase(attribute)])
 
     for (const [key, value] of Object.entries(attributes)) {
-      if (key.includes('*') && new RegExp(`^${key.replace('*', '.*')}$`).test(attribute)) {
+      if (key.includes('*') && new RegExp(`^${key.replace(/\*/g, '.*')}$`).test(attribute)) {
         name = value
       }
     }
