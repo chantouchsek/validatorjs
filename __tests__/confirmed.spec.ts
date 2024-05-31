@@ -6,7 +6,7 @@ describe('confirmed validation rule', () => {
     const validator = new Validator({ password: 'abc', password_confirmation: 'abcd' }, { password: 'confirmed' })
     expect(validator.passes()).toBeFalsy()
     expect(validator.fails()).toBeTruthy()
-    expect(validator.errors.first('password')).toEqual('The password confirmation does not match.')
+    expect(validator.errors.first('password')).toEqual('The password does not match.')
   })
 
   it('should pass with a matching confirmation field for the field under validation', () => {
@@ -42,14 +42,14 @@ describe('confirmed validation rule', () => {
         confirmedReverse: true,
         customAttributes: {
           form: {
-            password: 'Password',
-            passwordConfirmation: 'Password',
+            password: 'pwd',
+            passwordConfirmation: 'pwd confirmation',
           },
         },
       },
     )
     expect(validator.passes()).not.toBeTruthy()
     expect(validator.fails()).toBeTruthy()
-    expect(validator.errors.first('form.password_confirmation')).toEqual('The Password confirmation does not match.')
+    expect(validator.errors.first('form.passwordConfirmation')).toEqual('The pwd confirmation does not match.')
   })
 })

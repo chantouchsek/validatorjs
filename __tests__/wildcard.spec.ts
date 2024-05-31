@@ -129,4 +129,17 @@ describe('wildcard', () => {
       'conditions.0.values': ['Required'],
     })
   })
+  it('should it take the custom attributes if provide', () => {
+    const validator = new Validator(
+      { conditions: [{ age: null, values: null }] },
+      { 'conditions.*.age': 'required|integer', 'conditions.*.values': 'required' },
+      { customAttributes: { 'conditions.*.age': 'conditions age', 'conditions.*.values': 'conditions values' } },
+    )
+    expect(validator.fails()).toBeTruthy()
+    expect(validator.passes()).toBeFalsy()
+    expect(validator.errors.all()).toEqual({
+      'conditions.0.age': ['The conditions age field is required.'],
+      'conditions.0.values': ['The conditions values field is required.'],
+    })
+  })
 })

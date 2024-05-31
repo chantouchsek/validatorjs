@@ -1,4 +1,4 @@
-import { get, snakeCase } from 'lodash-es'
+import { snakeCase } from 'lodash-es'
 import type { Rule } from './rule'
 import type { CbFunction, SimpleObject } from './types'
 import { flattenObject, toCamelCase } from './utils'
@@ -15,17 +15,24 @@ export default class Messages {
 
   _getAttributeName(attribute: string): string {
     let name = attribute
-    const attributes = flattenObject(this.messages.attributes)
-    const attributeNames = flattenObject(this.attributeNames)
-    const camelCase = toCamelCase(attribute)
-    const _snakeCase = snakeCase(attribute)
-    if (_snakeCase in attributeNames || camelCase in attributeNames)
-      return attributeNames[_snakeCase] ?? attributeNames[camelCase]
+    const attributes = { ...flattenObject(this.messages.attributes), ...flattenObject(this.attributeNames) }
+    const keys = new Set<string>([toCamelCase(attribute), snakeCase(attribute)])
 
-    if (attribute in attributes) name = get(attributes, attribute)
-    else if (this.attributeFormatter) name = this.attributeFormatter(name)
+    for (const [key, value] of Object.entries(attributes)) {
+      if (key.includes('*') && new RegExp(`^${key.replace(/\*/g, '.*')}$`).test(attribute)) {
+        name = value
+      }
+    }
 
-    while (name.includes('confirmation')) name = name.replace(/\sconfirmation/g, '')
+    if (this.attributeFormatter) {
+      name = this.attributeFormatter(name)
+    }
+
+    keys.forEach((key) => {
+      if (key in attributes) {
+        name = attributes[key]
+      }
+    })
 
     return name
   }

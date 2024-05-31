@@ -15,7 +15,7 @@ const km = {
   before: ':attribute ត្រូវតែមុន :before។',
   before_or_equal: ':attribute ត្រូវតែស្មើរឺមុន :before_or_equal។',
   between: ':attribute ត្រូវតែស្ថិតនៅចន្លោះ :min និង :max។',
-  confirmed: ':attribute ការបញ្ជាក់មិនត្រូវគ្នា។',
+  confirmed: ':attribute មិនត្រូវគ្នា។',
   date: ':attribute មិនមែនជាទ្រង់ទ្រាយកាលបរិច្ឆេទត្រឹមត្រូវទេ។',
   def: ':attribute គុណលក្ខណៈមានកំហុស។',
   different: ':attribute និង :different ត្រូវតែមានភាពខុសគ្នា។',

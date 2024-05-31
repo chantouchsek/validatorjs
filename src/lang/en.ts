@@ -12,7 +12,7 @@ const en = {
     numeric: 'The :attribute field must be between :min and :max.',
     string: 'The :attribute field must be between :min and :max characters.',
   },
-  confirmed: 'The :attribute confirmation does not match.',
+  confirmed: 'The :attribute does not match.',
   date: 'The :attribute is not a valid date format.',
   def: 'The :attribute attribute has errors.',
   different: 'The :attribute and :different must be different.',
