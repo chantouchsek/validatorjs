@@ -108,8 +108,9 @@ export class Rule {
           return false
         }
         if (val && Array.isArray(val)) {
-          for (const va of val)
+          for (const va of val) {
             if (!list.includes(va)) return false
+          }
         }
         return true
       },
@@ -164,8 +165,9 @@ export class Rule {
       required_with_all(val: SimpleObject, req: string[]) {
         req = this.getParameters()
 
-        for (const re of req)
+        for (const re of req) {
           if (!get(this.validator.input, re)) return true
+        }
 
         return this.validator.getRule('required').validate(val, {})
       },
@@ -177,8 +179,9 @@ export class Rule {
       required_without_all(val: SimpleObject, req: string) {
         req = this.getParameters()
 
-        for (const re of req)
+        for (const re of req) {
           if (get(this.validator.input, re)) return true
+        }
 
         return this.validator.getRule('required').validate(val, {})
       },
@@ -276,8 +279,9 @@ export class Manager {
   ]
 
   isAsync(name: string) {
-    for (const rule of this.asyncRules)
+    for (const rule of this.asyncRules) {
       if (rule === name) return true
+    }
 
     return false
   }

@@ -18,8 +18,9 @@ export default class Messages {
     const attributes = { ...flattenObject(this.messages.attributes), ...flattenObject(this.attributeNames) }
     const keys = new Set<string>([toCamelCase(attribute), snakeCase(attribute)])
 
-    for (const [key, value] of Object.entries(attributes))
+    for (const [key, value] of Object.entries(attributes)) {
       if (key.includes('*') && new RegExp(key).test(attribute)) name = value
+    }
 
     if (attributes[attribute]) name = get(attributes, attribute)
     else if (this.attributeFormatter) name = this.attributeFormatter(name)
