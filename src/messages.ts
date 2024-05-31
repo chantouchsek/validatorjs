@@ -15,17 +15,17 @@ export default class Messages {
 
   _getAttributeName(attribute: string): string {
     let name = attribute
-    const attributes = flattenObject(this.messages.attributes)
-    const attributeNames = flattenObject(this.attributeNames)
-    const camelCase = toCamelCase(attribute)
-    const _snakeCase = snakeCase(attribute)
-    if (_snakeCase in attributeNames || camelCase in attributeNames)
-      return attributeNames[_snakeCase] ?? attributeNames[camelCase]
+    const attributes = { ...flattenObject(this.messages.attributes), ...flattenObject(this.attributeNames) }
+    const keys = new Set<string>([toCamelCase(attribute), snakeCase(attribute)])
 
-    if (attribute in attributes) name = get(attributes, attribute)
+    for (const [key, value] of Object.entries(attributes))
+      if (key.includes('*') && new RegExp(key).test(attribute)) name = value
+
+    if (attributes[attribute]) name = get(attributes, attribute)
     else if (this.attributeFormatter) name = this.attributeFormatter(name)
-
-    while (name.includes('confirmation')) name = name.replace(/\sconfirmation/g, '')
+    keys.forEach((key) => {
+      if (key in attributes) name = attributes[key]
+    })
 
     return name
   }

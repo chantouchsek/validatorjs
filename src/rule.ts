@@ -77,8 +77,8 @@ export class Rule {
         return size >= min && size <= max
       },
       confirmed(val: string, _req: string, attribute: string) {
-        const confirmedKey = `${attribute}_confirmation`
-        return this.validator.input[confirmedKey] === val
+        const confirmedKey = [`${attribute}_confirmation`, `${attribute}Confirmation`].find(key => key in this.validator.input)
+        return this.validator.input[confirmedKey!] === val
       },
       different(val: string, req: string) {
         const val1 = flattenObject(this.validator.input)[req]

@@ -89,7 +89,7 @@ describe('error messages', () => {
     it('should fail without a matching confirmation field for the field under validation', () => {
       const validator = new Validator({ password: 'abc' }, { password: 'confirmed' })
       expect(validator.passes()).toBeFalsy()
-      expect(validator.errors.first('password')).toEqual('The password confirmation does not match.')
+      expect(validator.errors.first('password')).toEqual('The password does not match.')
     })
 
     it('should fail when the 2 attributes are the same', () => {
