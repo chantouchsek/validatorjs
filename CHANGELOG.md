@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.1](https://github.com/chantouchsek/validatorjs/compare/v2.2.0...v2.2.1) (2024-06-03)
+
+
+### Bug Fixes
+
+* translation ([49face9](https://github.com/chantouchsek/validatorjs/commit/49face98626d94a519d0a8101e45e759823cca94))
+
 ## [2.2.0](https://github.com/chantouchsek/validatorjs/compare/v2.1.4...v2.2.0) (2024-05-31)
 
 
