@@ -7,9 +7,8 @@ export default config({}, {
     'perfectionist/sort-array-includes': [
       'error',
       {
-        'order': 'asc',
-        'spread-last': true,
-        'type': 'natural',
+        order: 'asc',
+        type: 'natural',
       },
     ],
     'perfectionist/sort-classes': [
@@ -60,13 +59,9 @@ export default config({}, {
     'perfectionist/sort-objects': [
       'error',
       {
-        'custom-groups': {
-          id: 'id',
-        },
-        'groups': ['id', 'unknown'],
-        'order': 'asc',
-        'partition-by-comment': 'Part:**',
-        'type': 'natural',
+        groups: ['id', 'unknown'],
+        order: 'asc',
+        type: 'natural',
       },
     ],
     'perfectionist/sort-union-types': [

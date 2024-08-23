@@ -4,7 +4,7 @@ import { Validator } from '../src/main'
 import type { SimpleObject } from '../src/types'
 
 interface Language {
-  input: SimpleObject | null
+  input: null | SimpleObject
   locale: LangTypes
   message: string
   rules: Record<RuleType, any>

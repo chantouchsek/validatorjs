@@ -13,74 +13,6 @@ export default class Messages {
     Messages._setReplacements()
   }
 
-  _getAttributeName(attribute: string): string {
-    let name = attribute
-    const attributes = { ...flattenObject(this.messages.attributes), ...flattenObject(this.attributeNames) }
-    const keys = new Set<string>([toCamelCase(attribute), snakeCase(attribute)])
-
-    for (const [key, value] of Object.entries(attributes)) {
-      if (key.includes('*') && new RegExp(`^${key.replace(/\*/g, '.*')}$`).test(attribute)) {
-        name = value
-      }
-    }
-
-    if (this.attributeFormatter) {
-      name = this.attributeFormatter(name)
-    }
-
-    keys.forEach((key) => {
-      if (key in attributes) {
-        name = attributes[key]
-      }
-    })
-
-    return name
-  }
-
-  _getTemplate(rule: Rule): string {
-    const messages = this.messages
-    let template = messages.def
-    const customMessages = this.customMessages
-    const formats = [`${rule.name}.${rule.attribute}`, rule.name]
-    for (const format of formats) {
-      if (format in customMessages) {
-        template = customMessages[format]
-        break
-      }
-      else if (format in messages && messages[format]) {
-        template = messages[format]
-        break
-      }
-    }
-    if (typeof template === 'object') template = template[rule._getValueType()]
-
-    return template
-  }
-
-  _replacePlaceholders(rule: Rule, template: string, data: SimpleObject) {
-    const updatedData = Object.assign(data, {
-      attribute: this._getAttributeName(rule.attribute),
-      [rule.name]: data[rule.name] || rule.getParameters().join(','),
-    })
-    let placeholder = template.trim()
-    if (this.defaultAttributeName !== undefined)
-      placeholder = template.replace(/(:attribute)/g, this.defaultAttributeName).replace(/\s+/g, ' ')
-
-    return placeholder.replace(/:(\w+)/g, (_, key) => updatedData[key])
-  }
-
-  _setAttributeFormatter(func: any) {
-    this.attributeFormatter = func
-  }
-
-  _setAttributeNames(attributes: SimpleObject) {
-    this.attributeNames = attributes
-  }
-
-  _setCustom(customMessages: SimpleObject = {}) {
-    this.customMessages = customMessages
-  }
-
   static _setReplacements() {
     this.replacements = {
       after(template: string, rule: Rule): string {
@@ -168,6 +100,74 @@ export default class Messages {
         })
       },
     }
+  }
+
+  _getAttributeName(attribute: string): string {
+    let name = attribute
+    const attributes = { ...flattenObject(this.messages.attributes), ...flattenObject(this.attributeNames) }
+    const keys = new Set<string>([toCamelCase(attribute), snakeCase(attribute)])
+
+    for (const [key, value] of Object.entries(attributes)) {
+      if (key.includes('*') && new RegExp(`^${key.replace(/\*/g, '.*')}$`).test(attribute)) {
+        name = value
+      }
+    }
+
+    if (this.attributeFormatter) {
+      name = this.attributeFormatter(name)
+    }
+
+    keys.forEach((key) => {
+      if (key in attributes) {
+        name = attributes[key]
+      }
+    })
+
+    return name
+  }
+
+  _getTemplate(rule: Rule): string {
+    const messages = this.messages
+    let template = messages.def
+    const customMessages = this.customMessages
+    const formats = [`${rule.name}.${rule.attribute}`, rule.name]
+    for (const format of formats) {
+      if (format in customMessages) {
+        template = customMessages[format]
+        break
+      }
+      else if (format in messages && messages[format]) {
+        template = messages[format]
+        break
+      }
+    }
+    if (typeof template === 'object') template = template[rule._getValueType()]
+
+    return template
+  }
+
+  _replacePlaceholders(rule: Rule, template: string, data: SimpleObject) {
+    const updatedData = Object.assign(data, {
+      attribute: this._getAttributeName(rule.attribute),
+      [rule.name]: data[rule.name] || rule.getParameters().join(','),
+    })
+    let placeholder = template.trim()
+    if (this.defaultAttributeName !== undefined)
+      placeholder = template.replace(/(:attribute)/g, this.defaultAttributeName).replace(/\s+/g, ' ')
+
+    return placeholder.replace(/:(\w+)/g, (_, key) => updatedData[key])
+  }
+
+  _setAttributeFormatter(func: any) {
+    this.attributeFormatter = func
+  }
+
+  _setAttributeNames(attributes: SimpleObject) {
+    this.attributeNames = attributes
+  }
+
+  _setCustom(customMessages: SimpleObject = {}) {
+    this.customMessages = customMessages
   }
 
   render(rule: Rule) {

@@ -13,7 +13,7 @@ export class Rule {
   static rules = Object.assign({}, rules) as SimpleObject
   private _customMessage: string | undefined = undefined
   private callback!: CbFunction<void>
-  private input: SimpleObject | number | string | undefined
+  private input: number | SimpleObject | string | undefined
   private passes = false
   private rule: (number | string)[] | number | string | undefined
   private validator!: Validator
@@ -21,24 +21,6 @@ export class Rule {
 
   constructor(readonly name: string, private readonly fn: VoidFunction, private readonly async: boolean) {
     Rule._setRules()
-  }
-
-  _apply(
-    input: SimpleObject | number | string,
-    rule: SimpleObject,
-    attribute: null | string,
-    callback?: CbFunction,
-  ): any {
-    const fn = this.isMissed() ? missedRuleValidator : this.fn
-    return fn.apply(this, [input, rule, attribute, callback] as any)
-  }
-
-  _getValueType() {
-    if (typeof this.input === 'number' || this.validator._hasNumericRule(this.attribute))
-      return 'numeric'
-    else if (Array.isArray(this.input))
-      return 'array'
-    return 'string'
   }
 
   static _setRules() {
@@ -199,7 +181,25 @@ export class Rule {
     }
   }
 
-  _setValidatingData(attribute: string, input: SimpleObject | number | string, rule: any) {
+  _apply(
+    input: number | SimpleObject | string,
+    rule: SimpleObject,
+    attribute: null | string,
+    callback?: CbFunction,
+  ): any {
+    const fn = this.isMissed() ? missedRuleValidator : this.fn
+    return fn.apply(this, [input, rule, attribute, callback] as any)
+  }
+
+  _getValueType() {
+    if (typeof this.input === 'number' || this.validator._hasNumericRule(this.attribute))
+      return 'numeric'
+    else if (Array.isArray(this.input))
+      return 'array'
+    return 'string'
+  }
+
+  _setValidatingData(attribute: string, input: number | SimpleObject | string, rule: any) {
     this.attribute = attribute
     this.input = input
     this.rule = rule
@@ -250,7 +250,7 @@ export class Rule {
     this.validator = validator
   }
 
-  validate(input: SimpleObject | number | string, rule: SimpleObject, attribute = '', callback?: CbFunction) {
+  validate(input: number | SimpleObject | string, rule: SimpleObject, attribute = '', callback?: CbFunction) {
     this._setValidatingData(attribute, input, rule)
     if (typeof callback === 'function') {
       this.callback = callback
