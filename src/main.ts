@@ -20,10 +20,10 @@ export class Validator {
   hasAsync = false
   readonly messages: Messages
   readonly numericRules = ['integer', 'numeric']
-  stopOnAttributes: SimpleObject | boolean | string[] | undefined
+  stopOnAttributes: boolean | SimpleObject | string[] | undefined
 
   constructor(
-    readonly input: SimpleObject | null,
+    readonly input: null | SimpleObject,
     readonly rules: SimpleObject = {},
     readonly options: ValidatorOptions = {},
   ) {
@@ -82,7 +82,7 @@ export class Validator {
     return this
   }
 
-  static stopOnError(attributes: SimpleObject | boolean) {
+  static stopOnError(attributes: boolean | SimpleObject) {
     this.prototype.stopOnAttributes = attributes
   }
 
@@ -147,11 +147,31 @@ export class Validator {
     return values
   }
 
+  _parsedRulesRecurse(
+    attribute: string,
+    rulesArray: (any | SimpleObject | string)[],
+    parsedRules: SimpleObject,
+    wildCardValues: number[] = [],
+  ) {
+    const parentPath = attribute.substring(0, attribute.indexOf('*') - 1)
+    const parentValue = (get(this.input, parentPath, []) ?? []) as SimpleObject[]
+
+    for (let propertyNumber = 0, len = parentValue.length; propertyNumber < len; propertyNumber++) {
+      const workingValues = [...wildCardValues, propertyNumber]
+      this._parseRulesCheck(
+        replace(attribute, '*', String(propertyNumber)),
+        rulesArray,
+        parsedRules,
+        workingValues,
+      )
+    }
+  }
+
   _parseRules(rules: SimpleObject = {}) {
     const parsedRules: SimpleObject = {}
     rules = flattenObject(rules)
     for (const attribute in rules) {
-      const rulesArray = rules[attribute] as (SimpleObject | any | string)[]
+      const rulesArray = rules[attribute] as (any | SimpleObject | string)[]
       this._parseRulesCheck(attribute, rulesArray, parsedRules)
     }
     return parsedRules
@@ -159,7 +179,7 @@ export class Validator {
 
   _parseRulesCheck(
     attribute: string,
-    rulesArray: (SimpleObject | any | string)[],
+    rulesArray: (any | SimpleObject | string)[],
     parsedRules: SimpleObject,
     wildCardValues?: number[],
   ) {
@@ -169,8 +189,8 @@ export class Validator {
 
   _parseRulesDefault(
     attribute: string,
-    rulesArray: SimpleObject[] | any[] | string,
-    parsedRules: SimpleObject | any,
+    rulesArray: any[] | SimpleObject[] | string,
+    parsedRules: any | SimpleObject,
     wildCardValues?: (number | string)[],
   ) {
     const attributeRules = []
@@ -191,32 +211,12 @@ export class Validator {
     parsedRules[attribute] = attributeRules
   }
 
-  _parsedRulesRecurse(
-    attribute: string,
-    rulesArray: (SimpleObject | any | string)[],
-    parsedRules: SimpleObject,
-    wildCardValues: number[] = [],
-  ) {
-    const parentPath = attribute.substring(0, attribute.indexOf('*') - 1)
-    const parentValue = (get(this.input, parentPath, []) ?? []) as SimpleObject[]
-
-    for (let propertyNumber = 0, len = parentValue.length; propertyNumber < len; propertyNumber++) {
-      const workingValues = [...wildCardValues, propertyNumber]
-      this._parseRulesCheck(
-        replace(attribute, '*', String(propertyNumber)),
-        rulesArray,
-        parsedRules,
-        workingValues,
-      )
-    }
-  }
-
   _passesOptionalCheck(attribute: string) {
     const findRules = ['sometimes', 'nullable']
     return this._hasRule(attribute, findRules) && !this._suppliedWithData(attribute)
   }
 
-  _prepareRulesArray(rulesArray: SimpleObject[] | any[]) {
+  _prepareRulesArray(rulesArray: any[] | SimpleObject[]) {
     return rulesArray.map(ruleArray => typeof ruleArray === 'object'
       ? Object.entries(ruleArray).map(([name, value]) => ({ name, value }))
       : ruleArray,
@@ -305,7 +305,7 @@ export class Validator {
     }
     const asyncResolvers = new AsyncResolvers(failsOne, resolvedAll)
     const validateRule = (
-      inputValue: SimpleObject | number | string,
+      inputValue: number | SimpleObject | string,
       ruleOptions: SimpleObject,
       rule: Rule,
       attribute = '',
@@ -358,7 +358,7 @@ export class Validator {
     this.messages._setAttributeNames(attributes)
   }
 
-  stopOnError(attributes: SimpleObject | boolean) {
+  stopOnError(attributes: boolean | SimpleObject) {
     this.stopOnAttributes = attributes
   }
 
