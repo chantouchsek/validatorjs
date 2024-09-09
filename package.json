@@ -1,7 +1,7 @@
 {
   "name": "@chantouchsek/validatorjs",
   "type": "module",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "packageManager": "pnpm@9.9.0",
   "description": "The validator.js library makes data validation in JavaScript very easy in both the browser and Node.js.",
   "author": {
