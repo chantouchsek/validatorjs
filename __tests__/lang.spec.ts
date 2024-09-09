@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import type { LangTypes, RuleType } from '../src/main'
 import { Validator } from '../src/main'
+import type { LangTypes, RuleType } from '../src/main'
 import type { SimpleObject } from '../src/types'
 
 interface Language {

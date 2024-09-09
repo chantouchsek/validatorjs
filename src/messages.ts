@@ -1,7 +1,7 @@
 import { snakeCase } from 'lodash-es'
+import { flattenObject, toCamelCase } from './utils'
 import type { Rule } from './rule'
 import type { CbFunction, SimpleObject } from './types'
-import { flattenObject, toCamelCase } from './utils'
 
 export default class Messages {
   static replacements: SimpleObject = {}

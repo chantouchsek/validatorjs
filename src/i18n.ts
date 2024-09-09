@@ -1,6 +1,6 @@
-import type { LangTypes, SimpleObject } from './types'
 import locales from './lang'
 import Massages from './messages'
+import type { LangTypes, SimpleObject } from './types'
 
 export default class I18n {
   public static messages = {} as Record<LangTypes, SimpleObject>

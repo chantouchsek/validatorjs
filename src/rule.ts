@@ -1,7 +1,7 @@
 import { get, isString } from 'lodash-es'
-import type { Validator } from './main'
 import * as rules from './rules'
 import { flattenObject, isEmpty, isValidDate } from './utils'
+import type { Validator } from './main'
 import type { CbFunction, SimpleObject } from './types'
 
 let missedRuleValidator: CbFunction = function (this: Rule) {
