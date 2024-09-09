@@ -1,14 +1,14 @@
 import { get, replace } from 'lodash-es'
-import type Messages from './messages'
-import type { Rule } from './rule'
-import type { CbFunction, LangTypes, RuleType, SimpleObject, ValidatorOptions } from './types'
 import AsyncResolvers from './async-resolvers'
 import Errors from './errors'
 import I18n from './i18n'
 import { Manager } from './rule'
 import { flattenObject, formatter, hasOwnProperty } from './utils'
+import type Messages from './messages'
+import type { Rule } from './rule'
+import type { CbFunction, LangTypes, RuleType, SimpleObject, ValidatorOptions } from './types'
 
-export { Errors, ValidatorOptions, LangTypes, RuleType }
+export { Errors, LangTypes, RuleType, ValidatorOptions }
 
 export class Validator {
   static attributeFormatter = formatter
