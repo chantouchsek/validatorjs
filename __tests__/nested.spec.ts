@@ -1,6 +1,6 @@
+import type { SimpleObject } from '../src/types'
 import { describe, expect, it } from 'vitest'
 import { Validator } from '../src/main'
-import type { SimpleObject } from '../src/types'
 
 describe('nested validation rules', () => {
   const nestedObject: any = {
