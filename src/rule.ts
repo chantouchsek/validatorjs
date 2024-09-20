@@ -1,8 +1,8 @@
+import type { Validator } from './main'
+import type { CbFunction, SimpleObject } from './types'
 import { get, isString } from 'lodash-es'
 import * as rules from './rules'
 import { flattenObject, isEmpty, isValidDate } from './utils'
-import type { Validator } from './main'
-import type { CbFunction, SimpleObject } from './types'
 
 let missedRuleValidator: CbFunction = function (this: Rule) {
   throw new Error(`Validator \`${this.name}\` is not defined!`)

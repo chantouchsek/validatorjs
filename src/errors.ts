@@ -1,6 +1,6 @@
+import type { SimpleObject } from './types'
 import { cloneDeep, get, omit } from 'lodash-es'
 import { is, toCamelCase, toSnakeCase } from './utils'
-import type { SimpleObject } from './types'
 
 export default class Errors {
   private errors: SimpleObject<string[]> = {}
