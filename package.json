@@ -54,7 +54,7 @@
     "lodash-es": "^4.17.21"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^3.6.2",
+    "@antfu/eslint-config": "^4.13.2",
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
     "@types/lodash-es": "^4.17.12",
