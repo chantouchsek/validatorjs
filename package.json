@@ -62,7 +62,7 @@
     "@vitest/coverage-v8": "^2.1.1",
     "eslint": "^9.10.0",
     "husky": "^9.1.6",
-    "lint-staged": "^15.2.10",
+    "lint-staged": "^16.2.1",
     "node-notifier": "^10.0.1",
     "standard-version": "^9.5.0",
     "ts-node": "^10.9.2",
