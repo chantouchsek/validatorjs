@@ -14,14 +14,14 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18]
+        node-version: [24]
 
     steps:
       - uses: actions/checkout@v4
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9.10.0
+          version: 10.14.0
           run_install: false
 
       - name: Use Node.js ${{ matrix.node-version }} 🏗
@@ -55,6 +55,6 @@ jobs:
         run: pnpm run test:cov
 
       - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: 'fix: :art: fix styling by (eslint)'
