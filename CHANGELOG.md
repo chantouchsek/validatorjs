@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.5](https://github.com/chantouchsek/validatorjs/compare/v2.2.4...v2.2.5) (2025-12-13)
+
+
+### Bug Fixes
+
+* **deps:** bump @eslint/plugin-kit from 0.2.0 to 0.2.3 ([430f158](https://github.com/chantouchsek/validatorjs/commit/430f1585deb5af0e0a2f3ad0a8f7f43710a66e67))
+* **deps:** bump actions/cache from 4 to 5 ([5fd09d5](https://github.com/chantouchsek/validatorjs/commit/5fd09d5df7a85398d37fee355ad28ae222a200d2))
+* **deps:** bump actions/checkout from 4 to 6 ([075496a](https://github.com/chantouchsek/validatorjs/commit/075496a7a3892306a9b722c3ee0e5ffb6cb0a020))
+* **deps:** bump actions/setup-node from 4 to 6 ([11d0898](https://github.com/chantouchsek/validatorjs/commit/11d0898183858219645b8505b3cdd2d1a92760bc))
+* **deps:** bump brace-expansion from 1.1.11 to 1.1.12 ([5da710a](https://github.com/chantouchsek/validatorjs/commit/5da710a3d9db1ee8d0ae4e2b52b72d35867a26fa))
+* **deps:** bump cross-spawn from 7.0.3 to 7.0.5 ([135a0ba](https://github.com/chantouchsek/validatorjs/commit/135a0ba8e7b6dde65fdbf7625e1d6f7ac722527f))
+* **deps:** bump github/codeql-action from 3 to 4 ([f8a277c](https://github.com/chantouchsek/validatorjs/commit/f8a277c1b1f0de49c4a7de591cd06013f5984d97))
+* **deps:** bump glob from 10.4.5 to 10.5.0 ([59b0451](https://github.com/chantouchsek/validatorjs/commit/59b04514e59df31e15351fb86a83ec7a1d08cab5))
+* **deps:** bump js-yaml from 4.1.0 to 4.1.1 ([1e3b53e](https://github.com/chantouchsek/validatorjs/commit/1e3b53e6f9b51de36a6ffcd252cc6a792dec114c))
+* **deps:** bump nanoid from 3.3.7 to 3.3.8 ([2f4529a](https://github.com/chantouchsek/validatorjs/commit/2f4529a699a94087f1a5642309130e056b77c0ce))
+* **deps:** bump rollup from 3.29.4 to 3.29.5 ([3e46d40](https://github.com/chantouchsek/validatorjs/commit/3e46d40eedf664e0ef293ad1c3e8a154060fcc12))
+* **deps:** bump stefanzweifel/git-auto-commit-action from 5 to 6 ([199a89a](https://github.com/chantouchsek/validatorjs/commit/199a89abfda0d6f863e23c835443639b4032e55a))
+* **deps:** bump stefanzweifel/git-auto-commit-action from 6 to 7 ([8f56d55](https://github.com/chantouchsek/validatorjs/commit/8f56d554b7ce5a545185ac308a37cce8b47979a0))
+* **deps:** bump vite from 5.2.8 to 5.4.8 ([b08a00b](https://github.com/chantouchsek/validatorjs/commit/b08a00be04d6b456bf31fcc89c8d5285a75dcc1e))
+
 ### [2.2.4](https://github.com/chantouchsek/validatorjs/compare/v2.2.3...v2.2.4) (2024-09-20)
 
 ### [2.2.3](https://github.com/chantouchsek/validatorjs/compare/v2.2.2...v2.2.3) (2024-09-09)
