@@ -198,7 +198,7 @@ export class Validator {
     if (Array.isArray(rulesArray)) {
       rulesArray = this._prepareRulesArray(rulesArray)
     }
-    else if (rulesArray === undefined || (rulesArray.trim() === '')) {
+    else if (rulesArray === undefined || (typeof rulesArray === 'string' && rulesArray.trim() === '')) {
       rulesArray = []
     }
     else {
