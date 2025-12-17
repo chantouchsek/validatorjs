@@ -57,8 +57,18 @@ describe('validator constructor', () => {
     expect(validator.fails()).toBeTruthy()
   })
 
-  it('should handle undefined/empty rule', () => {
-    const validator = new Validator(null, { name: '', age: undefined })
+  it('should handle empty rule', () => {
+    const validator = new Validator(null, { name: '' })
+    expect(validator.passes()).toBeTruthy()
+  })
+
+  it('should handle undefined rule', () => {
+    const validator = new Validator(null, { age: undefined })
+    expect(validator.passes()).toBeTruthy()
+  })
+
+  it('should handle null rule', () => {
+    const validator = new Validator(null, { gender: null })
     expect(validator.passes()).toBeTruthy()
   })
 
