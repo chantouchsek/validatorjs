@@ -195,9 +195,15 @@ export class Validator {
   ) {
     const attributeRules = []
 
-    if (Array.isArray(rulesArray)) rulesArray = this._prepareRulesArray(rulesArray)
-
-    if (typeof rulesArray === 'string') rulesArray = rulesArray.split('|')
+    if (Array.isArray(rulesArray)) {
+      rulesArray = this._prepareRulesArray(rulesArray)
+    }
+    else if (rulesArray === undefined || (rulesArray.trim() === '')) {
+      rulesArray = []
+    }
+    else {
+      rulesArray = String(rulesArray).split('|').filter(Boolean)
+    }
 
     for (const ruleKey of rulesArray) {
       const rule = this._extractRuleAndRuleValue(ruleKey)

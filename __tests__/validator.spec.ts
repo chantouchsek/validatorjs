@@ -57,6 +57,11 @@ describe('validator constructor', () => {
     expect(validator.fails()).toBeTruthy()
   })
 
+  it('should handle undefined/empty rule', () => {
+    const validator = new Validator(null, { name: '', age: undefined })
+    expect(validator.passes()).toBeTruthy()
+  })
+
   it('should get correct lang with exist', () => {
     const validator = new Validator(null, { name: 'required' }, { locale: 'km' })
     expect(validator.getDefaultLang()).toEqual('km')
