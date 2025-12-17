@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.7](https://github.com/chantouchsek/validatorjs/compare/v2.2.6...v2.2.7) (2025-12-17)
+
 ### [2.2.6](https://github.com/chantouchsek/validatorjs/compare/v2.2.5...v2.2.6) (2025-12-17)
 
 
