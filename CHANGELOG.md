@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.6](https://github.com/chantouchsek/validatorjs/compare/v2.2.5...v2.2.6) (2025-12-17)
+
+
+### Bug Fixes
+
+* enhance validator tests for handling undefined, empty, and null rules ([378e8c4](https://github.com/chantouchsek/validatorjs/commit/378e8c421a2190fe5ed579c51e86a02cc7398787))
+* handle undefined or empty rules in validator ([a626c92](https://github.com/chantouchsek/validatorjs/commit/a626c92592f2286a1eb6dc89bdc0f7d619fc445f))
+* improve handling of undefined and empty string rules in validator ([d90f7ac](https://github.com/chantouchsek/validatorjs/commit/d90f7acc6aac6c16041e436d10996cf05d5e6751))
+
 ### [2.2.5](https://github.com/chantouchsek/validatorjs/compare/v2.2.4...v2.2.5) (2025-12-13)
 
 
