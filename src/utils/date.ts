@@ -33,7 +33,7 @@ export function isValidDate(dateString: any) {
   if (typeof dateString === 'string' && dateString.trim() === '') return false
   if (typeof dateString === 'number') {
     testDate = new Date(dateString)
-    return typeof testDate === 'object'
+    return Number.isFinite(testDate.getTime())
   }
   testDate = new Date(dateString)
   if (testDate.toString() === 'Invalid Date')

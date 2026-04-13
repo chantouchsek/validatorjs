@@ -24,5 +24,10 @@ describe('utils Object', () => {
     it('should return false for whitespace-only string', () => {
       expect(isValidDate('   ')).toBeFalsy()
     })
+    it('should return false for invalid numeric timestamps', () => {
+      expect(isValidDate(NaN)).toBeFalsy()
+      expect(isValidDate(Infinity)).toBeFalsy()
+      expect(isValidDate(-Infinity)).toBeFalsy()
+    })
   })
 })
