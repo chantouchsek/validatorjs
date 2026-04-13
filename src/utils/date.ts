@@ -30,8 +30,7 @@ export function checkFalsePositiveDates(dateString: string) {
 
 export function isValidDate(dateString: any) {
   let testDate
-  if (typeof dateString === 'string' && dateString.trim() === '')
-    return false
+  if (typeof dateString === 'string' && dateString.trim() === '') return false
 
   if (typeof dateString === 'number') {
     testDate = new Date(dateString)
