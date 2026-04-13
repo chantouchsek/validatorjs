@@ -25,7 +25,7 @@ describe('utils Object', () => {
       expect(isValidDate('   ')).toBeFalsy()
     })
     it('should return false for invalid numeric timestamps', () => {
-      expect(isValidDate(NaN)).toBeFalsy()
+      expect(isValidDate(Number.NaN)).toBeFalsy()
       expect(isValidDate(Infinity)).toBeFalsy()
       expect(isValidDate(-Infinity)).toBeFalsy()
     })
