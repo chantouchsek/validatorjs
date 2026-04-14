@@ -27,14 +27,14 @@ function _checkFalsePositiveDates(date: string) {
   }
   return true
 }
-export function isValidDate(dateString: string | number) {
+export function isValidDate(date: string | number) {
   let testDate
-  if (typeof dateString === 'string' && dateString.trim() === '') return false
-  if (typeof dateString === 'number') {
-    testDate = new Date(dateString)
+  if (typeof date === 'string' && date.trim() === '') return false
+  if (typeof date === 'number') {
+    testDate = new Date(date)
     return Number.isFinite(testDate.getTime())
   }
-  testDate = new Date(dateString)
+  testDate = new Date(date)
   if (testDate.toString() === 'Invalid Date') return false
-  return _checkFalsePositiveDates(dateString)
+  return _checkFalsePositiveDates(date)
 }
