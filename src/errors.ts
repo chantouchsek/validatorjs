@@ -49,7 +49,8 @@ export default class Errors {
 
   get(field: string | string[]) {
     const fields = Array.isArray(field) ? field : [field]
-    return fields.find(f => this.has(f)) ? get(this.errors, fields.find(f => this.has(f)) || '', []) : []
+    const found = fields.find(f => this.has(f))
+    return found ? get(this.errors, found, []) : []
   }
 
   has(field: string | string[]) {

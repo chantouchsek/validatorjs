@@ -1,5 +1,5 @@
 export function formatter(attribute: string) {
-  return attribute.replace(/[_.[]/g, ' ').replace(/\]/g, '')
+  return attribute.replace(/[_.[]/g, ' ').replaceAll(']', '')
 }
 export function toCamelCase(s: string) {
   return s.replace(/([-_][a-z])/gi, ($1) => {
@@ -7,7 +7,7 @@ export function toCamelCase(s: string) {
   })
 }
 export function toSnakeCase(e: string) {
-  return (e.match(/([A-Z])/g) ? e.replace(/[A-Z]/g, l => `_${l.toLowerCase()}`) : e)
+  return (/[A-Z]/.test(e) ? e.replace(/[A-Z]/g, l => `_${l.toLowerCase()}`) : e)
 }
 export function onlyDigits(str: boolean | number | string) {
   const num = Number(str)
