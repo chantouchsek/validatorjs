@@ -1,6 +1,6 @@
 import type { SimpleObject } from '../types'
 
-export function hasOwnProperty(object?: any | SimpleObject, key?: number | string | symbol) {
+export function hasOwnProperty(object?: any | SimpleObject, key?: PropertyKey) {
   if (!object || !key) return false
   return Object.hasOwn(object, key)
 }
