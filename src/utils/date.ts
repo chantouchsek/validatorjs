@@ -1,9 +1,9 @@
-export function leapYear(year: number) {
+function _leapYear(year: number) {
   return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
 }
-export function checkFalsePositiveDates(dateString: string) {
-  if (dateString.length === 10) {
-    const normalizedDate = dateString.replace('.', '-').replace('/', '-')
+function _checkFalsePositiveDates(date: string) {
+  if (date.length === 10) {
+    const normalizedDate = date.replace('.', '-').replace('/', '-')
     const parts = normalizedDate.split('-')
     if (parts.length === 3) {
       if (parts[0].length === 4) {
@@ -11,7 +11,7 @@ export function checkFalsePositiveDates(dateString: string) {
         const m = Number.parseInt(parts[1])
         const d = Number.parseInt(parts[2])
         if (m === 2) {
-          if (leapYear(y)) {
+          if (_leapYear(y)) {
             if (d > 29) return false
           }
           else {
@@ -27,8 +27,7 @@ export function checkFalsePositiveDates(dateString: string) {
   }
   return true
 }
-
-export function isValidDate(dateString: any) {
+export function isValidDate(dateString: string | number) {
   let testDate
   if (typeof dateString === 'string' && dateString.trim() === '') return false
   if (typeof dateString === 'number') {
@@ -36,8 +35,6 @@ export function isValidDate(dateString: any) {
     return Number.isFinite(testDate.getTime())
   }
   testDate = new Date(dateString)
-  if (testDate.toString() === 'Invalid Date')
-    return false
-
-  return checkFalsePositiveDates(dateString)
+  if (testDate.toString() === 'Invalid Date') return false
+  return _checkFalsePositiveDates(dateString)
 }

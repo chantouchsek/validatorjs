@@ -2,7 +2,7 @@ import type { SimpleObject } from '../types'
 
 export function hasOwnProperty(object?: any | SimpleObject, key?: number | string | symbol) {
   if (!object || !key) return false
-  return Object.prototype.hasOwnProperty.call(object, key)
+  return Object.hasOwn(object, key)
 }
 export function flattenObject(obj: any | SimpleObject = {}) {
   const flattened: SimpleObject = {}
