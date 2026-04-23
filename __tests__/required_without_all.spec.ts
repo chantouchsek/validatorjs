@@ -46,4 +46,19 @@ describe('required without all', () => {
     expect(validator.passes()).toBeTruthy()
     expect(validator.fails()).toBeFalsy()
   })
+  it('required_without_all with numeric rule value hits Number.parseFloat + value.push branch', () => {
+    const v = new Validator(
+      { target: '' },
+      {
+        // numeric (not string, not array) so getParameters() executes:
+        // this.rule = Number.parseFloat(...)
+        // value.push(this.rule)
+        target: [{ required_without_all: 1 }],
+      },
+    )
+
+    // req becomes [1], get(input, 1) is falsy => required(target) runs and fails for ''
+    expect(v.check()).toBe(false)
+    expect(v.errorCount).toBe(1)
+  })
 })

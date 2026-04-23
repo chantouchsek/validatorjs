@@ -77,11 +77,10 @@ export class Rule {
         const max = Number.parseFloat(req[1])
         return numericRule.validate(val, {}) && val >= min && val <= max
       },
-      in(val: string | string[]) {
+      in(val?: string | string[]) {
         let list: (number | string)[] = []
-        if (!isEmpty(val))
-          list = this.getParameters()
-        if (!isEmpty(val) && !(Array.isArray(val))) {
+        if (!isEmpty(val)) list = this.getParameters()
+        if (!(Array.isArray(val))) {
           let localValue = val
           for (const li of list) {
             if (typeof li === 'string') localValue = String(val)
@@ -89,7 +88,7 @@ export class Rule {
           }
           return false
         }
-        if (val && Array.isArray(val)) {
+        else if (Array.isArray(val)) {
           for (const va of val) {
             if (!list.includes(va)) return false
           }

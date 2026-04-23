@@ -1,8 +1,8 @@
-export function formatter(attribute: string) {
-  return attribute.replace(/[_.[]/g, ' ').replace(/\]/g, '')
+export function formatter(attr: number | string) {
+  return String(attr).replace(/[_.[]/g, ' ').replace(/\]/g, '')
 }
-export function toCamelCase(s: string) {
-  return s.replace(/([-_][a-z])/gi, ($1) => {
+export function toCamelCase(s: number | string) {
+  return String(s).replace(/([-_][a-z])/gi, ($1) => {
     return $1.toUpperCase().replace('-', '').replace('_', '')
   })
 }

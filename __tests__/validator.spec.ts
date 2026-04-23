@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { Validator } from '../src/main'
 
 describe('validator constructor', () => {
@@ -89,5 +89,41 @@ describe('validator constructor', () => {
     const validator = new Validator({}, { name: 'required|string' }, { defaultAttributeName: { en: '', ja: 'この項目' }, locale: 'en' })
     expect(validator.fails()).toBeTruthy()
     expect(validator.errors.first('name')).toBe('The field is required.')
+  })
+  it('confirmedReverse rebinds failure attribute to *_confirmation', () => {
+    const validator = new Validator(
+      { password: 'secret', password_confirmation: 'different' },
+      { password: 'confirmed' },
+      { confirmedReverse: true },
+    )
+
+    expect(validator.check()).toBe(false)
+
+    expect(validator.errors.has('password_confirmation')).toBe(true)
+    expect(validator.errors.has('password')).toBe(false)
+  })
+  it('checkAsync skips validateRule when _isValidatable is false', () => {
+    const fn = vi.fn((_value: unknown, _req: unknown, _attr: string, passes: () => void) => passes())
+    Validator.registerAsync('async_nonimplicit_for_coverage', fn, 'invalid')
+
+    const v = new Validator(
+      {}, // missing "email" => undefined
+      { email: 'async_nonimplicit_for_coverage' },
+    )
+
+    // force async path
+    expect(v.hasAsync).toBe(true)
+
+    const passes = vi.fn()
+    const fails = vi.fn()
+
+    v.checkAsync(passes, fails)
+
+    // Branch covered: condition false => validateRule() NOT called
+    expect(fn).not.toHaveBeenCalled()
+
+    // Since nothing failed, resolver flow should end as pass
+    expect(passes).toHaveBeenCalled()
+    expect(fails).not.toHaveBeenCalled()
   })
 })

@@ -9,6 +9,8 @@ describe('date rule', () => {
       'Wed, 09 Aug 2020 00:00:00 GMT',
       'Wed, 09 Aug 2020 00:00:00',
       '2020-08-09',
+      'Aug 9 2020', // length === 10, parsable, but split('-') => parts.length !== 3
+      '2019/02/28', // length === 10, parsable, YYYY/MM/DD => parts.length === 3, non-leap Feb, d === 28
       '2020-08-09T00:00:00+00:00',
       '2020-08-09T00:00:00Z',
       '2020-08-09T00:00:00.000Z',
