@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## v2.2.8
+
+[compare changes](https://github.com/chantouchsek/validatorjs/compare/v2.2.7...v2.2.8)
+
+### 🩹 Fixes
+
+- **deps:** Bump pnpm/action-setup from 4 to 5 ([fa2131c](https://github.com/chantouchsek/validatorjs/commit/fa2131c))
+- **deps:** Bump pnpm/action-setup from 5 to 6 ([9eb98e4](https://github.com/chantouchsek/validatorjs/commit/9eb98e4))
+- Handle empty string in isValidDate to prevent false positives in some environments ([ea39424](https://github.com/chantouchsek/validatorjs/commit/ea39424))
+- **deps:** Replace deprecated standard-version with changelogen to fix trust downgrade error ([126b9b3](https://github.com/chantouchsek/validatorjs/commit/126b9b3))
+- Validate numeric date input using Number.isFinite and add NaN/Infinity tests ([2d749b1](https://github.com/chantouchsek/validatorjs/commit/2d749b1))
+- 🎨  fix styling by (eslint) ([ffd0a9c](https://github.com/chantouchsek/validatorjs/commit/ffd0a9c))
+- 🎨  fix styling by (eslint) ([1f8f048](https://github.com/chantouchsek/validatorjs/commit/1f8f048))
+- Handle empty string in isValidDate to prevent false positives in some environments ([c259707](https://github.com/chantouchsek/validatorjs/commit/c259707))
+- Validate numeric date input using Number.isFinite and add NaN/Infinity tests ([f0bc5bd](https://github.com/chantouchsek/validatorjs/commit/f0bc5bd))
+- 🎨  fix styling by (eslint) ([81e4349](https://github.com/chantouchsek/validatorjs/commit/81e4349))
+- 🎨  fix styling by (eslint) ([5178f9b](https://github.com/chantouchsek/validatorjs/commit/5178f9b))
+
+### 🎨 Styles
+
+- Collapse empty string guard to single line per review suggestion ([95d6b1a](https://github.com/chantouchsek/validatorjs/commit/95d6b1a))
+- Remove blank line after empty string guard ([f2ff78a](https://github.com/chantouchsek/validatorjs/commit/f2ff78a))
+- Collapse empty string guard to single line per review suggestion ([998d2a8](https://github.com/chantouchsek/validatorjs/commit/998d2a8))
+- Remove blank line after empty string guard ([2f136cd](https://github.com/chantouchsek/validatorjs/commit/2f136cd))
+
+### ❤️ Contributors
+
+- Chantouchsek ([@chantouchsek](http://github.com/chantouchsek))
+- Copilot ([@MicrosoftCopilot](http://github.com/MicrosoftCopilot))
+
 ### [2.2.7](https://github.com/chantouchsek/validatorjs/compare/v2.2.6...v2.2.7) (2025-12-17)
 
 ### [2.2.6](https://github.com/chantouchsek/validatorjs/compare/v2.2.5...v2.2.6) (2025-12-17)
