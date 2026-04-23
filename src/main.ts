@@ -6,7 +6,7 @@ import AsyncResolvers from './async-resolvers'
 import Errors from './errors'
 import I18n from './i18n'
 import { Manager } from './rule'
-import { flattenObject, formatter, hasOwnProperty } from './utils'
+import { flattenObject, formatter } from './utils'
 
 export { Errors, LangTypes, RuleType, ValidatorOptions }
 
@@ -260,7 +260,7 @@ export class Validator {
     let obj = this.input
 
     for (const key of keys) {
-      if (!obj || !hasOwnProperty(obj, key)) return false
+      if (!obj || !Object.hasOwn(obj, key)) return false
 
       obj = obj[key]
     }

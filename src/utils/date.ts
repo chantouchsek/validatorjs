@@ -3,7 +3,7 @@ function _leapYear(year: number) {
 }
 function _checkFalsePositiveDates(date: string) {
   if (date.length === 10) {
-    const normalizedDate = date.replace('.', '-').replace('/', '-')
+    const normalizedDate = date.replace(/[./]/g, '-')
     const parts = normalizedDate.split('-')
     if (parts.length === 3) {
       if (parts[0].length === 4) {

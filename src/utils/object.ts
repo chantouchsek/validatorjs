@@ -1,9 +1,5 @@
 import type { SimpleObject } from '../types'
 
-export function hasOwnProperty(object?: any | SimpleObject, key?: PropertyKey) {
-  if (!object || !key) return false
-  return Object.hasOwn(object, key)
-}
 export function flattenObject(obj: any | SimpleObject = {}) {
   const flattened: SimpleObject = {}
 
