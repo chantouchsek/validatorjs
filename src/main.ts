@@ -189,7 +189,7 @@ export class Validator {
 
   _parseRulesDefault(
     attribute: string,
-    rulesArray: any[] | SimpleObject[] | any | string,
+    rulesArray: any[] | SimpleObject[] | string,
     parsedRules: any | SimpleObject,
     wildCardValues?: (number | string)[],
   ) {
