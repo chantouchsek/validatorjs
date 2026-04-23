@@ -31,8 +31,7 @@ export default class AsyncResolvers {
   }
 
   fire() {
-    if (!this.firing)
-      return
+    if (!this.firing) return
     if (this.isAllResolved())
       this.onResolvedAll(this.failed.length === 0)
   }

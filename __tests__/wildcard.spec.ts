@@ -142,4 +142,18 @@ describe('wildcard', () => {
       'conditions.0.values': ['The conditions values field is required.'],
     })
   })
+  it('handles wildcard parent value as null (covers ?? [] fallback path)', () => {
+    const validator = new Validator(
+      { users: null as any },
+      { 'users.*.email': 'required' },
+    )
+    expect(() => validator.check()).not.toThrow()
+    expect(validator.check()).toBe(true)
+  })
+
+  it('_replaceWildCards returns early when no wildcard remains', () => {
+    const validator = new Validator({}, {})
+    const out = validator._replaceWildCards('users.*.email', [0, 1])
+    expect(out).toBe('users.0.email')
+  })
 })

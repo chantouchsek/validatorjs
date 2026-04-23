@@ -8,8 +8,7 @@ export default class Errors {
   private _getFields(field: string | string[]): string[] {
     const fields: string[] = []
     const attributes = Array.isArray(field) ? field : [field]
-    for (const f of attributes)
-      fields.push(toCamelCase(f), toSnakeCase(f))
+    for (const f of attributes) fields.push(toCamelCase(f), toSnakeCase(f))
 
     return [...new Set(fields)].filter(Boolean)
   }
@@ -18,8 +17,9 @@ export default class Errors {
     const messages = Array.isArray(message) ? message : [message]
     this.errors[field] = this.errors[field] || []
 
-    if (forceUpdate || this.errors[field].every(s => !messages.includes(s)))
+    if (forceUpdate || this.errors[field].every(s => !messages.includes(s))) {
       this.errors[field] = [...messages, ...this.errors[field]]
+    }
   }
 
   all() {
@@ -27,8 +27,7 @@ export default class Errors {
   }
 
   clear(attribute?: string | string[]) {
-    if (!attribute)
-      return this.flush()
+    if (!attribute) return this.flush()
     const errors = omit(cloneDeep(this.errors), attribute)
     this.fill(errors)
   }
@@ -48,8 +47,9 @@ export default class Errors {
   }
 
   get(field: string | string[]) {
-    const fields = Array.isArray(field) ? field : [field]
-    return fields.find(f => this.has(f)) ? get(this.errors, fields.find(f => this.has(f)) || '', []) : []
+    const fields = this._getFields(field)
+    const found = fields.find(f => f in this.errors)
+    return found ? get(this.errors, found, []) : []
   }
 
   has(field: string | string[]) {
@@ -63,8 +63,7 @@ export default class Errors {
 
   onKeydown(event: KeyboardEvent) {
     const { name } = event.target as HTMLInputElement
-    if (!name)
-      return
+    if (!name) return
 
     this.clear(name)
   }

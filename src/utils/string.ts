@@ -1,13 +1,13 @@
-export function formatter(attribute: string) {
-  return attribute.replace(/[_.[]/g, ' ').replace(/\]/g, '')
+export function formatter(attr: number | string) {
+  return String(attr).replace(/[_.[]/g, ' ').replace(/\]/g, '')
 }
-export function toCamelCase(s: string) {
-  return s.replace(/([-_][a-z])/gi, ($1) => {
+export function toCamelCase(s: number | string) {
+  return String(s).replace(/([-_][a-z])/gi, ($1) => {
     return $1.toUpperCase().replace('-', '').replace('_', '')
   })
 }
 export function toSnakeCase(e: string) {
-  return (e.match(/([A-Z])/g) ? e.replace(/[A-Z]/g, l => `_${l.toLowerCase()}`) : e)
+  return (/[A-Z]/.test(e) ? e.replace(/[A-Z]/g, l => `_${l.toLowerCase()}`) : e)
 }
 export function onlyDigits(str: boolean | number | string) {
   const num = Number(str)
