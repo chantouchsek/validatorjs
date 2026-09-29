@@ -68,7 +68,7 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
     "unbuild": "^3.6.1",
-    "vitest": "^4.0.16"
+    "vitest": "^5.0.1"
   },
   "lint-staged": {
     "*.{js,ts}": "eslint . --fix"
