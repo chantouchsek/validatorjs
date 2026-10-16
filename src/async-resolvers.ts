@@ -46,7 +46,7 @@ export default class AsyncResolvers {
     if (rule.passes) {
       this.passed.push(rule)
     }
-    else if (!rule.passes) {
+    else {
       this.failed.push(rule)
       this.onFailedOne(rule)
     }

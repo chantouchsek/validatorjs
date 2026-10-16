@@ -167,7 +167,7 @@ export default class Messages {
   }
 
   _setCustom(customMessages: SimpleObject = {}) {
-    this.customMessages = customMessages
+    this.customMessages = { ...customMessages }
   }
 
   render(rule: Rule) {

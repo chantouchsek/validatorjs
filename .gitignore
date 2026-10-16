@@ -106,3 +106,5 @@ typings
 # TernJS port file
 .tern-port
 package-lock.json
+
+.DS_Store
