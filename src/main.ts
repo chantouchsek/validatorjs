@@ -207,7 +207,12 @@ export class Validator {
 
     for (const ruleKey of rulesArray) {
       const rule = this._extractRuleAndRuleValue(ruleKey)
-      if (rule.value) rule.value = this._replaceWildCards(rule.value, wildCardValues)
+      if (Array.isArray(rule.value)) {
+        rule.value = rule.value.map(value => typeof value === 'string' ? this._replaceWildCards(value, wildCardValues) : value)
+      }
+      else if (typeof rule.value === 'string') {
+        rule.value = this._replaceWildCards(rule.value, wildCardValues)
+      }
       this._replaceWildCardsMessages(wildCardValues)
 
       if (Validator.manager.isAsync(rule.name)) this.hasAsync = true
@@ -269,6 +274,8 @@ export class Validator {
   }
 
   check() {
+    this.errorCount = 0
+    this.errors.flush()
     for (let attribute in this.rules) {
       const attributeRules = this.rules[attribute]
       const inputValue = get(this.input ?? {}, attribute)
@@ -297,6 +304,8 @@ export class Validator {
   }
 
   checkAsync(passes?: (() => void) | boolean, fails?: any) {
+    this.errorCount = 0
+    this.errors.flush()
     const emptyFn = () => {
       // empty code block
     }
@@ -354,6 +363,13 @@ export class Validator {
   passes(passes?: () => void) {
     const async = this._checkAsync('passes', passes)
     return async ? this.checkAsync(passes) : this.check()
+  }
+
+  passesAsync(): Promise<boolean> {
+    return new Promise((resolve) => {
+      if (this.hasAsync) this.checkAsync(() => resolve(true), () => resolve(false))
+      else resolve(this.check())
+    })
   }
 
   setAttributeFormatter(func: any) {

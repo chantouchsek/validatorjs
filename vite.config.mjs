@@ -12,7 +12,17 @@ export default defineConfig({
   },
   test: {
     coverage: {
-      exclude: ['src/types.ts', '*.config.?(c|m)[jt]s?(x)'],
+      provider: 'v8',
+      include: ['src/**/*.ts'],
+      exclude: ['**/*.d.ts', 'dist/**'],
+      reporter: ['text', 'json', 'json-summary', 'html'],
+      thresholds: {
+        perFile: true,
+        statements: 100,
+        branches: 100,
+        functions: 100,
+        lines: 100,
+      },
     },
     deps: {
       interopDefault: true,

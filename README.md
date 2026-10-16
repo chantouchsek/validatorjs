@@ -1,6 +1,6 @@
 # ValidatorJs
 
-[![ci](https://github.com/chantouchsek/validator-js/actions/workflows/ci.yml/badge.svg)](https://github.com/chantouchsek/validator-js/actions/workflows/ci.yml)
+[![ci](https://github.com/chantouchsek/validatorjs/actions/workflows/ci.yml/badge.svg)](https://github.com/chantouchsek/validatorjs/actions/workflows/ci.yml)
 [![Latest Version on NPM](https://img.shields.io/npm/v/@chantouchsek/validatorjs.svg?style=flat-square)](https://npmjs.com/package/@chantouchsek/validatorjs)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 [![npm](https://img.shields.io/npm/dt/@chantouchsek/validatorjs.svg?style=flat-square)](https://npmjs.com/package/@chantouchsek/validatorjs)
@@ -42,28 +42,39 @@ yarn add @chantouchsek/validatorjs
 
 ### Basic Usage
 
-```js
+```ts
 import { Validator } from '@chantouchsek/validatorjs'
 
+const data = { email: 'ada@example.com' }
+const rules = { email: 'required|email' }
+const options = { customAttributes: { email: 'Email address' } }
 const validation = new Validator(data, rules, options)
+validation.passes() // => true
 ```
 
 **data** {Object} - The data you want to validate
 
 **rules** {Object} - Validation rules
 
-**options** {Object} - Optional custom **options** to return
+**options** {Object} - Optional validation and message configuration
 
 - Options
-  - locale?: string | Optional passing locale from config
+  - locale?: LangTypes | Select a bundled locale
   - confirmedReverse?: boolean | Optional showing error message on confirmation field instead of password
   - customMessages?: Record<string, any> | Optional custom error messages to return
   - customAttributes?: Record<string, any> | Optional custom attribute name to return
-  - defaultAttributeName?: Record<LangTypes, string> | Optional replace all :attribute property with languages provided
+  - defaultAttributeName?: Partial<Record<LangTypes, string>> | Replace :attribute for the selected locale
+
+Examples below use TypeScript and the package's named `Validator` export. Synchronous
+`passes()` and `fails()` return booleans; callback-based validation returns `void`.
+`passesAsync()` always returns `Promise<boolean>` for either kind of rule.
+Each validation run replaces the instance's previous errors and error count.
 
 #### Example 1 - Passing Validation
 
-```js
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
 const data = {
   age: 28,
   email: 'johndoe@gmail.com',
@@ -78,15 +89,17 @@ const rules = {
 
 const validation = new Validator(data, rules)
 
-validation.passes() // true
-validation.fails() // false
+validation.passes() // => true
+validation.fails() // => false
 ```
 
 To apply validation rules to the _data_ object, use the same object key names for the _rules_ object.
 
 #### Example 2 - Failing Validation
 
-```js
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
 const validation = new Validator(
   {
     email: 'not an email address.com',
@@ -98,17 +111,22 @@ const validation = new Validator(
   },
 )
 
-validation.fails() // true
-validation.passes() // false
+validation.fails() // => true
+validation.passes() // => false
 
 // Error messages
-validation.errors.first('email') // 'The email format is invalid.'
-validation.errors.get('email') // returns an array of all email error messages
+validation.errors.first('email') // => 'The email format is invalid.'
+validation.errors.get('email') // => ['The email format is invalid.']
+validation.errors.has('name') // => true
+validation.errorCount // => 2
+validation.errors.all() // => { email: ['The email format is invalid.'], name: ['The name must be 3 characters.'] }
 ```
 
 #### Example 3 - With Default Attribute Name
 
 ```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
 const validation = new Validator(
   {
     email: 'not an email address.com',
@@ -119,21 +137,49 @@ const validation = new Validator(
     name: 'size:3',
   },
   {
+    locale: 'ja',
     defaultAttributeName: {
       en: '',
       ja: 'この項目',
     },
-  }
+  },
 )
 
-validation.fails() // true
-validation.passes() // false
+validation.fails() // => true
+validation.passes() // => false
 
 // Error messages
-validation.errors.first('email') // 'The field format is invalid.'
-validation.errors.first('email') // 'この項目は正しいメールアドレスを入力してください。'
-validation.errors.get('email') // returns an array of all email error messages
+validation.errors.first('email') // => 'この項目は正しいメールアドレスを入力してください。'
 ```
+
+### Optional fields, required, sometimes, and present
+
+An ordinary rule such as `email` skips missing, `undefined`, `null`, and empty-string
+values. Add `required` to reject them. `sometimes` skips the entire field only when
+the key is missing; an explicitly supplied empty value still runs `required`.
+`present` currently rejects both missing keys and `undefined`, but accepts `null`,
+empty strings, zero, false, and empty arrays.
+
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
+new Validator({}, { email: 'email' }).passes() // => true
+new Validator({ email: '' }, { email: 'email' }).passes() // => true
+new Validator({}, { email: 'required|email' }).passes() // => false
+new Validator({}, { email: 'sometimes|required|email' }).passes() // => true
+new Validator({ email: '' }, { email: 'sometimes|required|email' }).passes() // => false
+new Validator({ email: undefined }, { email: 'sometimes|required' }).passes() // => false
+new Validator({ email: null }, { email: 'present' }).passes() // => true
+new Validator({ email: undefined }, { email: 'present' }).passes() // => false
+new Validator({}, { email: 'present' }).passes() // => false
+new Validator({ count: 0, enabled: false }, { count: 'required', enabled: 'required' }).passes() // => true
+new Validator({ tags: [] }, { tags: 'required|array' }).passes() // => false
+```
+
+`required` checks the non-whitespace string representation, so zero and false pass
+and an empty array fails. Arrays still run ordinary rules even when empty.
+Validation does not coerce input types: a numeric string can pass `numeric` while
+remaining a string in the returned data.
 
 ### Nested Rules
 
@@ -141,7 +187,9 @@ Nested objects can also be validated. There are two ways to declare validation r
 is to declare the validation rules with a corresponding nested object structure that reflects the data. The second way
 is to declare validation rules with flattened key names. For example, to validate the following data:
 
-```js
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
 const data = {
   bio: {
     age: 28,
@@ -152,11 +200,7 @@ const data = {
   },
   name: 'John',
 }
-```
-
-We could declare our validation rules as follows:
-
-```js
+// Either nested rules or flattened paths can validate this data.
 const nested = {
   bio: {
     age: 'min:18',
@@ -176,13 +220,18 @@ const flattened = {
   'bio.education.secondary': 'string',
   'name': 'required',
 }
+
+new Validator(data, nested).passes() // => true
+new Validator(data, flattened).passes() // => true
 ```
 
 ### WildCards Rules
 
 WildCards can also be validated.
 
-```js
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
 const data = {
   users: [
     {
@@ -197,18 +246,73 @@ const data = {
     },
   ],
 }
-```
-
-We could declare our validation rules as follows:
-
-```js
 const rules = {
+  'users': 'required|array',
   'users.*.bio.age': 'min:18',
   'users.*.bio.education.primary': 'string',
   'users.*.bio.education.secondary': 'string',
   'users.*.name': 'required',
 }
+
+new Validator(data, rules).passes() // => true
+
+const invalid = new Validator({ users: [{ name: '' }] }, { 'users.*.name': 'required' })
+invalid.fails() // => true
+invalid.errors.first('users.0.name') // => 'The users 0 name field is required.'
 ```
+
+Use a rule on the parent array to require at least one item: wildcard rules alone
+have no entries to validate for a missing or empty array. Wildcards expand when
+the validator is constructed; create a new instance if the array structure changes.
+
+### Conditional required rules and comparisons
+
+String-form comparison parameters are strings. Array-form parameters preserve
+their types, so use them when comparing a boolean or number.
+
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
+const input = {
+  account: { kind: 'business' },
+  company: '',
+  password: 'secret123',
+  password_confirmation: 'secret123',
+  email: 'ada@example.com',
+  emailAgain: 'ada@example.com',
+  backupEmail: 'other@example.com',
+}
+const rules = {
+  company: 'required_if:account.kind,business',
+  password: 'required|confirmed',
+  emailAgain: 'required|same:email',
+  backupEmail: 'required|different:email',
+}
+const validation = new Validator(input, rules)
+validation.fails() // => true
+validation.errors.has('company') // => true
+validation.errorCount // => 1
+
+new Validator({ enabled: false }, { reason: [{ required_if: ['enabled', false] }] }).passes() // => false
+new Validator({ status: 'draft' }, { title: 'required_unless:status,draft' }).passes() // => true
+new Validator({ email: 'ada@example.com' }, { name: 'required_with:email' }).passes() // => false
+new Validator({ email: 'ada@example.com' }, { name: 'required_without:email' }).passes() // => true
+new Validator({ first: 'Ada', last: 'Lovelace' }, { name: 'required_with_all:first,last' }).passes() // => false
+new Validator({ first: 'Ada' }, { name: 'required_without_all:first,last' }).passes() // => true
+
+const users = { users: [{ needsPhone: true, phone: '' }, { needsPhone: false }] }
+const userRules = { 'users.*.phone': [{ required_if: ['users.*.needsPhone', true] }] }
+const perUser = new Validator(users, userRules)
+perUser.fails() // => true
+Object.keys(perUser.errors.all()) // => ['users.0.phone']
+```
+
+`same` and `different` use strict equality. Current limitations: comparison paths
+through arrays do not resolve correctly for these two rules, and `confirmed`
+looks up a top-level confirmation field. The with/without conditional rules use
+truthiness, so zero and false count as absent. Although their rule names below
+document multiple fields, `required_with` and `required_without` currently resolve
+only one path; use a single dependency until list handling is fixed.
 
 ### Available Rules
 
@@ -221,11 +325,11 @@ The field under validation must be yes, on, 1 or true. This is useful for valida
 
 #### after:date
 
-The field under validation must be after the given date.
+The field under validation must be after the date in the named top-level input field.
 
 #### after_or_equal:date
 
-The field under validation must be after or equal to the given field
+The field under validation must be after or equal to the date in the named top-level input field.
 
 #### alpha
 
@@ -245,15 +349,15 @@ The field under validation must be an array.
 
 #### before:date
 
-The field under validation must be before the given date.
+The field under validation must be before the date in the named top-level input field.
 
 #### before_or_equal:date
 
-The field under validation must be before or equal to the given date.
+The field under validation must be before or equal to the date in the named top-level input field.
 
 #### between:min,max
 
-The field under validation must have a size between the given min and max. Strings, numerics, and files are evaluated in
+The field under validation must have a size between the given min and max. Strings, numbers, and arrays are evaluated in
 the same fashion as the size rule.
 
 #### boolean
@@ -276,7 +380,8 @@ The field under validation must be numeric and must have an exact length of valu
 
 #### digits_between:min,max
 
-The field under validation must be numeric and must have length between given min and max.
+The current implementation checks that the numeric value is between min and max;
+it does not check digit count despite the rule's name and error message.
 
 #### different:attribute
 
@@ -307,26 +412,30 @@ _Note: Maximum checks are inclusive._
 
 #### Example 1 - Max validation
 
-```js
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
 const rules = {
-  phone: 'required|digits|max:11',
+  phone: 'required|digits:11|max:11',
 }
 const input = {
   phone: '01234567890',
 }
-// passes: true
+new Validator(input, rules).passes() // => true
 ```
 
 #### Example 2 - Max validation
 
-```js
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
 const rules = {
   phone: 'integer|max:16',
 }
 const input = {
   phone: '18',
 }
-// passes: false
+new Validator(input, rules).passes() // => false
 ```
 
 #### min:value
@@ -337,26 +446,30 @@ _Note: Minimum checks are inclusive._
 
 #### Example 1 - Min validation
 
-```js
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
 const rules = {
-  phone: 'required|digits|min:11',
+  phone: 'required|digits:11|min:11',
 }
 const input = {
   phone: '01234567890',
 }
-// passes: true
+new Validator(input, rules).passes() // => true
 ```
 
 #### Example 2 - Min validation
 
-```js
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
 const rules = {
   phone: 'integer|min:11',
 }
 const input = {
   phone: '18',
 }
-// passes: false
+new Validator(input, rules).passes() // => true
 ```
 
 #### not_in:foo,bar,...
@@ -367,27 +480,31 @@ The field under validation must not be included in the given list of values.
 
 Validate that an attribute is numeric. The string representation of a number will pass.
 
-```js
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
 const rules = {
   amount: 'numeric|digits:5',
 }
+new Validator({ amount: '12345' }, rules).passes() // => true
 ```
 
 #### present
 
-The field under validation must be present in the input data but can be empty.
+The field under validation must have a value other than `undefined`, but can be empty.
 
 #### required
 
-Checks if the length of the String representation of the value is >
+Rejects `null` and `undefined`, then checks that the string representation contains
+at least one non-whitespace character. Zero and false pass; empty arrays fail.
 
 #### required_if:another_field,value
 
-The field under validation must be present and not empty if the another field is equal to any value.
+The field under validation must be nonempty if the other field strictly equals the supplied value.
 
 #### required_unless:another_field,value
 
-The field under validation must be present and not empty unless the another field is equal to any value.
+The field under validation must be nonempty unless the other field strictly equals the supplied value.
 
 #### required_with:foo,bar,...
 
@@ -409,10 +526,14 @@ The field under validation must be present and not empty only when all the other
 
 In some situations, you may wish to run validation checks against a field only if that field is present in the data being validated. To quickly accomplish this, add the sometimes rule to your rule list:
 
-```js
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
 const rules = {
   email: 'sometimes|required|email',
 }
+new Validator({}, rules).passes() // => true
+new Validator({ email: '' }, rules).passes() // => false
 ```
 
 In the example above, the email field will only be validated if it is present in the input.
@@ -444,7 +565,9 @@ your regex pattern, you must escape each one with another backward slash.
 
 #### Example 3 - Regex validation
 
-```js
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
 const validation = new Validator(
   {
     name: 'Doe',
@@ -458,13 +581,15 @@ const validation = new Validator(
   },
 )
 
-validation.fails() // false
-validation.passes() // true
+validation.fails() // => false
+validation.passes() // => true
 ```
 
 #### Example 4 - Type Checking Validation
 
-```js
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
 const validation = new Validator(
   {
     age: 30,
@@ -476,15 +601,13 @@ const validation = new Validator(
   },
 )
 
-validation.fails() // true
-validation.passes() // false
+validation.fails() // => true
+validation.passes() // => false
 ```
 
 ### Register Custom Validation Rules
 
-```js
-Validator.register(name, callbackFn, errorMessage)
-```
+Use `Validator.register(name, callbackFn, errorMessage?)`.
 
 **name** {String} - The name of the rule.
 
@@ -493,58 +616,94 @@ Validator.register(name, callbackFn, errorMessage)
 **errorMessage** {String} - An optional string where you can specify a custom error message. _:attribute_ inside
 errorMessage will be replaced with the attribute name.
 
-```js
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
 Validator.register(
   'telephone',
-  (value, requirement, attribute) => {
-    // requirement parameter defaults to null
-    return value.match(/^\d{3}-\d{3}-\d{4}$/)
-  },
-  'The :attribute phone number is not in the format XXX-XXX-XXXX.',
+  (value: unknown, _requirement: unknown, _attribute: string): boolean =>
+    typeof value === 'string' && /^\d{3}-\d{3}-\d{4}$/.test(value),
+  'The :attribute is not in the format XXX-XXX-XXXX.',
 )
+
+const validation = new Validator({ phone: '123-456-7890' }, { phone: 'required|telephone' })
+validation.passes() // => true
+const invalid = new Validator({ phone: '123' }, { phone: 'required|telephone' })
+invalid.fails() // => true
+invalid.errors.first('phone') // => 'The phone is not in the format XXX-XXX-XXXX.'
 ```
+
+The callback receives `(value, requirement, attribute)`. A rule without a parameter
+receives `undefined` as its requirement. Ordinary custom rules skip missing/empty
+values; combine them with `required`, or use `registerImplicit` for a custom rule
+that must run on empty input. Registrations are shared by all validator instances.
 
 ### Asynchronous Validation
 
-Register an asynchronous rule which accepts a `passes` callback:
+Register an asynchronous rule which accepts a response callback as its fourth
+argument. Call that callback exactly once, including on failures; returning a
+Promise from the rule does not resolve validation automatically.
 
-```js
-Validator.registerAsync('username_available', (username, attribute, req, passes) => {
-  // do your database/api checks here etc
-  // then call the `passes` method where appropriate:
-  passes() // if username is available
-  passes(false, 'Username has already been taken.') // if username is not available
-})
-```
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
 
-Then call your validator using `checkAsync` passing `fails` and `passes` callbacks like so:
+type Respond = (passed?: boolean, message?: string) => void
+Validator.registerAsync(
+  'username_available',
+  (username: string, _requirement: unknown, _attribute: string, respond: Respond): void => {
+    setTimeout(() => {
+      if (username === 'taken') respond(false, 'Username has already been taken.')
+      else respond()
+    }, 0)
+  },
+  'The :attribute is unavailable.',
+)
 
-```js
 const validator = new Validator(
   {
-    username: 'test123',
+    username: 'taken',
   },
   {
     username: 'required|min:3|username_available',
   },
 )
 
-function passes() {
-  // Validation passed
-}
-
-function fails() {
-  validator.errors.first('username')
-}
-
-validator.checkAsync(passes, fails)
+const passed = await validator.passesAsync()
+passed // => false
+validator.errors.first('username') // => 'Username has already been taken.'
 ```
+
+This example uses top-level `await` in an ES module; it can also run inside an
+`async` function. `passesAsync()` resolves `true` or `false` after validation finishes;
+read `errors` and `errorCount` on the instance afterward. Errors thrown while
+invoking validation, such as an unknown rule, reject the Promise instead of
+resolving `false`. Exceptions thrown later in application-managed timers are not
+automatically captured, and custom async rules must still call their response callback.
+
+It also supports synchronous rules without a separate wrapper:
+
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
+const validator = new Validator({ email: 'ada@example.com' }, { email: 'required|email' })
+const passed: boolean = await validator.passesAsync()
+passed // => true
+validator.errors.all() // => {}
+```
+
+The callback APIs remain available: when async rules are present, `passes(callback)`
+and `fails(callback)` require a callback. `checkAsync(onPass, onFail)` handles both
+outcomes and returns `void`. Complete one validation run before starting another on
+the same instance. A custom rule that never responds still leaves validation pending;
+`passesAsync()` does not add a timeout or adopt returned Promises from custom rules.
 
 ### Working with validated input
 
 Use `validated()` method to retrieve only the validated data and to filter out attributes not found on rules provided.
 
-```js
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
 const validation = new Validator(
   {
     age: 28,
@@ -557,12 +716,14 @@ const validation = new Validator(
     name: 'required',
   },
 )
-validation.validated() // will return `{ "name": "John", "age": 28 }`
+validation.validated() // => { name: 'John', age: 28 }
 ```
 
 `validated()` method will throw an error when current validation is failing.
 
-```js
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
 const validation = new Validator(
   {
     age: 28,
@@ -575,14 +736,20 @@ const validation = new Validator(
     name: 'required',
   },
 )
-validation.validated() // will throw `Error('Validation failed!')`
+validation.validated() // throws: Validation failed!
 ```
 
-`validated()` method also works with asynchronous validation. In this case,
-`passes()` callback will receive only the validated data (without the
-attributes not found on rules provided) as the first argument.
+`validated()` also works with asynchronous validation. Its first callback receives
+the filtered data as its first argument; the second callback handles failure.
 
-```js
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
+type Respond = (passed?: boolean, message?: string) => void
+Validator.registerAsync('allowed_name', (value: string, _requirement: unknown, _attribute: string, respond: Respond): void => {
+  setTimeout(() => respond(value !== 'blocked'), 0)
+}, 'The :attribute is blocked.')
+
 const validation = new Validator(
   {
     age: 28,
@@ -592,17 +759,37 @@ const validation = new Validator(
   },
   {
     age: 'min:18',
-    name: 'required|some_async_rule',
+    name: 'required|allowed_name',
   },
 )
-function passes(validated) {
-  console.log(validated) // will output `{ "name": "John", "age": 28 }` if `some_async_rule` validates `'John'`
-}
-function fails() {
-  // will be called if `some_async_rule` does not validate `'John'`
-}
-validation.validated(passes, fails)
+const data = await new Promise<Record<string, unknown>>((resolve, reject) => {
+  validation.validated(
+    (validated: Record<string, unknown>) => resolve(validated),
+    () => reject(new Error('Validation failed')),
+  )
+})
+data // => { name: 'John', age: 28 }
 ```
+
+For nested data, place rules on the leaf fields you want returned:
+
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
+const input = {
+  user: { name: 'Ada', secret: 'hidden' },
+  items: [{ sku: 'A1', price: 10, internal: 'hidden' }],
+  extra: 'hidden',
+}
+const rules = { 'user.name': 'required', 'items.*.sku': 'required', 'items.*.price': 'numeric' }
+new Validator(input, rules).validated() // => { user: { name: 'Ada' }, items: [{ sku: 'A1', price: 10 }] }
+```
+
+`validated()` checks the input again and returns a JSON-cloned projection, without
+type coercion or inferred output types. Use JSON-compatible input. Current limitations:
+validating only an array parent can remove its elements, unruled objects can remain
+as empty containers, and `null` as the entire input cannot be projected. Use leaf
+rules for predictable filtering; this method is not a general-purpose sanitizer.
 
 ### Error Messages
 
@@ -613,7 +800,7 @@ for all failing attributes. The methods and properties on the **errors** propert
 
 #### .first(attribute)
 
-returns the first error message for an attribute, false otherwise
+returns the first error message for an attribute, or `undefined` when none exists
 
 #### .get(attribute)
 
@@ -629,21 +816,28 @@ returns true if error messages exist for an attribute, false otherwise
 
 #### .errorCount
 
-the number of validation errors
+The number of failed rules on the validator instance (`validation.errorCount`),
+not a property on `validation.errors`.
 
-```js
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
+const input = { email: 'invalid' }
+const rules = { email: 'required|email' }
 const validation = new Validator(input, rules)
-validation.errors.first('email') // returns first error message for email attribute
-validator.errors.get('email') // returns an array of error messages for the email attribute
+validation.fails()
+validation.errors.first('email') // => 'The email format is invalid.'
+validation.errors.get('email') // => ['The email format is invalid.']
 ```
 
 ### Custom Error Messages
 
-If you need a specific error message, and you don't want to override the default one, you can pass an override as the
-third argument to the Validator object, just like
-with [Laravel](http://laravel.com/docs/validation#custom-error-messages).
+Pass overrides in the third argument's `customMessages` property. Use the rule
+name for all fields, or `rule.attribute` for a particular field.
 
-```js
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
 const input = {
   name: '',
 }
@@ -653,15 +847,17 @@ const rules = {
 }
 
 const validation = new Validator(input, rules, {
-  required: 'You forgot to give a :attribute',
+  customMessages: { required: 'You forgot to give a :attribute' },
 })
-validation.passes()
-validation.errors.first('name') // returns 'You forgot to give a name'
+validation.passes() // => false
+validation.errors.first('name') // => 'You forgot to give a name'
 ```
 
 Some validators have string and numeric versions. You can change them too.
 
-```js
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
 const input = {
   username: 'myusernameistoolong',
 }
@@ -671,134 +867,138 @@ const rules = {
 }
 
 const validation = new Validator(input, rules, {
-  max: {
-    string: 'The :attribute is too long. Max length is :max.',
+  customMessages: {
+    max: {
+      string: 'The :attribute is too long. Max length is :max.',
+    },
   },
 })
-validation.passes()
-validation.errors.first('username') // returns 'The username is too long. Max length is 16.'
+validation.passes() // => false
+validation.errors.first('username') // => 'The username is too long. Max length is 16.'
 ```
 
 You can even provide error messages on a per-attribute basis! Just set the message's key to 'validator.attribute'
 
-```js
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
 const input = { email: '', name: '' }
 const rules = { email: 'required', name: 'required' }
 
 const validation = new Validator(input, rules, {
-  'required.email': 'Without an :attribute we can\'t reach you!',
+  customMessages: { 'required.email': 'Without an :attribute we can\'t reach you!' },
 })
 
-validation.passes()
-validation.errors.first('name') // returns  'The name field is required.'
-validation.errors.first('email') // returns 'Without an email we can\'t reach you!'
+validation.passes() // => false
+validation.errors.first('name') // => 'The name field is required.'
+validation.errors.first('email') // => 'Without an email we can\'t reach you!'
 ```
 
 ### Custom Attribute Names
 
 #### Using config for custom attribute name
 
-```js
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
 const validator = new Validator(
   { form: { name: null } },
   { form: { age: 'required', name: 'required' } },
   {
     customAttributes: { form: { name: 'Username' } },
     customMessages: {
-      required: 'The :attribute need to be filled.',
+      required: 'The :attribute must be filled.',
     },
   },
 )
 if (validator.fails())
-  validator.errors.first('form.name') // "The Userame need to be filled."
+  validator.errors.first('form.name') // => 'The Username must be filled.'
 ```
 
 To display a custom "friendly" attribute name in error messages, use `.setAttributeNames()`
 
-```js
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
 const validator = new Validator({ name: '' }, { name: 'required' })
 validator.setAttributeNames({ name: 'custom_name' })
 if (validator.fails())
-  validator.errors.first('name') // "The custom_name field is required."
+  validator.errors.first('name') // => 'The custom_name field is required.'
 ```
 
 Alternatively you can supply global custom attribute names in your lang with the `attributes` property.
 
 You can also configure a custom attribute formatter:
 
-```js
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
 // Configure global formatter.
-Validator.setAttributeFormatter((attribute) => {
+Validator.setAttributeFormatter((attribute: string) => {
   return attribute.replace(/_/g, ' ')
 })
 
 // Or configure formatter for particular instance.
 const validator = new Validator({ first_name: '' }, { first_name: 'required' })
-validator.setAttributeFormatter((attribute) => {
+validator.setAttributeFormatter((attribute: string) => {
   return attribute.replace(/_/g, ' ')
 })
 if (validator.fails())
-  console.log(validator.errors.first('first_name')) // The first name field is required.
+  validator.errors.first('first_name') // => 'The first name field is required.'
 ```
 
 Note: by default all \_ characters will be replaced with spaces.
 
 ### Language Support
 
-Error messages are in English by default. To include another language in the browser, reference the language file in a
-script tag and call `Validator.useLang('lang_code')`.
+Locales are bundled in the public package entry. Use named imports in Node or a
+browser bundler; no separate `dist/lang/*.js` import is needed. English is the
+initial default. `LangTypes` lists the supported locale codes.
 
-```html
-<script src="dist/main.js"></script>
-<script src="dist/lang/km.js"></script>
-<script>
-  Validator.useLang('km')
-</script>
+```ts
+import type { ValidatorOptions } from '@chantouchsek/validatorjs'
+import { Validator } from '@chantouchsek/validatorjs'
+
+const previousLocale = Validator.getDefaultLang()
+const options: ValidatorOptions = { locale: 'fr', customAttributes: { name: 'Nom' } }
+const validation = new Validator({ name: '' }, { name: 'required' }, options)
+validation.fails() // => true
+validation.errors.first('name') // => 'Le champ Nom est requis.'
+Validator.useLang(previousLocale)
 ```
 
-In Node, it will automatically pick up on the language source files.
+Currently, constructing a validator with `locale` also changes the global default
+for later validators and custom-rule registrations. Set or restore the default
+explicitly in shared applications. Use a supported locale; unknown codes have no
+automatic fallback. To set a default for subsequent instances:
 
-```js
-const Validator = require('validatorjs')
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
 
+const previousLocale = Validator.getDefaultLang()
 Validator.useLang('km')
+Validator.getDefaultLang() // => 'km'
+const validation = new Validator({ name: '' }, { name: 'required' })
+validation.fails() // => true
+validation.errors.first('name') // => 'ឈ្មោះ ត្រូវតែបញ្ចូលជាដាច់ខាត។'
+Validator.useLang(previousLocale)
+```
+
+`getMessages` returns a shared locale dictionary. Copy it before overriding messages
+with `setMessages`; preserve the other templates so unrelated rules can still render:
+
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+
+const original = Validator.getMessages('en')
+Validator.setMessages('en', { ...original, required: 'Whoops, :attribute is required.' })
+const validation = new Validator({}, { name: 'required' }, { locale: 'en' })
+validation.fails() // => true
+validation.errors.first('name') // => 'Whoops, name is required.'
+Validator.setMessages('en', original)
 ```
 
 If you don't see support for your language, please add one to `src/lang`!
-
-You can also add your own custom language by calling `setMessages`:
-
-```js
-Validator.setMessages('lang_code', {
-  required: 'The :attribute field is required.',
-})
-```
-
-Get the raw object of messages for the given language:
-
-```js
-Validator.getMessages('lang_code')
-```
-
-Switch the default language used by the validator:
-
-```js
-Validator.useLang('lang_code')
-```
-
-Get the default language being used:
-
-```js
-Validator.getDefaultLang() // returns e.g. 'en'
-```
-
-Override default messages for language:
-
-```js
-const messages = Validator.getMessages('en')
-messages.required = 'Whoops, :attribute field is required.'
-Validator.setMessages('en', messages)
-```
 
 ### License
 
