@@ -2,6 +2,40 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## v2.3.0
+
+[compare changes](https://github.com/chantouchsek/validatorjs/compare/v2.2.8...v2.3.0)
+
+### 🚀 Enhancements
+
+- Add promise validation and strengthen validation guarantees ([0dfdc6a](https://github.com/chantouchsek/validatorjs/commit/0dfdc6a))
+- Add optional phone validation adapter ([10e1565](https://github.com/chantouchsek/validatorjs/commit/10e1565))
+
+### 🩹 Fixes
+
+- 🎨  fix styling by (eslint) ([d92634d](https://github.com/chantouchsek/validatorjs/commit/d92634d))
+- **deps:** Bump fast-uri from 3.1.0 to 3.1.2 ([61a6fa5](https://github.com/chantouchsek/validatorjs/commit/61a6fa5))
+- **deps:** Bump actions/checkout from 6 to 7 ([47e6ad0](https://github.com/chantouchsek/validatorjs/commit/47e6ad0))
+- **deps:** Bump actions/cache from 5 to 6 ([a8f600d](https://github.com/chantouchsek/validatorjs/commit/a8f600d))
+- **deps:** Bump actions/setup-node from 6 to 7 ([bdb3a4a](https://github.com/chantouchsek/validatorjs/commit/bdb3a4a))
+- **deps:** Bump actions/stale from 9 to 11 ([ee17cf3](https://github.com/chantouchsek/validatorjs/commit/ee17cf3))
+- **deps:** Bump pnpm/action-setup from 6 to 6.0.9 ([17b731c](https://github.com/chantouchsek/validatorjs/commit/17b731c))
+- **deps:** Bump github/codeql-action from 4 to 4.37.4 ([69982ea](https://github.com/chantouchsek/validatorjs/commit/69982ea))
+- **rule:** Avoid coercing invalid parameters when rendering errors ([3264348](https://github.com/chantouchsek/validatorjs/commit/3264348))
+
+### 💅 Refactors
+
+- Update _parseRulesDefault signature to remove redundant type from rulesArray parameter ([85a0446](https://github.com/chantouchsek/validatorjs/commit/85a0446))
+
+### ✅ Tests
+
+- Cover boxed phone country parameters ([9945d32](https://github.com/chantouchsek/validatorjs/commit/9945d32))
+
+### ❤️ Contributors
+
+- Touch <chantouchsek.cs83@gmail.com>
+- Chantouchsek
+
 ## v2.2.8
 
 [compare changes](https://github.com/chantouchsek/validatorjs/compare/v2.2.7...v2.2.8)
