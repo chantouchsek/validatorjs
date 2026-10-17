@@ -79,10 +79,18 @@ describe('explicitly registered phone validation', () => {
     expect(validator.errors.has('contact')).toBe(true)
   })
 
-  it.each([null, 0, true, ['KH'], { country: 'KH' }])('rejects non-string object-rule country %j', (parameter) => {
+  it.each([null, 0, Infinity, true, ['KH'], { country: 'KH' }])('rejects non-string object-rule country %j', (parameter) => {
     const validator = new Validator({ contact: international }, { contact: [{ phone: parameter }] })
     expect(validator.fails()).toBe(true)
     expect(validator.errors.has('contact')).toBe(true)
+  })
+
+  it('reports a normal validation error for non-coercible country parameters', () => {
+    for (const parameter of [Symbol('KH'), Object.create(null)]) {
+      const validator = new Validator({ contact: international }, { contact: [{ phone: parameter }] })
+      expect(validator.fails()).toBe(true)
+      expect(validator.errors.get('contact')).toEqual(['The contact attribute has errors.'])
+    }
   })
 
   it('accepts object-rule countries and treats an undefined parameter as a bare rule', () => {

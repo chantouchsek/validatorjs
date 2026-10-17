@@ -723,7 +723,7 @@ Validator.useLang(previousLocale)
 
 The optional adapter adds parser/full-metadata cost only to applications importing
 `/phone`; the peer remains external to this package's builds. Existing core
-exports, validation behavior, and consumer Node requirements are unchanged.
+exports, documented validation behavior, and consumer Node requirements are unchanged.
 
 ### Register Custom Validation Rules
 

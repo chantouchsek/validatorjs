@@ -217,8 +217,8 @@ export class Rule {
 
     if (Array.isArray(this.rule)) value = this.rule
 
-    if (!Number.isNaN(Number.parseFloat(this.rule as string)) && Number.isFinite(this.rule)) {
-      this.rule = Number.parseFloat(this.rule as string)
+    if (typeof this.rule === 'number' && Number.isFinite(this.rule)) {
+      this.rule = Number.parseFloat(String(this.rule))
       value.push(this.rule)
     }
 
