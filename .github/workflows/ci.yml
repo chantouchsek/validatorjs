@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [24]
+        node-version: [22, 24, 26]
 
     steps:
       - uses: actions/checkout@v7
@@ -43,10 +43,13 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies 👨🏻‍💻
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Lint 👀
-        run: pnpm run lint:fix
+        run: pnpm run lint
+
+      - name: Typecheck
+        run: pnpm run typecheck
 
       - name: Run build 👷
         run: pnpm run build
@@ -54,7 +57,29 @@ jobs:
       - name: Run tests 🧪
         run: pnpm run test:cov
 
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v7
+      - name: Check packed package
+        run: pnpm run test:package
+
+  consumers:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.20.0, 14.13.0, 18, 20]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6.0.9
         with:
-          commit_message: 'fix: :art: fix styling by (eslint)'
+          version: 10.26.0
+          run_install: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - name: Save development runtime
+        run: echo "DEV_NODE=$(command -v node)" >> "$GITHUB_ENV"
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Check consumer runtime with development tooling
+        run: '"$DEV_NODE" scripts/check-package.ts "$(command -v node)"'
