@@ -605,6 +605,126 @@ validation.fails() // => true
 validation.passes() // => false
 ```
 
+### Optional Phone Validation
+
+Phone validation is an opt-in adapter. Install its optional peer explicitly:
+
+```sh
+pnpm add @chantouchsek/validatorjs libphonenumber-js
+# Or: npm install @chantouchsek/validatorjs libphonenumber-js
+# Or: yarn add @chantouchsek/validatorjs libphonenumber-js
+```
+
+Importing the core package loads no phone parser or metadata. The separate
+`/phone` entry loads `libphonenumber-js/max` (full metadata), but registers nothing
+until you call `registerPhoneRule(Validator)`. Core-only users do not need the peer;
+importing `/phone` without it produces a module-resolution error. ESM and CommonJS
+imports are supported, with TypeScript declarations for both entries.
+
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+import { registerPhoneRule } from '@chantouchsek/validatorjs/phone'
+
+registerPhoneRule(Validator)
+
+const international = new Validator({ contact: '+855 12 345 678' }, { contact: 'required|phone' })
+international.passes() // => true
+
+const national = new Validator({ contact: '012 345 678' }, { contact: 'phone:KH' })
+national.passes() // => true
+
+const missingCountry = new Validator({ contact: '012 345 678' }, { contact: 'phone' })
+missingCountry.fails() // => true
+
+const foreignCountry = new Validator({ contact: '+1 213 373 4253' }, { contact: 'phone:KH' })
+foreignCountry.fails() // => true
+```
+
+`phone` requires international notation beginning with `+`. `phone:KH` accepts a
+national or international number belonging to Cambodia. Other uppercase country
+codes supported by libphonenumber-js work in the same way (`US`, `CA`, `GB`, `FR`,
+etc., including its supported region codes). The parsed country must match,
+including countries sharing a calling code. Country-specific dialing prefixes
+follow the parser's country rules. `UK`, lowercase codes, unsupported codes, empty
+`phone:`, country lists, and non-string country parameters fail when evaluated.
+There are no registration or formatting options; use a bare rule or one country.
+
+Spaces, parentheses, and hyphens are accepted when the whole input parses as a
+valid number. Surrounding prose, extensions (`ext.`, `x`), and `tel:` URIs are
+rejected. Only primitive strings are accepted; numeric inputs lose leading zeros
+and must not be used. Numbering-plan validity does **not** prove assignment,
+ownership, reachability, or SMS capability. Keep the optional peer current because
+its metadata determines validity.
+
+Empty values follow the existing non-implicit rule behavior:
+
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+import { registerPhoneRule } from '@chantouchsek/validatorjs/phone'
+
+registerPhoneRule(Validator)
+new Validator({}, { contact: 'phone' }).passes() // => true
+new Validator({ contact: null }, { contact: 'phone' }).passes() // => true
+new Validator({ contact: '' }, { contact: 'required|phone' }).fails() // => true
+new Validator({}, { contact: 'sometimes|required|phone' }).passes() // => true
+new Validator({ contact: '' }, { contact: 'sometimes|required|phone' }).fails() // => true
+new Validator({ contact: [] }, { contact: 'phone' }).fails() // => true
+```
+
+Missing, undefined, null, empty, and whitespace-only values skip `phone`; add
+`required` to require a value. Arrays are evaluated and rejected. `present`,
+`nullable`, and conditional required rules keep their existing semantics.
+Invalid country options on skipped optional values are not preflight errors.
+
+Nested fields, wildcard rules, messages, and attribute names use the existing APIs:
+
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+import { registerPhoneRule } from '@chantouchsek/validatorjs/phone'
+
+registerPhoneRule(Validator)
+const input = { contacts: [{ number: 'bad' }, { number: '+855 12 345 678' }] }
+const validation = new Validator(input, { 'contacts.*.number': 'required|phone:KH' }, {
+  customMessages: { 'phone.contacts.*.number': 'Enter a valid phone number for :attribute.' },
+  customAttributes: { 'contacts.*.number': 'contact number' },
+})
+validation.fails() // => true
+validation.errors.first('contacts.0.number') // => 'Enter a valid phone number for contact number.'
+
+const valid = new Validator({ contact: '  +855 12 345 678  ' }, { contact: 'phone' })
+valid.validated() // => { contact: '  +855 12 345 678  ' }
+```
+
+Validation never formats or mutates input; `validated()` preserves the supplied
+string. Registration can be repeated and explicitly replaces an existing
+synchronous `phone` rule. Reserve that rule name for the adapter.
+
+Phone messages use the locale's `phone` template when present, then its existing
+generic `def` fallback (English: `The contact attribute has errors.`). Instance
+custom messages take normal precedence. To supply localized phone text:
+
+```ts
+import { Validator } from '@chantouchsek/validatorjs'
+import { registerPhoneRule } from '@chantouchsek/validatorjs/phone'
+
+const previousLocale = Validator.getDefaultLang()
+const original = Validator.getMessages('fr')
+Validator.setMessages('fr', { ...original, phone: 'Le numéro :attribute est invalide.' })
+Validator.useLang('fr')
+registerPhoneRule(Validator) // Preserves this translation and the default locale.
+
+const validation = new Validator({ contact: 'bad' }, { contact: 'phone' }, { locale: 'fr' })
+validation.fails() // => true
+validation.errors.first('contact') // => 'Le numéro contact est invalide.'
+
+Validator.setMessages('fr', original)
+Validator.useLang(previousLocale)
+```
+
+The optional adapter adds parser/full-metadata cost only to applications importing
+`/phone`; the peer remains external to this package's builds. Existing core
+exports, validation behavior, and consumer Node requirements are unchanged.
+
 ### Register Custom Validation Rules
 
 Use `Validator.register(name, callbackFn, errorMessage?)`.

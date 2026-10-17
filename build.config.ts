@@ -2,7 +2,10 @@ import { readFileSync } from 'node:fs'
 import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
+  entries: ['src/main', 'src/phone'],
+  declaration: 'compatible',
   rollup: {
+    emitCJS: true,
     // The package supports Node 12.20, independently of development tooling.
     esbuild: { target: 'node12.20' },
     // lodash-es cannot be required by CommonJS consumers on older Node versions.

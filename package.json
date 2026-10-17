@@ -28,11 +28,20 @@
     ".": {
       "import": "./dist/main.mjs",
       "require": "./dist/main.cjs"
+    },
+    "./phone": {
+      "import": "./dist/phone.mjs",
+      "require": "./dist/phone.cjs"
     }
   },
   "main": "./dist/main.cjs",
   "module": "./dist/main.mjs",
   "types": "./dist/main.d.ts",
+  "typesVersions": {
+    "*": {
+      "phone": ["./dist/phone.d.ts"]
+    }
+  },
   "files": [
     "dist"
   ],
@@ -51,6 +60,14 @@
     "prepare": "husky",
     "typecheck": "tsc --noEmit"
   },
+  "peerDependencies": {
+    "libphonenumber-js": "^1.13.15"
+  },
+  "peerDependenciesMeta": {
+    "libphonenumber-js": {
+      "optional": true
+    }
+  },
   "dependencies": {
     "lodash-es": "^4.18.1"
   },
@@ -64,6 +81,7 @@
     "changelogen": "^0.6.2",
     "eslint": "^10.13.0",
     "husky": "^9.1.7",
+    "libphonenumber-js": "^1.13.15",
     "lint-staged": "^17.6.0",
     "node-notifier": "^11.0.0",
     "ts-node": "^10.9.2",
