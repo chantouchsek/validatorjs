@@ -1000,6 +1000,26 @@ Validator.setMessages('en', original)
 
 If you don't see support for your language, please add one to `src/lang`!
 
+### Development
+
+Use pnpm 10.26.0 and Node.js 22.22.2+, 24.15.0+, or 26+ for development.
+These requirements come from the development tools; the published package still
+supports Node.js `^12.20.0 || >=14.13.0`.
+
+```sh
+pnpm install --frozen-lockfile
+pnpm test:cov
+pnpm typecheck
+pnpm lint
+pnpm build
+pnpm test:package
+```
+
+The package check installs a local tarball into a temporary project, verifies ESM
+and CommonJS behavior, and checks both declaration formats. To check an older
+consumer runtime, pass its Node executable to `pnpm test:package /path/to/node`;
+the check itself must run on a development Node version.
+
 ### License
 
 Copyright &copy; 2020-Present Chantouch Sek

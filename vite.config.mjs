@@ -1,4 +1,4 @@
-import { resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
@@ -6,7 +6,7 @@ export default defineConfig({
     alias: [
       {
         find: '~',
-        replacement: resolve(__dirname, './src'),
+        replacement: fileURLToPath(new URL('./src', import.meta.url)),
       },
     ],
   },
