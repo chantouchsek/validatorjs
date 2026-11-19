@@ -171,8 +171,8 @@ export class Rule {
         const val1 = flattenObject(this.validator.input)[req]
         return val1 === val
       },
-      size(val: string, req: number | string) {
-        if (!val)
+      size(val: number | string, req: number | string) {
+        if (!val && val !== 0)
           return false
         req = Number.parseFloat(String(req))
         const size = this.getSize()
