@@ -3,7 +3,7 @@ export function leapYear(year: number) {
 }
 export function checkFalsePositiveDates(dateString: string) {
   if (dateString.length === 10) {
-    const normalizedDate = dateString.replace('.', '-').replace('/', '-')
+    const normalizedDate = dateString.replace(/[./]/g, '-')
     const parts = normalizedDate.split('-')
     if (parts.length === 3) {
       if (parts[0].length === 4) {
@@ -30,6 +30,7 @@ export function checkFalsePositiveDates(dateString: string) {
 
 export function isValidDate(dateString: any) {
   let testDate
+  if (dateString === null) return false
   if (typeof dateString === 'string' && dateString.trim() === '') return false
   if (typeof dateString === 'number') {
     testDate = new Date(dateString)
