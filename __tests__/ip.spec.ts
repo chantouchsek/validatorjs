@@ -391,3 +391,88 @@ describe('iP Validation rules', () => {
     })
   })
 })
+
+describe.each(['ipv6', 'ip'])('%s IPv6 regressions', (rule) => {
+  it.each([
+    '2001:DB8::1',
+    'FE80::1',
+    '2001:dB8:85A3:0:0:8a2E:370:7334',
+    'FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF',
+    '::',
+    '1:2:3:4:5:6::8',
+    '::ffff:127.0.0.1',
+    '::FFFF:192.168.0.1',
+    '::192.0.2.1',
+    '0:0:0:0:0:ffff:192.0.2.1',
+    '1:2:3:4:5::192.0.2.1',
+    '::1:2:3:4:5:192.0.2.1',
+    '::ffff:0.0.0.0',
+    '::ffff:255.255.255.255',
+  ])('accepts %s', (value) => {
+    expect(new Validator({ value }, { value: rule }).passes()).toBe(true)
+  })
+
+  it.each([
+    ':::',
+    '2001:db8:::1',
+    ':::1',
+    '1:::',
+    '1::::2',
+    '1::2::3',
+    '1:2:3:4:5:6:7:8::',
+    '::1:2:3:4:5:6:7:8',
+    '1:2:3:4:5:6::7:8',
+    '1:2:3:4:5:6:7',
+    '1:2:3:4:5:6:7:',
+    ':1:2:3:4:5:6:7',
+    '::12345',
+    '::gggg',
+    '::ffff:256.0.0.1',
+    '::ffff:192.168.1',
+    '::ffff:192.168.0.1.2',
+    '::ffff:192.168..1',
+    '::ffff:192.168.0.-1',
+    '::ffff:192.168.0.a',
+    '::ffff:192.168.00.1',
+    '::ffff:0000.0.0.1',
+    '1:2:3:4:5:192.0.2.1',
+    '1:2:3:4:5:6:7:192.0.2.1',
+    '1:2:3:4:5:6::192.0.2.1',
+    '::ffff:192.0.2.1:1',
+    '192.0.2.1::',
+    '::ffff:192.0.2.1::',
+    '[::1]',
+    '::1/128',
+    'fe80::1%eth0',
+    ' ::1',
+    '::1 ',
+    '::1\n',
+    1234,
+  ])('rejects %s', (value) => {
+    const validator = new Validator({ value }, { value: rule })
+    expect(validator.passes()).toBe(false)
+    expect(validator.errors.first('value')).toBe(
+      'The value attribute has errors.',
+    )
+  })
+})
+
+describe.each(['ipv4', 'ip'])('%s IPv4 compatibility', (rule) => {
+  it.each(['0.0.0.0', '255.255.255.255', '192.168.0.1', '192.168.001.001'])(
+    'continues to accept %s',
+    (value) => {
+      expect(new Validator({ value }, { value: rule }).passes()).toBe(true)
+    },
+  )
+
+  it.each(['256.0.0.1', '192.168.1', '192.168.0.1.2', '192.168..1', '192.168.-1.1', 1234])(
+    'continues to reject %s',
+    (value) => {
+      expect(new Validator({ value }, { value: rule }).passes()).toBe(false)
+    },
+  )
+})
+
+it.each(['::1', '2001:DB8::1', '::ffff:192.168.0.1'])('keeps %s exclusive to IPv6', (value) => {
+  expect(new Validator({ value }, { value: 'ipv4' }).passes()).toBe(false)
+})

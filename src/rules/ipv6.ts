@@ -1,54 +1,27 @@
 export function ipv6(value: number | string) {
-  if (typeof value !== 'string')
+  if (typeof value !== 'string' || /[^0-9a-f:.]/i.test(value))
     return false
 
-  // regex to check that each hextet is valid
-  const er = /^[0-9a-f]+$/
-  // colon delimits ipv6 hextets
-  const hextets = value.split(':')
-
-  // check 1: ipv6 should contain only one consecutive colon
-  const colons = value.match(/::/)
-  const matcher = value.match(/::/g) || ''
-  if (colons != null && matcher.length > 1)
-    return false
-
-  // check 2: ipv6 should not be ending or starting with a colon-edge case: not with consecutive colons
-  if (value[0] === ':' && (colons === null || colons.index !== 0))
-    return false
-  if (value[value.length - 1] === ':' && (colons == null || colons.index !== value.length - 2))
-    return false
-
-  // check 3: ipv6 should contain no less than 3 sector
-  // minimum ipv6 address -: :1
-  if (hextets.length < 3)
-    return false
-
-  // check 4: ipv6 should contain no more than 8 sectors
-  // only 1 edge case: when first or last sector is omitted
-  const isEdgeCase = hextets.length === 9 && colons != null && (colons.index === 0 || colons.index === value.length - 2)
-  if (hextets.length > 8 && !isEdgeCase)
-    return false
-
-  // check 5: ipv6 should contain exactly one consecutive colon if it has less than 8 sectors
-  if (hextets.length !== 8 && colons == null)
-    return false
-
-  for (const hex of hextets) {
-    const element = hex
-
-    if (element.length === 0)
-      continue
-
-    // check 6: all of hextets should contain numbers from 0 to f (in hexadecimal)
-    if (!er.test(element))
+  if (value.includes('.')) {
+    const lastColon = value.lastIndexOf(':')
+    const octets = value.slice(lastColon + 1).split('.')
+    if (octets.length !== 4 || !octets.every(octet => /^(?:0|[1-9]\d{0,2})$/.test(octet) && Number(octet) <= 255))
       return false
 
-    // check 7: all the hextet values should be less than ffff (in hexadecimal)
-    // checking using length of hextet. the lowest invalid value's length is 5.
-    // so all valid hextets are length of 4 or less
-    if (element.length > 4)
-      return false
+    // The final 32 bits occupy two hextets in an IPv4-embedded address.
+    value = `${value.slice(0, lastColon + 1)}0:0`
   }
-  return true
+
+  const parts = value.split('::')
+  if (parts.length > 2)
+    return false
+
+  // Only the two sides of compression may be empty; a remaining empty
+  // hextet rejects single leading/trailing colons and triple colons.
+  const hextets = parts.flatMap(part => part === '' ? [] : part.split(':'))
+  if (!hextets.every(hextet => /^[0-9a-f]{1,4}$/i.test(hextet)))
+    return false
+
+  // Compression must replace at least one of the eight 16-bit groups.
+  return parts.length === 2 ? hextets.length < 8 : hextets.length === 8
 }
