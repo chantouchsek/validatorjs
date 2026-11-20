@@ -82,8 +82,8 @@ export class Rule {
         if (!isEmpty(val))
           list = this.getParameters()
         if (!isEmpty(val) && !(Array.isArray(val))) {
-          let localValue = val
           for (const li of list) {
+            let localValue = val
             if (typeof li === 'string') localValue = String(val)
             if (localValue === li) return true
           }
