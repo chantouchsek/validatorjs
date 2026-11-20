@@ -49,6 +49,23 @@ describe('integer pass rules', () => {
 })
 
 describe('integer fail rules', () => {
+  it.each([Number.NaN, 'NaN', Infinity, -Infinity, 'Infinity', '-Infinity'])(
+    'rejects non-finite input %s across validation entry points',
+    async (value) => {
+      const validator = new Validator({ value }, { value: 'integer' })
+      expect(validator.passes()).toBe(false)
+      expect(validator.fails()).toBe(true)
+      await expect(validator.passesAsync()).resolves.toBe(false)
+      expect(validator.errorCount).toBe(1)
+      expect(validator.errors.first('value')).toBe('The value must be an integer.')
+      await new Promise<void>((resolve) => {
+        validator.checkAsync(() => {
+          throw new Error('Non-finite integers must fail')
+        }, resolve)
+      })
+    },
+  )
+
   it('should fail with a decimal value', () => {
     const validator = new Validator(
       {
