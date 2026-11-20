@@ -20,7 +20,15 @@ describe('typed inclusion parameters', () => {
     ['other', ['other', 1], true],
     [[1], [1, 2], true],
     [[1], ['1', 2], false],
-  ])('preserves scalar and array matching for %j in %j', (value, list, expected) => {
-    expect(new Validator({ value }, { value: [{ in: list }] }).passes()).toBe(expected)
+  ])('preserves scalar and array matching for %j in %j', async (value, list, expected) => {
+    const validator = new Validator({ value }, { value: [{ in: list }] })
+    expect(validator.passes()).toBe(expected)
+    await expect(validator.passesAsync()).resolves.toBe(expected)
+    const callbackResult = await new Promise<boolean>(resolve => validator.checkAsync(
+      () => resolve(true),
+      () => resolve(false),
+    ))
+    expect(callbackResult).toBe(expected)
+    if (!expected) expect(validator.errors.first('value')).toBe('The selected value is invalid.')
   })
 })
