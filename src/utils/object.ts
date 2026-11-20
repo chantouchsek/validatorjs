@@ -7,10 +7,19 @@ export function hasOwnProperty(object?: any | SimpleObject, key?: number | strin
 export function flattenObject(obj: any | SimpleObject = {}) {
   const flattened: SimpleObject = {}
 
+  function setValue(property: string | undefined, value: unknown) {
+    Object.defineProperty(flattened, property as string, {
+      value,
+      enumerable: true,
+      configurable: true,
+      writable: true,
+    })
+  }
+
   function recurse(current: SimpleObject, property?: string) {
     if (!property && Object.getOwnPropertyNames(current).length === 0) return
     if (Object(current) !== current || Array.isArray(current)) {
-      flattened[property as string] = current
+      setValue(property, current)
     }
     else {
       let isEmpty = true
@@ -18,7 +27,7 @@ export function flattenObject(obj: any | SimpleObject = {}) {
         isEmpty = false
         recurse(current[p], property ? `${property}.${p}` : p)
       }
-      if (isEmpty) flattened[property as string] = {}
+      if (isEmpty) setValue(property, {})
     }
   }
 
