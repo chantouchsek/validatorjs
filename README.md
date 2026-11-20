@@ -47,7 +47,9 @@ import { Validator } from '@chantouchsek/validatorjs'
 
 const data = { email: 'ada@example.com' }
 const rules = { email: 'required|email' }
-const options = { customAttributes: { email: 'Email address' } }
+const options = {
+  customAttributes: { email: 'Email address' }
+}
 const validation = new Validator(data, rules, options)
 validation.passes() // => true
 ```
@@ -256,7 +258,11 @@ const rules = {
 
 new Validator(data, rules).passes() // => true
 
-const invalid = new Validator({ users: [{ name: '' }] }, { 'users.*.name': 'required' })
+const invalid = new Validator({
+  users: [
+    { name: '' }
+  ]
+}, { 'users.*.name': 'required' })
 invalid.fails() // => true
 invalid.errors.first('users.0.name') // => 'The users 0 name field is required.'
 ```
@@ -293,15 +299,32 @@ validation.fails() // => true
 validation.errors.has('company') // => true
 validation.errorCount // => 1
 
-new Validator({ enabled: false }, { reason: [{ required_if: ['enabled', false] }] }).passes() // => false
+new Validator({ enabled: false }, {
+  reason: [
+    {
+      required_if: ['enabled', false]
+    }
+  ]
+}).passes() // => false
 new Validator({ status: 'draft' }, { title: 'required_unless:status,draft' }).passes() // => true
 new Validator({ email: 'ada@example.com' }, { name: 'required_with:email' }).passes() // => false
 new Validator({ email: 'ada@example.com' }, { name: 'required_without:email' }).passes() // => true
 new Validator({ first: 'Ada', last: 'Lovelace' }, { name: 'required_with_all:first,last' }).passes() // => false
 new Validator({ first: 'Ada' }, { name: 'required_without_all:first,last' }).passes() // => true
 
-const users = { users: [{ needsPhone: true, phone: '' }, { needsPhone: false }] }
-const userRules = { 'users.*.phone': [{ required_if: ['users.*.needsPhone', true] }] }
+const users = {
+  users: [
+    { needsPhone: true, phone: '' },
+    { needsPhone: false }
+  ]
+}
+const userRules = {
+  'users.*.phone': [
+    {
+      required_if: ['users.*.needsPhone', true]
+    }
+  ]
+}
 const perUser = new Validator(users, userRules)
 perUser.fails() // => true
 Object.keys(perUser.errors.all()) // => ['users.0.phone']
@@ -596,8 +619,17 @@ const validation = new Validator(
     name: '',
   },
   {
-    age: ['required', { in: [29, 30] }],
-    name: [{ required_if: ['age', 30] }],
+    age: [
+      'required',
+      {
+        in: [29, 30]
+      }
+    ],
+    name: [
+      {
+        required_if: ['age', 30]
+      }
+    ],
   },
 )
 
@@ -683,7 +715,12 @@ import { Validator } from '@chantouchsek/validatorjs'
 import { registerPhoneRule } from '@chantouchsek/validatorjs/phone'
 
 registerPhoneRule(Validator)
-const input = { contacts: [{ number: 'bad' }, { number: '+855 12 345 678' }] }
+const input = {
+  contacts: [
+    { number: 'bad' },
+    { number: '+855 12 345 678' }
+  ]
+}
 const validation = new Validator(input, { 'contacts.*.number': 'required|phone:KH' }, {
   customMessages: { 'phone.contacts.*.number': 'Enter a valid phone number for :attribute.' },
   customAttributes: { 'contacts.*.number': 'contact number' },
@@ -898,7 +935,9 @@ import { Validator } from '@chantouchsek/validatorjs'
 
 const input = {
   user: { name: 'Ada', secret: 'hidden' },
-  items: [{ sku: 'A1', price: 10, internal: 'hidden' }],
+  items: [
+    { sku: 'A1', price: 10, internal: 'hidden' }
+  ],
   extra: 'hidden',
 }
 const rules = { 'user.name': 'required', 'items.*.sku': 'required', 'items.*.price': 'numeric' }
@@ -1022,10 +1061,16 @@ validation.errors.first('email') // => 'Without an email we can\'t reach you!'
 import { Validator } from '@chantouchsek/validatorjs'
 
 const validator = new Validator(
-  { form: { name: null } },
-  { form: { age: 'required', name: 'required' } },
   {
-    customAttributes: { form: { name: 'Username' } },
+    form: { name: null }
+  },
+  {
+    form: { age: 'required', name: 'required' }
+  },
+  {
+    customAttributes: {
+      form: { name: 'Username' }
+    },
     customMessages: {
       required: 'The :attribute must be filled.',
     },
@@ -1080,7 +1125,10 @@ import type { ValidatorOptions } from '@chantouchsek/validatorjs'
 import { Validator } from '@chantouchsek/validatorjs'
 
 const previousLocale = Validator.getDefaultLang()
-const options: ValidatorOptions = { locale: 'fr', customAttributes: { name: 'Nom' } }
+const options: ValidatorOptions = {
+  locale: 'fr',
+  customAttributes: { name: 'Nom' }
+}
 const validation = new Validator({ name: '' }, { name: 'required' }, options)
 validation.fails() // => true
 validation.errors.first('name') // => 'Le champ Nom est requis.'

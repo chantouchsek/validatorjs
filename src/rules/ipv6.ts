@@ -18,10 +18,14 @@ export function ipv6(value: number | string) {
 
   // Only the two sides of compression may be empty; a remaining empty
   // hextet rejects single leading/trailing colons and triple colons.
-  const hextets = parts.flatMap(part => part === '' ? [] : part.split(':'))
+  const hextets = parts.flatMap(part => part === ''
+    ? []
+    : part.split(':'))
   if (!hextets.every(hextet => /^[0-9a-f]{1,4}$/i.test(hextet)))
     return false
 
   // Compression must replace at least one of the eight 16-bit groups.
-  return parts.length === 2 ? hextets.length < 8 : hextets.length === 8
+  return parts.length === 2
+    ? hextets.length < 8
+    : hextets.length === 8
 }

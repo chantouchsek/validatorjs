@@ -100,11 +100,15 @@ export class Rule {
         return Rule.rules.ipv4(val, req, attribute) || Rule.rules.ipv6(val, req, attribute)
       },
       max(val: string, req: number) {
-        const value = typeof val === 'string' && this.validator._hasRule(this.attribute, ['email']) && val.includes('@') ? val.split('@')[0] : val
+        const value = typeof val === 'string' && this.validator._hasRule(this.attribute, ['email']) && val.includes('@')
+          ? val.split('@')[0]
+          : val
         return this.getSize(value) <= req
       },
       min(val: string, req: number) {
-        const value = typeof val === 'string' && this.validator._hasRule(this.attribute, ['email']) && val.includes('@') ? val.split('@')[0] : val
+        const value = typeof val === 'string' && this.validator._hasRule(this.attribute, ['email']) && val.includes('@')
+          ? val.split('@')[0]
+          : val
         return this.getSize(value) >= req
       },
       not_in(val: string) {
@@ -187,7 +191,9 @@ export class Rule {
     attribute: null | string,
     callback?: CbFunction,
   ): any {
-    const fn = this.isMissed() ? missedRuleValidator : this.fn
+    const fn = this.isMissed()
+      ? missedRuleValidator
+      : this.fn
     return fn.apply(this, [input, rule, attribute, callback] as any)
   }
 
@@ -206,7 +212,9 @@ export class Rule {
   }
 
   get customMessages() {
-    return this.isMissed() ? missedRuleMessage : this._customMessage
+    return this.isMissed()
+      ? missedRuleMessage
+      : this._customMessage
   }
 
   getParameters() {

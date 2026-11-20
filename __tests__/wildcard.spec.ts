@@ -4,9 +4,23 @@ import { Validator } from '../src/main'
 describe('wildcard', () => {
   it('resolves typed conditional parameters per row without mutating shared rules', () => {
     const condition = Object.freeze(['users.*.active', true])
-    const rules = { 'users.*.name': [{ required_if: condition }] }
-    const first = new Validator({ users: [{ name: '', active: true }, { name: '', active: false }] }, rules)
-    const second = new Validator({ users: [{ name: '', active: false }, { name: '', active: true }] }, rules)
+    const rules = {
+      'users.*.name': [
+        { required_if: condition },
+      ],
+    }
+    const first = new Validator({
+      users: [
+        { name: '', active: true },
+        { name: '', active: false },
+      ],
+    }, rules)
+    const second = new Validator({
+      users: [
+        { name: '', active: false },
+        { name: '', active: true },
+      ],
+    }, rules)
     expect(first.fails()).toBe(true)
     expect(Object.keys(first.errors.all())).toEqual(['users.0.name'])
     expect(second.fails()).toBe(true)
@@ -15,10 +29,30 @@ describe('wildcard', () => {
   })
 
   it('preserves numeric wildcard parameters and typed inclusion values', () => {
-    const rules = { 'users.*.age': [{ min: 18, in: [30, 31] }] }
-    expect(new Validator({ users: [{ age: 30 }, { age: 31 }] }, rules).passes()).toBe(true)
-    expect(new Validator({ users: [{ age: 17 }] }, rules).fails()).toBe(true)
-    expect(new Validator({ users: [{ age: '30' }] }, rules).fails()).toBe(true)
+    const rules = {
+      'users.*.age': [
+        {
+          min: 18,
+          in: [30, 31],
+        },
+      ],
+    }
+    expect(new Validator({
+      users: [
+        { age: 30 },
+        { age: 31 },
+      ],
+    }, rules).passes()).toBe(true)
+    expect(new Validator({
+      users: [
+        { age: 17 },
+      ],
+    }, rules).fails()).toBe(true)
+    expect(new Validator({
+      users: [
+        { age: '30' },
+      ],
+    }, rules).fails()).toBe(true)
     expect(rules['users.*.age'][0].in).toEqual([30, 31])
   })
 
@@ -139,9 +173,15 @@ describe('wildcard', () => {
   })
   it('should it take the custom message if provide', () => {
     const validator = new Validator(
-      { conditions: [{ age: null, values: null }] },
+      {
+        conditions: [
+          { age: null, values: null },
+        ],
+      },
       { 'conditions.*.values': 'required' },
-      { customMessages: { 'required.conditions.*.values': 'Required' } },
+      {
+        customMessages: { 'required.conditions.*.values': 'Required' },
+      },
     )
     expect(validator.fails()).toBeTruthy()
     expect(validator.passes()).toBeFalsy()
@@ -151,9 +191,15 @@ describe('wildcard', () => {
   })
   it('should it take the custom attributes if provide', () => {
     const validator = new Validator(
-      { conditions: [{ age: null, values: null }] },
+      {
+        conditions: [
+          { age: null, values: null },
+        ],
+      },
       { 'conditions.*.age': 'required|integer', 'conditions.*.values': 'required' },
-      { customAttributes: { 'conditions.*.age': 'conditions age', 'conditions.*.values': 'conditions values' } },
+      {
+        customAttributes: { 'conditions.*.age': 'conditions age', 'conditions.*.values': 'conditions values' },
+      },
     )
     expect(validator.fails()).toBeTruthy()
     expect(validator.passes()).toBeFalsy()

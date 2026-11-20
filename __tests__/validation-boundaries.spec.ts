@@ -4,13 +4,19 @@ import { Errors, Validator } from '../src/main'
 describe('validation boundary behavior', () => {
   it('selects the first requested field with errors and keeps repeated lookups stable', () => {
     const errors = new Errors()
-    errors.fill({ 'email': ['Invalid email'], 'user.name': ['Name required'] })
+    errors.fill({
+      'email': ['Invalid email'],
+      'user.name': ['Name required'],
+    })
     expect(errors.get(['missing', 'email', 'user.name'])).toEqual(['Invalid email'])
     expect(errors.get(['missing', 'user.name', 'email'])).toEqual(['Name required'])
     expect(errors.get(['missing', 'email', 'user.name'])).toEqual(['Invalid email'])
     expect(errors.get(['', 'missing'])).toEqual([])
     expect(errors.get([])).toEqual([])
-    expect(errors.all()).toEqual({ 'email': ['Invalid email'], 'user.name': ['Name required'] })
+    expect(errors.all()).toEqual({
+      'email': ['Invalid email'],
+      'user.name': ['Name required'],
+    })
   })
 
   it('deduplicates repeated external errors and allows explicitly forced duplicates', () => {
@@ -34,7 +40,9 @@ describe('validation boundary behavior', () => {
   })
 
   it('can disable the attribute formatter without changing the validation path', () => {
-    const validator = new Validator({ user: { first_name: '' } }, { 'user.first_name': 'required' })
+    const validator = new Validator({
+      user: { first_name: '' },
+    }, { 'user.first_name': 'required' })
     validator.setAttributeFormatter(undefined)
     expect(validator.fails()).toBe(true)
     expect(validator.errors.first('user.first_name')).toBe('The user.first_name field is required.')

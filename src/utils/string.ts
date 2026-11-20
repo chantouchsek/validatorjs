@@ -7,7 +7,9 @@ export function toCamelCase(s: string) {
   })
 }
 export function toSnakeCase(e: string) {
-  return (e.match(/([A-Z])/g) ? e.replace(/[A-Z]/g, l => `_${l.toLowerCase()}`) : e)
+  return (e.match(/([A-Z])/g)
+    ? e.replace(/[A-Z]/g, l => `_${l.toLowerCase()}`)
+    : e)
 }
 export function onlyDigits(str: boolean | number | string) {
   const num = Number(str)

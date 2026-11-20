@@ -13,9 +13,14 @@ export default config({}, {
 }, {
   files: ['pnpm-workspace.yaml'],
   rules: {
-    'pnpm/yaml-enforce-settings': ['error', { settings: {
-      shellEmulator: true,
-      trustPolicy: 'no-downgrade',
-    } }],
+    'pnpm/yaml-enforce-settings': [
+      'error',
+      {
+        settings: {
+          shellEmulator: true,
+          trustPolicy: 'no-downgrade',
+        },
+      },
+    ],
   },
 })

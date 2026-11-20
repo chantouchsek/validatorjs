@@ -77,12 +77,16 @@ describe('max validation rule', () => {
   })
 
   it('should be failed when given array greater than max', () => {
-    const validator = new Validator({ val: ['12', '32', '43'] }, { val: 'array|max:2' })
+    const validator = new Validator({
+      val: ['12', '32', '43'],
+    }, { val: 'array|max:2' })
     expect(validator.fails()).toBeTruthy()
   })
 
   it('should be passed when given array lower than max', () => {
-    const validator = new Validator({ val: ['12', '32'] }, { val: 'array|max:2' })
+    const validator = new Validator({
+      val: ['12', '32'],
+    }, { val: 'array|max:2' })
     expect(validator.passes()).toBeTruthy()
   })
 })

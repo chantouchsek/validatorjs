@@ -46,14 +46,20 @@ describe('nested validation rules', () => {
       },
     ],
     [
-      { data: { weight: 70 } },
+      {
+        data: { weight: 70 },
+      },
       {
         'data.hair.color': 'The data hair color field is required.',
         'name': 'The name field is required.',
       },
     ],
     [
-      { data: { hair: { color: 'black' } } },
+      {
+        data: {
+          hair: { color: 'black' },
+        },
+      },
       {
         'data.weight': 'The data weight field is required.',
         'name': 'The name field is required.',
@@ -99,11 +105,22 @@ describe('nested validation rules', () => {
     const testVal = 'mainAccountName'
     const validator = new Validator({
       filters: [
-        { key: testVal, values: [''] },
-        { key: testVal, values: [''] },
+        {
+          key: testVal,
+          values: [''],
+        },
+        {
+          key: testVal,
+          values: [''],
+        },
       ],
     }, {
-      'filters.*.key': ['required', { in: [testVal] }],
+      'filters.*.key': [
+        'required',
+        {
+          in: [testVal],
+        },
+      ],
       'filters.*.values': ['array', 'required'],
       'filters.*.values.*': `required_if:filters.*.key,${testVal}|string`,
     })

@@ -5,8 +5,16 @@ type Respond = (passed?: boolean, message?: string) => void
 
 describe('passesAsync()', () => {
   it.each([
-    [{ name: 'Ada' }, { name: 'required' }, true],
-    [{ name: '' }, { name: 'required' }, false],
+    [
+      { name: 'Ada' },
+      { name: 'required' },
+      true,
+    ],
+    [
+      { name: '' },
+      { name: 'required' },
+      false,
+    ],
     [{}, {}, true],
   ])('returns a Promise for synchronous input %j', async (input, rules, expected) => {
     const result = new Validator(input, rules).passesAsync()
@@ -92,7 +100,9 @@ describe('passesAsync()', () => {
   it.each([false, true])('rejects errors thrown while invoking a rule (async: %s)', async (async) => {
     const error = new Error('Rule configuration failed')
     const rule = async ? 'promise_throw_async' : 'promise_throw_sync'
-    const register = async ? Validator.registerAsync.bind(Validator) : Validator.register.bind(Validator)
+    const register = async
+      ? Validator.registerAsync.bind(Validator)
+      : Validator.register.bind(Validator)
     register(rule, () => {
       throw error
     })
