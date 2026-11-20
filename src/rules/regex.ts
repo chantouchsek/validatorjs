@@ -1,5 +1,5 @@
 export function regex(value: string, req: any | number | string) {
-  const mod = /[g|im]{1,3}$/
+  const mod = /[dgimsuvy]+$/
   let flag = req.match(mod)
   flag = flag ? flag[0] : ''
   req = req.replace(mod, '').slice(1, -1)
