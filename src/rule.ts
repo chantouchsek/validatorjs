@@ -100,11 +100,11 @@ export class Rule {
         return Rule.rules.ipv4(val, req, attribute) || Rule.rules.ipv6(val, req, attribute)
       },
       max(val: string, req: number) {
-        const value = this.validator._hasRule(this.attribute, ['email']) && val.includes('@') ? val.split('@')[0] : val
+        const value = typeof val === 'string' && this.validator._hasRule(this.attribute, ['email']) && val.includes('@') ? val.split('@')[0] : val
         return this.getSize(value) <= req
       },
       min(val: string, req: number) {
-        const value = this.validator._hasRule(this.attribute, ['email']) && val.includes('@') ? val.split('@')[0] : val
+        const value = typeof val === 'string' && this.validator._hasRule(this.attribute, ['email']) && val.includes('@') ? val.split('@')[0] : val
         return this.getSize(value) >= req
       },
       not_in(val: string) {
@@ -171,8 +171,8 @@ export class Rule {
         const val1 = flattenObject(this.validator.input)[req]
         return val1 === val
       },
-      size(val: string, req: number | string) {
-        if (!val)
+      size(val: number | string, req: number | string) {
+        if (!val && val !== 0)
           return false
         req = Number.parseFloat(String(req))
         const size = this.getSize()
