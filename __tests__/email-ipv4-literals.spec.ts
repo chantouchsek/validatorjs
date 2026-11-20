@@ -30,6 +30,11 @@ describe('email IPv4 address literals', () => {
     expect(validator.passes()).toBe(expected)
     expect(validator.fails()).toBe(!expected)
     await expect(validator.passesAsync()).resolves.toBe(expected)
+    const callbackResult = await new Promise<boolean>(resolve => validator.checkAsync(
+      () => resolve(true),
+      () => resolve(false),
+    ))
+    expect(callbackResult).toBe(expected)
     if (!expected) expect(validator.errors.first('value')).toBe('The value format is invalid.')
   })
 })
