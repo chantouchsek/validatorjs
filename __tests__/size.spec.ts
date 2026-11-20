@@ -20,7 +20,11 @@ describe('size validation rule', () => {
     ['0', 'size:1', true],
     ['0', 'numeric|size:0', true],
     [[], 'array|size:0', true],
-    [[0], 'array|size:0', false],
+    [
+      [0],
+      'array|size:0',
+      false,
+    ],
     ['', 'size:0', true],
     [null, 'size:0', true],
     [undefined, 'size:0', true],

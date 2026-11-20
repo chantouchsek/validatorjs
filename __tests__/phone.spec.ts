@@ -4,8 +4,12 @@ import { registerPhoneRule } from '../src/phone'
 
 const international = '+855 12 345 678'
 const national = '012 345 678'
-const originalEn = { ...Validator.getMessages('en') }
-const originalFr = { ...Validator.getMessages('fr') }
+const originalEn = {
+  ...Validator.getMessages('en'),
+}
+const originalFr = {
+  ...Validator.getMessages('fr'),
+}
 
 it('does not register the optional rule merely by importing the adapter', () => {
   expect(new Validator({}).getRule('phone').isMissed()).toBe(true)
@@ -73,33 +77,83 @@ describe('explicitly registered phone validation', () => {
     expect(validator.errors.get('contact')).toHaveLength(1)
   })
 
-  it.each(['', 'kh', 'ZZ', 'UK', 'KH,US', 'KH:US', ' KH', '__proto__', '001'])('rejects malformed country parameter %j', (parameter) => {
+  it.each([
+    '',
+    'kh',
+    'ZZ',
+    'UK',
+    'KH,US',
+    'KH:US',
+    ' KH',
+    '__proto__',
+    '001',
+  ])('rejects malformed country parameter %j', (parameter) => {
     const validator = new Validator({ contact: international }, { contact: `phone:${parameter}` })
     expect(validator.fails()).toBe(true)
     expect(validator.errors.has('contact')).toBe(true)
   })
 
-  it.each([null, 0, Infinity, true, ['KH'], { country: 'KH' }])('rejects non-string object-rule country %j', (parameter) => {
-    const validator = new Validator({ contact: international }, { contact: [{ phone: parameter }] })
+  it.each([
+    null,
+    0,
+    Infinity,
+    true,
+    ['KH'],
+    { country: 'KH' },
+  ])('rejects non-string object-rule country %j', (parameter) => {
+    const validator = new Validator({ contact: international }, {
+      contact: [
+        { phone: parameter },
+      ],
+    })
     expect(validator.fails()).toBe(true)
     expect(validator.errors.has('contact')).toBe(true)
   })
 
   it('reports normal validation errors for unsupported country parameter types', () => {
-    for (const parameter of [Symbol('KH'), Object.create(null), Reflect.construct(String, ['KH'])]) {
-      const validator = new Validator({ contact: international }, { contact: [{ phone: parameter }] })
+    for (const parameter of [
+      Symbol('KH'),
+      Object.create(null),
+      Reflect.construct(String, ['KH']),
+    ]) {
+      const validator = new Validator({ contact: international }, {
+        contact: [
+          { phone: parameter },
+        ],
+      })
       expect(validator.fails()).toBe(true)
       expect(validator.errors.get('contact')).toEqual(['The contact attribute has errors.'])
     }
   })
 
   it('accepts object-rule countries and treats an undefined parameter as a bare rule', () => {
-    expect(new Validator({ contact: national }, { contact: [{ phone: 'KH' }] }).passes()).toBe(true)
-    expect(new Validator({ contact: international }, { contact: [{ phone: undefined }] }).passes()).toBe(true)
-    expect(new Validator({ contact: national }, { contact: [{ phone: undefined }] }).fails()).toBe(true)
+    expect(new Validator({ contact: national }, {
+      contact: [
+        { phone: 'KH' },
+      ],
+    }).passes()).toBe(true)
+    expect(new Validator({ contact: international }, {
+      contact: [
+        { phone: undefined },
+      ],
+    }).passes()).toBe(true)
+    expect(new Validator({ contact: national }, {
+      contact: [
+        { phone: undefined },
+      ],
+    }).fails()).toBe(true)
   })
 
-  it.each([0, 85512345678, false, true, [], [international], {}, Reflect.construct(String, [international])])('rejects supplied non-string input %j', (value) => {
+  it.each([
+    0,
+    85512345678,
+    false,
+    true,
+    [],
+    [international],
+    {},
+    Reflect.construct(String, [international]),
+  ])('rejects supplied non-string input %j', (value) => {
     const validator = new Validator({ contact: value }, { contact: 'phone' })
     expect(validator.fails()).toBe(true)
     expect(validator.errors.has('contact')).toBe(true)
@@ -126,7 +180,12 @@ describe('explicitly registered phone validation', () => {
   })
 
   it('integrates nested/wildcard errors, custom messages, and attribute names without mutating input or rules', () => {
-    const input = { contacts: [{ number: 'bad' }, { number: international }] }
+    const input = {
+      contacts: [
+        { number: 'bad' },
+        { number: international },
+      ],
+    }
     const rules = { 'contacts.*.number': 'required|phone:KH' }
     const messages = { 'phone.contacts.*.number': 'Enter a valid phone number for :attribute.' }
     const snapshot = JSON.stringify({ input, rules, messages })
@@ -135,16 +194,29 @@ describe('explicitly registered phone validation', () => {
       customAttributes: { 'contacts.*.number': 'contact number' },
     })
     expect(validator.fails()).toBe(true)
-    expect(validator.errors.all()).toEqual({ 'contacts.0.number': ['Enter a valid phone number for contact number.'] })
+    expect(validator.errors.all()).toEqual({
+      'contacts.0.number': ['Enter a valid phone number for contact number.'],
+    })
     expect(JSON.stringify({ input, rules, messages })).toBe(snapshot)
   })
 
   it('preserves formatted strings and nested/wildcard projection in validated()', () => {
-    const input = { user: { contact: `  ${international}  `, ignored: true }, contacts: [{ number: national }], ignored: true }
+    const input = {
+      user: { contact: `  ${international}  `, ignored: true },
+      contacts: [
+        { number: national },
+      ],
+      ignored: true,
+    }
     const rules = { 'user.contact': 'phone', 'contacts.*.number': 'phone:KH' }
     const snapshot = JSON.stringify(input)
     const validator = new Validator(input, rules)
-    expect(validator.validated()).toEqual({ user: { contact: `  ${international}  ` }, contacts: [{ number: national }] })
+    expect(validator.validated()).toEqual({
+      user: { contact: `  ${international}  ` },
+      contacts: [
+        { number: national },
+      ],
+    })
     expect(JSON.stringify(input)).toBe(snapshot)
   })
 
@@ -184,7 +256,10 @@ describe('explicitly registered phone validation', () => {
     })
     const valid = new Validator({ contact: national }, { contact: 'phone:KH|phone_business_check' })
     const invalid = new Validator({ contact: national }, { contact: 'phone|phone_business_check' })
-    expect(await Promise.all([valid.passesAsync(), invalid.passesAsync()])).toEqual([true, false])
+    expect(await Promise.all([
+      valid.passesAsync(),
+      invalid.passesAsync(),
+    ])).toEqual([true, false])
     expect(valid.errors.all()).toEqual({})
     expect(invalid.errors.get('contact')).toEqual(['The contact attribute has errors.'])
   })

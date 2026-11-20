@@ -458,14 +458,26 @@ describe.each(['ipv6', 'ip'])('%s IPv6 regressions', (rule) => {
 })
 
 describe.each(['ipv4', 'ip'])('%s IPv4 compatibility', (rule) => {
-  it.each(['0.0.0.0', '255.255.255.255', '192.168.0.1', '192.168.001.001'])(
+  it.each([
+    '0.0.0.0',
+    '255.255.255.255',
+    '192.168.0.1',
+    '192.168.001.001',
+  ])(
     'continues to accept %s',
     (value) => {
       expect(new Validator({ value }, { value: rule }).passes()).toBe(true)
     },
   )
 
-  it.each(['256.0.0.1', '192.168.1', '192.168.0.1.2', '192.168..1', '192.168.-1.1', 1234])(
+  it.each([
+    '256.0.0.1',
+    '192.168.1',
+    '192.168.0.1.2',
+    '192.168..1',
+    '192.168.-1.1',
+    1234,
+  ])(
     'continues to reject %s',
     (value) => {
       expect(new Validator({ value }, { value: rule }).passes()).toBe(false)

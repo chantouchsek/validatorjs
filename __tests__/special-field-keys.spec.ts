@@ -2,7 +2,12 @@ import { describe, expect, it } from 'vitest'
 import { Errors, Validator } from '../src/main'
 import { flattenObject } from '../src/utils'
 
-describe.each(['__proto__', 'constructor', 'toString', 'hasOwnProperty'])('field named %s', (field) => {
+describe.each([
+  '__proto__',
+  'constructor',
+  'toString',
+  'hasOwnProperty',
+])('field named %s', (field) => {
   it('validates and renders errors without losing keys or changing prototypes', async () => {
     const rules = { [field]: 'required' }
     const validator = new Validator({ [field]: '' }, rules)
@@ -25,7 +30,9 @@ describe.each(['__proto__', 'constructor', 'toString', 'hasOwnProperty'])('field
 
   it('stores, deduplicates, fills, and clears own errors safely', () => {
     const errors = new Errors()
-    errors.fill({ [field]: ['First'] })
+    errors.fill({
+      [field]: ['First'],
+    })
     expect(Object.getPrototypeOf(errors.all())).toBe(Object.prototype)
     expect(errors.first(field)).toBe('First')
     errors.add(field, 'Second')

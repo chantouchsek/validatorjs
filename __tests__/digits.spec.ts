@@ -18,7 +18,9 @@ describe('digits rule', () => {
   })
 
   it('should fail with an array value', () => {
-    const validation = new Validator({ zip: ['90989'] }, { zip: 'digits:5' })
+    const validation = new Validator({
+      zip: ['90989'],
+    }, { zip: 'digits:5' })
 
     expect(validation.fails()).toBeTruthy()
     expect(validation.errors.first('zip')).toEqual('The zip must be 5 digits.')

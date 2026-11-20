@@ -4,10 +4,16 @@ import { Validator } from '../src/main'
 describe('validator custom attribute', () => {
   it('should be able set custom attributes', () => {
     const validator = new Validator(
-      { form: { name: null } },
-      { form: { age: 'required', name: 'required' } },
       {
-        customAttributes: { form: { name: 'Username' } },
+        form: { name: null },
+      },
+      {
+        form: { age: 'required', name: 'required' },
+      },
+      {
+        customAttributes: {
+          form: { name: 'Username' },
+        },
         customMessages: {
           required: 'The :attribute need to be filled.',
         },
@@ -20,9 +26,17 @@ describe('validator custom attribute', () => {
 
   it('should be able get custom attribute', () => {
     const validator = new Validator(
-      { form: { name: null } },
-      { form: { age: 'required', name: 'required' } },
-      { customAttributes: { form: { age: 'age', name: 'name' } } },
+      {
+        form: { name: null },
+      },
+      {
+        form: { age: 'required', name: 'required' },
+      },
+      {
+        customAttributes: {
+          form: { age: 'age', name: 'name' },
+        },
+      },
     )
     expect(validator.fails()).toBeTruthy()
     expect(validator.passes()).not.toBeTruthy()

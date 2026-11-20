@@ -2,7 +2,16 @@ import { describe, expect, it } from 'vitest'
 import { Validator } from '../src/main'
 
 describe.each(['min:1', 'max:30'])('email combined with %s', (size) => {
-  it.each([0, 123, true, false, {}, { address: 'ada@example.com' }, [], ['invalid']])(
+  it.each([
+    0,
+    123,
+    true,
+    false,
+    {},
+    { address: 'ada@example.com' },
+    [],
+    ['invalid'],
+  ])(
     'rejects invalid input %j without throwing',
     async (value) => {
       for (const rule of [`email|${size}`, `${size}|email`]) {

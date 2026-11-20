@@ -28,8 +28,20 @@ describe('date calendar boundaries', () => {
   })
 })
 
-describe.each(['after', 'after_or_equal', 'before', 'before_or_equal'])('%s invalid references', (rule) => {
-  it.each([null, undefined, '', 'bad-date', '2019/02/29', '2020.04.31'])(
+describe.each([
+  'after',
+  'after_or_equal',
+  'before',
+  'before_or_equal',
+])('%s invalid references', (rule) => {
+  it.each([
+    null,
+    undefined,
+    '',
+    'bad-date',
+    '2019/02/29',
+    '2020.04.31',
+  ])(
     'rejects reference %j through sync, Promise, and callback validation',
     async (reference) => {
       const validator = new Validator({ date: '2020-03-01', reference }, { date: `${rule}:reference` })

@@ -6,8 +6,17 @@ describe('validation state isolation', () => {
     const customMessages = Object.freeze({ 'required.users.*.name': 'Name required' })
     const options = { customMessages }
     const rules = { 'users.*.name': 'required' }
-    const first = new Validator({ users: [{ name: '' }] }, rules, options)
-    const second = new Validator({ users: [{ name: '' }, { name: '' }] }, rules, options)
+    const first = new Validator({
+      users: [
+        { name: '' },
+      ],
+    }, rules, options)
+    const second = new Validator({
+      users: [
+        { name: '' },
+        { name: '' },
+      ],
+    }, rules, options)
     expect(first.fails()).toBe(true)
     expect(second.fails()).toBe(true)
     expect(first.messages.customMessages).not.toBe(second.messages.customMessages)
@@ -26,7 +35,12 @@ describe('validation state isolation', () => {
   })
 
   it('returns validated nested and wildcard data after correcting input', () => {
-    const input = { user: { name: '' }, items: [{ value: '', secret: 'hidden' }] }
+    const input = {
+      user: { name: '' },
+      items: [
+        { value: '', secret: 'hidden' },
+      ],
+    }
     const validator = new Validator(input, { 'user.name': 'required', 'items.*.value': 'required' })
     const errors = validator.errors
     expect(validator.fails()).toBe(true)
@@ -37,7 +51,12 @@ describe('validation state isolation', () => {
     expect(validator.errorCount).toBe(0)
     expect(validator.errors).toBe(errors)
     expect(errors.all()).toEqual({})
-    expect(validator.validated()).toEqual({ user: { name: 'Ada' }, items: [{ value: 'visible' }] })
+    expect(validator.validated()).toEqual({
+      user: { name: 'Ada' },
+      items: [
+        { value: 'visible' },
+      ],
+    })
   })
 
   it('replaces errors on sequential asynchronous runs', async () => {

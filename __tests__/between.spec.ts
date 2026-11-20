@@ -53,7 +53,9 @@ describe('between rule', () => {
   })
 
   it('should support array', () => {
-    const validator = new Validator({ array2: ['a', 'b'] }, { array2: 'required|between:1,2' })
+    const validator = new Validator({
+      array2: ['a', 'b'],
+    }, { array2: 'required|between:1,2' })
     expect(validator.passes()).toBeTruthy()
     expect(validator.fails()).toBeFalsy()
   })

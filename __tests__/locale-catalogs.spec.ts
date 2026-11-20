@@ -7,7 +7,10 @@ type Dictionary = Record<string, unknown>
 const modules = import.meta.glob<{ default: Dictionary }>('../src/lang/*.ts', { eager: true })
 const catalogs = Object.entries(modules)
   .filter(([path]) => !path.endsWith('/index.ts'))
-  .map(([path, module]) => [path.split('/').pop()!.slice(0, -3) as LangTypes, module.default] as const)
+  .map(([path, module]) => [
+    path.split('/').pop()!.slice(0, -3) as LangTypes,
+    module.default,
+  ] as const)
 
 function expectMessageTree(tree: Dictionary) {
   expect(Object.getPrototypeOf(tree)).toBe(Object.prototype)

@@ -79,7 +79,10 @@ describe('custom attribute names', () => {
 
   it('should use custom attribute names for replacements in after rule', () => {
     const validator = new Validator(
-      { date: new Date('2017-01-01'), other: new Date('2017-01-02') },
+      {
+        date: new Date('2017-01-01'),
+        other: new Date('2017-01-02'),
+      },
       { date: 'after:other' },
     )
     validator.setAttributeNames({ date: 'custom_name', other: 'other_field' })
@@ -89,7 +92,10 @@ describe('custom attribute names', () => {
 
   it('should use custom attribute names for replacements in before rule', () => {
     const validator = new Validator(
-      { date: new Date('2017-01-03'), other: new Date('2017-01-02') },
+      {
+        date: new Date('2017-01-03'),
+        other: new Date('2017-01-02'),
+      },
       { date: 'before:other' },
     )
     validator.setAttributeNames({ date: 'custom_name', other: 'other_field' })
@@ -99,7 +105,10 @@ describe('custom attribute names', () => {
 
   it('should use custom attribute names for replacements in after_or_equal rule', () => {
     const validator = new Validator(
-      { date: new Date('2017-01-01'), other: new Date('2017-01-02') },
+      {
+        date: new Date('2017-01-01'),
+        other: new Date('2017-01-02'),
+      },
       { date: 'after_or_equal:other' },
     )
     validator.setAttributeNames({ date: 'custom_name', other: 'other_field' })
@@ -109,7 +118,10 @@ describe('custom attribute names', () => {
 
   it('should use custom attribute names for replacements in before_or_equal rule', () => {
     const validator = new Validator(
-      { date: new Date('2017-01-03'), other: new Date('2017-01-02') },
+      {
+        date: new Date('2017-01-03'),
+        other: new Date('2017-01-02'),
+      },
       { date: 'before_or_equal:other' },
     )
     validator.setAttributeNames({

@@ -54,7 +54,9 @@ describe('sometimes validation pass rules', () => {
 
   it('should pass when the nested property is passed with data', () => {
     const validator = new Validator(
-      { user: { firstname: 'Johnny', lastname: 'Appleseed' } },
+      {
+        user: { firstname: 'Johnny', lastname: 'Appleseed' },
+      },
       {
         'user.firstname': 'required',
         'user.lastname': 'sometimes|required|string',
@@ -65,7 +67,9 @@ describe('sometimes validation pass rules', () => {
 
   it('should fail validation when the nested property is passed with invalid data', () => {
     const validator = new Validator(
-      { user: { firstname: 'Johnny', lastname: '' } },
+      {
+        user: { firstname: 'Johnny', lastname: '' },
+      },
       {
         'user.firstname': 'required',
         'user.lastname': 'sometimes|required|string',

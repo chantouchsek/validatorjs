@@ -25,7 +25,9 @@ export function flattenObject(obj: any | SimpleObject = {}) {
       let isEmpty = true
       for (const p in current) {
         isEmpty = false
-        recurse(current[p], property ? `${property}.${p}` : p)
+        recurse(current[p], property
+          ? `${property}.${p}`
+          : p)
       }
       if (isEmpty) setValue(property, {})
     }
@@ -44,5 +46,7 @@ export function isEmpty(obj: any) {
   else return !obj
 }
 export function is(errors: string[], errorsToCheck: string | string[]): boolean {
-  return Array.isArray(errorsToCheck) ? errorsToCheck.some(w => is(errors, w)) : errors.includes(errorsToCheck)
+  return Array.isArray(errorsToCheck)
+    ? errorsToCheck.some(w => is(errors, w))
+    : errors.includes(errorsToCheck)
 }

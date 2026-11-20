@@ -49,7 +49,14 @@ describe('integer pass rules', () => {
 })
 
 describe('integer fail rules', () => {
-  it.each([Number.NaN, 'NaN', Infinity, -Infinity, 'Infinity', '-Infinity'])(
+  it.each([
+    Number.NaN,
+    'NaN',
+    Infinity,
+    -Infinity,
+    'Infinity',
+    '-Infinity',
+  ])(
     'rejects non-finite input %s across validation entry points',
     async (value) => {
       const validator = new Validator({ value }, { value: 'integer' })

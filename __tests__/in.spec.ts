@@ -41,13 +41,17 @@ describe('in validation rule', () => {
   })
 
   it('should pass when all values are present', () => {
-    const validator = new Validator({ fruits: ['apple', 'strawberry'] }, { fruits: 'array|in:apple,strawberry,kiwi' })
+    const validator = new Validator({
+      fruits: ['apple', 'strawberry'],
+    }, { fruits: 'array|in:apple,strawberry,kiwi' })
 
     expect(validator.passes()).toBeTruthy()
   })
 
   it('should fail when not all values are present', () => {
-    const validator = new Validator({ fruits: ['strawberry', 'kiwi'] }, { fruits: 'array|in:apple,strawberry' })
+    const validator = new Validator({
+      fruits: ['strawberry', 'kiwi'],
+    }, { fruits: 'array|in:apple,strawberry' })
 
     expect(validator.passes()).toBeFalsy()
   })
