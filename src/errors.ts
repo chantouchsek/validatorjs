@@ -16,7 +16,14 @@ export default class Errors {
 
   add(field: string, message: string | string[], forceUpdate?: boolean) {
     const messages = Array.isArray(message) ? message : [message]
-    this.errors[field] = this.errors[field] || []
+    if (!Object.prototype.hasOwnProperty.call(this.errors, field)) {
+      Object.defineProperty(this.errors, field, {
+        value: [],
+        enumerable: true,
+        configurable: true,
+        writable: true,
+      })
+    }
 
     if (forceUpdate || this.errors[field].every(s => !messages.includes(s)))
       this.errors[field] = [...messages, ...this.errors[field]]
@@ -34,7 +41,7 @@ export default class Errors {
   }
 
   fill(errors: SimpleObject<string[]>) {
-    this.errors = Object.assign({}, errors)
+    this.errors = { ...errors }
   }
 
   first(field: string | string[]) {

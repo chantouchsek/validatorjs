@@ -105,10 +105,10 @@ export default class Messages {
   _getAttributeName(attribute: string): string {
     let name = attribute
     const attributes = { ...flattenObject(this.messages.attributes), ...flattenObject(this.attributeNames) }
-    const keys = new Set<string>([toCamelCase(attribute), snakeCase(attribute)])
+    const keys = new Set<string>([attribute, toCamelCase(attribute), snakeCase(attribute)])
 
     for (const [key, value] of Object.entries(attributes)) {
-      if (key.includes('*') && new RegExp(`^${key.replace(/\*/g, '.*')}$`).test(attribute)) {
+      if (key.includes('*') && new RegExp(`^${key.replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*')}$`).test(attribute)) {
         name = value
       }
     }
@@ -118,7 +118,7 @@ export default class Messages {
     }
 
     keys.forEach((key) => {
-      if (key in attributes) {
+      if (Object.prototype.hasOwnProperty.call(attributes, key)) {
         name = attributes[key]
       }
     })
