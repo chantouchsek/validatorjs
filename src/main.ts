@@ -219,7 +219,12 @@ export class Validator {
       attributeRules.push(rule)
     }
 
-    parsedRules[attribute] = attributeRules
+    Object.defineProperty(parsedRules, attribute, {
+      value: attributeRules,
+      enumerable: true,
+      configurable: true,
+      writable: true,
+    })
   }
 
   _passesOptionalCheck(attribute: string) {
