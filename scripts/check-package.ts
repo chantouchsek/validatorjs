@@ -114,7 +114,9 @@ registerPhoneRule(Validator, { country: 'KH' })
   writeFileSync(join(directory, 'phone.cts'), phoneTypes)
   run(process.execPath, [resolve(root, 'node_modules/typescript/bin/tsc'), '--noEmit', '--strict', '--target', 'ES2020', '--module', 'NodeNext', '--moduleResolution', 'NodeNext', 'phone.mts', 'phone.cts'])
   writeFileSync(join(directory, 'phone.ts'), phoneTypes)
-  run(process.execPath, [resolve(root, 'node_modules/typescript/bin/tsc'), '--noEmit', '--strict', '--target', 'ES2020', '--module', 'CommonJS', '--moduleResolution', 'Node', 'phone.ts'])
+  // Preserve the classic CommonJS/Node resolution check with TypeScript 5;
+  // TypeScript 6 checks ESM/CJS through NodeNext above and deprecates node10.
+  run(process.execPath, [resolve(root, 'node_modules/typescript-legacy/bin/tsc'), '--noEmit', '--strict', '--target', 'ES2020', '--module', 'CommonJS', '--moduleResolution', 'Node', 'phone.ts'])
 
   // Execute the actual README TypeScript blocks and assert their documented results.
   const section = readFileSync(join(root, 'README.md'), 'utf8').split('### Optional Phone Validation\n')[1].split('\n### ')[0]
