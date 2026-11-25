@@ -1,5 +1,5 @@
 trustPolicy: no-downgrade
 shellEmulator: true
 
-onlyBuiltDependencies:
-  - esbuild
+allowBuilds:
+  esbuild: true
