@@ -28,7 +28,9 @@ describe('numeric validation rule', () => {
   })
 
   it('should fail with an array value', () => {
-    const validator = new Validator({ age: [13] }, { age: 'numeric' })
+    const validator = new Validator({
+      age: [13],
+    }, { age: 'numeric' })
     expect(validator.fails()).toBeTruthy()
     expect(validator.passes()).toBeFalsy()
   })

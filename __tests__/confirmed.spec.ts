@@ -37,7 +37,9 @@ describe('confirmed validation rule', () => {
           passwordConfirmation: 'abc',
         },
       },
-      { form: { password: 'confirmed' } },
+      {
+        form: { password: 'confirmed' },
+      },
       {
         confirmedReverse: true,
         customAttributes: {

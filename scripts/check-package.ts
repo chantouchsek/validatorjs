@@ -20,7 +20,11 @@ try {
   run('pnpm', ['pack', '--pack-destination', directory], root)
   const archive = readdirSync(directory).find(file => file.endsWith('.tgz'))!
   writeFileSync(join(directory, 'package.json'), JSON.stringify({ private: true, type: 'module', packageManager: manifest.packageManager }))
-  run('pnpm', ['add', join(directory, archive), '--ignore-scripts'])
+  run('pnpm', [
+    'add',
+    join(directory, archive),
+    '--ignore-scripts',
+  ])
 
   const assertions = `
 const input = { user: { name: 'Ada' }, items: [{ sku: 'A1' }], extra: true }
@@ -45,7 +49,9 @@ checkAsync().catch(error => { console.error(error); process.exitCode = 1 })
   writeFileSync(join(directory, 'consumer.cjs'), `const assert = require('assert')\nconst { Validator, Errors } = require('@chantouchsek/validatorjs')\n${assertions}`)
 
   const runtimes = process.argv.slice(2)
-  for (const runtime of runtimes.length ? runtimes : [process.execPath]) {
+  for (const runtime of runtimes.length
+    ? runtimes
+    : [process.execPath]) {
     run(runtime, ['--version'])
     run(runtime, ['consumer.mjs'])
     run(runtime, ['consumer.cjs'])
@@ -68,7 +74,9 @@ import('@chantouchsek/validatorjs/phone').then(
   },
 ).catch(error => { console.error(error); process.exitCode = 1 })
 `)
-  for (const runtime of runtimes.length ? runtimes : [process.execPath]) {
+  for (const runtime of runtimes.length
+    ? runtimes
+    : [process.execPath]) {
     run(runtime, ['missing-peer.cjs'])
     run(runtime, ['missing-peer.mjs'])
   }
@@ -87,7 +95,19 @@ void invalid
 `
   writeFileSync(join(directory, 'consumer.mts'), types)
   writeFileSync(join(directory, 'consumer.cts'), types)
-  run(process.execPath, [resolve(root, 'node_modules/typescript/bin/tsc'), '--noEmit', '--strict', '--target', 'ES2020', '--module', 'NodeNext', '--moduleResolution', 'NodeNext', 'consumer.mts', 'consumer.cts'])
+  run(process.execPath, [
+    resolve(root, 'node_modules/typescript/bin/tsc'),
+    '--noEmit',
+    '--strict',
+    '--target',
+    'ES2020',
+    '--module',
+    'NodeNext',
+    '--moduleResolution',
+    'NodeNext',
+    'consumer.mts',
+    'consumer.cts',
+  ])
 
   run('pnpm', ['add', `libphonenumber-js@${manifest.peerDependencies['libphonenumber-js']}`, '--ignore-scripts'])
   const phoneAssertions = `
@@ -112,17 +132,44 @@ registerPhoneRule(Validator, { country: 'KH' })
 `
   writeFileSync(join(directory, 'phone.mts'), phoneTypes)
   writeFileSync(join(directory, 'phone.cts'), phoneTypes)
-  run(process.execPath, [resolve(root, 'node_modules/typescript/bin/tsc'), '--noEmit', '--strict', '--target', 'ES2020', '--module', 'NodeNext', '--moduleResolution', 'NodeNext', 'phone.mts', 'phone.cts'])
+  run(process.execPath, [
+    resolve(root, 'node_modules/typescript/bin/tsc'),
+    '--noEmit',
+    '--strict',
+    '--target',
+    'ES2020',
+    '--module',
+    'NodeNext',
+    '--moduleResolution',
+    'NodeNext',
+    'phone.mts',
+    'phone.cts',
+  ])
   writeFileSync(join(directory, 'phone.ts'), phoneTypes)
-  run(process.execPath, [resolve(root, 'node_modules/typescript/bin/tsc'), '--noEmit', '--strict', '--target', 'ES2020', '--module', 'CommonJS', '--moduleResolution', 'Node', 'phone.ts'])
+  run(process.execPath, [
+    resolve(root, 'node_modules/typescript/bin/tsc'),
+    '--noEmit',
+    '--strict',
+    '--target',
+    'ES2020',
+    '--module',
+    'CommonJS',
+    '--moduleResolution',
+    'Node',
+    'phone.ts',
+  ])
 
   // Execute the actual README TypeScript blocks and assert their documented results.
   const section = readFileSync(join(root, 'README.md'), 'utf8').split('### Optional Phone Validation\n')[1].split('\n### ')[0]
-  const examples = [...section.matchAll(/```ts\n([\s\S]*?)```/g)]
+  const examples = [
+    ...section.matchAll(/```ts\n([\s\S]*?)```/g),
+  ]
   const exampleFiles = examples.map(([, code], index) => {
     const source = code.split('\n').map((line) => {
       const [expression, expected] = line.split(' // => ')
-      return expected === undefined ? line : `expectExample(${expression}, ${expected})`
+      return expected === undefined
+        ? line
+        : `expectExample(${expression}, ${expected})`
     }).join('\n')
     const file = `phone-example-${index}.mts`
     writeFileSync(join(directory, file), `
@@ -134,11 +181,29 @@ ${source}`)
     return file
   })
   if (exampleFiles.length !== 4) throw new Error('Expected four executable phone README examples')
-  run(process.execPath, [resolve(root, 'node_modules/typescript/bin/tsc'), '--strict', '--target', 'ES2019', '--module', 'NodeNext', '--moduleResolution', 'NodeNext', '--outDir', 'examples', ...exampleFiles])
-  for (const runtime of runtimes.length ? runtimes : [process.execPath]) {
+  run(process.execPath, [
+    resolve(root, 'node_modules/typescript/bin/tsc'),
+    '--strict',
+    '--target',
+    'ES2019',
+    '--module',
+    'NodeNext',
+    '--moduleResolution',
+    'NodeNext',
+    '--outDir',
+    'examples',
+    ...exampleFiles,
+  ])
+  for (const runtime of runtimes.length
+    ? runtimes
+    : [process.execPath]) {
     run(runtime, ['phone.mjs'])
     run(runtime, ['phone.cjs'])
-    for (const file of exampleFiles) run(runtime, [join('examples', file.replace('.mts', '.mjs'))])
+    for (const file of exampleFiles) {
+      run(runtime, [
+        join('examples', file.replace('.mts', '.mjs')),
+      ])
+    }
   }
   console.log('Packed core without peer, optional phone adapter, declarations, and four README examples passed.')
 }

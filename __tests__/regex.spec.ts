@@ -38,11 +38,15 @@ describe('regex validation rule for most common regular expressions', () => {
   })
 
   it('should pass with the year pattern: 2015', () => {
-    const validator = new Validator({ pattern: '2015' }, { pattern: ['regex:/^(19|20)[\\d]{2,2}$/'] })
+    const validator = new Validator({ pattern: '2015' }, {
+      pattern: ['regex:/^(19|20)[\\d]{2,2}$/'],
+    })
     expect(validator.passes()).toBeTruthy()
   })
   it('should fail with the year pattern:: 20151', () => {
-    const validator = new Validator({ pattern: '20151' }, { pattern: ['regex:/^(19|20)[\\d]{2,2}$/'] })
+    const validator = new Validator({ pattern: '20151' }, {
+      pattern: ['regex:/^(19|20)[\\d]{2,2}$/'],
+    })
     expect(validator.fails()).toBeTruthy()
   })
 
@@ -276,7 +280,9 @@ describe('regex validation rule for most common regular expressions', () => {
   it('should pass with simple password format w/ escaped back slashes', () => {
     const validator = new Validator(
       { pattern: 'SomePass1' },
-      { pattern: ['regex:/^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/'] },
+      {
+        pattern: ['regex:/^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/'],
+      },
     )
 
     expect(validator.passes()).toBeTruthy()

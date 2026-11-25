@@ -24,7 +24,9 @@ describe('register a custom validation rule', () => {
   it('should override custom rules', () => {
     Validator.register('string', () => true)
 
-    const validator = new Validator({ field: ['not a string'] }, { field: 'string' })
+    const validator = new Validator({
+      field: ['not a string'],
+    }, { field: 'string' })
 
     expect(validator.passes()).toBeTruthy()
     expect(validator.fails()).toBeFalsy()

@@ -40,7 +40,9 @@ describe('errors', () => {
     const validator = new Validator(null, { name: 'required' })
     expect(validator.fails()).toBeTruthy()
     expect(validator.passes()).toBeFalsy()
-    validator.errors.fill({ name: ['The name field is required'] })
+    validator.errors.fill({
+      name: ['The name field is required'],
+    })
     expect(validator.errors.first('name')).toEqual('The name field is required')
   })
   it('should flush all messages, when call clear without argument', () => {

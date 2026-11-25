@@ -75,12 +75,16 @@ describe('min validation rule', () => {
   })
 
   it('should be failed when given array lower than min', () => {
-    const validator = new Validator({ val: ['12'] }, { val: 'array|min:2' })
+    const validator = new Validator({
+      val: ['12'],
+    }, { val: 'array|min:2' })
     expect(validator.fails()).toBeTruthy()
   })
 
   it('should be passed when given array greater than min', () => {
-    const validator = new Validator({ val: ['12', '32', '34'] }, { val: 'array|min:2' })
+    const validator = new Validator({
+      val: ['12', '32', '34'],
+    }, { val: 'array|min:2' })
     expect(validator.passes()).toBeTruthy()
   })
 })

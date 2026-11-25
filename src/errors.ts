@@ -7,15 +7,21 @@ export default class Errors {
 
   private _getFields(field: string | string[]): string[] {
     const fields: string[] = []
-    const attributes = Array.isArray(field) ? field : [field]
+    const attributes = Array.isArray(field)
+      ? field
+      : [field]
     for (const f of attributes)
       fields.push(toCamelCase(f), toSnakeCase(f))
 
-    return [...new Set(fields)].filter(Boolean)
+    return [
+      ...new Set(fields),
+    ].filter(Boolean)
   }
 
   add(field: string, message: string | string[], forceUpdate?: boolean) {
-    const messages = Array.isArray(message) ? message : [message]
+    const messages = Array.isArray(message)
+      ? message
+      : [message]
     if (!Object.prototype.hasOwnProperty.call(this.errors, field)) {
       Object.defineProperty(this.errors, field, {
         value: [],
@@ -25,8 +31,12 @@ export default class Errors {
       })
     }
 
-    if (forceUpdate || this.errors[field].every(s => !messages.includes(s)))
-      this.errors[field] = [...messages, ...this.errors[field]]
+    if (forceUpdate || this.errors[field].every(s => !messages.includes(s))) {
+      this.errors[field] = [
+        ...messages,
+        ...this.errors[field],
+      ]
+    }
   }
 
   all() {
@@ -55,9 +65,13 @@ export default class Errors {
   }
 
   get(field: string | string[]) {
-    const fields = Array.isArray(field) ? field : [field]
+    const fields = Array.isArray(field)
+      ? field
+      : [field]
     const errorField = fields.find(f => this.has(f))
-    return errorField ? get(this.errors, errorField, []) : []
+    return errorField
+      ? get(this.errors, errorField, [])
+      : []
   }
 
   has(field: string | string[]) {

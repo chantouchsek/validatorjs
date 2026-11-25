@@ -137,7 +137,9 @@ export class Validator {
 
   _onlyInputWithRules(obj?: SimpleObject, keyPrefix?: string) {
     const prefix = keyPrefix || ''
-    const values: SimpleObject = JSON.parse(JSON.stringify(obj === undefined ? this.input : obj))
+    const values: SimpleObject = JSON.parse(JSON.stringify(obj === undefined
+      ? this.input
+      : obj))
 
     for (const key of Object.keys(values)) {
       if (values[key] !== null && typeof values[key] === 'object') values[key] = this._onlyInputWithRules(values[key], `${prefix + key}.`)
@@ -208,7 +210,9 @@ export class Validator {
     for (const ruleKey of rulesArray) {
       const rule = this._extractRuleAndRuleValue(ruleKey)
       if (Array.isArray(rule.value)) {
-        rule.value = rule.value.map(value => typeof value === 'string' ? this._replaceWildCards(value, wildCardValues) : value)
+        rule.value = rule.value.map(value => typeof value === 'string'
+          ? this._replaceWildCards(value, wildCardValues)
+          : value)
       }
       else if (typeof rule.value === 'string') {
         rule.value = this._replaceWildCards(rule.value, wildCardValues)
@@ -262,7 +266,9 @@ export class Validator {
 
   _shouldStopValidating(attribute: string, rulePassed: any) {
     if (!this.stopOnAttributes || rulePassed) return false
-    return Array.isArray(this.stopOnAttributes) ? this.stopOnAttributes.includes(attribute) : true
+    return Array.isArray(this.stopOnAttributes)
+      ? this.stopOnAttributes.includes(attribute)
+      : true
   }
 
   _suppliedWithData(attribute: string) {
@@ -354,7 +360,9 @@ export class Validator {
 
   fails(fails?: CbFunction) {
     const async = this._checkAsync('fails', fails)
-    return async ? this.checkAsync(false, fails) : !this.check()
+    return async
+      ? this.checkAsync(false, fails)
+      : !this.check()
   }
 
   getDefaultLang() {
@@ -367,7 +375,9 @@ export class Validator {
 
   passes(passes?: () => void) {
     const async = this._checkAsync('passes', passes)
-    return async ? this.checkAsync(passes) : this.check()
+    return async
+      ? this.checkAsync(passes)
+      : this.check()
   }
 
   passesAsync(): Promise<boolean> {

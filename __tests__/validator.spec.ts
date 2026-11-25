@@ -8,7 +8,9 @@ describe('validator constructor', () => {
     validator = new Validator(
       { email: 'johndoe@gmail.com', name: 'David' },
       { email: 'required', name: 'required' },
-      { customMessages: { required: 'You\'re missing :required' } },
+      {
+        customMessages: { required: 'You\'re missing :required' },
+      },
     )
   })
 
@@ -80,13 +82,19 @@ describe('validator constructor', () => {
   })
 
   it('should get the default attribute name from config -> ja', () => {
-    const validator = new Validator({}, { name: 'required|string' }, { defaultAttributeName: { en: 'This field', ja: 'この項目' }, locale: 'ja' })
+    const validator = new Validator({}, { name: 'required|string' }, {
+      defaultAttributeName: { en: 'This field', ja: 'この項目' },
+      locale: 'ja',
+    })
     expect(validator.fails()).toBeTruthy()
     expect(validator.errors.first('name')).toBe('この項目は必須です。')
   })
 
   it('should get the default attribute name from  -> en', () => {
-    const validator = new Validator({}, { name: 'required|string' }, { defaultAttributeName: { en: '', ja: 'この項目' }, locale: 'en' })
+    const validator = new Validator({}, { name: 'required|string' }, {
+      defaultAttributeName: { en: '', ja: 'この項目' },
+      locale: 'en',
+    })
     expect(validator.fails()).toBeTruthy()
     expect(validator.errors.first('name')).toBe('The field is required.')
   })

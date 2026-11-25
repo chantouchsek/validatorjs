@@ -16,7 +16,9 @@ describe('regex flag parsing', () => {
     ['a/b', '/^a\\/b$/uy', true],
     ['abc', '/^abc$/gim', true],
   ])('matches %j with %s', async (value, pattern, expected) => {
-    const validator = new Validator({ value }, { value: [`regex:${pattern}`] })
+    const validator = new Validator({ value }, {
+      value: [`regex:${pattern}`],
+    })
     expect(validator.passes()).toBe(expected)
     expect(validator.passes()).toBe(expected)
     expect(validator.fails()).toBe(!expected)

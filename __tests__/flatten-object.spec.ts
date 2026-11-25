@@ -7,14 +7,54 @@ describe('object', () => {
       [undefined, {}],
       [null, {}],
       [{}, {}],
-      [{ foo: null }, { foo: null }],
-      [{ foo: {} }, { foo: {} }],
-      [{ foo: 1 }, { foo: 1 }],
-      [{ foo: [] }, { foo: [] }],
-      [{ foo: { bar: 1 } }, { 'foo.bar': 1 }],
-      [{ foo: { bar: [] } }, { 'foo.bar': [] }],
-      [{ foo: { bar: { fizz: 'buzz' } } }, { 'foo.bar.fizz': 'buzz' }],
-      [{ foo: { bar: { fizz: ['buzz'] } } }, { 'foo.bar.fizz': ['buzz'] }],
+      [
+        { foo: null },
+        { foo: null },
+      ],
+      [
+        { foo: {} },
+        { foo: {} },
+      ],
+      [
+        { foo: 1 },
+        { foo: 1 },
+      ],
+      [
+        { foo: [] },
+        { foo: [] },
+      ],
+      [
+        {
+          foo: { bar: 1 },
+        },
+        { 'foo.bar': 1 },
+      ],
+      [
+        {
+          foo: { bar: [] },
+        },
+        { 'foo.bar': [] },
+      ],
+      [
+        {
+          foo: {
+            bar: { fizz: 'buzz' },
+          },
+        },
+        { 'foo.bar.fizz': 'buzz' },
+      ],
+      [
+        {
+          foo: {
+            bar: {
+              fizz: ['buzz'],
+            },
+          },
+        },
+        {
+          'foo.bar.fizz': ['buzz'],
+        },
+      ],
     ]
 
     asserts.forEach((assert) => {
