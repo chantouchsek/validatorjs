@@ -19,7 +19,7 @@ function run(command: string, args: string[], cwd = directory) {
 try {
   run('pnpm', ['pack', '--pack-destination', directory], root)
   const archive = readdirSync(directory).find(file => file.endsWith('.tgz'))!
-  writeFileSync(join(directory, 'package.json'), JSON.stringify({ private: true, type: 'module', packageManager: 'pnpm@10.26.0' }))
+  writeFileSync(join(directory, 'package.json'), JSON.stringify({ private: true, type: 'module', packageManager: manifest.packageManager }))
   run('pnpm', [
     'add',
     join(directory, archive),
