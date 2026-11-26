@@ -140,7 +140,14 @@ ${source}`)
     run(runtime, ['phone.cjs'])
     for (const file of exampleFiles) run(runtime, [join('examples', file.replace('.mts', '.mjs'))])
   }
-  console.log('Packed core without peer, optional phone adapter, declarations, and four README examples passed.')
+  // TypeScript 4.7 introduced NodeNext. Keep both entrypoints on the same
+  // ESM/CJS declaration graph, including the optional phone registration API.
+  run('pnpm', ['add', '--save-dev', 'typescript@4.7.4', '--ignore-scripts'])
+  const compatibilityCompiler = join(directory, 'node_modules/typescript/bin/tsc')
+  run(process.execPath, [compatibilityCompiler, '--noEmit', '--strict', '--target', 'ES2020', '--module', 'NodeNext', '--moduleResolution', 'NodeNext', 'consumer.mts', 'consumer.cts', 'phone.mts', 'phone.cts'])
+  run(process.execPath, [compatibilityCompiler, '--noEmit', '--strict', '--target', 'ES2020', '--module', 'CommonJS', '--moduleResolution', 'Node', 'phone.ts'])
+
+  console.log('Packed core without peer, optional phone adapter, declarations, TypeScript 4.7 consumers, and four README examples passed.')
 }
 finally {
   rmSync(directory, { recursive: true, force: true })
